@@ -1,0 +1,24 @@
+{
+  "browser": true,
+  "camelcase": true,
+  "curly": false,
+  "debug": true,
+  "devel": true,
+  "eqeqeq": true,
+  "esnext": true,
+  "globals": {
+    "require": true,
+    "module": true,
+    "Phaser": true,
+    "PIXI": true
+  },
+  "indent": 2,
+  "laxcomma": true,
+  "noarg": true,
+  "nonew": true,
+  "sub": true,
+  "trailing": true,
+  "undef": true,
+  "unused": true,
+  "white": true
+}

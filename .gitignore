@@ -1,0 +1,11 @@
+.*
+*.sw?
+
+!.git*
+!.bowerrc
+!.jshintrc
+!.editorconfig
+
+build
+node_modules
+bower_components

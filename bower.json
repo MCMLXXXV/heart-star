@@ -1,0 +1,13 @@
+{
+  "name": "heart-star",
+  "version": "0.0.1",
+  "description": "HTML pot of Heart-Star",
+  "authors": [
+    ""
+  ],
+  "dependencies": {
+    "localforage": "latest",
+    "phaser-official": "latest",
+    "traceur-runtime": "latest"
+  }
+}

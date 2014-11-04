@@ -1,0 +1,625 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="8" tileheight="8" backgroundcolor="#585858">
+ <properties>
+  <property name="first-stage" value="01"/>
+ </properties>
+ <tileset firstgid="1" name="tileset" tilewidth="8" tileheight="8">
+  <image source="../static/assets/images/tileset.png" width="192" height="48"/>
+ </tileset>
+ <layer name="title" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJy91ElPAkEQhuFyFzTRqxuKmOhVwX29irivVxVNVPCuIokK/m7fS4e2hokhdFnJk0l1CJXJV9NZEclhEUvoQKeErwEMYgjD2EMB+zjACEYN5mYwg1nM4RZF3OEe81gIOG8bO03O31DBO6rYRT7g3EtcNTlfxorXX+Mm4FxXCSS9/hBHXv+CV4O5aUwb/O9ftYo1ic/bqo5xIo28Xb4659D1gEevd/nqnEPXBz69Piu/7yurWscGNrEl0fvKqk5xhnNcSPS+0nm3mrvbV/18QgllPEv0vtJ5t5q721f9/EINdXx7v9fv1e5+x32n+ly/V7v7HXcvx51bld7n/yq9z13oRg960Yd+g7l6n8cwjgmkMIkpg7l6n38ACaIvlQ==
+  </data>
+ </layer>
+ <layer name="credits" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzllccKQjEQRZ/+hf6GFax7K1i31o1lb91YvtuzGQgDMXk8Xlx44TBMIFwuEzJR9F0VqBrVpRa0jb4GdWhA0+O+aABDo7o0g7nRj2AME5jG8E2qHezhAMeAvg94wgvexnkBilCCcor+MnepHehCD/op+srcpa5gDRvYpugrkrwXuMIN7gF89Xv/F2UgG8BH/2M5yAfw1XNdwDLy/3+TSnKf4Bz5/79J9av3rOccSjpv3D3rK71/dd64e9ZXev9KXp3Pldt2rnNIb9u/Op8rt+1cz0162/79ALhuKM8=
+  </data>
+ </layer>
+ <layer name="stage-selection" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzdlrsKAkEMRaPdquC22vkAbbXx0WirjY9mbbXTP9BOv9zTBJbA7CyKWfDCKZIUd0LIzIiU0wzmBfUmtKANKaxgnavbuKx2sC+oD2AIIxhDBqdc3cbe+rTvb6V9x+b2K8Xm9i9KoFGBbw/64j/fBSzFf74HOIp/v1e4iX+/T3hBDeqOvnpfdaDr6Kv31QSmjr6qDWwr8D3DxdFP53uHh6OvfYd1j+0+h/IqPX/sfxF6d3WP7T6H8vb8sf+Fjd9ZGxn/
+  </data>
+ </layer>
+ <layer name="test" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJzt1MsNgkAYRWFaQEBpAUGxBx5NoPYAKj3wrJmzYUMyIRkYBqM3+XYzObvfMORm4iD5d8k8nDV0cxQauhVqDd3/vnsWbDg44gR3xfei+QhwwRUhbiu+/7VFiJEg3bCT4Y4Hngq7084Lb3xQKuxOOw1adOgVdrfq7H2iezN3h2T/jRPdm7k7JPtvADQnGOk=
+  </data>
+ </layer>
+ <objectgroup name="test">
+  <properties>
+   <property name="heart-layer" value="01a"/>
+   <property name="next-stage" value="02"/>
+   <property name="star-layer" value="01b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="64" y="40" width="16" height="24"/>
+  <object name="star" type="starting-point" x="160" y="40" width="16" height="24"/>
+  <object name="goal" type="goal" x="104" y="80" width="32" height="32"/>
+  <object name="trap" type="trap" x="0" y="88" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="both"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="224" y="88" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="both"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="0" y="56" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="both"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="16" y="24" width="32" height="8">
+   <properties>
+    <property name="availableTo" value="both"/>
+    <property name="type" value="2"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="192" y="24" width="32" height="8">
+   <properties>
+    <property name="availableTo" value="both"/>
+    <property name="type" value="2"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="224" y="56" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="both"/>
+    <property name="type" value="1"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="01a" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt0skRggAMQFEQF1pQBG0BXKAFF8AWWHsAldr5DcAtkxkgM++Uwz8khrHMHCZEpNBN8VHomlgpdPc4KHR9BArdB54K3Qz5yF7q3xu0I3upf7ewxgZb7GDjgituuAt0HRzhwsMJZ7zwRoxEoDt0vwIlKtQC3aH7ffHDH51Ad5lpTg94ygxn
+  </data>
+ </layer>
+ <layer name="01b" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt1MsNgkAURmG2KKgtKL5aQFFoAUGhBQXpAQXq5hQwCQtyczfzJ99qkjmbyTiOnd38xUgUugVKha6LhUJ3i51CN8RFoZviIXDv1Ht94yPQnXqvLX4C3Ssi3HDHEh58rLDGRqCbIccTLwTY44AjTjgLdCvU+KIxnEv9V3906DEYzrX+KzudjWhXDgc=
+  </data>
+ </layer>
+ <objectgroup name="01" visible="0">
+  <properties>
+   <property name="heart-layer" value="01a"/>
+   <property name="next-stage" value="02"/>
+   <property name="star-layer" value="01b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="40" y="72" width="16" height="24"/>
+  <object name="star" type="starting-point" x="184" y="72" width="16" height="24"/>
+  <object name="goal" type="goal" x="104" y="96" width="32" height="32"/>
+ </objectgroup>
+ <layer name="02a" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzbsRglAQRmFEQHMQRBTIRR4m2gFCIh3w6EKr51RwA4aZDbhn5kt2g98wdFtsB1NgN8RFYLfCU2C3QSuwO2IS2P3hL7D7whsuPJzgI8AZNT6K/9K+6HBHhgdyFCjRY1D8dbo12sOCDQcHHBX3tYpwxQ0xEqSK+9aaAU0PCgc=
+  </data>
+ </layer>
+ <layer name="02b" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzTsOgkAURmFaUB4JorQCogn4aLXBDlposNNWdyEr56xgEhmTG5I5ydfMzeS3LJPp92w4ArtbJAK7V9wEdlt0ArtvfAR2vxg0/odYIcIaG8So0SjuFe4auwVKHHHCGRc88VLcezw0dk3zboElXHjwESje/1WKDDvk2OOgeDdNawSy3AtH
+  </data>
+ </layer>
+ <objectgroup name="02" visible="0">
+  <properties>
+   <property name="heart-layer" value="02a"/>
+   <property name="next-stage" value="03"/>
+   <property name="star-layer" value="02b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="80" y="56" width="16" height="24"/>
+  <object name="star" type="starting-point" x="144" y="56" width="16" height="24"/>
+  <object name="goal" type="goal" x="104" y="120" width="32" height="32"/>
+ </objectgroup>
+ <layer name="03a" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztlMkNgzAABJ1wpQXOpAXSBXQBXYTqGYkf0uLXIiQy0rxs7X68DmHjgc/gQ+WXWBl7VX6PX2Ovyh9wNPaq/AlnY6/K/+Fi7I3lJ5hihjkW+Dq4p873xPZSY4MtdvjGz8E9db7HvReFey8K914U7r0o3HtRuP9/xf89n8Pd3vNVWAGv5Azn
+  </data>
+ </layer>
+ <layer name="03b" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzbkNgDAQRFGn3LTAaVqALqAL6AIq5yeEtkQ0QuyXXrQrjXOWZX29BKlgt0Er2J2xCHZXbILdHYdg98Ql2H3KkKNAiQp15C90f1uHHgNGeEyRv9Dd+nc3ey8FQQ==
+  </data>
+ </layer>
+ <objectgroup name="03" visible="0">
+  <properties>
+   <property name="heart-layer" value="03a"/>
+   <property name="next-stage" value="04"/>
+   <property name="star-layer" value="03b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="48" y="24" width="16" height="24"/>
+  <object name="star" type="starting-point" x="48" y="88" width="16" height="24"/>
+  <object name="goal" type="goal" x="176" y="96" width="32" height="32"/>
+ </objectgroup>
+ <layer name="04a" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzzkKgDAURdGAY+8IGpPesdNd6P5X423cQUiQ/AunfjylJCneTlwBdm88AXblr5/kr59i/ZsgRYYcBUpUqNGgRYfewe73d8AIjQkGFjMWrNiw43Cw+/depZYIuQ==
+  </data>
+ </layer>
+ <layer name="04b" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzcsKgkAYhuHZKyh4yL1BQWntPXUPlXYPpTfh4bp9l7MSZjNI/C88zGZmPqUkSZKkPVegRIXa4u4TL7zRWtz94oceg8XdERNmLBZ3Gzy004ELD77BPwFCRIhxQLJxv8NHO1McccLZYPeCKzLkuOFu8P5fWwHgoQrD
+  </data>
+ </layer>
+ <objectgroup name="04" visible="0">
+  <properties>
+   <property name="heart-layer" value="04a"/>
+   <property name="next-stage" value="05"/>
+   <property name="star-layer" value="04b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="168" y="104" width="16" height="24"/>
+  <object name="star" type="starting-point" x="24" y="72" width="16" height="24"/>
+  <object name="goal" type="goal" x="192" y="96" width="32" height="32"/>
+ </objectgroup>
+ <layer name="05a" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztycsJwCAABFEhMaYHP0kX2oX2X43TgOJRcAfeZdcYpZRSSu3WhRsWDxxeZJTJP9pX8wiISPjwo6JN/tF+ah1vTAOF
+  </data>
+ </layer>
+ <layer name="05b" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYBgFo2AUjIKhCbiBmAeI+YFYAIjtgdgBizpOIOaior3KQKwCxOpArAHE4UAcgUWdIhArUdFeYoElEFvhkYeFGy8Q8zEgwo9SEAjEQXjkYeGmCsRqDIjwoxRkAnEWA+38hQs0AnETA+X+wuVuXOKwdE6pf3G5G5c4LJ3TKh6HGwAAW1IMZQ==
+  </data>
+ </layer>
+ <objectgroup name="05" visible="0">
+  <properties>
+   <property name="heart-layer" value="05a"/>
+   <property name="next-stage" value="06"/>
+   <property name="star-layer" value="05b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="200" y="104" width="16" height="24"/>
+  <object name="star" type="starting-point" x="24" y="104" width="16" height="24"/>
+  <object name="goal" type="goal" x="104" y="48" width="32" height="32"/>
+ </objectgroup>
+ <layer name="06a" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYCAPMAMxCxCzAjEbELMDMQeZZpECpIFYBohlgVgOiOWBWIEO9o6C4QVg6Zde6RYGYOl3qKZbRiBmGgB7JYFYColPr/hLBOIkJD694q8SiKtoaD46GCzxSi+AHq/0Arjildr1KbH5g9r16VAv36gNAKC2ByE=
+  </data>
+ </layer>
+ <layer name="06b" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJztzasNgEAQRdG1/GmBPy2AgRbAQAvQBVTONZugVixiEjI3OWLE5BmjaZqmvQsQCuwWKAV2B4wCuwtWgd0Dp8Duhdvjb8LsuG0RYiRIkSH32LNt2B23rUKNBi069B92/9IDVaMG0Q==
+  </data>
+ </layer>
+ <objectgroup name="06" visible="0">
+  <properties>
+   <property name="heart-layer" value="06a"/>
+   <property name="next-stage" value="07"/>
+   <property name="star-layer" value="06b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="24" y="104" width="16" height="24"/>
+  <object name="star" type="starting-point" x="184" y="104" width="16" height="24"/>
+  <object name="goal" type="goal" x="160" y="32" width="32" height="32"/>
+ </objectgroup>
+ <layer name="07a" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYIAAQSAWYqA/0ARirQGwtxCIiwbA3k4g7hoAe0dq/AoDsQgQiwKxGBCLA7EEDe2Fxa82EOsAsS4Q6wGxPhAb4HEPrd2Jyz24xEfBKBhOgN7lAAxQK3+NlhtDEwAAMvoORQ==
+  </data>
+ </layer>
+ <layer name="07b" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJxjYIAAQSAWYqA/0ARirQGwtxCIiwbA3k4g7hoAe0dq/AoDsQgQiwKxGBCLA7EEDe2Fxa82EOsAsS4Q6wGxPhAb4HEPrd2Jyz24xEfBKBhOgN7lAAxQK3+NlhtDEwAAMvoORQ==
+  </data>
+ </layer>
+ <objectgroup name="07" visible="0">
+  <properties>
+   <property name="heart-layer" value="07a"/>
+   <property name="next-stage" value="08"/>
+   <property name="star-layer" value="07b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="40" y="24" width="16" height="24"/>
+  <object name="star" type="starting-point" x="192" y="88" width="16" height="24"/>
+  <object name="goal" type="goal" x="32" y="112" width="32" height="32"/>
+  <object name="trap" type="trap" x="80" y="48" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="96" y="48" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="112" y="48" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="128" y="48" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="144" y="48" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="160" y="48" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="80" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="96" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="112" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="128" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="144" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="160" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="192" y="72" width="32" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="type" value="2"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="08a" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt07kKAkEMxvEBBW29BQVtve209Vi109bbV/B8B89n9t8Ehq1SzC4iG/gVCcMGPrLGRBXV/1QKaQffiSGOBJKKvoa6g70llFFBVdEPMHSwt4e+4p3ku8TKwd45Fop3ku8RJwd7tSX53vEIca/k6+qetSX5urpnbUm+kvcIY3iYmOBy8N/zGhtssTPB5eC/5zMuuOJmzaeYIYMscsijgKI11/byXcn7iRfe+FjzPQ5ooIkW2uiga821fdj/z6/UF3sfHv0=
+  </data>
+ </layer>
+ <layer name="08b" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt00cKAkEQheHeK5jDXsEcbmAc9QbmcAXjHYxn9t8UNLOqRc8gMgXfoopmCh41xkQV1f9UCmkH34khjgSSir6GuoO9JZRRQVXRDzB0sLeHvuKd5LvEysHeORaKd5LvEScHe7Ul+d7xCHGv5OvqnrUl+bq6Z21JvpL3CGN4mJjgcvDf8xobbLEzweXgv+czLrjiZs2nmCGDLHLIo4CiNdf28l3J+4kX3vhY8z0OaKCJFtrooGvNtX3Y/8+v1BeXKh/d
+  </data>
+ </layer>
+ <objectgroup name="08" visible="0">
+  <properties>
+   <property name="heart-layer" value="08a"/>
+   <property name="next-stage" value="09"/>
+   <property name="star-layer" value="08b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="24" y="88" width="16" height="24"/>
+  <object name="star" type="starting-point" x="48" y="88" width="16" height="24"/>
+  <object name="goal" type="goal" x="192" y="96" width="32" height="32"/>
+  <object name="retractable-a" type="retractable" x="144" y="80" width="16" height="48">
+   <properties>
+    <property name="availableTo" value="both"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="128" y="80" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object name="button" type="button" x="200" y="32" width="16" height="16">
+   <properties>
+    <property name="availableTo" value="both"/>
+    <property name="bindTo" value="retractable-a"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="64" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="80" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="96" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="112" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="128" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="144" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="160" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="176" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="09a" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt1D0Kg0AQQOGFaGKvoKBRewWFqJfQeImol/Dn7HmNYONiIRYyD75il4GFLUYpSbpfDxgw8cQL1uZ+PZ+djwBvhIgQb+7XsyRJ1/dBgRLVhe/WaPBFq5mz4cCFp47vsb25Hzr0GDTvJkiRIVfH99je3IgJMxbdx9y8PyfTCiM=
+  </data>
+ </layer>
+ <layer name="09b" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt1EkKAjEQheFsnQUF3ToLCrp1bK/g7BUc7+B4bn+Qhl50SWw7ZJMH3yKVoTZFlIoncyxieuuX7HGw0PeKm4W+CSQt9K2gaqHvAMMI91JII4MscsgH6v5aijTPI4wxwTRkv4Y6GmiihXag7q+lSPO8xAprbL7cjxppno844YyLgb4eZiH1Ox544mWg7xY7A++6uPyTAooooaz0/zHpnG466KKHvtL/x6RzLp+8ASawEyw=
+  </data>
+ </layer>
+ <objectgroup name="09" visible="0">
+  <properties>
+   <property name="heart-layer" value="09a"/>
+   <property name="next-stage" value="10"/>
+   <property name="star-layer" value="09b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="200" y="88" width="16" height="24"/>
+  <object name="star" type="starting-point" x="200" y="24" width="16" height="24"/>
+  <object name="goal" type="goal" x="32" y="96" width="32" height="32"/>
+  <object name="retractable-a" type="retractable" x="80" y="64" width="16" height="48">
+   <properties>
+    <property name="availableTo" value="both"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="button" type="button" x="32" y="32" width="16" height="16">
+   <properties>
+    <property name="availableTo" value="both"/>
+    <property name="bindTo" value="retractable-a"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="128" y="80" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="128" y="48" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="64" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="80" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="96" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="112" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="128" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="144" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="160" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="176" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+ </objectgroup>
+ <layer name="10a" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt1TcLAkEQhuEFY2sWjK1ZMJytNgrGVhsFQ6+toddf7Vu43CIntyeIoPfBU8ywO9sMrCGE6KCBJlpow3j0QwgL+0QQRQJJjfNTzDDECGNMlH4BRY05JZRRQ13jvMwaG2yxU/pd9BzMcZojTjjjovTnWHzw3VfZ4/CFd6+4feHdPgbC3NcY4kJ/b9/NEith7msFVeF8b924cfN78cCLAIIWtfyPZexqed8HvzLnOSmkkUPeopb/sYxdLe9nkFXm/GvuKmkURw==
+  </data>
+ </layer>
+ <layer name="10b" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzt1TcLAkEQhuHpzdnenO3NNtqbbbQ3gP4FA+iv9rXa4+DcUxGLuw+eYpfZnWZgRF4nhLCm5pkIokggiQ66aKCJFtqGe10KKNqoK6GMGuqYYY4RxphgarjXpYe+jTqrbLDFDvs33i2w/KLvCWdccH3j3QHHL/p+mhvuf+g7wFDUvMYQFzW3v8oKa1HzWkFV1Ny6cePGufHACx/8CCAoal+a96bubPWfOSmkkUEWOeRF7Uvz3tSdrf5zah7R8xcP
+  </data>
+ </layer>
+ <objectgroup name="10" visible="0">
+  <properties>
+   <property name="heart-layer" value="10a"/>
+   <property name="next-stage" value=""/>
+   <property name="star-layer" value="10b"/>
+  </properties>
+  <object name="heart" type="starting-point" x="200" y="104" width="16" height="24"/>
+  <object name="star" type="starting-point" x="24" y="104" width="16" height="24"/>
+  <object name="goal" type="goal" x="88" y="16" width="32" height="32"/>
+  <object name="platform" type="platform" x="224" y="96" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="144" y="64" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="176" y="64" width="32" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="type" value="medium"/>
+   </properties>
+  </object>
+  <object name="button" type="button" x="200" y="32" width="16" height="16">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="bindTo" value="retractable-b"/>
+    <property name="orientation" value="south"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="112" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="176" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="192" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="208" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="retractable-b" type="retractable" x="144" y="16" width="16" height="48">
+   <properties>
+    <property name="availableTo" value="star"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="button" type="button" x="24" y="32" width="16" height="16">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="bindTo" value="retractable-a"/>
+    <property name="orientation" value="south"/>
+   </properties>
+  </object>
+  <object name="retractable-a" type="retractable" x="160" y="16" width="16" height="48">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="16" y="72" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="16" y="96" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="144" y="64" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="176" y="64" width="32" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="type" value="medium"/>
+   </properties>
+  </object>
+  <object name="platform" type="platform" x="224" y="96" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="16" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="32" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="48" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="64" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="80" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+  <object name="trap" type="trap" x="144" y="120" width="16" height="8">
+   <properties>
+    <property name="availableTo" value="heart"/>
+    <property name="orientation" value="north"/>
+   </properties>
+  </object>
+ </objectgroup>
+</map>
