@@ -33,6 +33,10 @@ class Character extends Phaser.Sprite {
       }
     }
 
+    if (this._carryingFriend && !this._carryingFriend.standing) {
+      this._carryingFriend = null;
+    }
+
     if (this.standing) {
       this._jumpPower = DEFAULT_JUMP_POWER;
     }
