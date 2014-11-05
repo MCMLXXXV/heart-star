@@ -7,6 +7,21 @@ class Goal extends Phaser.Sprite {
 
     this._setupPhysicsBody(32, 16, 0, 8);
     this._setupAnimation();
+
+    this.charactersLanded = new Phaser.Signal();
+  }
+
+  // --------------------------------------------------------------------------
+
+  collideCharacters (playerCharacter, idleCharacter) {
+    var playerCollided = this.game.physics.arcade.collide(
+      playerCharacter, this);
+    var idleCollided = this.game.physics.arcade.collide(
+      idleCharacter, this);
+
+    if (playerCollided && idleCollided) {
+      this.charactersLanded.dispatch();
+    }
   }
 
   // --------------------------------------------------------------------------
