@@ -19,30 +19,14 @@ class Character extends Phaser.Sprite {
     this.stance = 'idle';
     this.idle   = false;
 
-    this._jumpPower = 0;
+    this._jumpPower      = 0;
+    this._carryingFriend = null;
   }
 
   update () {
-    if (this.jumping) {
-      this.stance = (this.falling ? 'falling' : 'jumping');
-    }
-    else if (!this.walking) {
-      if (this.idle) {
-        this.facing = Character.FACE_RIGHT;
-        this.stance = this.carrying ? 'carrying-idle' : 'idle';
-      }
-      else {
-        this.stance = this.carrying ? 'carrying-facing' : 'facing';
-      }
-    }
-
-    if (this._carryingFriend && !this._carryingFriend.standing) {
-      this._carryingFriend = null;
-    }
-
-    if (this.standing) {
-      this._jumpPower = DEFAULT_JUMP_POWER;
-    }
+    this._updateStance();
+    this._updateCarryingFriend();
+    this._updateJumpPower();
   }
 
   // --------------------------------------------------------------------------
@@ -120,6 +104,33 @@ class Character extends Phaser.Sprite {
 
   _changeStance (stance) {
     this.animations.play(stance);
+  }
+
+  _updateStance () {
+    if (this.jumping) {
+      this.stance = (this.falling ? 'falling' : 'jumping');
+    }
+    else if (!this.walking) {
+      if (this.idle) {
+        this.facing = Character.FACE_RIGHT;
+        this.stance = this.carrying ? 'carrying-idle' : 'idle';
+      }
+      else {
+        this.stance = this.carrying ? 'carrying-facing' : 'facing';
+      }
+    }
+  }
+
+  _updateCarryingFriend () {
+    if (this._carryingFriend && !this._carryingFriend.standing) {
+      this._carryingFriend = null;
+    }
+  }
+
+  _updateJumpPower () {
+    if (this.standing) {
+      this._jumpPower = DEFAULT_JUMP_POWER;
+    }
   }
 
   _characterCollisionCallback (character) {
