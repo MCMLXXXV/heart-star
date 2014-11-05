@@ -1,5 +1,9 @@
-var DEFAULT_JUMP_POWER = 10;
-var DEFAULT_ACCELERATION = 600;
+var DEFAULT_DRAG          = 600;
+var DEFAULT_GRAVITY       = 300;
+var DEFAULT_JUMP_POWER    = 10;
+var DEFAULT_ACCELERATION  = 600;
+var DEFAULT_SPEED_LIMITS  = [ 64, 180 ];
+var DEFAULT_JUMP_VELOCITY = -120;
 
 
 class Character extends Phaser.Sprite {
@@ -24,7 +28,7 @@ class Character extends Phaser.Sprite {
     }
     else if (!this.walking) {
       if (this.idle) {
-        this.facing = 1;
+        this.facing = Character.FACE_RIGHT;
         this.stance = this.carrying ? 'carrying' : 'normal';
       }
       else {
@@ -44,16 +48,16 @@ class Character extends Phaser.Sprite {
   // --------------------------------------------------------------------------
 
   walkLeft () {
-    this._move(-1, DEFAULT_ACCELERATION);
+    this._move(Character.FACE_LEFT,  DEFAULT_ACCELERATION);
   }
 
   walkRight () {
-    this._move( 1, DEFAULT_ACCELERATION);
+    this._move(Character.FACE_RIGHT, DEFAULT_ACCELERATION);
   }
 
   jump () {
     if (this.canJump) {
-      this.body.velocity.y = -120;
+      this.body.velocity.y = DEFAULT_JUMP_VELOCITY;
       this._jumpPower -= 1;
     }
   }
@@ -85,9 +89,9 @@ class Character extends Phaser.Sprite {
     if (this.body === null) {
       this.game.physics.arcade.enableBody(this);
 
-      this.body.drag.x = 600;
-      this.body.maxVelocity.set(64, 180);
-      this.body.gravity.y = 300;
+      this.body.drag.x = DEFAULT_DRAG;
+      this.body.gravity.y = DEFAULT_GRAVITY;
+      this.body.maxVelocity.set(... DEFAULT_SPEED_LIMITS);
     }
 
     this.body.setSize(width, height);
@@ -173,6 +177,9 @@ class Character extends Phaser.Sprite {
 
 }
 
+
+Character.FACE_LEFT  = -1;
+Character.FACE_RIGHT =  1;
 
 Character.HEART = 'character-heart';
 Character.STAR  = 'character-star';
