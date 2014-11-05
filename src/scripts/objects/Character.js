@@ -23,7 +23,7 @@ class Character extends Phaser.Sprite {
     }
     else if (!this.walking) {
       if (this.idle) {
-        this.scale.x = 1;
+        this.facing = 1;
         this.stance = this.carrying ? 'carrying' : 'normal';
       }
       else {
@@ -43,13 +43,13 @@ class Character extends Phaser.Sprite {
   // --------------------------------------------------------------------------
 
   walkLeft () {
-    this.scale.x             =   -1;
+    this.facing              =   -1;
     this.body.acceleration.x = -600;
     this.stance              = this.carrying ? 'carrying-walking' : 'walking';
   }
 
   walkRight () {
-    this.scale.x             =    1;
+    this.facing              =    1;
     this.body.acceleration.x =  600;
     this.stance              = this.carrying ? 'carrying-walking' : 'walking';
   }
@@ -122,6 +122,14 @@ class Character extends Phaser.Sprite {
   }
 
   // --------------------------------------------------------------------------
+
+  get facing () {
+    return this.scale.x;
+  }
+
+  set facing (newValue) {
+    this.scale.x = newValue;
+  }
 
   get stance () {
     return this._stance;
