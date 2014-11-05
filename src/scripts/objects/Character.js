@@ -99,7 +99,6 @@ class Character extends Phaser.Sprite {
   _move (direction, speed) {
     this.facing              = direction;
     this.body.acceleration.x = direction * speed;
-    this.animation           = this.carrying ? 'carrying-walking' : 'walking';
   }
 
   _changeAnimation (animation) {
@@ -109,17 +108,18 @@ class Character extends Phaser.Sprite {
   }
 
   _updateStance () {
-    if (this.jumping) {
-      this.animation = (this.falling ? 'falling' : 'jumping');
+    if (this.idle) {
+      this.facing = Character.FACE_RIGHT;
+      this.animation = this.carrying ? 'carrying-idle' : 'idle';
     }
-    else if (!this.walking) {
-      if (this.idle) {
-        this.facing = Character.FACE_RIGHT;
-        this.animation = this.carrying ? 'carrying-idle' : 'idle';
-      }
-      else {
-        this.animation = this.carrying ? 'carrying-facing' : 'facing';
-      }
+    else if (this.jumping) {
+      this.animation = this.falling ? 'falling' : 'jumping';
+    }
+    else if (this.walking) {
+      this.animation = this.carrying ? 'carrying-walking' : 'walking';
+    }
+    else if (this.standing) {
+      this.animation = this.carrying ? 'carrying-facing' : 'facing';
     }
   }
 
