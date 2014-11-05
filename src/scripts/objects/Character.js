@@ -16,15 +16,15 @@ class Character extends Phaser.Sprite {
     this._setupPhysicsBody(10, 16);
     this._setupAnimations();
 
-    this.stance = 'idle';
-    this.idle   = false;
+    this.animation = 'idle';
+    this.idle      = true;
 
     this._jumpPower      = 0;
     this._carryingFriend = null;
   }
 
   update () {
-    this._updateStance();
+    this._updateAnimation();
     this._updateCarryingFriend();
     this._updateJumpPower();
   }
@@ -99,25 +99,21 @@ class Character extends Phaser.Sprite {
   _move (direction, speed) {
     this.facing              = direction;
     this.body.acceleration.x = direction * speed;
-    this.stance              = this.carrying ? 'carrying-walking' : 'walking';
   }
 
-  _changeStance (stance) {
-    this.animations.play(stance);
-  }
-
-  _updateStance () {
-    if (this.jumping) {
-      this.stance = (this.falling ? 'falling' : 'jumping');
+  _updateAnimation () {
+    if (this.idle) {
+      this.facing = Character.FACE_RIGHT;
+      this.animation = this.carrying ? 'carrying-idle' : 'idle';
     }
-    else if (!this.walking) {
-      if (this.idle) {
-        this.facing = Character.FACE_RIGHT;
-        this.stance = this.carrying ? 'carrying-idle' : 'idle';
-      }
-      else {
-        this.stance = this.carrying ? 'carrying-facing' : 'facing';
-      }
+    else if (this.jumping) {
+      this.animation = this.falling ? 'falling' : 'jumping';
+    }
+    else if (this.walking) {
+      this.animation = this.carrying ? 'carrying-walking' : 'walking';
+    }
+    else if (this.standing) {
+      this.animation = this.carrying ? 'carrying-facing' : 'facing';
     }
   }
 
@@ -149,13 +145,12 @@ class Character extends Phaser.Sprite {
     this.scale.x = newValue;
   }
 
-  get stance () {
-    return this._stance;
+  get animation () {
+    return this.animations.currentAnim;
   }
 
-  set stance (newValue) {
-    this._stance = newValue;
-    this._changeStance(newValue);
+  set animation (newValue) {
+    this.animations.play(newValue);
   }
 
   get standing () {
