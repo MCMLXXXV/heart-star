@@ -16,8 +16,8 @@ class Character extends Phaser.Sprite {
     this._setupPhysicsBody(10, 16);
     this._setupAnimations();
 
-    this.stance = 'normal';
-    this.idle = false;
+    this.stance = 'idle';
+    this.idle   = false;
 
     this._jumpPower = 0;
   }
@@ -29,7 +29,7 @@ class Character extends Phaser.Sprite {
     else if (!this.walking) {
       if (this.idle) {
         this.facing = Character.FACE_RIGHT;
-        this.stance = this.carrying ? 'carrying' : 'normal';
+        this.stance = this.carrying ? 'carrying-idle' : 'idle';
       }
       else {
         this.stance = this.carrying ? 'carrying-facing' : 'facing';
@@ -98,11 +98,11 @@ class Character extends Phaser.Sprite {
   }
 
   _setupAnimations () {
-    this.animations.add('normal',           [  0,  1,  2,  3 ], 4, true);
+    this.animations.add('idle',             [  0,  1,  2,  3 ], 4, true);
     this.animations.add('happy',            [  4,  5,  6,  7 ], 4, true);
     this.animations.add('facing',           [  8,  9, 10, 11 ], 4, true);
     this.animations.add('walking',          [ 12, 13, 14, 15 ], 4, true);
-    this.animations.add('carrying',                     [ 16 ], 0, false);
+    this.animations.add('carrying-idle',                [ 16 ], 0, false);
     this.animations.add('carrying-facing',  [ 17, 18, 19, 20 ], 4, true);
     this.animations.add('carrying-walking', [ 21, 22, 23, 24 ], 4, true);
     this.animations.add('jumping',                      [ 25 ], 0, false);
