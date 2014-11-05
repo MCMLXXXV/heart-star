@@ -4,6 +4,9 @@ class Game extends Phaser.State {
     this.controls = this.game.controls;
 
     this.stageName = stageName;
+
+    this._playerCharacter = null;
+    this._idleCharacter   = null;
   }
 
   create () {
@@ -18,12 +21,10 @@ class Game extends Phaser.State {
     this._heart = this.add.existing(new Character(this.game, 168, 32, Character.HEART));
     this._star = this.add.existing(new Character(this.game, 72, 32, Character.STAR));
 
-    this._player = this._star;
+    this._setupPlayableCharacters(this._star, this._heart);
 
     this.controls.spacebar.onUp.add(this._togglePlayerCharacter, this);
     this.controls.backspace.onUp.add(this._restartCharacters, this);
-
-    this._star.animations.play('cheering');
   }
 
   update () {
@@ -35,23 +36,29 @@ class Game extends Phaser.State {
     this._star.body.acceleration.x = 0;
 
     if (this.controls.left.isDown)
-      this._player.walkLeft();
+      this._playerCharacter.walkLeft();
     else if (this.controls.right.isDown)
-      this._player.walkRight();
+      this._playerCharacter.walkRight();
 
     if (this.controls.up.isDown) {
-      this._player.jump();
+      this._playerCharacter.jump();
     }
     else {
-      this._player.cancelPowerJump();
+      this._playerCharacter.cancelPowerJump();
     }
   }
 
   // --------------------------------------------------------------------------
 
+  _setupPlayableCharacters(playerCharacter, idleCharacter) {
+    this._playerCharacter = playerCharacter;
+    this._idleCharacter = idleCharacter;
+  }
+
   _togglePlayerCharacter () {
-    if (this._player.standing)
-      this._player = this._player === this._heart ? this._star : this._heart;
+    if (this._playerCharacter.standing) {
+      this._setupPlayableCharacters(this._idleCharacter, this._playerCharacter);
+    }
   }
 
   _restartCharacters () {
