@@ -16,8 +16,8 @@ class Character extends Phaser.Sprite {
     this._setupPhysicsBody(10, 16);
     this._setupAnimations();
 
-    this.stance = 'idle';
-    this.idle   = false;
+    this.animation = 'idle';
+    this.idle      = true;
 
     this._jumpPower      = 0;
     this._carryingFriend = null;
@@ -99,24 +99,26 @@ class Character extends Phaser.Sprite {
   _move (direction, speed) {
     this.facing              = direction;
     this.body.acceleration.x = direction * speed;
-    this.stance              = this.carrying ? 'carrying-walking' : 'walking';
+    this.animation           = this.carrying ? 'carrying-walking' : 'walking';
   }
 
-  _changeStance (stance) {
-    this.animations.play(stance);
+  _changeAnimation (animation) {
+    this.animations.play(animation);
+
+    this._animation = animation;
   }
 
   _updateStance () {
     if (this.jumping) {
-      this.stance = (this.falling ? 'falling' : 'jumping');
+      this.animation = (this.falling ? 'falling' : 'jumping');
     }
     else if (!this.walking) {
       if (this.idle) {
         this.facing = Character.FACE_RIGHT;
-        this.stance = this.carrying ? 'carrying-idle' : 'idle';
+        this.animation = this.carrying ? 'carrying-idle' : 'idle';
       }
       else {
-        this.stance = this.carrying ? 'carrying-facing' : 'facing';
+        this.animation = this.carrying ? 'carrying-facing' : 'facing';
       }
     }
   }
@@ -149,13 +151,12 @@ class Character extends Phaser.Sprite {
     this.scale.x = newValue;
   }
 
-  get stance () {
-    return this._stance;
+  get animation () {
+    return this._animation;
   }
 
-  set stance (newValue) {
-    this._stance = newValue;
-    this._changeStance(newValue);
+  set animation (newValue) {
+    this._changeAnimation(newValue);
   }
 
   get standing () {
