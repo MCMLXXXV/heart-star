@@ -18,6 +18,7 @@ class Game extends Phaser.State {
 
     this._layer = this._tilemap.createLayer('test');
 
+    this._goal = this.add.existing(new Goal(this.game, 120, 72));
     this._heart = this.add.existing(new Character(this.game, 168, 32, Character.HEART));
     this._star = this.add.existing(new Character(this.game, 72, 32, Character.STAR));
 
@@ -29,6 +30,7 @@ class Game extends Phaser.State {
 
   update () {
     this._playerCharacter.collideCharacter(this._idleCharacter);
+    this.physics.arcade.collide(this._goal, [this._heart, this._star]);
     this.physics.arcade.collide(this._star,  this._layer);
     this.physics.arcade.collide(this._heart, this._layer);
 
@@ -72,6 +74,7 @@ class Game extends Phaser.State {
 }
 
 
+import Goal              from 'objects/Goal';
 import Character         from 'objects/Character';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
