@@ -24,7 +24,7 @@ class Character extends Phaser.Sprite {
   }
 
   update () {
-    this._updateStance();
+    this._updateAnimation();
     this._updateCarryingFriend();
     this._updateJumpPower();
   }
@@ -101,7 +101,7 @@ class Character extends Phaser.Sprite {
     this.body.acceleration.x = direction * speed;
   }
 
-  _updateStance () {
+  _updateAnimation () {
     if (this.idle) {
       this.facing = Character.FACE_RIGHT;
       this.animation = this.carrying ? 'carrying-idle' : 'idle';
