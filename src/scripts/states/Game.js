@@ -15,40 +15,54 @@ class Game extends Phaser.State {
 
     this._layer = this._tilemap.createLayer('test');
 
-    this._star = this.add.sprite(72, 32, 'character-star');
-    this._star.animations.add('main', [ 0, 1, 2, 3 ], 4, true).play();
-    this._star.anchor.set(0.5, 1);
-    this.physics.arcade.enableBody(this._star);
-    this._star.body.setSize(10, 16);
-    this._star.body.gravity.y = 300;
+    this._heart = this.add.existing(new Character(this.game, 168, 32, Character.HEART));
+    this._star = this.add.existing(new Character(this.game, 72, 32, Character.STAR));
+
+    this._player = this._star;
+
+    this.controls.spacebar.onUp.add(this._togglePlayerCharacter, this);
+    this.controls.backspace.onUp.add(this._restartCharacters, this);
+
+    this._star.animations.play('cheering');
   }
 
   update () {
-    this.physics.arcade.collide(this._star, this._layer);
+    this.physics.arcade.collide(this._heart, this._star);
+    this.physics.arcade.collide(this._star,  this._layer);
+    this.physics.arcade.collide(this._heart, this._layer);
 
-    this._star.body.velocity.x = 0;
+    this._heart.body.acceleration.x = 0;
+    this._star.body.acceleration.x = 0;
 
     if (this.controls.left.isDown)
-      this._star.body.velocity.x = -64;
+      this._player.walkLeft();
     else if (this.controls.right.isDown)
-      this._star.body.velocity.x =  64;
+      this._player.walkRight();
 
-    if (this._star.body.blocked.down) {
-      if (this.controls.up.isDown) {
-        this._star.body.velocity.y = -120;
-      }
+    if (this.controls.up.isDown) {
+      this._player.jump();
     }
-  }
-
-  render () {
-    // this.game.debug.body(this._star);
+    else {
+      this._player.cancelPowerJump();
+    }
   }
 
   // --------------------------------------------------------------------------
 
+  _togglePlayerCharacter () {
+    if (this._player.standing)
+      this._player = this._player === this._heart ? this._star : this._heart;
+  }
+
+  _restartCharacters () {
+    this._heart.reset(168, 32);
+    this._star.reset(72, 32);
+  }
+
 }
 
 
+import Character         from 'objects/Character';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
 export default Game;
