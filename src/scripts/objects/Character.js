@@ -52,7 +52,7 @@ class Character extends Phaser.Sprite {
   }
 
   jump () {
-    if (!this.carrying && (this.standing || this.canPowerJump)) {
+    if (this.canJump) {
       this.body.velocity.y = -120;
       this._jumpPower -= 1;
     }
@@ -153,6 +153,10 @@ class Character extends Phaser.Sprite {
 
   get jumping () {
     return !this.standing;
+  }
+
+  get canJump () {
+    return !this.carrying && (this.standing || this.canPowerJump);
   }
 
   get canPowerJump () {
