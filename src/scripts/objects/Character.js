@@ -21,20 +21,20 @@ class Character extends Phaser.Sprite {
       this.stance = (this.falling ? 'falling' : 'jumping');
     }
     else if (!this.walking) {
-      if (this.playerControlling) {
-        this.stance = 'facing';
+      if (this.carrying) {
+        this.stance = 'carrying-facing';
+      }
+      else if (this.idle) {
+        this.scale.x = 1;
+        this.stance = 'normal';
       }
       else {
-        this.stance = 'normal';
+        this.stance = 'facing';
       }
     }
 
     if (this.standing) {
       this._jumpPower = DEFAULT_JUMP_POWER;
-    }
-
-    if (!this.playerControlling) {
-      this.scale.x = 1;
     }
   }
 
@@ -43,13 +43,13 @@ class Character extends Phaser.Sprite {
   walkLeft () {
     this.scale.x             =   -1;
     this.body.acceleration.x = -600;
-    this.stance              = 'walking';
+    this.stance              = this.carrying ? 'carrying-walking' : 'walking';
   }
 
   walkRight () {
     this.scale.x             =    1;
     this.body.acceleration.x =  600;
-    this.stance              = 'walking';
+    this.stance              = this.carrying ? 'carrying-walking' : 'walking';
   }
 
   jump () {
@@ -63,6 +63,21 @@ class Character extends Phaser.Sprite {
     if (this.standing) return;
 
     this._jumpPower = 0;
+  }
+
+  collideCharacter (character) {
+    var hasCollided = this.game.physics.arcade.collide(
+      character,
+      this,
+      this._characterCollisionCallback,
+      null,
+      this);
+
+    character.carry(hasCollided && this.standing, this);
+  }
+
+  carry (condition, character) {
+    this._carryingFriend = condition ? character : null;
   }
 
   // --------------------------------------------------------------------------
@@ -98,6 +113,12 @@ class Character extends Phaser.Sprite {
     this.animations.play(stance);
   }
 
+  _characterCollisionCallback (character) {
+    if (character.standing) {
+      character.body.x += this.body.deltaX();
+    }
+  }
+
   // --------------------------------------------------------------------------
 
   get stance () {
@@ -129,8 +150,12 @@ class Character extends Phaser.Sprite {
     return this.jumping && this.body.velocity.y > 0;
   }
 
-  get playerControlling () {
-    return true;
+  get carrying () {
+    return this._carryingFriend;
+  }
+
+  get idle () {
+    return false;
   }
 
 }

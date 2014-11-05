@@ -28,7 +28,7 @@ class Game extends Phaser.State {
   }
 
   update () {
-    this.physics.arcade.collide(this._heart, this._star);
+    this._playerCharacter.collideCharacter(this._idleCharacter);
     this.physics.arcade.collide(this._star,  this._layer);
     this.physics.arcade.collide(this._heart, this._layer);
 
