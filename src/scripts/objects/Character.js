@@ -101,12 +101,6 @@ class Character extends Phaser.Sprite {
     this.body.acceleration.x = direction * speed;
   }
 
-  _changeAnimation (animation) {
-    this.animations.play(animation);
-
-    this._animation = animation;
-  }
-
   _updateStance () {
     if (this.idle) {
       this.facing = Character.FACE_RIGHT;
@@ -152,11 +146,11 @@ class Character extends Phaser.Sprite {
   }
 
   get animation () {
-    return this._animation;
+    return this.animations.currentAnim;
   }
 
   set animation (newValue) {
-    this._changeAnimation(newValue);
+    this.animations.play(newValue);
   }
 
   get standing () {
