@@ -51,8 +51,11 @@ class Game extends Phaser.State {
   // --------------------------------------------------------------------------
 
   _setupPlayableCharacters(playerCharacter, idleCharacter) {
-    this._playerCharacter = playerCharacter;
-    this._idleCharacter = idleCharacter;
+    this._playerCharacter      = playerCharacter;
+    this._playerCharacter.idle = false;
+
+    this._idleCharacter      = idleCharacter;
+    this._idleCharacter.idle = true;
   }
 
   _togglePlayerCharacter () {
