@@ -1,4 +1,5 @@
 var DEFAULT_JUMP_POWER = 10;
+var DEFAULT_ACCELERATION = 600;
 
 
 class Character extends Phaser.Sprite {
@@ -43,15 +44,11 @@ class Character extends Phaser.Sprite {
   // --------------------------------------------------------------------------
 
   walkLeft () {
-    this.facing              =   -1;
-    this.body.acceleration.x = -600;
-    this.stance              = this.carrying ? 'carrying-walking' : 'walking';
+    this._move(-1, DEFAULT_ACCELERATION);
   }
 
   walkRight () {
-    this.facing              =    1;
-    this.body.acceleration.x =  600;
-    this.stance              = this.carrying ? 'carrying-walking' : 'walking';
+    this._move( 1, DEFAULT_ACCELERATION);
   }
 
   jump () {
@@ -109,6 +106,12 @@ class Character extends Phaser.Sprite {
     this.animations.add('hurt',                         [ 27 ], 0, false);
     this.animations.add('scared',                       [ 28 ], 0, false);
     this.animations.add('cheering',                 [ 29, 30 ], 2, true);
+  }
+
+  _move (direction, speed) {
+    this.facing              = direction;
+    this.body.acceleration.x = direction * speed;
+    this.stance              = this.carrying ? 'carrying-walking' : 'walking';
   }
 
   _changeStance (stance) {
