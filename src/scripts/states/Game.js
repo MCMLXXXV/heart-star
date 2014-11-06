@@ -36,6 +36,9 @@ class Game extends Phaser.State {
       trap.hitted.addOnce(this._trapped, this);
     }, this);
 
+    this._agents = this.add.existing(new Agents(this.game));
+    this._agents.characterFellOff.add(this._fellOff, this);
+
     this._heart = this.add.existing(new Character(this.game, 168, 32, Character.HEART));
     this._star = this.add.existing(new Character(this.game, 72, 32, Character.STAR));
 
@@ -59,6 +62,8 @@ class Game extends Phaser.State {
     this._traps.forEach(function (trap) {
       trap.collideCharacter(this._playerCharacter);
     }, this);
+
+    this._agents.collide(this._playerCharacter);
 
     if (this.controls.left.isDown) {
       this._playerCharacter.walkLeft();
@@ -108,11 +113,18 @@ class Game extends Phaser.State {
     console.info('Trapped!!!');
   }
 
+  _fellOff () {
+    console.log('Player Fell!!!')
+
+    this._restartCharacters();
+  }
+
 }
 
 
 import Goal              from 'objects/Goal';
 import Trap              from 'objects/Trap';
+import Agents            from 'objects/Agents';
 import Platform          from 'objects/Platform';
 import Character         from 'objects/Character';
 import BackgroundPattern from 'objects/BackgroundPattern';
