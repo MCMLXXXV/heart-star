@@ -40,7 +40,6 @@ class Actor extends Phaser.Sprite {
   }
 
   stop () {
-    this.body.velocity.x     = 0;
     this.body.acceleration.x = 0;
   }
 
