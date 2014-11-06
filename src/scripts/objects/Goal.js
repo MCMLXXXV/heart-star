@@ -19,7 +19,7 @@ class Goal extends Phaser.Sprite {
     var idleCollided = this.game.physics.arcade.collide(
       idleActor, this);
 
-    if (playerCollided && idleCollided) {
+    if (playerCollided && idleCollided && this.actorsStanding) {
       this.actorsLanded.dispatch();
     }
   }
@@ -29,7 +29,6 @@ class Goal extends Phaser.Sprite {
   _setupPhysicsBody (width, height, offsetX, offsetY) {
     if (this.body === null) {
       this.game.physics.arcade.enableBody(this);
-
     }
 
     this.body.immovable = true;
@@ -38,6 +37,14 @@ class Goal extends Phaser.Sprite {
 
   _setupAnimation () {
     this.animations.add('main', null, 8, true).play();
+  }
+
+  // --------------------------------------------------------------------------
+
+  get actorsStanding () {
+    var { left, right, up, down } = this.body.touching;
+
+    return up && !(left || right || down);
   }
 
 }
