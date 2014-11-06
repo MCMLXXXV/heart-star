@@ -29,6 +29,13 @@ class Game extends Phaser.State {
     this._platforms.add(new Platform(this.game,  32, 112, Platform.SMALL));
     this._platforms.add(new Platform(this.game, 192, 112, Platform.SMALL));
 
+    this._traps = this.add.group();
+    this._traps.add(new Trap(this.game,   0,  80));
+    this._traps.add(new Trap(this.game, 224,  80));
+    this._traps.forEach(function (trap) {
+      trap.hitted.addOnce(this._trapped, this);
+    }, this);
+
     this._heart = this.add.existing(new Character(this.game, 168, 32, Character.HEART));
     this._star = this.add.existing(new Character(this.game, 72, 32, Character.STAR));
 
@@ -49,6 +56,9 @@ class Game extends Phaser.State {
       this._platforms,
       [ this._heart, this._star ]);
 
+    this._traps.forEach(function (trap) {
+      trap.collideCharacter(this._playerCharacter);
+    }, this);
 
     if (this.controls.left.isDown) {
       this._playerCharacter.walkLeft();
@@ -94,10 +104,15 @@ class Game extends Phaser.State {
     console.info('Yeah!!!');
   }
 
+  _trapped () {
+    console.info('Trapped!!!');
+  }
+
 }
 
 
 import Goal              from 'objects/Goal';
+import Trap              from 'objects/Trap';
 import Platform          from 'objects/Platform';
 import Character         from 'objects/Character';
 import BackgroundPattern from 'objects/BackgroundPattern';
