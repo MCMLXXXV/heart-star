@@ -39,6 +39,11 @@ class Character extends Phaser.Sprite {
     this._move(Character.FACE_RIGHT, DEFAULT_ACCELERATION);
   }
 
+  stop () {
+    this.body.velocity.x     = 0;
+    this.body.acceleration.x = 0;
+  }
+
   jump () {
     if (this.canJump) {
       this.body.velocity.y = DEFAULT_JUMP_VELOCITY;

@@ -72,8 +72,8 @@ class Game extends Phaser.State {
       this._playerCharacter.walkRight();
     }
     else {
-      this._playerCharacter.body.acceleration.x = 0;
-      this._idleCharacter.body.acceleration.x = 0;
+      this._playerCharacter.stop();
+      this._idleCharacter.stop();
     }
 
     if (this.controls.up.isDown) {
@@ -98,6 +98,9 @@ class Game extends Phaser.State {
     if (this._playerCharacter.standing) {
       this._setupPlayableCharacters(this._idleCharacter, this._playerCharacter);
     }
+
+    this._playerCharacter.stop();
+    this._idleCharacter.stop();
   }
 
   _restartCharacters () {
