@@ -10,6 +10,8 @@ class Game extends Phaser.State {
   }
 
   create () {
+    var { heartLayer, starLayer } = stages.getRelatedLayerNames(this.stageName);
+
     this._heartGroup = new Layer(this.game);
     this._starGroup  = new Layer(this.game);
 
@@ -18,19 +20,56 @@ class Game extends Phaser.State {
     this._starGroup.add(
       new BackgroundPattern(this.game, BackgroundPattern.STAR));
 
-    this._tilemap1 = this._makeTilemap('05a');
-    this._tilemap2 = this._makeTilemap('05b');
+    this._tilemap1 = this._makeTilemap(heartLayer);
+    this._tilemap2 = this._makeTilemap(starLayer);
 
-    this._layer1 = this._heartGroup.add(this._makeTilemapLayer(this._tilemap1, '05a'));
-    this._layer2 = this._starGroup.add(this._makeTilemapLayer(this._tilemap2, '05b'));
+    var mapObjects = this._tilemap1.objects[this.stageName];
 
-    this._goal = this.add.existing(new Goal(this.game, 120, 64));
+    for (var object of mapObjects) {
+      var coordinates = this._getObjectCoordinates(object);
+
+      switch (object.type) {
+        case 'goal':
+          this.goalCoordinates = this._fixGoalCoordinates(coordinates);
+
+          break;
+        case 'starting-point':
+          if (object.name === 'heart') {
+            this.heartCoordinates = this._fixActorCoordinates(coordinates);
+          }
+          else if (object.name === 'star') {
+            this.starCoordinates = this._fixActorCoordinates(coordinates);
+          }
+
+          break;
+      }
+    }
+
+    this._layer1 = this._heartGroup.add(this._makeTilemapLayer(this._tilemap1, heartLayer));
+    this._layer2 = this._starGroup.add(this._makeTilemapLayer(this._tilemap2, starLayer));
 
     this._agents = this.add.existing(new Agents(this.game));
     this._agents.actorFellOff.add(this._fellOff, this);
 
-    this._heart = this.add.existing(new Actor(this.game, 200, 128, Actor.HEART));
-    this._star = this.add.existing(new Actor(this.game, 40, 128, Actor.STAR));
+    this._goal = this.add.existing(
+      new Goal(
+        this.game,
+        this.goalCoordinates.x,
+        this.goalCoordinates.y));
+    this._goal.actorsLanded.addOnce(this._goToNextStage, this);
+
+    this._heart = this.add.existing(
+      new Actor(
+        this.game,
+        this.heartCoordinates.x,
+        this.heartCoordinates.y,
+        Actor.HEART));
+    this._star = this.add.existing(
+      new Actor(
+        this.game,
+        this.starCoordinates.x,
+        this.starCoordinates.y,
+        Actor.STAR));
 
     this._setupPlayableActors(this._heart, this._star);
 
@@ -82,6 +121,20 @@ class Game extends Phaser.State {
     return tilemap.createLayer(layerName);
   }
 
+  _getObjectCoordinates (object) {
+    var { x, y } = object;
+
+    return { x, y };
+  }
+
+  _fixGoalCoordinates ({ x, y }) {
+    return { x: x + 16, y: y + 16 };
+  }
+
+  _fixActorCoordinates ({ x, y }) {
+    return { x: x + 8, y: y + 24 };
+  }
+
   _setupPlayableActors(playerActor, idleActor) {
     this._playerActor      = playerActor;
     this._playerActor.idle = false;
@@ -106,16 +159,27 @@ class Game extends Phaser.State {
   }
 
   _restartActors () {
-    this._heart.reset(200, 128);
-    this._star.reset(40, 128);
+    this._heart.reset(this.heartCoordinates.x, this.heartCoordinates.y);
+    this._star.reset(this.starCoordinates.x, this.starCoordinates.y);
   }
 
   _fellOff () {
     this._restartActors();
   }
 
+  _goToNextStage () {
+    var nextStage = stages.getNextStage(this.stageName);
+
+    if (nextStage === null)
+      this._restartActors();
+    else
+      this.state.start('Game', true, false, nextStage);
+  }
+
 }
 
+
+import stages from 'common/stages';
 
 import Goal              from 'objects/Goal';
 import Layer             from 'objects/Layer';
