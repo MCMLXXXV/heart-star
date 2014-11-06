@@ -150,7 +150,7 @@ class Game extends Phaser.State {
   }
 
   _togglePlayerActor () {
-    if (!this._playerActor) return;
+    if (!this._playerActor.standing) return;
 
     this._setupPlayableActors(this._idleActor, this._playerActor);
 
