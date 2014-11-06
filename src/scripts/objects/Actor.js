@@ -6,10 +6,10 @@ var DEFAULT_SPEED_LIMITS  = [ 64, 180 ];
 var DEFAULT_JUMP_VELOCITY = -120;
 
 
-class Character extends Phaser.Sprite {
+class Actor extends Phaser.Sprite {
 
-  constructor (game, x, y, character) {
-    super(game, x, y, character);
+  constructor (game, x, y, role) {
+    super(game, x, y, role);
 
     this.anchor.set(0.5, 1);
 
@@ -32,11 +32,11 @@ class Character extends Phaser.Sprite {
   // --------------------------------------------------------------------------
 
   walkLeft () {
-    this._move(Character.FACE_LEFT,  DEFAULT_ACCELERATION);
+    this._move(Actor.FACE_LEFT,  DEFAULT_ACCELERATION);
   }
 
   walkRight () {
-    this._move(Character.FACE_RIGHT, DEFAULT_ACCELERATION);
+    this._move(Actor.FACE_RIGHT, DEFAULT_ACCELERATION);
   }
 
   stop () {
@@ -57,19 +57,19 @@ class Character extends Phaser.Sprite {
     this._jumpPower = 0;
   }
 
-  collideCharacter (character) {
+  collideActor (actor) {
     var hasCollided = this.game.physics.arcade.collide(
-      character,
+      actor,
       this,
-      this._characterCollisionCallback,
+      this._actorCollisionCallback,
       null,
       this);
 
-    character.carry(hasCollided && this.standing, this);
+    actor.carry(hasCollided && this.standing, this);
   }
 
-  carry (condition, character) {
-    this._carryingFriend = condition ? character : null;
+  carry (condition, actor) {
+    this._carryingFriend = condition ? actor : null;
   }
 
   // --------------------------------------------------------------------------
@@ -108,7 +108,7 @@ class Character extends Phaser.Sprite {
 
   _updateAnimation () {
     if (this.idle) {
-      this.facing = Character.FACE_RIGHT;
+      this.facing = Actor.FACE_RIGHT;
       this.animation = this.carrying ? 'carrying-idle' : 'idle';
     }
     else if (this.jumping) {
@@ -134,9 +134,9 @@ class Character extends Phaser.Sprite {
     }
   }
 
-  _characterCollisionCallback (character) {
-    if (character.standing) {
-      character.body.x += this.body.deltaX();
+  _actorCollisionCallback (actor) {
+    if (actor.standing) {
+      actor.body.x += this.body.deltaX();
     }
   }
 
@@ -189,10 +189,10 @@ class Character extends Phaser.Sprite {
 }
 
 
-Character.FACE_LEFT  = -1;
-Character.FACE_RIGHT =  1;
+Actor.FACE_LEFT  = -1;
+Actor.FACE_RIGHT =  1;
 
-Character.HEART = 'character-heart';
-Character.STAR  = 'character-star';
+Actor.HEART = 'character-heart';
+Actor.STAR  = 'character-star';
 
-export default Character;
+export default Actor;

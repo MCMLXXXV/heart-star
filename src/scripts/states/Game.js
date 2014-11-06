@@ -5,8 +5,8 @@ class Game extends Phaser.State {
 
     this.stageName = stageName;
 
-    this._playerCharacter = null;
-    this._idleCharacter   = null;
+    this._playerActor = null;
+    this._idleActor   = null;
   }
 
   create () {
@@ -32,78 +32,78 @@ class Game extends Phaser.State {
     this._goal = this.add.existing(new Goal(this.game, 120, 64));
 
     this._agents = this.add.existing(new Agents(this.game));
-    this._agents.characterFellOff.add(this._fellOff, this);
+    this._agents.actorFellOff.add(this._fellOff, this);
 
-    this._heart = this.add.existing(new Character(this.game, 200, 128, Character.HEART));
-    this._star = this.add.existing(new Character(this.game, 40, 128, Character.STAR));
+    this._heart = this.add.existing(new Actor(this.game, 200, 128, Actor.HEART));
+    this._star = this.add.existing(new Actor(this.game, 40, 128, Actor.STAR));
 
-    this._setupPlayableCharacters(this._heart, this._star);
+    this._setupPlayableActors(this._heart, this._star);
 
-    this.controls.spacebar.onUp.add(this._togglePlayerCharacter, this);
-    this.controls.backspace.onUp.add(this._restartCharacters, this);
+    this.controls.spacebar.onUp.add(this._togglePlayerActor, this);
+    this.controls.backspace.onUp.add(this._restartActors, this);
   }
 
   update () {
-    this._playerCharacter.collideCharacter(this._idleCharacter);
-    this._goal.collideCharacters(this._playerCharacter, this._idleCharacter);
+    this._playerActor.collideActor(this._idleActor);
+    this._goal.collideActors(this._playerActor, this._idleActor);
 
     this.physics.arcade.collide(this._heart, this._layer1);
     this.physics.arcade.collide(this._star,  this._layer2);
 
-    this._agents.collide(this._playerCharacter);
-    this._agents.collide(this._idleCharacter);
+    this._agents.collide(this._playerActor);
+    this._agents.collide(this._idleActor);
 
     if (this.controls.left.isDown) {
-      this._playerCharacter.walkLeft();
+      this._playerActor.walkLeft();
     }
     else if (this.controls.right.isDown) {
-      this._playerCharacter.walkRight();
+      this._playerActor.walkRight();
     }
     else {
-      this._playerCharacter.stop();
-      this._idleCharacter.stop();
+      this._playerActor.stop();
+      this._idleActor.stop();
     }
 
     if (this.controls.up.isDown) {
-      this._playerCharacter.jump();
+      this._playerActor.jump();
     }
     else {
-      this._playerCharacter.cancelPowerJump();
+      this._playerActor.cancelPowerJump();
     }
   }
 
   // --------------------------------------------------------------------------
 
-  _setupPlayableCharacters(playerCharacter, idleCharacter) {
-    this._playerCharacter      = playerCharacter;
-    this._playerCharacter.idle = false;
+  _setupPlayableActors(playerActor, idleActor) {
+    this._playerActor      = playerActor;
+    this._playerActor.idle = false;
 
-    this._idleCharacter      = idleCharacter;
-    this._idleCharacter.idle = true;
+    this._idleActor      = idleActor;
+    this._idleActor.idle = true;
 
-    this._heartGroup.alpha = this._playerCharacter === this._heart ? 1 : 0;
-    this._starGroup.alpha  = this._playerCharacter === this._star  ? 1 : 0;
+    this._heartGroup.alpha = this._playerActor === this._heart ? 1 : 0;
+    this._starGroup.alpha  = this._playerActor === this._star  ? 1 : 0;
 
-    this._heart.alpha = this._playerCharacter === this._heart ? 1 : 0.75;
-    this._star.alpha  = this._playerCharacter === this._star  ? 1 : 0.75;
+    this._heart.alpha = this._playerActor === this._heart ? 1 : 0.75;
+    this._star.alpha  = this._playerActor === this._star  ? 1 : 0.75;
   }
 
-  _togglePlayerCharacter () {
-    if (!this._playerCharacter) return;
+  _togglePlayerActor () {
+    if (!this._playerActor) return;
 
-    this._setupPlayableCharacters(this._idleCharacter, this._playerCharacter);
+    this._setupPlayableActors(this._idleActor, this._playerActor);
 
-    this._playerCharacter.stop();
-    this._idleCharacter.stop();
+    this._playerActor.stop();
+    this._idleActor.stop();
   }
 
-  _restartCharacters () {
+  _restartActors () {
     this._heart.reset(200, 128);
     this._star.reset(40, 128);
   }
 
   _fellOff () {
-    this._restartCharacters();
+    this._restartActors();
   }
 
 }
@@ -111,9 +111,9 @@ class Game extends Phaser.State {
 
 import Goal              from 'objects/Goal';
 //import Trap              from 'objects/Trap';
+import Actor             from 'objects/Actor';
 import Agents            from 'objects/Agents';
 //import Platform          from 'objects/Platform';
-import Character         from 'objects/Character';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
 export default Game;
