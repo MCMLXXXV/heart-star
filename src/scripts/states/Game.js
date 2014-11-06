@@ -18,16 +18,11 @@ class Game extends Phaser.State {
     this._starGroup.add(
       new BackgroundPattern(this.game, BackgroundPattern.STAR));
 
-    this._tilemap1 = this.add.tilemap('tilemaps');
-    this._tilemap1.setCollisionBetween(1, 144, true, '05a');
-    this._tilemap1.addTilesetImage('tileset');
+    this._tilemap1 = this._makeTilemap('05a');
+    this._tilemap2 = this._makeTilemap('05b');
 
-    this._tilemap2 = this.add.tilemap('tilemaps');
-    this._tilemap2.setCollisionBetween(1, 144, true, '05b');
-    this._tilemap2.addTilesetImage('tileset');
-
-    this._layer1 = this._heartGroup.add(this._tilemap1.createLayer('05a'));
-    this._layer2 = this._starGroup.add(this._tilemap2.createLayer('05b'));
+    this._layer1 = this._heartGroup.add(this._makeTilemapLayer(this._tilemap1, '05a'));
+    this._layer2 = this._starGroup.add(this._makeTilemapLayer(this._tilemap2, '05b'));
 
     this._goal = this.add.existing(new Goal(this.game, 120, 64));
 
@@ -73,6 +68,19 @@ class Game extends Phaser.State {
   }
 
   // --------------------------------------------------------------------------
+
+  _makeTilemap (collisionLayerName) {
+    var tilemap = this.add.tilemap('tilemaps');
+
+    tilemap.setCollisionBetween(1, 144, true, collisionLayerName);
+    tilemap.addTilesetImage('tileset');
+
+    return tilemap;
+  }
+
+  _makeTilemapLayer (tilemap, layerName) {
+    return tilemap.createLayer(layerName);
+  }
 
   _setupPlayableActors(playerActor, idleActor) {
     this._playerActor      = playerActor;
