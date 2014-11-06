@@ -20,6 +20,22 @@ class Game extends Phaser.State {
 
     this._goal = this.add.existing(new Goal(this.game, 120, 72));
     this._goal.charactersLanded.addOnce(this._goalReached, this);
+
+    this._platforms = this.add.group();
+    this._platforms.add(new Platform(this.game,  16,  24, Platform.MEDIUM));
+    this._platforms.add(new Platform(this.game, 192,  24, Platform.MEDIUM));
+    this._platforms.add(new Platform(this.game,   0,  56, Platform.SMALL));
+    this._platforms.add(new Platform(this.game, 224,  56, Platform.SMALL));
+    this._platforms.add(new Platform(this.game,  32, 112, Platform.SMALL));
+    this._platforms.add(new Platform(this.game, 192, 112, Platform.SMALL));
+
+    this._traps = this.add.group();
+    this._traps.add(new Trap(this.game,   0,  80));
+    this._traps.add(new Trap(this.game, 224,  80));
+    this._traps.forEach(function (trap) {
+      trap.hitted.addOnce(this._trapped, this);
+    }, this);
+
     this._heart = this.add.existing(new Character(this.game, 168, 32, Character.HEART));
     this._star = this.add.existing(new Character(this.game, 72, 32, Character.STAR));
 
@@ -32,16 +48,28 @@ class Game extends Phaser.State {
   update () {
     this._playerCharacter.collideCharacter(this._idleCharacter);
     this._goal.collideCharacters(this._playerCharacter, this._idleCharacter);
+
     this.physics.arcade.collide(this._star,  this._layer);
     this.physics.arcade.collide(this._heart, this._layer);
 
-    this._heart.body.acceleration.x = 0;
-    this._star.body.acceleration.x = 0;
+    this.physics.arcade.collide(
+      this._platforms,
+      [ this._heart, this._star ]);
 
-    if (this.controls.left.isDown)
+    this._traps.forEach(function (trap) {
+      trap.collideCharacter(this._playerCharacter);
+    }, this);
+
+    if (this.controls.left.isDown) {
       this._playerCharacter.walkLeft();
-    else if (this.controls.right.isDown)
+    }
+    else if (this.controls.right.isDown) {
       this._playerCharacter.walkRight();
+    }
+    else {
+      this._playerCharacter.body.acceleration.x = 0;
+      this._idleCharacter.body.acceleration.x = 0;
+    }
 
     if (this.controls.up.isDown) {
       this._playerCharacter.jump();
@@ -76,10 +104,16 @@ class Game extends Phaser.State {
     console.info('Yeah!!!');
   }
 
+  _trapped () {
+    console.info('Trapped!!!');
+  }
+
 }
 
 
 import Goal              from 'objects/Goal';
+import Trap              from 'objects/Trap';
+import Platform          from 'objects/Platform';
 import Character         from 'objects/Character';
 import BackgroundPattern from 'objects/BackgroundPattern';
 

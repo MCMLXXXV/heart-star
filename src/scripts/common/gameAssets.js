@@ -368,7 +368,7 @@ export default {
       'type': 'spritesheet',
       'key': 'platform-fixed-2',
       'url': 'images/platform-fixed-2.png',
-      'frameWidth': 16,
+      'frameWidth': 32,
       'frameHeight': 16,
       'margin': 8,
       'spacing': 8
