@@ -45,17 +45,21 @@ class Game extends Phaser.State {
     this.physics.arcade.collide(this._star,  this._layer);
     this.physics.arcade.collide(this._heart, this._layer);
 
-    this._heart.body.acceleration.x = 0;
-    this._star.body.acceleration.x = 0;
     this.physics.arcade.collide(
       this._platforms,
       [ this._heart, this._star ]);
 
 
-    if (this.controls.left.isDown)
+    if (this.controls.left.isDown) {
       this._playerCharacter.walkLeft();
-    else if (this.controls.right.isDown)
+    }
+    else if (this.controls.right.isDown) {
       this._playerCharacter.walkRight();
+    }
+    else {
+      this._playerCharacter.body.acceleration.x = 0;
+      this._idleCharacter.body.acceleration.x = 0;
+    }
 
     if (this.controls.up.isDown) {
       this._playerCharacter.jump();
