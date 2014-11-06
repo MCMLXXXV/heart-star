@@ -20,6 +20,15 @@ class Game extends Phaser.State {
 
     this._goal = this.add.existing(new Goal(this.game, 120, 72));
     this._goal.charactersLanded.addOnce(this._goalReached, this);
+
+    this._platforms = this.add.group();
+    this._platforms.add(new Platform(this.game,  16,  24, Platform.MEDIUM));
+    this._platforms.add(new Platform(this.game, 192,  24, Platform.MEDIUM));
+    this._platforms.add(new Platform(this.game,   0,  56, Platform.SMALL));
+    this._platforms.add(new Platform(this.game, 224,  56, Platform.SMALL));
+    this._platforms.add(new Platform(this.game,  32, 112, Platform.SMALL));
+    this._platforms.add(new Platform(this.game, 192, 112, Platform.SMALL));
+
     this._heart = this.add.existing(new Character(this.game, 168, 32, Character.HEART));
     this._star = this.add.existing(new Character(this.game, 72, 32, Character.STAR));
 
@@ -32,11 +41,16 @@ class Game extends Phaser.State {
   update () {
     this._playerCharacter.collideCharacter(this._idleCharacter);
     this._goal.collideCharacters(this._playerCharacter, this._idleCharacter);
+
     this.physics.arcade.collide(this._star,  this._layer);
     this.physics.arcade.collide(this._heart, this._layer);
 
     this._heart.body.acceleration.x = 0;
     this._star.body.acceleration.x = 0;
+    this.physics.arcade.collide(
+      this._platforms,
+      [ this._heart, this._star ]);
+
 
     if (this.controls.left.isDown)
       this._playerCharacter.walkLeft();
@@ -80,6 +94,7 @@ class Game extends Phaser.State {
 
 
 import Goal              from 'objects/Goal';
+import Platform          from 'objects/Platform';
 import Character         from 'objects/Character';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
