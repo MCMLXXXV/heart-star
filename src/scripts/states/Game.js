@@ -10,8 +10,8 @@ class Game extends Phaser.State {
   }
 
   create () {
-    this._heartGroup = this.add.group();
-    this._starGroup = this.add.group();
+    this._heartGroup = new Layer(this.game);
+    this._starGroup  = new Layer(this.game);
 
     this._heartGroup.add(
       new BackgroundPattern(this.game, BackgroundPattern.HEART));
@@ -81,8 +81,8 @@ class Game extends Phaser.State {
     this._idleActor      = idleActor;
     this._idleActor.idle = true;
 
-    this._heartGroup.alpha = this._playerActor === this._heart ? 1 : 0;
-    this._starGroup.alpha  = this._playerActor === this._star  ? 1 : 0;
+    this._heartGroup.toggle(this._playerActor === this._heart ? 1 : 0);
+    this._starGroup.toggle(this._playerActor === this._star ? 1 : 0);
 
     this._heart.alpha = this._playerActor === this._heart ? 1 : 0.75;
     this._star.alpha  = this._playerActor === this._star  ? 1 : 0.75;
@@ -110,6 +110,7 @@ class Game extends Phaser.State {
 
 
 import Goal              from 'objects/Goal';
+import Layer             from 'objects/Layer';
 //import Trap              from 'objects/Trap';
 import Actor             from 'objects/Actor';
 import Agents            from 'objects/Agents';
