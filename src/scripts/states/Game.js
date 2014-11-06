@@ -19,22 +19,6 @@ class Game extends Phaser.State {
     this._layer = this._tilemap.createLayer('test');
 
     this._goal = this.add.existing(new Goal(this.game, 120, 72));
-    this._goal.charactersLanded.addOnce(this._goalReached, this);
-
-    this._platforms = this.add.group();
-    this._platforms.add(new Platform(this.game,  16,  24, Platform.MEDIUM));
-    this._platforms.add(new Platform(this.game, 192,  24, Platform.MEDIUM));
-    this._platforms.add(new Platform(this.game,   0,  56, Platform.SMALL));
-    this._platforms.add(new Platform(this.game, 224,  56, Platform.SMALL));
-    this._platforms.add(new Platform(this.game,  32, 112, Platform.SMALL));
-    this._platforms.add(new Platform(this.game, 192, 112, Platform.SMALL));
-
-    this._traps = this.add.group();
-    this._traps.add(new Trap(this.game,   0,  80));
-    this._traps.add(new Trap(this.game, 224,  80));
-    this._traps.forEach(function (trap) {
-      trap.hitted.addOnce(this._trapped, this);
-    }, this);
 
     this._agents = this.add.existing(new Agents(this.game));
     this._agents.characterFellOff.add(this._fellOff, this);
@@ -54,14 +38,6 @@ class Game extends Phaser.State {
 
     this.physics.arcade.collide(this._star,  this._layer);
     this.physics.arcade.collide(this._heart, this._layer);
-
-    this.physics.arcade.collide(
-      this._platforms,
-      [ this._heart, this._star ]);
-
-    this._traps.forEach(function (trap) {
-      trap.collideCharacter(this._playerCharacter);
-    }, this);
 
     this._agents.collide(this._playerCharacter);
 
@@ -108,17 +84,7 @@ class Game extends Phaser.State {
     this._star.reset(72, 32);
   }
 
-  _goalReached () {
-    console.info('Yeah!!!');
-  }
-
-  _trapped () {
-    console.info('Trapped!!!');
-  }
-
   _fellOff () {
-    console.log('Player Fell!!!')
-
     this._restartCharacters();
   }
 
