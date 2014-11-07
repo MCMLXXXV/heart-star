@@ -58,7 +58,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":64,
@@ -72,7 +72,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":160,
@@ -86,7 +86,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":104,
@@ -97,7 +97,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"both"
+                     "affects":"both"
                     },
                  "rotation":0,
                  "type":"trap",
@@ -111,7 +111,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"both"
+                     "affects":"both"
                     },
                  "rotation":0,
                  "type":"trap",
@@ -125,7 +125,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"both",
+                     "affects":"both",
                      "type":"1"
                     },
                  "rotation":0,
@@ -140,7 +140,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"both",
+                     "affects":"both",
                      "type":"2"
                     },
                  "rotation":0,
@@ -155,7 +155,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"both",
+                     "affects":"both",
                      "type":"2"
                     },
                  "rotation":0,
@@ -170,7 +170,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"both",
+                     "affects":"both",
                      "type":"1"
                     },
                  "rotation":0,
@@ -228,7 +228,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":40,
@@ -242,7 +242,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":184,
@@ -256,7 +256,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":104,
@@ -310,7 +310,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":80,
@@ -324,7 +324,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":144,
@@ -338,7 +338,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":104,
@@ -392,7 +392,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":48,
@@ -406,7 +406,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":48,
@@ -420,7 +420,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":176,
@@ -474,7 +474,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":168,
@@ -488,7 +488,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":24,
@@ -502,7 +502,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":192,
@@ -556,7 +556,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":200,
@@ -570,7 +570,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":24,
@@ -584,7 +584,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":104,
@@ -638,7 +638,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":24,
@@ -652,7 +652,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":184,
@@ -666,7 +666,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":160,
@@ -720,7 +720,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":40,
@@ -734,7 +734,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":192,
@@ -748,7 +748,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":32,
@@ -759,7 +759,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -774,7 +774,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -789,7 +789,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -804,7 +804,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -819,7 +819,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -834,7 +834,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -849,7 +849,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -864,7 +864,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -879,7 +879,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -894,7 +894,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -909,7 +909,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -924,7 +924,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -939,8 +939,8 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"star",
-                     "type":"2"
+                     "affects":"star",
+                     "type":"medium"
                     },
                  "rotation":0,
                  "type":"platform",
@@ -997,7 +997,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":24,
@@ -1011,7 +1011,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":48,
@@ -1025,7 +1025,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":192,
@@ -1036,7 +1036,7 @@
                  "name":"retractable-a",
                  "properties":
                     {
-                     "availableTo":"both",
+                     "affects":"both",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1051,7 +1051,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "type":"short"
                     },
                  "rotation":0,
@@ -1066,9 +1066,9 @@
                  "name":"button",
                  "properties":
                     {
-                     "availableTo":"both",
-                     "bindTo":"retractable-a",
-                     "orientation":"north"
+                     "affects":"both",
+                     "orientation":"north",
+                     "triggers":"retractable-a"
                     },
                  "rotation":0,
                  "type":"button",
@@ -1082,7 +1082,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1097,7 +1097,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1112,7 +1112,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1127,7 +1127,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1142,7 +1142,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1157,7 +1157,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1172,7 +1172,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1187,7 +1187,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1245,7 +1245,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":200,
@@ -1259,7 +1259,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":200,
@@ -1273,7 +1273,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":32,
@@ -1284,7 +1284,7 @@
                  "name":"retractable-a",
                  "properties":
                     {
-                     "availableTo":"both",
+                     "affects":"both",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1299,9 +1299,9 @@
                  "name":"button",
                  "properties":
                     {
-                     "availableTo":"both",
-                     "bindTo":"retractable-a",
-                     "orientation":"north"
+                     "affects":"both",
+                     "orientation":"north",
+                     "triggers":"retractable-a"
                     },
                  "rotation":0,
                  "type":"button",
@@ -1315,7 +1315,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "type":"short"
                     },
                  "rotation":0,
@@ -1330,7 +1330,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "type":"short"
                     },
                  "rotation":0,
@@ -1345,7 +1345,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1360,7 +1360,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1375,7 +1375,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1390,7 +1390,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1405,7 +1405,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1420,7 +1420,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1435,7 +1435,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1450,7 +1450,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1508,7 +1508,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":200,
@@ -1522,7 +1522,7 @@
 
                     },
                  "rotation":0,
-                 "type":"starting-point",
+                 "type":"position",
                  "visible":true,
                  "width":16,
                  "x":24,
@@ -1536,7 +1536,7 @@
 
                     },
                  "rotation":0,
-                 "type":"goal",
+                 "type":"position",
                  "visible":true,
                  "width":32,
                  "x":88,
@@ -1547,7 +1547,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "type":"short"
                     },
                  "rotation":0,
@@ -1562,7 +1562,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "type":"short"
                     },
                  "rotation":0,
@@ -1577,7 +1577,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "type":"medium"
                     },
                  "rotation":0,
@@ -1592,9 +1592,9 @@
                  "name":"button",
                  "properties":
                     {
-                     "availableTo":"star",
-                     "bindTo":"retractable-b",
-                     "orientation":"south"
+                     "affects":"star",
+                     "orientation":"north",
+                     "triggers":"retractable-b"
                     },
                  "rotation":0,
                  "type":"button",
@@ -1608,7 +1608,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1623,7 +1623,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1638,7 +1638,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1653,7 +1653,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1668,7 +1668,7 @@
                  "name":"retractable-b",
                  "properties":
                     {
-                     "availableTo":"star",
+                     "affects":"star",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1683,9 +1683,9 @@
                  "name":"button",
                  "properties":
                     {
-                     "availableTo":"heart",
-                     "bindTo":"retractable-a",
-                     "orientation":"south"
+                     "affects":"heart",
+                     "orientation":"north",
+                     "triggers":"retractable-a"
                     },
                  "rotation":0,
                  "type":"button",
@@ -1699,7 +1699,7 @@
                  "name":"retractable-a",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1714,7 +1714,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "type":"short"
                     },
                  "rotation":0,
@@ -1729,7 +1729,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "type":"short"
                     },
                  "rotation":0,
@@ -1744,7 +1744,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "type":"short"
                     },
                  "rotation":0,
@@ -1759,7 +1759,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "type":"medium"
                     },
                  "rotation":0,
@@ -1774,7 +1774,7 @@
                  "name":"platform",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "type":"short"
                     },
                  "rotation":0,
@@ -1789,7 +1789,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1804,7 +1804,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1819,7 +1819,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1834,7 +1834,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1849,7 +1849,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,
@@ -1864,7 +1864,7 @@
                  "name":"trap",
                  "properties":
                     {
-                     "availableTo":"heart",
+                     "affects":"heart",
                      "orientation":"north"
                     },
                  "rotation":0,

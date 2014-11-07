@@ -28,28 +28,26 @@ class Game extends Phaser.State {
 
     for (var object of mapObjects) {
       var coordinates = this._getObjectCoordinates(object);
-      var { availableTo, type } = object.properties;
-      var objectColor = availableTo === 'heart' ? Platform.HEART : availableTo === 'star' ? Platform.STAR : Platform.BOTH;
-      var recipientGroup = availableTo === 'heart' ? this._heartGroup : availableTo === 'star' ? this._starGroup : this._moonGroup;
+      var { affects, type } = object.properties;
+      var objectColor = affects === 'heart' ? Platform.HEART : affects === 'star' ? Platform.STAR : Platform.BOTH;
+      var recipientGroup = affects === 'heart' ? this._heartGroup : affects === 'star' ? this._starGroup : this._moonGroup;
 
       switch (object.type) {
-        case 'goal':
-          this.goalCoordinates = this._fixGoalCoordinates(coordinates);
-
-          break;
-
-        case 'starting-point':
+        case 'position':
           if (object.name === 'heart') {
             this.heartCoordinates = this._fixActorCoordinates(coordinates);
           }
           else if (object.name === 'star') {
             this.starCoordinates = this._fixActorCoordinates(coordinates);
           }
+          else if (object.name === 'goal') {
+            this.goalCoordinates = this._fixGoalCoordinates(coordinates);
+          }
 
           break;
 
         case 'platform':
-          var platformType = type === '2' ? Platform.MEDIUM : Platform.SMALL;
+          var platformType = type === 'medium' ? Platform.MEDIUM : Platform.SMALL;
 
           recipientGroup.add(
             new Platform(
