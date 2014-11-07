@@ -24,48 +24,45 @@ class Game extends Phaser.State {
     this._tilemap1 = this._makeTilemap(heartLayer);
     this._tilemap2 = this._makeTilemap(starLayer);
 
-    var mapObjects = this._tilemap1.objects[this.stageName];
+    var mapObjects  = new ObjectsParser(this.game, this._tilemap1.objects[this.stageName]);
+    this.heartCoordinates = mapObjects.objects['positions']['heart']['position'];
+    this.starCoordinates  = mapObjects.objects['positions']['star']['position'];
+    this.goalCoordinates  = mapObjects.objects['positions']['goal']['position'];
 
-    for (var object of mapObjects) {
-      var coordinates = this._getObjectCoordinates(object);
-      var { affects, type } = object.properties;
-      var objectColor = affects === 'heart' ? Platform.HEART : affects === 'star' ? Platform.STAR : Platform.BOTH;
-      var recipientGroup = affects === 'heart' ? this._heartGroup : affects === 'star' ? this._starGroup : this._moonGroup;
+    var recipientGroup = {
+      'heart': this._heartGroup,
+      'star':  this._starGroup,
+      'both':  this._moonGroup
+    };
 
-      switch (object.type) {
-        case 'position':
-          if (object.name === 'heart') {
-            this.heartCoordinates = this._fixActorCoordinates(coordinates);
-          }
-          else if (object.name === 'star') {
-            this.starCoordinates = this._fixActorCoordinates(coordinates);
-          }
-          else if (object.name === 'goal') {
-            this.goalCoordinates = this._fixGoalCoordinates(coordinates);
-          }
+    var objectColor = {
+      'heart': Platform.HEART,
+      'star':  Platform.STAR,
+      'both':  Platform.BOTH
+    };
 
-          break;
+    var platformType = {
+      'small':  Platform.SMALL,
+      'medium': Platform.MEDIUM
+    };
 
-        case 'platform':
-          var platformType = type === 'medium' ? Platform.MEDIUM : Platform.SMALL;
+    for (var { position, affects } of mapObjects.objects.traps) {
+      recipientGroup[affects].add(
+        new Trap(
+          this.game,
+          position.x,
+          position.y,
+          objectColor[affects]));
+    }
 
-          recipientGroup.add(
-            new Platform(
-              this.game,
-              coordinates.x, coordinates.y,
-              platformType, objectColor));
-
-          break;
-
-        case 'trap':
-          recipientGroup.add(
-            new Trap(
-              this.game,
-              coordinates.x, coordinates.y - 8,
-              objectColor));
-
-          break;
-      }
+    for (var { position, affects, type } of mapObjects.objects.platforms) {
+      recipientGroup[affects].add(
+        new Platform(
+          this.game,
+          position.x,
+          position.y,
+          platformType[type],
+          objectColor[affects]));
     }
 
     this._layer1 = this._heartGroup.add(this._makeTilemapLayer(this._tilemap1, heartLayer));
@@ -213,6 +210,7 @@ import Trap              from 'objects/Trap';
 import Actor             from 'objects/Actor';
 import Agents            from 'objects/Agents';
 import Platform          from 'objects/Platform';
+import ObjectsParser     from 'objects/ObjectsParser';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
 export default Game;
