@@ -14,6 +14,7 @@ class Game extends Phaser.State {
 
     this._heartGroup = new Layer(this.game);
     this._starGroup  = new Layer(this.game);
+    this._moonGroup  = new Layer(this.game);
 
     this._heartGroup.add(
       new BackgroundPattern(this.game, BackgroundPattern.HEART));
@@ -27,12 +28,16 @@ class Game extends Phaser.State {
 
     for (var object of mapObjects) {
       var coordinates = this._getObjectCoordinates(object);
+      var { availableTo, type } = object.properties;
+      var objectColor = availableTo === 'heart' ? Platform.HEART : availableTo === 'star' ? Platform.STAR : Platform.BOTH;
+      var recipientGroup = availableTo === 'heart' ? this._heartGroup : availableTo === 'star' ? this._starGroup : this._moonGroup;
 
       switch (object.type) {
         case 'goal':
           this.goalCoordinates = this._fixGoalCoordinates(coordinates);
 
           break;
+
         case 'starting-point':
           if (object.name === 'heart') {
             this.heartCoordinates = this._fixActorCoordinates(coordinates);
@@ -40,6 +45,26 @@ class Game extends Phaser.State {
           else if (object.name === 'star') {
             this.starCoordinates = this._fixActorCoordinates(coordinates);
           }
+
+          break;
+
+        case 'platform':
+          var platformType = type === '2' ? Platform.MEDIUM : Platform.SMALL;
+
+          recipientGroup.add(
+            new Platform(
+              this.game,
+              coordinates.x, coordinates.y,
+              platformType, objectColor));
+
+          break;
+
+        case 'trap':
+          recipientGroup.add(
+            new Trap(
+              this.game,
+              coordinates.x, coordinates.y - 8,
+              objectColor));
 
           break;
       }
@@ -83,6 +108,9 @@ class Game extends Phaser.State {
 
     this.physics.arcade.collide(this._heart, this._layer1);
     this.physics.arcade.collide(this._star,  this._layer2);
+
+    this.physics.arcade.collide(this._heart, [ this._heartGroup, this._moonGroup ]);
+    this.physics.arcade.collide(this._star,  [ this._starGroup , this._moonGroup ]);
 
     this._agents.collide(this._playerActor);
     this._agents.collide(this._idleActor);
@@ -183,10 +211,10 @@ import stages from 'common/stages';
 
 import Goal              from 'objects/Goal';
 import Layer             from 'objects/Layer';
-//import Trap              from 'objects/Trap';
+import Trap              from 'objects/Trap';
 import Actor             from 'objects/Actor';
 import Agents            from 'objects/Agents';
-//import Platform          from 'objects/Platform';
+import Platform          from 'objects/Platform';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
 export default Game;
