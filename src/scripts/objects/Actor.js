@@ -135,7 +135,7 @@ class Actor extends Phaser.Sprite {
 
   _actorCollisionCallback (actor) {
     if (actor.standing) {
-      actor.body.x += this.body.deltaX();
+      actor.body.x += this.deltaX;
     }
   }
 
@@ -182,7 +182,7 @@ class Actor extends Phaser.Sprite {
   }
 
   get carrying () {
-    return this._carryingFriend;
+    return this._carryingFriend !== null && this.body.touching.up;
   }
 
 }
