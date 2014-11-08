@@ -24,10 +24,10 @@ class Game extends Phaser.State {
     this._tilemap1 = this._makeTilemap(heartLayer);
     this._tilemap2 = this._makeTilemap(starLayer);
 
-    var mapObjects  = new ObjectsParser(this.game, this._tilemap1.objects[this.stageName]);
-    this.heartCoordinates = mapObjects.objects['positions']['heart']['position'];
-    this.starCoordinates  = mapObjects.objects['positions']['star']['position'];
-    this.goalCoordinates  = mapObjects.objects['positions']['goal']['position'];
+    var mapObjects  = objectsParser(this._tilemap1.objects[this.stageName]);
+    this.heartCoordinates = mapObjects['positions']['heart']['position'];
+    this.starCoordinates  = mapObjects['positions']['star']['position'];
+    this.goalCoordinates  = mapObjects['positions']['goal']['position'];
 
     var recipientGroup = {
       'heart': this._heartGroup,
@@ -46,7 +46,7 @@ class Game extends Phaser.State {
       'medium': Platform.MEDIUM
     };
 
-    for (var { position, affects } of mapObjects.objects.traps) {
+    for (var { position, affects } of mapObjects.traps) {
       recipientGroup[affects].add(
         new Trap(
           this.game,
@@ -55,7 +55,7 @@ class Game extends Phaser.State {
           objectColor[affects]));
     }
 
-    for (var { position, affects, type } of mapObjects.objects.platforms) {
+    for (var { position, affects, type } of mapObjects.platforms) {
       recipientGroup[affects].add(
         new Platform(
           this.game,
@@ -202,7 +202,8 @@ class Game extends Phaser.State {
 }
 
 
-import stages from 'common/stages';
+import stages        from 'common/stages';
+import objectsParser from 'common/objectsParser';
 
 import Goal              from 'objects/Goal';
 import Layer             from 'objects/Layer';
@@ -210,7 +211,6 @@ import Trap              from 'objects/Trap';
 import Actor             from 'objects/Actor';
 import Agents            from 'objects/Agents';
 import Platform          from 'objects/Platform';
-import ObjectsParser     from 'objects/ObjectsParser';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
 export default Game;
