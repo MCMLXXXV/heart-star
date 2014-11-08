@@ -11,7 +11,7 @@ class ObjectsManager {
   // --------------------------------------------------------------------------
 
   createLayerFor (roleName, enableBackground = false) {
-    var layer = new Layer(this.game, roleName);
+    var layer = new ObjectsLayer(this.game, roleName);
 
     layer.actorTrapped.add(this.actorTrapped.dispatch);
 
@@ -49,6 +49,6 @@ class ObjectsManager {
 }
 
 
-import Layer    from 'objects/Layer';
+import ObjectsLayer from 'objects/ObjectsLayer';
 
 export default ObjectsManager;

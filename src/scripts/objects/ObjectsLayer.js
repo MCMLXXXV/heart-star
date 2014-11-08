@@ -1,4 +1,4 @@
-class Layer extends Phaser.Group {
+class ObjectsLayer extends Phaser.Group {
 
   constructor (game, roleName) {
     super(game);
@@ -106,4 +106,4 @@ import Trap              from 'objects/Trap';
 import Platform          from 'objects/Platform';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
-export default Layer;
+export default ObjectsLayer;
