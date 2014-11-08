@@ -5,6 +5,8 @@ class Game extends Phaser.State {
 
     this.stageName = stageName;
 
+    this._objectsManager = new ObjectsManager(this.game);
+
     this._playerActor = null;
     this._idleActor   = null;
   }
@@ -12,14 +14,9 @@ class Game extends Phaser.State {
   create () {
     var { heartLayer, starLayer } = stages.getRelatedLayerNames(this.stageName);
 
-    this._heartGroup = new Layer(this.game);
-    this._starGroup  = new Layer(this.game);
-    this._moonGroup  = new Layer(this.game);
-
-    this._heartGroup.add(
-      new BackgroundPattern(this.game, BackgroundPattern.HEART));
-    this._starGroup.add(
-      new BackgroundPattern(this.game, BackgroundPattern.STAR));
+    this._heartGroup = this._objectsManager.createLayerFor('heart', true);
+    this._starGroup  = this._objectsManager.createLayerFor('star', true);
+    this._moonGroup  = this._objectsManager.createLayerFor('both');
 
     this._tilemap1 = this._makeTilemap(heartLayer);
     this._tilemap2 = this._makeTilemap(starLayer);
@@ -29,41 +26,7 @@ class Game extends Phaser.State {
     this.starCoordinates  = mapObjects['positions']['star']['position'];
     this.goalCoordinates  = mapObjects['positions']['goal']['position'];
 
-    var recipientGroup = {
-      'heart': this._heartGroup,
-      'star':  this._starGroup,
-      'both':  this._moonGroup
-    };
-
-    var objectColor = {
-      'heart': Platform.HEART,
-      'star':  Platform.STAR,
-      'both':  Platform.BOTH
-    };
-
-    var platformType = {
-      'small':  Platform.SMALL,
-      'medium': Platform.MEDIUM
-    };
-
-    for (var { position, affects } of mapObjects.traps) {
-      recipientGroup[affects].add(
-        new Trap(
-          this.game,
-          position.x,
-          position.y,
-          objectColor[affects]));
-    }
-
-    for (var { position, affects, type } of mapObjects.platforms) {
-      recipientGroup[affects].add(
-        new Platform(
-          this.game,
-          position.x,
-          position.y,
-          platformType[type],
-          objectColor[affects]));
-    }
+    this._objectsManager.createObjects(mapObjects);
 
     this._layer1 = this._heartGroup.add(this._makeTilemapLayer(this._tilemap1, heartLayer));
     this._layer2 = this._starGroup.add(this._makeTilemapLayer(this._tilemap2, starLayer));
@@ -205,12 +168,10 @@ class Game extends Phaser.State {
 import stages        from 'common/stages';
 import objectsParser from 'common/objectsParser';
 
-import Goal              from 'objects/Goal';
-import Layer             from 'objects/Layer';
-import Trap              from 'objects/Trap';
-import Actor             from 'objects/Actor';
-import Agents            from 'objects/Agents';
-import Platform          from 'objects/Platform';
-import BackgroundPattern from 'objects/BackgroundPattern';
+import ObjectsManager from 'managers/ObjectsManager';
+
+import Goal   from 'objects/Goal';
+import Actor  from 'objects/Actor';
+import Agents from 'objects/Agents';
 
 export default Game;
