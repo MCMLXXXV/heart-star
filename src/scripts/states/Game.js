@@ -12,6 +12,8 @@ class Game extends Phaser.State {
   }
 
   create () {
+    this._objectsManager.actorTrapped.add(this._restartActors, this);
+
     var { heartLayer, starLayer } = stages.getRelatedLayerNames(this.stageName);
 
     this._heartGroup = this._objectsManager.createLayerFor('heart', true);
@@ -67,8 +69,9 @@ class Game extends Phaser.State {
     this.physics.arcade.collide(this._heart, this._layer1);
     this.physics.arcade.collide(this._star,  this._layer2);
 
-    this.physics.arcade.collide(this._heart, [ this._heartGroup, this._moonGroup ]);
-    this.physics.arcade.collide(this._star,  [ this._starGroup , this._moonGroup ]);
+    this._heartGroup.collide(this._heart);
+    this._starGroup.collide(this._star);
+    this._moonGroup.collide([ this._heart, this._star ]);
 
     this._agents.collide(this._playerActor);
     this._agents.collide(this._idleActor);

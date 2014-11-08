@@ -4,19 +4,6 @@ class Trap extends Phaser.Sprite {
     super(game, x, y, 'trap', availableTo);
 
     this._setupPhysicsBody(this.width - 2, 8, 1, 8);
-
-    this.hitted = new Phaser.Signal();
-  }
-
-  // --------------------------------------------------------------------------
-
-  collideActor (actor) {
-    this.game.physics.arcade.collide(
-      actor,
-      this,
-      this._actorCollideCallback,
-      null,
-      this);
   }
 
   // --------------------------------------------------------------------------
@@ -29,10 +16,6 @@ class Trap extends Phaser.Sprite {
     this.body.immovable = true;
 
     this.body.setSize(width, height, offsetX, offsetY);
-  }
-
-  _actorCollideCallback (actor) {
-    this.hitted.dispatch(actor);
   }
 
 }

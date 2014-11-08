@@ -3,6 +3,8 @@ class Layer extends Phaser.Group {
   constructor (game, roleName) {
     super(game);
 
+    this.actorTrapped = new Phaser.Signal();
+
     this._roleName = roleName;
 
     this._background = this.add(this.game.make.group());
@@ -33,6 +35,18 @@ class Layer extends Phaser.Group {
     this.alpha = visible ? 1 : 0;
   }
 
+  collide (actor) {
+    this.game.physics.arcade.collide(
+      actor,
+      this._traps,
+      this._trapCollisionCallback,
+      null,
+      this);
+    this.game.physics.arcade.collide(
+      actor,
+      this._platforms);
+  }
+
   // --------------------------------------------------------------------------
 
   _addObject (x, y, group, factory, ... features) {
@@ -53,6 +67,10 @@ class Layer extends Phaser.Group {
       case 'small':  return Platform.SMALL;
       case 'medium': return Platform.MEDIUM;
     }
+  }
+
+  _trapCollisionCallback (actor) {
+    this.actorTrapped.dispatch(actor);
   }
 
   // --------------------------------------------------------------------------
