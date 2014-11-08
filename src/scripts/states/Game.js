@@ -110,20 +110,6 @@ class Game extends Phaser.State {
     return tilemap.createLayer(layerName);
   }
 
-  _getObjectCoordinates (object) {
-    var { x, y } = object;
-
-    return { x, y };
-  }
-
-  _fixGoalCoordinates ({ x, y }) {
-    return { x: x + 16, y: y + 16 };
-  }
-
-  _fixActorCoordinates ({ x, y }) {
-    return { x: x + 8, y: y + 24 };
-  }
-
   _setupPlayableActors(playerActor, idleActor) {
     this._playerActor      = playerActor;
     this._playerActor.idle = false;
