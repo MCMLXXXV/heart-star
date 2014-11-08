@@ -47,17 +47,16 @@
     <!-- build:js game.min.js -->
     <script src="bower_components/phaser-official/build/custom/phaser-arcade-physics.js"></script>
     <script src="bower_components/localforage/dist/localforage.js"></script>
-    <script src="bower_components/traceur-runtime/traceur-runtime.js"></script>
-    <script src="game.js"></script>
-    <!-- /build -->
-
+    <script src="bower_components/traceur/traceur.js"></script>
     <script>
-      (function (App) {
-
-        App.start();
-
-      }(System.get('main')['default']));
+      new traceur.WebPageTranscoder(document.location.href + '/scripts/').run();
     </script>
+    <script type="module">
+      import App from 'main';
+
+      App.start();
+    </script>
+    <!-- /build -->
   </body>
 
 </html>

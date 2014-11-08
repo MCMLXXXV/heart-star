@@ -13,7 +13,7 @@ function logChanges (event) {
 
 
 gulp.task('watch', function () {
-    gulp.watch(paths['scripts'], [ 'scripts', browserSync.reload ])
+    gulp.watch(paths['scripts'], [ 'lint', browserSync.reload ])
         .on('change', logChanges);
     gulp.watch(paths['less'], [ 'styles', browserSync.reload ])
         .on('change', logChanges);

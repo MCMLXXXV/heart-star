@@ -1,5 +1,6 @@
 var gulp         = require('gulp'),
     concat       = require('gulp-concat'),
+    footer       = require('gulp-footer'),
     plumber      = require('gulp-plumber'),
     traceur      = require('gulp-traceur'),
     sourcemaps   = require('gulp-sourcemaps'),
@@ -16,6 +17,7 @@ gulp.task('scripts', [ 'lint' ], function () {
             moduleName: true
         }))
         .pipe(concat('game.js'))
+        .pipe(footer(";!function(A){A.start();}(System.get('main')['default']);"))
         .pipe(sourcemaps.write())
         .pipe(gulp.dest(paths['temp']));
 });
