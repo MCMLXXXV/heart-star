@@ -24,9 +24,9 @@ class Game extends Phaser.State {
     this._tilemap2 = this._makeTilemap(starLayer);
 
     var mapObjects  = objectsParser(this._tilemap1.objects[this.stageName]);
-    this.heartCoordinates = mapObjects['positions']['heart']['position'];
-    this.starCoordinates  = mapObjects['positions']['star']['position'];
-    this.goalCoordinates  = mapObjects['positions']['goal']['position'];
+    this.heartCoordinates = mapObjects['actors']['heart'];
+    this.starCoordinates  = mapObjects['actors']['star'];
+    this.goalCoordinates  = mapObjects['actors']['goal'];
 
     this._objectsManager.createObjects(mapObjects);
 

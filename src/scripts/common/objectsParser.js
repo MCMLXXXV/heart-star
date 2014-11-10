@@ -10,17 +10,14 @@ function normalizeTrapCoordinates (x, y) {
   return { x: x, y: y - 8 };
 }
 
-function makeObjectPosition ({ x, y, name }) {
+function makeActorPosition ({ x, y, name }) {
   switch(name) {
     case 'heart':
     case 'star':
-      return {
-        position: normalizeActorCoordinates(x, y)
-      };
+      return normalizeActorCoordinates(x, y);
+
     case 'goal':
-      return {
-        position: normalizeGoalCoordinates(x, y)
-      };
+      return normalizeGoalCoordinates(x, y);
   }
 }
 
@@ -38,7 +35,7 @@ function makePlatform ({ x, y, properties: { affects, type }}) {
 export default function objectsParser (mapObjects) {
   var objects = {
     traps: [],
-    positions: {},
+    actors: {},
     platforms: [],
     miscellaneousObjects: []
   };
@@ -50,7 +47,7 @@ export default function objectsParser (mapObjects) {
         break;
 
       case 'position':
-        objects['positions'][object.name] = makeObjectPosition(object);
+        objects['actors'][object.name] = makeActorPosition(object);
         break;
 
       case 'platform':
