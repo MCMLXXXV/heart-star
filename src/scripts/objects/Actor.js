@@ -185,6 +185,15 @@ class Actor extends Phaser.Sprite {
     return this._carryingFriend !== null && this.body.touching.up;
   }
 
+  get idle () {
+    return this._idle;
+  }
+
+  set idle (newValue) {
+    this._idle = newValue;
+
+    this.alpha = this._idle ?  0.75 : 1;
+  }
 }
 
 

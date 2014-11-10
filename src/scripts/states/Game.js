@@ -113,18 +113,19 @@ class Game extends Phaser.State {
     return new Actor(this.game, 0, 0, roleName);
   }
 
-  _changeActors(playerActor, idleActor) {
+  _changeActors (playerActor, idleActor) {
     this._playerActor      = playerActor;
     this._playerActor.idle = false;
 
     this._idleActor      = idleActor;
     this._idleActor.idle = true;
 
-    this._heartGroup.toggle(this._playerActor === this._heart ? 1 : 0);
-    this._starGroup.toggle(this._playerActor === this._star ? 1 : 0);
+    this._toggleLayers();
+  }
 
-    this._heart.alpha = this._playerActor === this._heart ? 1 : 0.75;
-    this._star.alpha  = this._playerActor === this._star  ? 1 : 0.75;
+  _toggleLayers () {
+    this._heartGroup.toggle(!this._heart.idle);
+    this._starGroup.toggle(!this._star.idle);
   }
 
   _togglePlayerActor () {
