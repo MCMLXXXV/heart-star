@@ -16,25 +16,25 @@ class Game extends Phaser.State {
 
     var { heartLayer, starLayer } = stages.getRelatedLayerNames(this.stageName);
 
+    var mapObjects = this._getTilemapObjects('tilemaps', this.stageName);
+    this.heartCoordinates = mapObjects['actors']['heart'];
+    this.starCoordinates  = mapObjects['actors']['star'];
+    this.goalCoordinates  = mapObjects['actors']['goal'];
+
+    this._agents = this.add.existing(new Agents(this.game));
+    this._agents.actorFellOff.add(this._fellOff, this);
+
     this._heartGroup = this._objectsManager.createLayerFor('heart', true);
     this._starGroup  = this._objectsManager.createLayerFor('star', true);
     this._moonGroup  = this._objectsManager.createLayerFor('both');
 
     this._tilemap1 = this._makeTilemap(heartLayer);
-    this._tilemap2 = this._makeTilemap(starLayer);
-
-    var mapObjects  = objectsParser(this._tilemap1.objects[this.stageName]);
-    this.heartCoordinates = mapObjects['actors']['heart'];
-    this.starCoordinates  = mapObjects['actors']['star'];
-    this.goalCoordinates  = mapObjects['actors']['goal'];
-
-    this._objectsManager.createObjects(mapObjects);
-
     this._layer1 = this._heartGroup.add(this._makeTilemapLayer(this._tilemap1, heartLayer));
+
+    this._tilemap2 = this._makeTilemap(starLayer);
     this._layer2 = this._starGroup.add(this._makeTilemapLayer(this._tilemap2, starLayer));
 
-    this._agents = this.add.existing(new Agents(this.game));
-    this._agents.actorFellOff.add(this._fellOff, this);
+    this._objectsManager.createObjects(mapObjects);
 
     this._goal = this.add.existing(
       new Goal(
@@ -96,6 +96,13 @@ class Game extends Phaser.State {
   }
 
   // --------------------------------------------------------------------------
+
+  _getTilemapObjects (key, stageName) {
+    var parsedTilemap = Phaser.TilemapParser.parse(this.game, key);
+    var stageObjects  = parsedTilemap.objects[stageName];
+
+    return objectsParser(stageObjects);
+  }
 
   _makeTilemap (collisionLayerName) {
     var tilemap = this.add.tilemap('tilemaps');
