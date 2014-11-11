@@ -6,81 +6,17 @@
  <tileset firstgid="1" name="tileset" tilewidth="8" tileheight="8">
   <image source="../static/assets/images/tileset.png" width="192" height="48"/>
  </tileset>
- <layer name="title" width="30" height="20" visible="0">
-  <data encoding="base64" compression="zlib">
-   eJy91ElPAkEQhuFyFzTRqxuKmOhVwX29irivVxVNVPCuIokK/m7fS4e2hokhdFnJk0l1CJXJV9NZEclhEUvoQKeErwEMYgjD2EMB+zjACEYN5mYwg1nM4RZF3OEe81gIOG8bO03O31DBO6rYRT7g3EtcNTlfxorXX+Mm4FxXCSS9/hBHXv+CV4O5aUwb/O9ftYo1ic/bqo5xIo28Xb4659D1gEevd/nqnEPXBz69Piu/7yurWscGNrEl0fvKqk5xhnNcSPS+0nm3mrvbV/18QgllPEv0vtJ5t5q721f9/EINdXx7v9fv1e5+x32n+ly/V7v7HXcvx51bld7n/yq9z13oRg960Yd+g7l6n8cwjgmkMIkpg7l6n38ACaIvlQ==
-  </data>
- </layer>
- <layer name="credits" width="30" height="20" visible="0">
-  <data encoding="base64" compression="zlib">
-   eJzllccKQjEQRZ/+hf6GFax7K1i31o1lb91YvtuzGQgDMXk8Xlx44TBMIFwuEzJR9F0VqBrVpRa0jb4GdWhA0+O+aABDo7o0g7nRj2AME5jG8E2qHezhAMeAvg94wgvexnkBilCCcor+MnepHehCD/op+srcpa5gDRvYpugrkrwXuMIN7gF89Xv/F2UgG8BH/2M5yAfw1XNdwDLy/3+TSnKf4Bz5/79J9av3rOccSjpv3D3rK71/dd64e9ZXev9KXp3Pldt2rnNIb9u/Op8rt+1cz0162/79ALhuKM8=
-  </data>
- </layer>
- <layer name="stage-selection" width="30" height="20" visible="0">
-  <data encoding="base64" compression="zlib">
-   eJzdlrsKAkEMRaPdquC22vkAbbXx0WirjY9mbbXTP9BOv9zTBJbA7CyKWfDCKZIUd0LIzIiU0wzmBfUmtKANKaxgnavbuKx2sC+oD2AIIxhDBqdc3cbe+rTvb6V9x+b2K8Xm9i9KoFGBbw/64j/fBSzFf74HOIp/v1e4iX+/T3hBDeqOvnpfdaDr6Kv31QSmjr6qDWwr8D3DxdFP53uHh6OvfYd1j+0+h/IqPX/sfxF6d3WP7T6H8vb8sf+Fjd9ZGxn/
-  </data>
- </layer>
- <layer name="test" width="30" height="20">
-  <data encoding="base64" compression="zlib">
-   eJzt1MsNgkAYRWFaQEBpAUGxBx5NoPYAKj3wrJmzYUMyIRkYBqM3+XYzObvfMORm4iD5d8k8nDV0cxQauhVqDd3/vnsWbDg44gR3xfei+QhwwRUhbiu+/7VFiJEg3bCT4Y4Hngq7084Lb3xQKuxOOw1adOgVdrfq7H2iezN3h2T/jRPdm7k7JPtvADQnGOk=
-  </data>
- </layer>
- <objectgroup name="test">
-  <properties>
-   <property name="heart-layer" value="01a"/>
-   <property name="next-stage" value="02"/>
-   <property name="star-layer" value="01b"/>
-  </properties>
-  <object name="heart" type="position" x="64" y="40" width="16" height="24"/>
-  <object name="star" type="position" x="160" y="40" width="16" height="24"/>
-  <object name="goal" type="position" x="104" y="80" width="32" height="32"/>
-  <object name="trap" type="trap" x="0" y="88" width="16" height="8">
-   <properties>
-    <property name="affects" value="both"/>
-   </properties>
-  </object>
-  <object name="trap" type="trap" x="224" y="88" width="16" height="8">
-   <properties>
-    <property name="affects" value="both"/>
-   </properties>
-  </object>
-  <object name="platform" type="platform" x="0" y="56" width="16" height="8">
-   <properties>
-    <property name="affects" value="both"/>
-    <property name="type" value="1"/>
-   </properties>
-  </object>
-  <object name="platform" type="platform" x="16" y="24" width="32" height="8">
-   <properties>
-    <property name="affects" value="both"/>
-    <property name="type" value="2"/>
-   </properties>
-  </object>
-  <object name="platform" type="platform" x="192" y="24" width="32" height="8">
-   <properties>
-    <property name="affects" value="both"/>
-    <property name="type" value="2"/>
-   </properties>
-  </object>
-  <object name="platform" type="platform" x="224" y="56" width="16" height="8">
-   <properties>
-    <property name="affects" value="both"/>
-    <property name="type" value="1"/>
-   </properties>
-  </object>
- </objectgroup>
- <layer name="01a" width="30" height="20" visible="0">
+ <layer name="01a" width="30" height="20">
   <data encoding="base64" compression="zlib">
    eJzt0skRggAMQFEQF1pQBG0BXKAFF8AWWHsAldr5DcAtkxkgM++Uwz8khrHMHCZEpNBN8VHomlgpdPc4KHR9BArdB54K3Qz5yF7q3xu0I3upf7ewxgZb7GDjgituuAt0HRzhwsMJZ7zwRoxEoDt0vwIlKtQC3aH7ffHDH51Ad5lpTg94ygxn
   </data>
  </layer>
- <layer name="01b" width="30" height="20" visible="0">
+ <layer name="01b" width="30" height="20">
   <data encoding="base64" compression="zlib">
    eJzt1MsNgkAURmG2KKgtKL5aQFFoAUGhBQXpAQXq5hQwCQtyczfzJ99qkjmbyTiOnd38xUgUugVKha6LhUJ3i51CN8RFoZviIXDv1Ht94yPQnXqvLX4C3Ssi3HDHEh58rLDGRqCbIccTLwTY44AjTjgLdCvU+KIxnEv9V3906DEYzrX+KzudjWhXDgc=
   </data>
  </layer>
- <objectgroup name="01" visible="0">
+ <objectgroup name="01">
   <properties>
    <property name="heart-layer" value="01a"/>
    <property name="next-stage" value="02"/>
