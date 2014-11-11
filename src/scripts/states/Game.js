@@ -5,7 +5,8 @@ class Game extends Phaser.State {
 
     this.stageName = stageName;
 
-    this._objectsManager = this._makeManager(ObjectsManager);
+    this._gameStageManager = this._makeManager(GameStageManager);
+    this._objectsManager   = this._makeManager(ObjectsManager);
 
     this._playerActor = null;
     this._idleActor   = null;
@@ -14,9 +15,10 @@ class Game extends Phaser.State {
   create () {
     this._objectsManager.actorTrapped.add(this._restartActors, this);
 
-    var { heartLayer, starLayer } = stages.getRelatedLayerNames(this.stageName);
+    this._stageDefinitions = this._getStageDefinitions(this.stageName);
 
-    this._mapObjects = this._getTilemapObjects('tilemaps', this.stageName);
+    var heartLayer = this._stageDefinitions.layers.heart;
+    var starLayer  = this._stageDefinitions.layers.star;
 
     this._agents = this.add.existing(new Agents(this.game));
     this._agents.actorFellOff.add(this._fellOff, this);
@@ -31,7 +33,7 @@ class Game extends Phaser.State {
     this._tilemap2 = this._makeTilemap(starLayer);
     this._layer2 = this._starGroup.add(this._makeTilemapLayer(this._tilemap2, starLayer));
 
-    this._objectsManager.createObjects(this._mapObjects);
+    this._objectsManager.createObjects(this._stageDefinitions.objects);
 
     this._goal = this.add.existing(
       new Goal(
@@ -89,11 +91,8 @@ class Game extends Phaser.State {
     return new factory(this.game, ... args);
   }
 
-  _getTilemapObjects (key, stageName) {
-    var parsedTilemap = Phaser.TilemapParser.parse(this.game, key);
-    var stageObjects  = parsedTilemap.objects[stageName];
-
-    return objectsParser(stageObjects);
+  _getStageDefinitions (stageName) {
+    return this._gameStageManager.getStage(stageName);
   }
 
   _makeTilemap (collisionLayerName) {
@@ -147,7 +146,7 @@ class Game extends Phaser.State {
   }
 
   _goToNextStage () {
-    var nextStage = stages.getNextStage(this.stageName);
+    var nextStage = this._stageDefinitions.next;
 
     if (nextStage === null)
       this._restartActors();
@@ -158,24 +157,22 @@ class Game extends Phaser.State {
   // --------------------------------------------------------------------------
 
   get heartCoordinates () {
-    return this._mapObjects.actors.heart;
+    return this._stageDefinitions.actors.heart;
   }
 
   get starCoordinates () {
-    return this._mapObjects.actors.star;
+    return this._stageDefinitions.actors.star;
   }
 
   get goalCoordinates () {
-    return this._mapObjects.actors.goal;
+    return this._stageDefinitions.actors.goal;
   }
 
 }
 
 
-import stages        from 'common/stages';
-import objectsParser from 'common/objectsParser';
-
-import ObjectsManager from 'managers/ObjectsManager';
+import ObjectsManager   from 'managers/ObjectsManager';
+import GameStageManager from 'managers/GameStageManager';
 
 import Goal   from 'objects/Goal';
 import Actor  from 'objects/Actor';
