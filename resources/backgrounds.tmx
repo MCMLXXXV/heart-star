@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="8" tileheight="8" backgroundcolor="#585858">
+ <properties>
+  <property name="first-stage" value="01"/>
+ </properties>
+ <tileset firstgid="1" name="tileset" tilewidth="8" tileheight="8">
+  <image source="../static/assets/images/tileset.png" width="192" height="48"/>
+ </tileset>
+ <layer name="background-title" width="30" height="20">
+  <data encoding="base64" compression="zlib">
+   eJy91ElPAkEQhuFyFzTRqxuKmOhVwX29irivVxVNVPCuIokK/m7fS4e2hokhdFnJk0l1CJXJV9NZEclhEUvoQKeErwEMYgjD2EMB+zjACEYN5mYwg1nM4RZF3OEe81gIOG8bO03O31DBO6rYRT7g3EtcNTlfxorXX+Mm4FxXCSS9/hBHXv+CV4O5aUwb/O9ftYo1ic/bqo5xIo28Xb4659D1gEevd/nqnEPXBz69Piu/7yurWscGNrEl0fvKqk5xhnNcSPS+0nm3mrvbV/18QgllPEv0vtJ5t5q721f9/EINdXx7v9fv1e5+x32n+ly/V7v7HXcvx51bld7n/yq9z13oRg960Yd+g7l6n8cwjgmkMIkpg7l6n38ACaIvlQ==
+  </data>
+ </layer>
+ <layer name="background-credits" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzllccKQjEQRZ/+hf6GFax7K1i31o1lb91YvtuzGQgDMXk8Xlx44TBMIFwuEzJR9F0VqBrVpRa0jb4GdWhA0+O+aABDo7o0g7nRj2AME5jG8E2qHezhAMeAvg94wgvexnkBilCCcor+MnepHehCD/op+srcpa5gDRvYpugrkrwXuMIN7gF89Xv/F2UgG8BH/2M5yAfw1XNdwDLy/3+TSnKf4Bz5/79J9av3rOccSjpv3D3rK71/dd64e9ZXev9KXp3Pldt2rnNIb9u/Op8rt+1cz0162/79ALhuKM8=
+  </data>
+ </layer>
+ <layer name="background-stage-selection" width="30" height="20" visible="0">
+  <data encoding="base64" compression="zlib">
+   eJzdlrsKAkEMRaPdquC22vkAbbXx0WirjY9mbbXTP9BOv9zTBJbA7CyKWfDCKZIUd0LIzIiU0wzmBfUmtKANKaxgnavbuKx2sC+oD2AIIxhDBqdc3cbe+rTvb6V9x+b2K8Xm9i9KoFGBbw/64j/fBSzFf74HOIp/v1e4iX+/T3hBDeqOvnpfdaDr6Kv31QSmjr6qDWwr8D3DxdFP53uHh6OvfYd1j+0+h/IqPX/sfxF6d3WP7T6H8vb8sf+Fjd9ZGxn/
+  </data>
+ </layer>
+</map>

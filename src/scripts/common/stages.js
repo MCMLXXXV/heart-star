@@ -1,26 +1,12 @@
 export default {
-
-  stages: {
-    '01': { heartLayer: '01a', starLayer: '01b', nextStage: '02' },
-    '02': { heartLayer: '02a', starLayer: '02b', nextStage: '03' },
-    '03': { heartLayer: '03a', starLayer: '03b', nextStage: '04' },
-    '04': { heartLayer: '04a', starLayer: '04b', nextStage: '05' },
-    '05': { heartLayer: '05a', starLayer: '05b', nextStage: '06' },
-    '06': { heartLayer: '06a', starLayer: '06b', nextStage: '07' },
-    '07': { heartLayer: '07a', starLayer: '07b', nextStage: '08' },
-    '08': { heartLayer: '08a', starLayer: '08b', nextStage: '09' },
-    '09': { heartLayer: '09a', starLayer: '09b', nextStage: '10' },
-    '10': { heartLayer: '10a', starLayer: '10b', nextStage: null }
-  },
-
-  getRelatedLayerNames (key) {
-    var { heartLayer, starLayer } = this.stages[key];
-
-    return { heartLayer, starLayer };
-  },
-
-  getNextStage (key) {
-    return this.stages[key].nextStage;
-  }
-
+  '01': { 'layers': { 'heart': '01a', 'star': '01b' }, 'next': '02' },
+  '02': { 'layers': { 'heart': '02a', 'star': '02b' }, 'next': '03' },
+  '03': { 'layers': { 'heart': '03a', 'star': '03b' }, 'next': '04' },
+  '04': { 'layers': { 'heart': '04a', 'star': '04b' }, 'next': '05' },
+  '05': { 'layers': { 'heart': '05a', 'star': '05b' }, 'next': '06' },
+  '06': { 'layers': { 'heart': '06a', 'star': '06b' }, 'next': '07' },
+  '07': { 'layers': { 'heart': '07a', 'star': '07b' }, 'next': '08' },
+  '08': { 'layers': { 'heart': '08a', 'star': '08b' }, 'next': '09' },
+  '09': { 'layers': { 'heart': '09a', 'star': '09b' }, 'next': '10' },
+  '10': { 'layers': { 'heart': '10a', 'star': '10b' }, 'next': null }
 };
