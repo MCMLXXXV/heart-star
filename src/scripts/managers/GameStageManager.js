@@ -33,9 +33,8 @@ class GameStageManager {
     return Phaser.TilemapParser.parse(this.game, 'tilemaps');
   }
 
-  _makeGameStage ({ layers, next }, layerObjects) {
+  _makeGameStage ({ next }, layerObjects) {
     return {
-      'layers' : layers,
       'actors' : this._parseLayerActors(layerObjects),
       'objects': this._parseLayerObjects(layerObjects),
       'next'   : next
@@ -57,6 +56,7 @@ class GameStageManager {
   _parseLayerObjects (layerObjects) {
     var objects = {
       'traps'               : [],
+      'layers'              : null,
       'platforms'           : [],
       'miscellaneousObjects': []
     };
@@ -67,6 +67,10 @@ class GameStageManager {
           objects['traps'].push(this._makeTrap(object));
           break;
 
+        case 'layers':
+          objects['layers'] = this._makeTilemapLayerNames(object);
+          break;
+
         case 'platform':
           objects['platforms'].push(this._makePlatform(object));
           break;
@@ -74,6 +78,10 @@ class GameStageManager {
     }
 
     return objects;
+  }
+
+  _makeTilemapLayerNames ({ properties: { heart, star } }) {
+    return { heart, star };
   }
 
   _makeActorPosition ({ x, y, name }) {
