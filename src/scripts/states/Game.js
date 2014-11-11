@@ -17,21 +17,12 @@ class Game extends Phaser.State {
 
     this._stageDefinitions = this._getStageDefinitions(this.stageName);
 
-    var heartLayer = this._stageDefinitions.layers.heart;
-    var starLayer  = this._stageDefinitions.layers.star;
-
     this._agents = this.add.existing(new Agents(this.game));
     this._agents.actorFellOff.add(this._fellOff, this);
 
     this._heartGroup = this._objectsManager.createLayerFor('heart', true);
     this._starGroup  = this._objectsManager.createLayerFor('star', true);
     this._moonGroup  = this._objectsManager.createLayerFor('both');
-
-    this._tilemap1 = this._makeTilemap(heartLayer);
-    this._layer1 = this._heartGroup.add(this._makeTilemapLayer(this._tilemap1, heartLayer));
-
-    this._tilemap2 = this._makeTilemap(starLayer);
-    this._layer2 = this._starGroup.add(this._makeTilemapLayer(this._tilemap2, starLayer));
 
     this._objectsManager.createObjects(this._stageDefinitions.objects);
 
@@ -55,9 +46,6 @@ class Game extends Phaser.State {
   update () {
     this._playerActor.collideActor(this._idleActor);
     this._goal.collideActors(this._playerActor, this._idleActor);
-
-    this.physics.arcade.collide(this._heart, this._layer1);
-    this.physics.arcade.collide(this._star,  this._layer2);
 
     this._heartGroup.collide(this._heart);
     this._starGroup.collide(this._star);
@@ -93,19 +81,6 @@ class Game extends Phaser.State {
 
   _getStageDefinitions (stageName) {
     return this._gameStageManager.getStage(stageName);
-  }
-
-  _makeTilemap (collisionLayerName) {
-    var tilemap = this.add.tilemap('tilemaps');
-
-    tilemap.setCollisionBetween(1, 144, true, collisionLayerName);
-    tilemap.addTilesetImage('tileset');
-
-    return tilemap;
-  }
-
-  _makeTilemapLayer (tilemap, layerName) {
-    return tilemap.createLayer(layerName);
   }
 
   _makeActor (roleName) {

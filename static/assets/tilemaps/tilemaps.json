@@ -69,14 +69,23 @@
                  "width":32,
                  "x":104,
                  "y":96
+                }, 
+                {
+                 "height":8,
+                 "name":"",
+                 "properties":
+                    {
+                     "heart":"01a",
+                     "star":"01b"
+                    },
+                 "rotation":0,
+                 "type":"layers",
+                 "visible":true,
+                 "width":8,
+                 "x":-16,
+                 "y":0
                 }],
          "opacity":1,
-         "properties":
-            {
-             "heart-layer":"01a",
-             "next-stage":"02",
-             "star-layer":"01b"
-            },
          "type":"objectgroup",
          "visible":true,
          "width":0,
@@ -151,14 +160,23 @@
                  "width":32,
                  "x":104,
                  "y":120
+                }, 
+                {
+                 "height":8,
+                 "name":"",
+                 "properties":
+                    {
+                     "heart":"02a",
+                     "star":"02b"
+                    },
+                 "rotation":0,
+                 "type":"layers",
+                 "visible":true,
+                 "width":8,
+                 "x":-16,
+                 "y":0
                 }],
          "opacity":1,
-         "properties":
-            {
-             "heart-layer":"02a",
-             "next-stage":"03",
-             "star-layer":"02b"
-            },
          "type":"objectgroup",
          "visible":false,
          "width":0,
@@ -233,14 +251,23 @@
                  "width":32,
                  "x":176,
                  "y":96
+                }, 
+                {
+                 "height":8,
+                 "name":"",
+                 "properties":
+                    {
+                     "heart":"03a",
+                     "star":"03b"
+                    },
+                 "rotation":0,
+                 "type":"layers",
+                 "visible":true,
+                 "width":8,
+                 "x":-16,
+                 "y":0
                 }],
          "opacity":1,
-         "properties":
-            {
-             "heart-layer":"03a",
-             "next-stage":"04",
-             "star-layer":"03b"
-            },
          "type":"objectgroup",
          "visible":false,
          "width":0,
@@ -315,14 +342,23 @@
                  "width":32,
                  "x":192,
                  "y":96
+                }, 
+                {
+                 "height":8,
+                 "name":"",
+                 "properties":
+                    {
+                     "heart":"04a",
+                     "star":"04b"
+                    },
+                 "rotation":0,
+                 "type":"layers",
+                 "visible":true,
+                 "width":8,
+                 "x":-16,
+                 "y":0
                 }],
          "opacity":1,
-         "properties":
-            {
-             "heart-layer":"04a",
-             "next-stage":"05",
-             "star-layer":"04b"
-            },
          "type":"objectgroup",
          "visible":false,
          "width":0,
@@ -397,14 +433,23 @@
                  "width":32,
                  "x":104,
                  "y":48
+                }, 
+                {
+                 "height":8,
+                 "name":"",
+                 "properties":
+                    {
+                     "heart":"05a",
+                     "star":"05b"
+                    },
+                 "rotation":0,
+                 "type":"layers",
+                 "visible":true,
+                 "width":8,
+                 "x":-16,
+                 "y":0
                 }],
          "opacity":1,
-         "properties":
-            {
-             "heart-layer":"05a",
-             "next-stage":"06",
-             "star-layer":"05b"
-            },
          "type":"objectgroup",
          "visible":false,
          "width":0,
@@ -479,14 +524,23 @@
                  "width":32,
                  "x":160,
                  "y":32
+                }, 
+                {
+                 "height":8,
+                 "name":"",
+                 "properties":
+                    {
+                     "heart":"06a",
+                     "star":"06b"
+                    },
+                 "rotation":0,
+                 "type":"layers",
+                 "visible":true,
+                 "width":8,
+                 "x":-16,
+                 "y":0
                 }],
          "opacity":1,
-         "properties":
-            {
-             "heart-layer":"06a",
-             "next-stage":"07",
-             "star-layer":"06b"
-            },
          "type":"objectgroup",
          "visible":false,
          "width":0,
@@ -756,14 +810,23 @@
                  "width":32,
                  "x":192,
                  "y":72
+                }, 
+                {
+                 "height":8,
+                 "name":"",
+                 "properties":
+                    {
+                     "heart":"07a",
+                     "star":"07b"
+                    },
+                 "rotation":0,
+                 "type":"layers",
+                 "visible":true,
+                 "width":8,
+                 "x":-16,
+                 "y":0
                 }],
          "opacity":1,
-         "properties":
-            {
-             "heart-layer":"07a",
-             "next-stage":"08",
-             "star-layer":"07b"
-            },
          "type":"objectgroup",
          "visible":false,
          "width":0,
@@ -1004,14 +1067,23 @@
                  "width":16,
                  "x":176,
                  "y":120
+                }, 
+                {
+                 "height":8,
+                 "name":"",
+                 "properties":
+                    {
+                     "heart":"08a",
+                     "star":"08b"
+                    },
+                 "rotation":0,
+                 "type":"layers",
+                 "visible":true,
+                 "width":8,
+                 "x":-16,
+                 "y":0
                 }],
          "opacity":1,
-         "properties":
-            {
-             "heart-layer":"08a",
-             "next-stage":"09",
-             "star-layer":"08b"
-            },
          "type":"objectgroup",
          "visible":false,
          "width":0,
@@ -1267,14 +1339,23 @@
                  "width":16,
                  "x":176,
                  "y":120
+                }, 
+                {
+                 "height":8,
+                 "name":"",
+                 "properties":
+                    {
+                     "heart":"09a",
+                     "star":"09b"
+                    },
+                 "rotation":0,
+                 "type":"layers",
+                 "visible":true,
+                 "width":8,
+                 "x":-16,
+                 "y":0
                 }],
          "opacity":1,
-         "properties":
-            {
-             "heart-layer":"09a",
-             "next-stage":"10",
-             "star-layer":"09b"
-            },
          "type":"objectgroup",
          "visible":false,
          "width":0,
@@ -1681,14 +1762,23 @@
                  "width":16,
                  "x":144,
                  "y":120
+                }, 
+                {
+                 "height":8,
+                 "name":"",
+                 "properties":
+                    {
+                     "heart":"10a",
+                     "star":"10b"
+                    },
+                 "rotation":0,
+                 "type":"layers",
+                 "visible":true,
+                 "width":8,
+                 "x":-16,
+                 "y":0
                 }],
          "opacity":1,
-         "properties":
-            {
-             "heart-layer":"10a",
-             "next-stage":"",
-             "star-layer":"10b"
-            },
          "type":"objectgroup",
          "visible":false,
          "width":0,
@@ -1698,7 +1788,7 @@
  "orientation":"orthogonal",
  "properties":
     {
-     "first-stage":"01"
+
     },
  "renderorder":"right-down",
  "tileheight":8,

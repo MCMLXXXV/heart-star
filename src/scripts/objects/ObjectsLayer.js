@@ -7,28 +7,45 @@ class ObjectsLayer extends Phaser.Group {
 
     this._roleName = roleName;
 
-    this._background = this.add(this.game.make.group());
-    this._traps      = this.add(this.game.make.group());
-    this._platforms  = this.add(this.game.make.group());
+    this._tilemap      = null;
+    this._tilemapLayer = null;
+
+    this._backgroundGroup = this.add(this._makeGroup());
+    this._tilemapGroup    = this.add(this._makeGroup());
+    this._trapsGroup      = this.add(this._makeGroup());
+    this._platformsGroup  = this.add(this._makeGroup());
   }
 
   // --------------------------------------------------------------------------
 
+  addTilemapLayer (layerName) {
+    if (this._tilemap === null)
+      this._tilemap = this._makeTilemap('tilemaps');
+
+    if (this._tilemapLayer !== null)
+      this._tilemapLayer.destroy();
+
+    this._tilemapLayer = this._makeTilemapLayer(this._tilemap, layerName);
+
+    this._tilemapGroup.add(this._tilemapLayer);
+  }
+
   addTrap (x, y) {
     this._addObject(
-      x, y, this._traps,
+      x, y, this._trapsGroup,
       Trap, this.preferedTrapColor);
   }
 
   addPlatform (x, y, type) {
     this._addObject(
-      x, y, this._platforms,
+      x, y, this._platformsGroup,
       Platform, this._getPlatformType(type),
       this.preferedPlatformColor);
   }
 
   enableBackground () {
-    this._background.add(new BackgroundPattern(this.game, this.preferedBackground));
+    this._backgroundGroup.add(
+      new BackgroundPattern(this.game, this.preferedBackground));
   }
 
   toggle (visible) {
@@ -36,18 +53,39 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   collide (actor) {
+    this.game.physics.arcade.collide(actor, this._tilemapLayer);
     this.game.physics.arcade.collide(
       actor,
-      this._traps,
+      this._trapsGroup,
       this._trapCollisionCallback,
       null,
       this);
     this.game.physics.arcade.collide(
       actor,
-      this._platforms);
+      this._platformsGroup);
   }
 
   // --------------------------------------------------------------------------
+
+  _makeTilemap (tilemapKey) {
+    var tilemap = this.game.make.tilemap(tilemapKey);
+
+    tilemap.addTilesetImage('tileset');
+
+    return tilemap;
+  }
+
+  _makeTilemapLayer (tilemap, layerName) {
+    var tilemapLayer = tilemap.createLayer(layerName);
+
+    tilemap.setCollisionBetween(1, 144, true, layerName);
+
+    return tilemapLayer;
+  }
+
+  _makeGroup () {
+    return this.game.make.group();
+  }
 
   _addObject (x, y, group, factory, ... features) {
     this._getOrCreateObject(group, factory, ... features).reset(x, y);

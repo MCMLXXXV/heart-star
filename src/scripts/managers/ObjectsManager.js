@@ -24,11 +24,21 @@ class ObjectsManager {
   }
 
   createObjects (mapObjects) {
+    this._makeTilemapLayers(mapObjects.layers);
     this._makeTraps(mapObjects.traps);
     this._makePlatforms(mapObjects.platforms);
   }
 
   // --------------------------------------------------------------------------
+
+  _makeTilemapLayers (layers) {
+    for (var layer in layers)
+      this._makeTilemapLayer(layer, layers[layer]);
+  }
+
+  _makeTilemapLayer (actor, layerName) {
+    this._getRecipientGroupFor(actor).addTilemapLayer(layerName);
+  }
 
   _makeTraps (traps) {
     for (var { position, affects } of traps)
