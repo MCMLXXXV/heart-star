@@ -4,7 +4,8 @@ class Boot extends Phaser.State {
   init () {
     this.load.baseURL = './assets/';
 
-    this.game.controls = this.game.plugins.add(GameControl);
+    this.game.controls    = this.game.plugins.add(GameControl);
+    this.game.transitions = this.game.plugins.add(Transitions);
 
     this.physics.startSystem(Phaser.Physics.ARCADE);
   }
@@ -47,5 +48,6 @@ class Boot extends Phaser.State {
 import gameAssets from 'common/gameAssets';
 
 import GameControl from 'plugins/GameControl';
+import Transitions from 'plugins/Transitions';
 
 export default Boot;

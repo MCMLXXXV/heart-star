@@ -1,6 +1,12 @@
 class Credits extends Phaser.State {
 
+  init () {
+    this.game.transitions.registerTransition('fade-from-black');
+  }
+
   create () {
+    this.game.transitions.doTransition();
+
     this.add.existing(new BackgroundPattern(this.game));
     this.add.image(0, 0, 'background-credits');
 

@@ -1,6 +1,8 @@
 class Game extends Phaser.State {
 
   init (stageName) {
+    this.game.transitions.registerTransition('fade-from-black');
+
     this.controls = this.game.controls;
 
     this.stageName = stageName;
@@ -13,6 +15,8 @@ class Game extends Phaser.State {
   }
 
   create () {
+    this.game.transitions.doTransition();
+
     this._objectsManager.actorTrapped.add(this._restartActors, this);
 
     this._stageDefinitions = this._getStageDefinitions(this.stageName);
@@ -102,6 +106,16 @@ class Game extends Phaser.State {
     this._starGroup.toggle(!this._star.idle);
   }
 
+  _blink () {
+    if (this._heart.idle)
+      this.game.transitions.registerTransition('blink-blue');
+
+    else if (this._star.idle)
+      this.game.transitions.registerTransition('blink-pink');
+
+    this.game.transitions.doTransition();
+  }
+
   _togglePlayerActor () {
     if (!this._playerActor.standing) return;
 
@@ -109,6 +123,8 @@ class Game extends Phaser.State {
 
     this._playerActor.stop();
     this._idleActor.stop();
+
+    this._blink();
   }
 
   _restartActors () {

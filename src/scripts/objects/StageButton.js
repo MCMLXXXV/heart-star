@@ -5,6 +5,7 @@ class StageButton extends Phaser.Group {
 
     this.position.set(x, y);
 
+    this.clicked   = false;
     this.stageName = stageName;
 
     this._makeUnlockableButton(buttonKey, locked);
@@ -17,13 +18,21 @@ class StageButton extends Phaser.Group {
       this.add(this.game.make.image(0, 0, 'button-stage-locked'));
     }
     else {
-      var button = this.game.make.button(0, 0, key, this._goToStageNumber, this, 1, 0);
+      var button = this.game.make.button(0, 0, key, this._doTransition, this, 1, 0);
       this.add(button);
     }
   }
 
+  _doTransition () {
+    if (this.clicked) return;
+    this.clicked = true;
+
+    this.game.transitions.registerTransition('fade-to-black');
+    this.game.transitions.registerTransitionCallback(this._goToStageNumber, this);
+    this.game.transitions.doTransition();
+  }
+
   _goToStageNumber () {
-    console.log('Now, init\'ing stage "%s".', this.stageName);
     this.game.state.start('Game', true, false, this.stageName);
   }
 
