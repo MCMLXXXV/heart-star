@@ -12,7 +12,7 @@ class Blinds extends Phaser.Image {
 
   _drawAperture (aperture) {
     var bitmap = this._bitmap;
-    var { width, height } = bitmap;
+    var { height } = bitmap;
 
     bitmap.clear();
 
