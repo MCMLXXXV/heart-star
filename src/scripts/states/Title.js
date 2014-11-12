@@ -1,7 +1,7 @@
 class Title extends Phaser.State {
 
-  init () {
-    this.game.transitions.registerTransition('fade-from-black');
+  init (transitionName = 'fade-from-black') {
+    this.game.transitions.registerTransition(transitionName);
     this.game.transitions.registerTransitionCallback(
       this._makeMenuButtons, this);
   }

@@ -10,6 +10,9 @@ class Transitions extends Phaser.Plugin {
     this._group    = this.game.stage.addChild(this.game.make.group());
     this._blackout = this._group.add(this._makeBlackout());
 
+    this._iris       = this._group.add(new Iris(this.game, 384, 256));
+    this._iris.alpha = 0;
+
     this.transitionCompleted.add(this._clearRegisteredTransition, this);
   }
 
@@ -30,6 +33,9 @@ class Transitions extends Phaser.Plugin {
     this.transitionRunning = true;
 
     switch (this.transitionRegistered) {
+      case 'iris':
+        this._openIris();
+        break;
       case 'fade-from-black':
         this._fadeFromBlack();
         break;
@@ -105,6 +111,19 @@ class Transitions extends Phaser.Plugin {
       .start();
   }
 
+  _openIris () {
+    var tween = this._makeTween(this._iris);
+
+    this._iris.alpha = 1;
+
+    tween
+      .to({ aperture: 1 }, 1000)
+      .start();
+
+    tween
+      .onComplete.addOnce(this.transitionCompleted.dispatch, this);
+  }
+
   _clearRegisteredTransition () {
     this.transitionRunning    = false;
     this.transitionRegistered = null;
@@ -112,5 +131,7 @@ class Transitions extends Phaser.Plugin {
 
 }
 
+
+import Iris from 'objects/Iris';
 
 export default Transitions;
