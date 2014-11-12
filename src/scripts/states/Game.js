@@ -1,7 +1,7 @@
 class Game extends Phaser.State {
 
-  init (stageName) {
-    this.game.transitions.registerTransition('fade-from-black');
+  init (stageName, transitionName = 'fade-from-black') {
+    this.game.transitions.registerTransition(transitionName);
 
     this.controls = this.game.controls;
 
@@ -35,7 +35,7 @@ class Game extends Phaser.State {
         this.game,
         this.goalCoordinates.x,
         this.goalCoordinates.y));
-    this._goal.actorsLanded.addOnce(this._goToNextStage, this);
+    this._goal.actorsLanded.addOnce(this._closeBlinds, this);
 
     this._heart = this.add.existing(this._makeActor(Actor.HEART));
     this._star  = this.add.existing(this._makeActor(Actor.STAR));
@@ -116,6 +116,12 @@ class Game extends Phaser.State {
     this.game.transitions.doTransition();
   }
 
+  _closeBlinds () {
+    this.game.transitions.registerTransition('blinds-close');
+    this.game.transitions.registerTransitionCallback(this._goToNextStage, this);
+    this.game.transitions.doTransition();
+  }
+
   _togglePlayerActor () {
     if (!this._playerActor.standing) return;
 
@@ -142,7 +148,7 @@ class Game extends Phaser.State {
     if (nextStage === null)
       this._restartActors();
     else
-      this.state.start('Game', true, false, nextStage);
+      this.state.start('Game', true, false, nextStage, 'blinds-open');
   }
 
   // --------------------------------------------------------------------------

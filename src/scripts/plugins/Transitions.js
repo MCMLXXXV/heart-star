@@ -10,8 +10,8 @@ class Transitions extends Phaser.Plugin {
     this._group    = this.game.stage.addChild(this.game.make.group());
     this._blackout = this._group.add(this._makeBlackout());
 
-    this._iris       = this._group.add(new Iris(this.game, 240, 160));
-    this._iris.alpha = 0;
+    this._iris   = this._group.add(new Iris(this.game, 240, 160));
+    this._blinds = this._group.add(new Blinds(this.game, 240, 160));
 
     this.transitionCompleted.add(this._clearRegisteredTransition, this);
   }
@@ -39,6 +39,12 @@ class Transitions extends Phaser.Plugin {
     switch (this.transitionRegistered) {
       case 'iris':
         this._openIris();
+        break;
+      case 'blinds-open':
+        this._openBlinds();
+        break;
+      case 'blinds-close':
+        this._closeBlinds();
         break;
       case 'fade-from-black':
         this._fadeFromBlack();
@@ -113,12 +119,15 @@ class Transitions extends Phaser.Plugin {
     tween
       .to({ alpha: 0 }, 400)
       .start();
+
+    tween
+      .onComplete.addOnce(this.transitionCompleted.dispatch, this);
   }
 
   _openIris () {
     var tween = this._makeTween(this._iris);
 
-    this._iris.alpha = 1;
+    this._iris.aperture = 0;
 
     tween
       .to({ aperture: 1 }, 1000)
@@ -126,6 +135,27 @@ class Transitions extends Phaser.Plugin {
 
     tween
       .onComplete.addOnce(this.transitionCompleted.dispatch, this);
+  }
+
+  _slideBlinds(from, to) {
+    var tween = this._makeTween(this._blinds);
+
+    this._blinds.aperture = from;
+
+    tween
+      .to({ aperture: to }, 1000)
+      .start();
+
+    tween
+      .onComplete.addOnce(this.transitionCompleted.dispatch, this);
+  }
+
+  _openBlinds () {
+    this._slideBlinds(1, 0);
+  }
+
+  _closeBlinds () {
+    this._slideBlinds(0, -1);
   }
 
   _clearRegisteredTransition () {
@@ -136,6 +166,7 @@ class Transitions extends Phaser.Plugin {
 }
 
 
-import Iris from 'objects/Iris';
+import Iris   from 'objects/Iris';
+import Blinds from 'objects/Blinds';
 
 export default Transitions;
