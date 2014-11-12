@@ -5,7 +5,7 @@ class Iris extends Phaser.Image {
 
     super(game, 0, 0, this._bitmap);
 
-    this.aperture = 0;
+    this.aperture = 1;
   }
 
   // --------------------------------------------------------------------------
