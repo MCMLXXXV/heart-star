@@ -10,7 +10,7 @@ class Transitions extends Phaser.Plugin {
     this._group    = this.game.stage.addChild(this.game.make.group());
     this._blackout = this._group.add(this._makeBlackout());
 
-    this._iris       = this._group.add(new Iris(this.game, 384, 256));
+    this._iris       = this._group.add(new Iris(this.game, 240, 160));
     this._iris.alpha = 0;
 
     this.transitionCompleted.add(this._clearRegisteredTransition, this);
@@ -71,7 +71,7 @@ class Transitions extends Phaser.Plugin {
   }
 
   _makeBlackout () {
-    return this._makeImage(-120, -80, 480, 320);
+    return this._makeImage(0, 0, 240, 160);
   }
 
   _makeTween (object) {

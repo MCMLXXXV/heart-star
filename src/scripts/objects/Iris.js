@@ -1,13 +1,10 @@
 class Iris extends Phaser.Image {
 
   constructor (game, width, height) {
-    var { centerX, centerY } = game.world;
-
     this._bitmap = game.make.bitmapData(width, height);
 
-    super(game, centerX, centerY, this._bitmap);
+    super(game, 0, 0, this._bitmap);
 
-    this.anchor.set(0.5);
     this.aperture = 0;
   }
 
@@ -15,13 +12,13 @@ class Iris extends Phaser.Image {
 
   _drawAperture (aperture) {
     var bitmap = this._bitmap;
-    var radius = Phaser.Math.max(bitmap.width, bitmap.height) / 2;
+    var { width, height } = bitmap;
+    var radius = aperture * Phaser.Math.distance(width, height, 0, 0) / 2;
 
     bitmap.blendSourceOver();
     bitmap.fill(0, 0, 0);
     bitmap.blendDestinationOut();
-    bitmap.circle(
-      bitmap.width / 2, bitmap.height / 2, radius * aperture, 'white');
+    bitmap.circle(width / 2, height / 2, radius, 'white');
   }
 
   // --------------------------------------------------------------------------
