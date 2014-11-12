@@ -19,11 +19,15 @@ class Transitions extends Phaser.Plugin {
   // --------------------------------------------------------------------------
 
   registerTransition (transitionName) {
+    if (this.transitionRunning) return;
+
     this.transitionRunning    = false;
     this.transitionRegistered = transitionName;
   }
 
   registerTransitionCallback (callback, context) {
+    if (this.transitionRunning) return;
+
     this.transitionCompleted.addOnce(callback, context);
   }
 
