@@ -88,36 +88,14 @@ class Transitions extends Phaser.Plugin {
     return this.game.add.tween(object);
   }
 
-  _fadeFromBlack () {
-    this._fadeBlackout(1, 0);
-  }
+  _doTransition (object, property, from, to, interval, delay = 0) {
+    var tween = this._makeTween(object);
 
-  _fadeToBlack () {
-    this._fadeBlackout(0, 1);
-  }
-
-  _fadeBlackout (from, to) {
-    var tween = this._makeTween(this._blackout);
-
-    this._blackout.alpha = from;
-    this._blackout.tint  = 0x000000;
+    object[property] = from;
 
     tween
-      .to({ alpha: to }, 1000)
-      .start();
-
-    tween
-      .onComplete.addOnce(this.transitionCompleted.dispatch, this);
-  }
-
-  _blink (color) {
-    var tween = this._makeTween(this._blackout);
-
-    this._blackout.alpha = 1;
-    this._blackout.tint  = color;
-
-    tween
-      .to({ alpha: 0 }, 400)
+      .to({ [property]: to }, interval)
+      .delay(delay)
       .start();
 
     tween
@@ -125,37 +103,30 @@ class Transitions extends Phaser.Plugin {
   }
 
   _openIris () {
-    var tween = this._makeTween(this._iris);
-
-    this._iris.aperture = 0;
-
-    tween
-      .to({ aperture: 1 }, 1000)
-      .start();
-
-    tween
-      .onComplete.addOnce(this.transitionCompleted.dispatch, this);
-  }
-
-  _slideBlinds(from, to) {
-    var tween = this._makeTween(this._blinds);
-
-    this._blinds.aperture = from;
-
-    tween
-      .to({ aperture: to }, 1000)
-      .start();
-
-    tween
-      .onComplete.addOnce(this.transitionCompleted.dispatch, this);
+    this._doTransition(this._iris, 'aperture', 0, 1, 1000);
   }
 
   _openBlinds () {
-    this._slideBlinds(1, 0);
+    this._doTransition(this._blinds, 'aperture', 1, 0, 1000);
   }
 
   _closeBlinds () {
-    this._slideBlinds(0, -1);
+    this._doTransition(this._blinds, 'aperture', 0, -1, 1000);
+  }
+
+  _fadeFromBlack () {
+    this._blackout.tint = 0x000000;
+    this._doTransition(this._blackout, 'alpha', 1, 0, 1000, 0);
+  }
+
+  _fadeToBlack () {
+    this._blackout.tint = 0x000000;
+    this._doTransition(this._blackout, 'alpha', 0, 1, 1000, 0);
+  }
+
+  _blink (color) {
+    this._blackout.tint = color;
+    this._doTransition(this._blackout, 'alpha', 1, 0, 400, 0);
   }
 
   _clearRegisteredTransition () {
