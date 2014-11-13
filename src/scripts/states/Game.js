@@ -1,6 +1,8 @@
 class Game extends Phaser.State {
 
-  init (stageName) {
+  init (stageName, transitionName = 'fade-from-black') {
+    this.game.transitions.registerTransition(transitionName);
+
     this.controls = this.game.controls;
 
     this.stageName = stageName;
@@ -13,6 +15,8 @@ class Game extends Phaser.State {
   }
 
   create () {
+    this.game.transitions.doTransition();
+
     this._stageDefinitions = this._getStageDefinitions(this.stageName);
 
     this._agents = this.add.existing(new Agents(this.game));
@@ -104,6 +108,22 @@ class Game extends Phaser.State {
     this._starGroup.toggle(!this._star.idle);
   }
 
+  _blink () {
+    if (this._heart.idle)
+      this.game.transitions.registerTransition('blink-blue');
+
+    else if (this._star.idle)
+      this.game.transitions.registerTransition('blink-pink');
+
+    this.game.transitions.doTransition();
+  }
+
+  _closeBlinds () {
+    this.game.transitions.registerTransition('blinds-close');
+    this.game.transitions.registerTransitionCallback(this._goToNextStage, this);
+    this.game.transitions.doTransition();
+  }
+
   _togglePlayerActor () {
     if (!this._playerActor.standing) return;
 
@@ -111,6 +131,8 @@ class Game extends Phaser.State {
 
     this._playerActor.stop();
     this._idleActor.stop();
+
+    this._blink();
   }
 
   _restartActors () {
@@ -131,7 +153,7 @@ class Game extends Phaser.State {
     this._heart.emotion = 'cheering';
     this._star.emotion  = 'cheering';
 
-    this.time.events.add(3000, this._goToNextStage, this);
+    this.time.events.add(3000, this._closeBlinds, this);
   }
 
   _goToNextStage () {
@@ -140,7 +162,7 @@ class Game extends Phaser.State {
     if (nextStage === null)
       this._restartActors();
     else
-      this.state.start('Game', true, false, nextStage);
+      this.state.start('Game', true, false, nextStage, 'blinds-open');
   }
 
   // --------------------------------------------------------------------------

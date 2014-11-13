@@ -25,7 +25,7 @@ class Logo extends Phaser.State {
   // --------------------------------------------------------------------------
 
   _goToNextState () {
-    this.state.start(this._nextState);
+    this.state.start(this._nextState, true, false, 'iris');
   }
 
   // --------------------------------------------------------------------------
