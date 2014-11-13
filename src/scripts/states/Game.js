@@ -112,8 +112,13 @@ class Game extends Phaser.State {
   }
 
   _restartActors () {
-    this._heart.reset(this.heartCoordinates.x, this.heartCoordinates.y);
-    this._star.reset(this.starCoordinates.x, this.starCoordinates.y);
+    this._restartActor(this._heart, this.heartCoordinates);
+    this._restartActor(this._star, this.starCoordinates);
+  }
+
+  _restartActor(actor, { x, y }) {
+    actor.reset(x, y);
+    actor.sink();
   }
 
   _fellOff () {

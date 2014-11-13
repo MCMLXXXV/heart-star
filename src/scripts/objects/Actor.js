@@ -39,6 +39,14 @@ class Actor extends Phaser.Sprite {
     this._move(Actor.FACE_RIGHT, DEFAULT_ACCELERATION);
   }
 
+  float () {
+    this.body.gravity.y = 0;
+  }
+
+  sink () {
+    this.body.gravity.y = DEFAULT_GRAVITY;
+  }
+
   stop () {
     this.body.acceleration.x = 0;
   }
@@ -76,11 +84,10 @@ class Actor extends Phaser.Sprite {
   _setupPhysicsBody (width, height) {
     if (this.body === null) {
       this.game.physics.arcade.enableBody(this);
-
-      this.body.drag.x = DEFAULT_DRAG;
-      this.body.gravity.y = DEFAULT_GRAVITY;
-      this.body.maxVelocity.set(... DEFAULT_SPEED_LIMITS);
     }
+
+    this.body.drag.x = DEFAULT_DRAG;
+    this.body.maxVelocity.set(... DEFAULT_SPEED_LIMITS);
 
     this.body.setSize(width, height);
   }
