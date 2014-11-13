@@ -3,8 +3,6 @@ class ObjectsManager {
   constructor (game) {
     this.game = game;
 
-    this.actorTrapped = new Phaser.Signal();
-
     this._layers = {};
   }
 
@@ -12,8 +10,6 @@ class ObjectsManager {
 
   createLayerFor (roleName, enableBackground = false) {
     var layer = new ObjectsLayer(this.game, roleName);
-
-    layer.actorTrapped.add(this.actorTrapped.dispatch);
 
     if (enableBackground)
       layer.enableBackground();

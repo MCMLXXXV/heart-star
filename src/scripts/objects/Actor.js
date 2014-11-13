@@ -13,11 +13,14 @@ class Actor extends Phaser.Sprite {
 
     this.anchor.set(0.5, 1);
 
+    this.wasHurt = new Phaser.Signal();
+
     this._setupPhysicsBody(10, 16);
     this._setupAnimations();
 
     this.animation = 'idle';
     this.idle      = true;
+    this.emotion   = null;
 
     this._jumpPower      = 0;
     this._carryingFriend = null;
@@ -30,6 +33,11 @@ class Actor extends Phaser.Sprite {
   }
 
   // --------------------------------------------------------------------------
+
+  reset(x, y) {
+    super.reset(x, y);
+    this.emotion = null;
+  }
 
   walkLeft () {
     this._move(Actor.FACE_LEFT,  DEFAULT_ACCELERATION);
@@ -79,6 +87,17 @@ class Actor extends Phaser.Sprite {
     this._carryingFriend = condition ? actor : null;
   }
 
+  harm () {
+    this.emotion = 'hurt';
+    this.body.velocity.y = -100;
+    this.wasHurt.dispatch(this);
+  }
+
+  startle () {
+    this.float();
+    this.emotion = 'scared';
+  }
+
   // --------------------------------------------------------------------------
 
   _setupPhysicsBody (width, height) {
@@ -113,18 +132,20 @@ class Actor extends Phaser.Sprite {
   }
 
   _updateAnimation () {
-    if (this.idle) {
-      this.facing = Actor.FACE_RIGHT;
-      this.animation = this.carrying ? 'carrying-idle' : 'idle';
-    }
-    else if (this.jumping) {
-      this.animation = this.falling ? 'falling' : 'jumping';
-    }
-    else if (this.walking) {
-      this.animation = this.carrying ? 'carrying-walking' : 'walking';
-    }
-    else if (this.standing) {
-      this.animation = this.carrying ? 'carrying-facing' : 'facing';
+    if (this.emotion === null) {
+      if (this.idle) {
+        this.facing = Actor.FACE_RIGHT;
+        this.animation = this.carrying ? 'carrying-idle' : 'idle';
+      }
+      else if (this.jumping) {
+        this.animation = this.falling ? 'falling' : 'jumping';
+      }
+      else if (this.walking) {
+        this.animation = this.carrying ? 'carrying-walking' : 'walking';
+      }
+      else if (this.standing) {
+        this.animation = this.carrying ? 'carrying-facing' : 'facing';
+      }
     }
   }
 
@@ -201,6 +222,21 @@ class Actor extends Phaser.Sprite {
 
     this.alpha = this._idle ?  0.75 : 1;
   }
+
+  get emotion () {
+    return this._emotion;
+  }
+
+  set emotion (newValue) {
+    if (newValue !== null)
+      this.animation = newValue;
+
+    this._emotion = newValue;
+  }
+  get hurt () {
+    return this.emotion === 'hurt';
+  }
+
 }
 
 

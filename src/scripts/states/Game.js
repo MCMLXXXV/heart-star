@@ -13,12 +13,9 @@ class Game extends Phaser.State {
   }
 
   create () {
-    this._objectsManager.actorTrapped.add(this._restartActors, this);
-
     this._stageDefinitions = this._getStageDefinitions(this.stageName);
 
     this._agents = this.add.existing(new Agents(this.game));
-    this._agents.actorFellOff.add(this._fellOff, this);
 
     this._heartGroup = this._objectsManager.createLayerFor('heart', true);
     this._starGroup  = this._objectsManager.createLayerFor('star', true);
@@ -31,10 +28,15 @@ class Game extends Phaser.State {
         this.game,
         this.goalCoordinates.x,
         this.goalCoordinates.y));
-    this._goal.actorsLanded.addOnce(this._goToNextStage, this);
+    this._goal.actorsLanded.addOnce(this._celebrate, this);
 
     this._heart = this.add.existing(this._makeActor(Actor.HEART));
     this._star  = this.add.existing(this._makeActor(Actor.STAR));
+
+    this._heart.wasHurt.add(this._star.startle, this._star);
+    this._star.wasHurt.add(this._heart.startle, this._heart);
+    this._heart.wasHurt.add(this._actorHurt, this);
+    this._star.wasHurt.add(this._actorHurt, this);
 
     this._restartActors();
     this._changeActors(this._heart, this._star);
@@ -121,8 +123,15 @@ class Game extends Phaser.State {
     actor.sink();
   }
 
-  _fellOff () {
-    this._restartActors();
+  _actorHurt () {
+    this.time.events.add(1500, this._restartActors, this);
+  }
+
+  _celebrate () {
+    this._heart.emotion = 'cheering';
+    this._star.emotion  = 'cheering';
+
+    this.time.events.add(3000, this._goToNextStage, this);
   }
 
   _goToNextStage () {

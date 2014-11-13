@@ -3,8 +3,6 @@ class Agents extends Phaser.Group {
   constructor (game) {
     super(game);
 
-    this.actorFellOff = new Phaser.Signal();
-
     this.enableBody = true;
 
     this._leftAgent   = this.add(this._makeAgent( -20,   0,  16, 160));
@@ -17,14 +15,14 @@ class Agents extends Phaser.Group {
   // --------------------------------------------------------------------------
 
   collide (actor) {
-    this.game.physics.arcade.collide(this._leftAgent,  actor);
-    this.game.physics.arcade.collide(this._rightAgent, actor);
+    this.game.physics.arcade.collide(actor, this._leftAgent);
+    this.game.physics.arcade.collide(actor, this._rightAgent);
 
     this.game.physics.arcade.overlap(
-      this._bottomAgent,
       actor,
+      this._bottomAgent,
       this._bottomAgentOverlapCallback,
-      null,
+      this._bottomAgentOverlapProcess,
       this);
   }
 
@@ -39,7 +37,11 @@ class Agents extends Phaser.Group {
   }
 
   _bottomAgentOverlapCallback (actor) {
-    this.actorFellOff.dispatch(actor);
+    actor.harm();
+  }
+
+  _bottomAgentOverlapProcess (actor) {
+    return !actor.hurt;
   }
 
 }

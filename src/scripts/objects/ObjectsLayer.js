@@ -3,8 +3,6 @@ class ObjectsLayer extends Phaser.Group {
   constructor (game, roleName) {
     super(game);
 
-    this.actorTrapped = new Phaser.Signal();
-
     this._roleName = roleName;
 
     this._tilemap      = null;
@@ -53,12 +51,17 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   collide (actor) {
-    this.game.physics.arcade.collide(actor, this._tilemapLayer);
+    this.game.physics.arcade.collide(
+      actor,
+      this._tilemapLayer,
+      null,
+      this._collisionProcess,
+      this);
     this.game.physics.arcade.collide(
       actor,
       this._trapsGroup,
       this._trapCollisionCallback,
-      null,
+      this._collisionProcess,
       this);
     this.game.physics.arcade.collide(
       actor,
@@ -108,7 +111,11 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   _trapCollisionCallback (actor) {
-    this.actorTrapped.dispatch(actor);
+    actor.harm();
+  }
+
+  _collisionProcess (actor) {
+    return !actor.hurt;
   }
 
   // --------------------------------------------------------------------------
