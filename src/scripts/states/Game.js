@@ -153,7 +153,7 @@ class Game extends Phaser.State {
     this._heart.emotion = 'cheering';
     this._star.emotion  = 'cheering';
 
-    this.time.events.add(3000, this._closeBlinds, this);
+    this.time.events.add(1000, this._closeBlinds, this);
   }
 
   _goToNextStage () {
