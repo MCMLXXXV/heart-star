@@ -44,25 +44,10 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   addRetractable ({ retractable, button }) {
-    var retractable, button;
+    var r = this._addRetractable(retractable);
+    var b = this._addButton(button);
 
-    {
-      var { position: { x, y } } = retractable;
-
-      retractable = this._addObject(
-        x, y, this._retractableGroup,
-        Retractable, this.preferedRetractableColor);
-    }
-
-    {
-      var { position: { x, y }, orientation } = button;
-
-      button = this._addObject(
-        x, y, this._buttonGroup,
-        Button, orientation, this.preferedButtonColor);
-    }
-
-    retractable.bindTo(button);
+    r.bindTo(b);
   }
 
   enableBackground () {
@@ -128,6 +113,18 @@ class ObjectsLayer extends Phaser.Group {
 
   _addObject (x, y, group, factory, ... features) {
     return this._getOrCreateObject(group, factory, ... features).reset(x, y);
+  }
+
+  _addRetractable ({ position: { x, y } }) {
+    return this._addObject(
+      x, y, this._retractableGroup,
+      Retractable, this.preferedRetractableColor);
+  }
+
+  _addButton ({ position: { x, y }, orientation }) {
+    return this._addObject(
+      x, y, this._buttonGroup,
+      Button, orientation, this.preferedButtonColor);
   }
 
   _getOrCreateObject (group, factory, ... features) {
