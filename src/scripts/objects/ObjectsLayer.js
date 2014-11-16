@@ -169,7 +169,7 @@ class ObjectsLayer extends Phaser.Group {
     switch (this._roleName) {
       case 'heart': return BackgroundPattern.HEART;
       case 'star':  return BackgroundPattern.STAR;
-      case 'both':  return BackgroundPattern.BOTH;
+      case 'both':  return BackgroundPattern.HEART_STAR;
     }
   }
 

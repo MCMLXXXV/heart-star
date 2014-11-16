@@ -1,35 +1,24 @@
 class BackgroundPattern extends Phaser.TileSprite {
 
   constructor (game, texture = BackgroundPattern.HEART_STAR) {
-    super(game, 0, 0, 240, 160);
+    super(game, 0, 0, 240, 160, texture);
 
-    this.change(texture);
-  }
-
-  change (texture = BackgroundPattern.HEART_STAR) {
-    this.loadTexture(texture);
     this._changeScroll(texture);
   }
 
   // --------------------------------------------------------------------------
 
+  _getScrollSpeed (texture) {
+    switch (texture) {
+      case BackgroundPattern.HEART_STAR: return [   0,  15 ];
+      case BackgroundPattern.HEART:      return [ -15,  15 ];
+      case BackgroundPattern.MOON:       return [ -15, -15 ];
+      case BackgroundPattern.STAR:       return [  15, -15 ];
+    }
+  }
+
   _changeScroll (texture) {
-    var scrollSpeed = [ 0, 15 ];
-
-    if (texture === BackgroundPattern.HEART_STAR) {
-      scrollSpeed = [   0,  15 ];
-    }
-    else if (texture === BackgroundPattern.HEART) {
-      scrollSpeed = [ -15,  15 ];
-    }
-    else if (texture === BackgroundPattern.MOON) {
-      scrollSpeed = [ -15, -15 ];
-    }
-    else if (texture === BackgroundPattern.STAR) {
-      scrollSpeed = [  15, -15 ];
-    }
-
-    this.autoScroll(... scrollSpeed);
+    this.autoScroll(... this._getScrollSpeed(texture));
   }
 
 }
