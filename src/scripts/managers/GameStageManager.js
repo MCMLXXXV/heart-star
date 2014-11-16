@@ -100,16 +100,16 @@ class GameStageManager {
     switch (name) {
       case 'heart':
       case 'star':
-        return this._normalizeActorCoordinates(x, y);
+        return this._normalizeCoordinates(x, y, 8, 24);
 
       case 'goal':
-        return this._normalizeGoalCoordinates(x, y);
+        return this._normalizeCoordinates(x, y, 16, 16);
     }
   }
 
   _makeTrap ({ x, y, properties: { affects, orientation } }) {
     return {
-      position: this._normalizeTrapCoordinates(x, y),
+      position: this._normalizeCoordinates(x, y, 0, -8),
       affects, orientation
     };
   }
@@ -120,14 +120,14 @@ class GameStageManager {
 
   _makeButton ({ x, y, properties: { orientation, triggers } }) {
     return {
-      position: this._normalizeButtonCoordinates(x, y),
+      position: this._normalizeCoordinates(x, y, 8, 16),
       orientation
     };
   }
 
   _makeRetractable ({ x, y, name, properties: { affects, orientation } }) {
     return {
-      position: this._normalizeRetractableCoordinates(x, y),
+      position: this._normalizeCoordinates(x, y, 8, 0),
       affects, orientation
     };
   }
@@ -138,24 +138,8 @@ class GameStageManager {
     return object[name];
   }
 
-  _normalizeActorCoordinates (x, y) {
-    return { x: x + 8, y: y + 24 };
-  }
-
-  _normalizeGoalCoordinates (x, y) {
-    return { x: x + 16, y: y + 16 };
-  }
-
-  _normalizeTrapCoordinates (x, y) {
-    return { x: x, y: y - 8 };
-  }
-
-  _normalizeButtonCoordinates (x, y) {
-    return { x: x + 8, y: y + 16 };
-  }
-
-  _normalizeRetractableCoordinates (x, y) {
-    return { x: x + 8, y };
+  _normalizeCoordinates (x, y, offsetX, offsetY) {
+    return { x: x + offsetX, y: y + offsetY };
   }
 
 }
