@@ -55,10 +55,10 @@ class GameStageManager {
 
   _parseLayerObjects (layerObjects) {
     var objects = {
-      'traps'               : [],
-      'layers'              : null,
-      'platforms'           : [],
-      'miscellaneousObjects': []
+      'traps'        : [],
+      'layers'       : null,
+      'platforms'    : [],
+      'retractables' : {}
     };
 
     for (var object of layerObjects) {
@@ -73,6 +73,18 @@ class GameStageManager {
 
         case 'platform':
           objects['platforms'].push(this._makePlatform(object));
+          break;
+
+        case 'button':
+          this._getOrMakeRetractableObject(
+            objects['retractables'], object.properties.triggers)
+              .button = this._makeButton(object);
+          break;
+
+        case 'retractable':
+          this._getOrMakeRetractableObject(
+            objects['retractables'], object.name)
+              .retractable = this._makeRetractable(object);
           break;
       }
     }
@@ -106,6 +118,26 @@ class GameStageManager {
     return { position: { x, y }, affects, type };
   }
 
+  _makeButton ({ x, y, properties: { orientation, triggers } }) {
+    return {
+      position: this._normalizeButtonCoordinates(x, y),
+      orientation
+    };
+  }
+
+  _makeRetractable ({ x, y, name, properties: { affects, orientation } }) {
+    return {
+      position: this._normalizeRetractableCoordinates(x, y),
+      affects, orientation
+    };
+  }
+
+  _getOrMakeRetractableObject (object, name) {
+    object[name] = object[name] || {};
+
+    return object[name];
+  }
+
   _normalizeActorCoordinates (x, y) {
     return { x: x + 8, y: y + 24 };
   }
@@ -116,6 +148,14 @@ class GameStageManager {
 
   _normalizeTrapCoordinates (x, y) {
     return { x: x, y: y - 8 };
+  }
+
+  _normalizeButtonCoordinates (x, y) {
+    return { x: x + 8, y: y + 16 };
+  }
+
+  _normalizeRetractableCoordinates (x, y) {
+    return { x: x + 8, y };
   }
 
 }
