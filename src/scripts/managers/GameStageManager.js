@@ -118,7 +118,7 @@ class GameStageManager {
     return { position: { x, y }, affects, type };
   }
 
-  _makeButton ({ x, y, properties: { orientation, triggers } }) {
+  _makeButton ({ x, y, properties: { orientation } }) {
     return {
       position: this._normalizeCoordinates(x, y, 8, 16),
       orientation
