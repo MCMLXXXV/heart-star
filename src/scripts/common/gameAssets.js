@@ -291,16 +291,6 @@ export default {
     },
 
     {
-      'type': 'spritesheet',
-      'key': 'goal-light',
-      'url': 'images/goal-light.png',
-      'frameWidth': 32,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
       'type': 'image',
       'key': 'label-carrying-partners',
       'url': 'images/label-carrying-partners.png',
