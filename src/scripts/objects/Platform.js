@@ -1,7 +1,7 @@
 class Platform extends Phaser.Sprite {
 
-  constructor (game, x, y, type = Platform.SMALL, availableTo = Platform.BOTH) {
-    super(game, x, y, type, availableTo);
+  constructor (game, type = Platform.SMALL, availableTo = Platform.BOTH) {
+    super(game, 0, 0, type, availableTo);
 
     this._setupPhysicsBody(this.width - 4, 8, 2);
   }

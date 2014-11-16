@@ -1,7 +1,7 @@
 class Retractable extends Phaser.Sprite {
 
-  constructor (game, x, y, availableTo = Retractable.BOTH) {
-    super(game, x, y, availableTo);
+  constructor (game, availableTo = Retractable.BOTH) {
+    super(game, 0, 0, availableTo);
 
     this.anchor.set(0.5, 0);
 

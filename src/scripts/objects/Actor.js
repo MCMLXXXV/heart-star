@@ -8,8 +8,8 @@ var DEFAULT_JUMP_VELOCITY = -120;
 
 class Actor extends Phaser.Sprite {
 
-  constructor (game, x, y, role) {
-    super(game, x, y, role);
+  constructor (game, role) {
+    super(game, 0, 0, role);
 
     this.anchor.set(0.5, 1);
 

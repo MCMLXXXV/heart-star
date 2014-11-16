@@ -27,11 +27,8 @@ class Game extends Phaser.State {
 
     this._objectsManager.createObjects(this._stageDefinitions.objects);
 
-    this._goal = this.add.existing(
-      new Goal(
-        this.game,
-        this.goalCoordinates.x,
-        this.goalCoordinates.y));
+    this._goal = this.add.existing(new Goal(this.game));
+    this._goal.reset(this.goalCoordinates.x, this.goalCoordinates.y);
     this._goal.actorsLanded.addOnce(this._celebrate, this);
 
     this._heart = this.add.existing(this._makeActor(Actor.HEART));
@@ -90,7 +87,7 @@ class Game extends Phaser.State {
   }
 
   _makeActor (roleName) {
-    return new Actor(this.game, 0, 0, roleName);
+    return new Actor(this.game, roleName);
   }
 
   _changeActors (playerActor, idleActor) {

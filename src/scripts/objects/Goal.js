@@ -1,7 +1,7 @@
 class Goal extends Phaser.Sprite {
 
-  constructor (game, x, y) {
-    super(game, x, y, 'platform-goal');
+  constructor (game) {
+    super(game, 0, 0, 'platform-goal');
 
     this.anchor.set(0.5);
 

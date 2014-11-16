@@ -1,7 +1,7 @@
 class Button extends Phaser.Sprite {
 
-  constructor (game, x, y, orientation = Button.SOUTH, availableTo = Button.BOTH) {
-    super(game, x, y, availableTo);
+  constructor (game, orientation = Button.SOUTH, availableTo = Button.BOTH) {
+    super(game, 0, 0, availableTo);
 
     this.wasTriggered = new Phaser.Signal();
 

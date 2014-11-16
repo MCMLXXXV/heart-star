@@ -1,7 +1,7 @@
 class Trap extends Phaser.Sprite {
 
-  constructor (game, x, y, availableTo = Trap.BOTH) {
-    super(game, x, y, 'trap', availableTo);
+  constructor (game, availableTo = Trap.BOTH) {
+    super(game, 0, 0, 'trap', availableTo);
 
     this._setupPhysicsBody(this.width - 2, 8, 1, 8);
   }

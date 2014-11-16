@@ -134,7 +134,7 @@ class ObjectsLayer extends Phaser.Group {
     var object = group.getFirstDead();
 
     if (object === null)
-      object = group.add(new factory(this.game, 0, 0, ... features));
+      object = group.add(new factory(this.game, ... features));
 
     return object;
   }
