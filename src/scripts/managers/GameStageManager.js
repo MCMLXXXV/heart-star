@@ -55,10 +55,10 @@ class GameStageManager {
 
   _parseLayerObjects (layerObjects) {
     var objects = {
-      'traps'               : [],
-      'layers'              : null,
-      'platforms'           : [],
-      'miscellaneousObjects': []
+      'traps'        : [],
+      'layers'       : null,
+      'platforms'    : [],
+      'retractables' : {}
     };
 
     for (var object of layerObjects) {
@@ -74,6 +74,18 @@ class GameStageManager {
         case 'platform':
           objects['platforms'].push(this._makePlatform(object));
           break;
+
+        case 'button':
+          this._getOrMakeRetractableObject(
+            objects['retractables'], object.properties.triggers)
+              .button = this._makeButton(object);
+          break;
+
+        case 'retractable':
+          this._getOrMakeRetractableObject(
+            objects['retractables'], object.name)
+              .retractable = this._makeRetractable(object);
+          break;
       }
     }
 
@@ -88,16 +100,16 @@ class GameStageManager {
     switch (name) {
       case 'heart':
       case 'star':
-        return this._normalizeActorCoordinates(x, y);
+        return this._normalizeCoordinates(x, y, 8, 24);
 
       case 'goal':
-        return this._normalizeGoalCoordinates(x, y);
+        return this._normalizeCoordinates(x, y, 16, 16);
     }
   }
 
   _makeTrap ({ x, y, properties: { affects, orientation } }) {
     return {
-      position: this._normalizeTrapCoordinates(x, y),
+      position: this._normalizeCoordinates(x, y, 0, -8),
       affects, orientation
     };
   }
@@ -106,16 +118,28 @@ class GameStageManager {
     return { position: { x, y }, affects, type };
   }
 
-  _normalizeActorCoordinates (x, y) {
-    return { x: x + 8, y: y + 24 };
+  _makeButton ({ x, y, properties: { orientation, triggers } }) {
+    return {
+      position: this._normalizeCoordinates(x, y, 8, 16),
+      orientation
+    };
   }
 
-  _normalizeGoalCoordinates (x, y) {
-    return { x: x + 16, y: y + 16 };
+  _makeRetractable ({ x, y, name, properties: { affects, orientation } }) {
+    return {
+      position: this._normalizeCoordinates(x, y, 8, 0),
+      affects, orientation
+    };
   }
 
-  _normalizeTrapCoordinates (x, y) {
-    return { x: x, y: y - 8 };
+  _getOrMakeRetractableObject (object, name) {
+    object[name] = object[name] || {};
+
+    return object[name];
+  }
+
+  _normalizeCoordinates (x, y, offsetX, offsetY) {
+    return { x: x + offsetX, y: y + offsetY };
   }
 
 }

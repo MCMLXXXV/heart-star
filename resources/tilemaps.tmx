@@ -244,8 +244,7 @@
   <object name="goal" type="position" x="192" y="96" width="32" height="32"/>
   <object name="retractable-a" type="retractable" x="144" y="80" width="16" height="48">
    <properties>
-    <property name="affects" value="both"/>
-    <property name="orientation" value="north"/>
+    <property name="affects" value="star"/>
    </properties>
   </object>
   <object name="platform" type="platform" x="128" y="80" width="16" height="8">
@@ -256,7 +255,6 @@
   </object>
   <object name="button" type="button" x="200" y="32" width="16" height="16">
    <properties>
-    <property name="affects" value="both"/>
     <property name="orientation" value="north"/>
     <property name="triggers" value="retractable-a"/>
    </properties>
@@ -333,12 +331,10 @@
   <object name="retractable-a" type="retractable" x="80" y="64" width="16" height="48">
    <properties>
     <property name="affects" value="both"/>
-    <property name="orientation" value="north"/>
    </properties>
   </object>
   <object name="button" type="button" x="32" y="32" width="16" height="16">
    <properties>
-    <property name="affects" value="both"/>
     <property name="orientation" value="north"/>
     <property name="triggers" value="retractable-a"/>
    </properties>
@@ -444,8 +440,7 @@
   </object>
   <object name="button" type="button" x="200" y="32" width="16" height="16">
    <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
+    <property name="orientation" value="south"/>
     <property name="triggers" value="retractable-b"/>
    </properties>
   </object>
@@ -476,20 +471,17 @@
   <object name="retractable-b" type="retractable" x="144" y="16" width="16" height="48">
    <properties>
     <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
    </properties>
   </object>
   <object name="button" type="button" x="24" y="32" width="16" height="16">
    <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
+    <property name="orientation" value="south"/>
     <property name="triggers" value="retractable-a"/>
    </properties>
   </object>
   <object name="retractable-a" type="retractable" x="160" y="16" width="16" height="48">
    <properties>
     <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
    </properties>
   </object>
   <object name="platform" type="platform" x="16" y="72" width="16" height="8">

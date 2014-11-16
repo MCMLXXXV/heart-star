@@ -23,6 +23,7 @@ class ObjectsManager {
     this._makeTilemapLayers(mapObjects.layers);
     this._makeTraps(mapObjects.traps);
     this._makePlatforms(mapObjects.platforms);
+    this._makeRetractables(mapObjects.retractables);
   }
 
   // --------------------------------------------------------------------------
@@ -46,6 +47,16 @@ class ObjectsManager {
     for (var { position, affects, type } of platforms)
       this._getRecipientGroupFor(affects).addPlatform(
         position.x, position.y, type);
+  }
+
+  _makeRetractables (retractables) {
+    for (var key of Object.keys(retractables))
+      this._makeRetractable(retractables[key]);
+  }
+
+  _makeRetractable ({ retractable, button }) {
+    this._getRecipientGroupFor(retractable.affects).addRetractable(
+      { retractable, button });
   }
 
   _getRecipientGroupFor (roleName) {
