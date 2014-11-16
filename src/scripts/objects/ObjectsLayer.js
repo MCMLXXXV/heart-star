@@ -8,10 +8,12 @@ class ObjectsLayer extends Phaser.Group {
     this._tilemap      = null;
     this._tilemapLayer = null;
 
-    this._backgroundGroup = this.add(this._makeGroup());
-    this._tilemapGroup    = this.add(this._makeGroup());
-    this._trapsGroup      = this.add(this._makeGroup());
-    this._platformsGroup  = this.add(this._makeGroup());
+    this._backgroundGroup  = this.add(this._makeGroup());
+    this._tilemapGroup     = this.add(this._makeGroup());
+    this._retractableGroup = this.add(this._makeGroup());
+    this._buttonGroup      = this.add(this._makeGroup());
+    this._trapsGroup       = this.add(this._makeGroup());
+    this._platformsGroup   = this.add(this._makeGroup());
   }
 
   // --------------------------------------------------------------------------
@@ -41,6 +43,28 @@ class ObjectsLayer extends Phaser.Group {
       this.preferedPlatformColor);
   }
 
+  addRetractable ({ retractable, button }) {
+    var retractable, button;
+
+    {
+      var { position: { x, y } } = retractable;
+
+      retractable = this._addObject(
+        x, y, this._retractableGroup,
+        Retractable, this.preferedRetractableColor);
+    }
+
+    {
+      var { position: { x, y }, orientation } = button;
+
+      button = this._addObject(
+        x, y, this._buttonGroup,
+        Button, orientation, this.preferedButtonColor);
+    }
+
+    retractable.bindTo(button);
+  }
+
   enableBackground () {
     this._backgroundGroup.add(
       new BackgroundPattern(this.game, this.preferedBackground));
@@ -56,6 +80,18 @@ class ObjectsLayer extends Phaser.Group {
       this._tilemapLayer,
       null,
       this._collisionProcess,
+      this);
+    this.game.physics.arcade.collide(
+      actor,
+      this._buttonGroup,
+      this._buttonCollisionCallback,
+      this._buttonCollisionProcess,
+      this);
+    this.game.physics.arcade.collide(
+      actor,
+      this._retractableGroup,
+      null,
+      this._retractableCollisionProcess,
       this);
     this.game.physics.arcade.collide(
       actor,
@@ -91,7 +127,7 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   _addObject (x, y, group, factory, ... features) {
-    this._getOrCreateObject(group, factory, ... features).reset(x, y);
+    return this._getOrCreateObject(group, factory, ... features).reset(x, y);
   }
 
   _getOrCreateObject (group, factory, ... features) {
@@ -108,6 +144,18 @@ class ObjectsLayer extends Phaser.Group {
       case 'small':  return Platform.SMALL;
       case 'medium': return Platform.MEDIUM;
     }
+  }
+
+  _buttonCollisionCallback (actor, button) {
+    button.trigger();
+  }
+
+  _buttonCollisionProcess (actor, button) {
+    return !(button.triggered || actor.hurt);
+  }
+
+  _retractableCollisionProcess (actor, retractable) {
+    return !(retractable.open || actor.hurt);
   }
 
   _trapCollisionCallback (actor) {
@@ -144,11 +192,29 @@ class ObjectsLayer extends Phaser.Group {
     }
   }
 
+  get preferedButtonColor () {
+    switch (this._roleName) {
+      case 'heart': return Button.HEART;
+      case 'star':  return Button.STAR;
+      case 'both':  return Button.BOTH;
+    }
+  }
+
+  get preferedRetractableColor () {
+    switch (this._roleName) {
+      case 'heart': return Retractable.HEART;
+      case 'star':  return Retractable.STAR;
+      case 'both':  return Retractable.BOTH;
+    }
+  }
+
 }
 
 
 import Trap              from 'objects/Trap';
+import Button            from 'objects/Button';
 import Platform          from 'objects/Platform';
+import Retractable       from 'objects/Retractable';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
 export default ObjectsLayer;
