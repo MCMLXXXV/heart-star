@@ -907,8 +907,7 @@
                  "name":"retractable-a",
                  "properties":
                     {
-                     "affects":"both",
-                     "orientation":"north"
+                     "affects":"star"
                     },
                  "rotation":0,
                  "type":"retractable",
@@ -937,7 +936,6 @@
                  "name":"button",
                  "properties":
                     {
-                     "affects":"both",
                      "orientation":"north",
                      "triggers":"retractable-a"
                     },
@@ -1164,8 +1162,7 @@
                  "name":"retractable-a",
                  "properties":
                     {
-                     "affects":"both",
-                     "orientation":"north"
+                     "affects":"both"
                     },
                  "rotation":0,
                  "type":"retractable",
@@ -1179,7 +1176,6 @@
                  "name":"button",
                  "properties":
                     {
-                     "affects":"both",
                      "orientation":"north",
                      "triggers":"retractable-a"
                     },
@@ -1481,8 +1477,7 @@
                  "name":"button",
                  "properties":
                     {
-                     "affects":"star",
-                     "orientation":"north",
+                     "orientation":"south",
                      "triggers":"retractable-b"
                     },
                  "rotation":0,
@@ -1557,8 +1552,7 @@
                  "name":"retractable-b",
                  "properties":
                     {
-                     "affects":"star",
-                     "orientation":"north"
+                     "affects":"star"
                     },
                  "rotation":0,
                  "type":"retractable",
@@ -1572,8 +1566,7 @@
                  "name":"button",
                  "properties":
                     {
-                     "affects":"heart",
-                     "orientation":"north",
+                     "orientation":"south",
                      "triggers":"retractable-a"
                     },
                  "rotation":0,
@@ -1588,8 +1581,7 @@
                  "name":"retractable-a",
                  "properties":
                     {
-                     "affects":"heart",
-                     "orientation":"north"
+                     "affects":"heart"
                     },
                  "rotation":0,
                  "type":"retractable",
