@@ -5,7 +5,8 @@ class Button extends Phaser.Sprite {
 
     this.wasTriggered = new Phaser.Signal();
 
-    this._setupPhysicsBody(16, 8);
+    this.anchor.set(0.5);
+
     this.orientation = orientation;
 
     this.triggered = false;
@@ -51,15 +52,16 @@ class Button extends Phaser.Sprite {
   _setOrientation (orientation) {
     if (this._orientation === orientation) return;
 
-    if (orientation === Button.NORTH) {
-      this.anchor.set(0.5, 1);
-      this._setupPhysicsBody(16, 8);
-      this.angle = 0;
-    }
-    else if (orientation === Button.SOUTH) {
-      this.anchor.set(0.5, 0);
-      this._setupPhysicsBody(16, 8, 0, -16);
-      this.angle = 180;
+    switch (orientation) {
+      case Button.NORTH:
+        this._setupPhysicsBody(16, 8, 0,  4);
+        this.angle = 0;
+        break;
+
+      case Button.SOUTH:
+        this._setupPhysicsBody(16, 8, 0, -4);
+        this.angle = 180;
+        break;
     }
 
     this._orientation = orientation;

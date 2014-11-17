@@ -120,7 +120,7 @@ class GameStageManager {
 
   _makeButton ({ x, y, properties: { orientation } }) {
     return {
-      position: this._normalizeCoordinates(x, y, 8, 16),
+      position: this._normalizeCoordinates(x, y, 8, 8),
       orientation
     };
   }
