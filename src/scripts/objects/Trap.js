@@ -1,7 +1,7 @@
 class Trap extends Phaser.Sprite {
 
-  constructor (game, availableTo = Trap.BOTH) {
-    super(game, 0, 0, 'trap', availableTo);
+  constructor (game, availableTo) {
+    super(game, 0, 0, 'trap', this._getColor(availableTo));
 
     this._setupPhysicsBody(this.width - 2, 8, 1, 8);
   }
@@ -18,11 +18,15 @@ class Trap extends Phaser.Sprite {
     this.body.setSize(width, height, offsetX, offsetY);
   }
 
+  _getColor (role) {
+    switch (role) {
+      case 'heart': return 0;
+      case 'star' : return 1;
+      default     : return 2;
+    }
+  }
+
 }
 
-
-Trap.HEART = 0;
-Trap.STAR  = 1;
-Trap.BOTH  = 2;
 
 export default Trap;

@@ -1,7 +1,7 @@
 class Platform extends Phaser.Sprite {
 
-  constructor (game, type = Platform.SMALL, availableTo = Platform.BOTH) {
-    super(game, 0, 0, type, availableTo);
+  constructor (game, type, availableTo) {
+    super(game, 0, 0, this._getType(type), this._getColor(availableTo));
 
     this._setupPhysicsBody(this.width - 4, 8, 2);
   }
@@ -22,14 +22,22 @@ class Platform extends Phaser.Sprite {
     this.body.setSize(width, height, offsetX, offsetY);
   }
 
+  _getType (type) {
+    switch (type) {
+      case 'short' : return 'platform-fixed-1';
+      case 'medium': return 'platform-fixed-2';
+    }
+  }
+
+  _getColor (role) {
+    switch (role) {
+      case 'heart': return 0;
+      case 'star' : return 1;
+      default     : return 2;
+    }
+  }
+
 }
 
-
-Platform.SMALL  = 'platform-fixed-1';
-Platform.MEDIUM = 'platform-fixed-2';
-
-Platform.HEART = 0;
-Platform.STAR  = 1;
-Platform.BOTH  = 2;
 
 export default Platform;

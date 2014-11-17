@@ -33,14 +33,13 @@ class ObjectsLayer extends Phaser.Group {
   addTrap (x, y) {
     this._addObject(
       x, y, this._trapsGroup,
-      Trap, this.preferedTrapColor);
+      Trap, this._roleName);
   }
 
   addPlatform (x, y, type) {
     this._addObject(
       x, y, this._platformsGroup,
-      Platform, this._getPlatformType(type),
-      this.preferedPlatformColor);
+      Platform, type, this._roleName);
   }
 
   addRetractable ({ retractable, button }) {
@@ -118,13 +117,13 @@ class ObjectsLayer extends Phaser.Group {
   _addRetractable ({ position: { x, y } }) {
     return this._addObject(
       x, y, this._retractableGroup,
-      Retractable, this.preferedRetractableColor);
+      Retractable, this._roleName);
   }
 
   _addButton ({ position: { x, y }, orientation }) {
     return this._addObject(
       x, y, this._buttonGroup,
-      Button, orientation, this.preferedButtonColor);
+      Button, this._roleName, orientation);
   }
 
   _getOrCreateObject (group, factory, ... features) {
@@ -134,13 +133,6 @@ class ObjectsLayer extends Phaser.Group {
       object = group.add(new factory(this.game, ... features));
 
     return object;
-  }
-
-  _getPlatformType (type) {
-    switch (type) {
-      case 'small':  return Platform.SMALL;
-      case 'medium': return Platform.MEDIUM;
-    }
   }
 
   _buttonCollisionCallback (actor, button) {
@@ -170,38 +162,6 @@ class ObjectsLayer extends Phaser.Group {
       case 'heart': return BackgroundPattern.HEART;
       case 'star':  return BackgroundPattern.STAR;
       case 'both':  return BackgroundPattern.HEART_STAR;
-    }
-  }
-
-  get preferedTrapColor () {
-    switch (this._roleName) {
-      case 'heart': return Trap.HEART;
-      case 'star':  return Trap.STAR;
-      case 'both':  return Trap.MOON;
-    }
-  }
-
-  get preferedPlatformColor () {
-    switch (this._roleName) {
-      case 'heart': return Platform.HEART;
-      case 'star':  return Platform.STAR;
-      case 'both':  return Platform.BOTH;
-    }
-  }
-
-  get preferedButtonColor () {
-    switch (this._roleName) {
-      case 'heart': return Button.HEART;
-      case 'star':  return Button.STAR;
-      case 'both':  return Button.BOTH;
-    }
-  }
-
-  get preferedRetractableColor () {
-    switch (this._roleName) {
-      case 'heart': return Retractable.HEART;
-      case 'star':  return Retractable.STAR;
-      case 'both':  return Retractable.BOTH;
     }
   }
 

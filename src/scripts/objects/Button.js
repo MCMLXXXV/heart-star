@@ -1,7 +1,7 @@
 class Button extends Phaser.Sprite {
 
-  constructor (game, orientation = Button.SOUTH, availableTo = Button.BOTH) {
-    super(game, 0, 0, availableTo);
+  constructor (game, availableTo, orientation = Button.SOUTH) {
+    super(game, 0, 0, this._getColor(availableTo));
 
     this.wasTriggered = new Phaser.Signal();
 
@@ -40,6 +40,14 @@ class Button extends Phaser.Sprite {
     this.body.setSize(width, height, offsetX, offsetY);
   }
 
+  _getColor (type) {
+    switch (type) {
+      case 'heart': return 'button-game-heart';
+      case 'star' : return 'button-game-star';
+      default     : return 'button-game-moon';
+    }
+  }
+
   _setOrientation (orientation) {
     if (this._orientation === orientation) return;
 
@@ -72,9 +80,5 @@ class Button extends Phaser.Sprite {
 
 Button.NORTH = 'north';
 Button.SOUTH = 'south';
-
-Button.HEART = 'button-game-heart';
-Button.STAR  = 'button-game-star';
-Button.BOTH  = 'button-game-moon';
 
 export default Button;
