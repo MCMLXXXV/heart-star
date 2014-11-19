@@ -43,7 +43,7 @@ class Game extends Phaser.State {
     this._changeActors(this._heart, this._star);
 
     this.controls.spacebar.onUp.add(this._togglePlayerActor, this);
-    this.controls.backspace.onUp.add(this._restartActors, this);
+    this.controls.backspace.onUp.add(this._preRestartActors, this);
   }
 
   update () {
@@ -57,22 +57,28 @@ class Game extends Phaser.State {
     this._agents.collide(this._playerActor);
     this._agents.collide(this._idleActor);
 
-    if (this.controls.left.isDown) {
-      this._playerActor.walkLeft();
-    }
-    else if (this.controls.right.isDown) {
-      this._playerActor.walkRight();
+    if (this.inGame) {
+      if (this.controls.left.isDown) {
+        this._playerActor.walkLeft();
+      }
+      else if (this.controls.right.isDown) {
+        this._playerActor.walkRight();
+      }
+      else {
+        this._playerActor.stop();
+        this._idleActor.stop();
+      }
+
+      if (this.controls.up.isDown) {
+        this._playerActor.jump();
+      }
+      else {
+        this._playerActor.cancelPowerJump();
+      }
     }
     else {
       this._playerActor.stop();
       this._idleActor.stop();
-    }
-
-    if (this.controls.up.isDown) {
-      this._playerActor.jump();
-    }
-    else {
-      this._playerActor.cancelPowerJump();
     }
   }
 
@@ -93,9 +99,11 @@ class Game extends Phaser.State {
   _changeActors (playerActor, idleActor) {
     this._playerActor      = playerActor;
     this._playerActor.idle = false;
+    this._playerActor.stop();
 
     this._idleActor      = idleActor;
     this._idleActor.idle = true;
+    this._idleActor.stop();
 
     this._toggleLayers();
   }
@@ -122,19 +130,29 @@ class Game extends Phaser.State {
   }
 
   _togglePlayerActor () {
+    if (!this.inGame) return;
+    if (this.game.transitions.transitionRunning) return;
     if (!this._playerActor.standing) return;
 
     this._changeActors(this._idleActor, this._playerActor);
 
-    this._playerActor.stop();
-    this._idleActor.stop();
-
     this._blink();
+  }
+
+  _preRestartActors () {
+    this.game.transitions.registerTransition('blinds-close');
+    this.game.transitions.registerTransitionCallback(this._restartActors, this);
+    this.game.transitions.doTransition();
   }
 
   _restartActors () {
     this._restartActor(this._heart, this.heartCoordinates);
     this._restartActor(this._star, this.starCoordinates);
+
+    this.game.transitions.registerTransition('blinds-open');
+    this.game.transitions.doTransition();
+
+    this._changeActors(this._heart, this._star);
   }
 
   _restartActor(actor, { x, y }) {
@@ -143,7 +161,7 @@ class Game extends Phaser.State {
   }
 
   _actorHurt () {
-    this.time.events.add(1500, this._restartActors, this);
+    this.time.events.add(1500, this._preRestartActors, this);
   }
 
   _celebrate () {
@@ -157,7 +175,7 @@ class Game extends Phaser.State {
     var nextStage = this._stageDefinitions.next;
 
     if (nextStage === null)
-      this._restartActors();
+      this.state.start('Credits');
     else
       this.state.start('Game', true, false, nextStage, 'blinds-open');
   }
@@ -174,6 +192,10 @@ class Game extends Phaser.State {
 
   get goalCoordinates () {
     return this._stageDefinitions.actors.goal;
+  }
+
+  get inGame () {
+    return this._playerActor && this._playerActor.emotion === null;
   }
 
 }
