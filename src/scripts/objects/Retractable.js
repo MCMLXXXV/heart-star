@@ -7,8 +7,6 @@ class Retractable extends Phaser.Sprite {
 
     this._setupPhysicsBody(16, 48);
     this._setupAnimations();
-
-    this.open = false;
   }
 
   // --------------------------------------------------------------------------
@@ -16,8 +14,7 @@ class Retractable extends Phaser.Sprite {
   reset (x, y) {
     super.reset(x, y);
 
-    this.animations.play('close');
-    this.open = false;
+    this.close();
 
     return this;
   }
@@ -27,6 +24,7 @@ class Retractable extends Phaser.Sprite {
   }
 
   close () {
+    this.animations.play('close');
     this.open = false;
   }
 

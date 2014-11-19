@@ -88,6 +88,13 @@ class ObjectsLayer extends Phaser.Group {
       this._platformsGroup);
   }
 
+  reset () {
+    this._retractableGroup.forEach(
+      function (retractable) { retractable.close(); });
+    this._buttonGroup.forEach(
+      function (button) { button.switchOff(); });
+  }
+
   // --------------------------------------------------------------------------
 
   _makeTilemap (tilemapKey) {
@@ -136,7 +143,7 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   _buttonCollisionCallback (actor, button) {
-    button.trigger();
+    button.switchOn();
   }
 
   _buttonCollisionProcess (actor, button) {

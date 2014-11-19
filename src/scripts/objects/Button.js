@@ -8,8 +8,6 @@ class Button extends Phaser.Sprite {
     this.anchor.set(0.5);
 
     this.orientation = orientation;
-
-    this.triggered = false;
   }
 
   // --------------------------------------------------------------------------
@@ -17,17 +15,21 @@ class Button extends Phaser.Sprite {
   reset (x, y) {
     super.reset(x, y);
 
-    this.frame     = 0;
-    this.triggered = false;
+    this.switchOff();
 
     return this;
   }
 
-  trigger () {
+  switchOn () {
     this.frame     = 1;
     this.triggered = true;
 
     this.wasTriggered.dispatch();
+  }
+
+  switchOff () {
+    this.frame     = 0;
+    this.triggered = false;
   }
 
   // --------------------------------------------------------------------------

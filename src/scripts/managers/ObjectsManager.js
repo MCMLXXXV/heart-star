@@ -26,6 +26,11 @@ class ObjectsManager {
     this._makeRetractables(mapObjects.retractables);
   }
 
+  reset () {
+    for (var key of Object.keys(this._layers))
+      this._resetLayer(this._layers[key]);
+  }
+
   // --------------------------------------------------------------------------
 
   _makeTilemapLayers (layers) {
@@ -61,6 +66,10 @@ class ObjectsManager {
 
   _getRecipientGroupFor (roleName) {
     return this._layers[roleName];
+  }
+
+  _resetLayer (objectsLayer) {
+    objectsLayer.reset();
   }
 
 }

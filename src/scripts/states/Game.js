@@ -153,6 +153,7 @@ class Game extends Phaser.State {
     this.game.transitions.doTransition();
 
     this._changeActors(this._heart, this._star);
+    this._objectsManager.reset();
   }
 
   _restartActor(actor, { x, y }) {
