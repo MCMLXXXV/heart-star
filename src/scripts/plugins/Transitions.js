@@ -137,7 +137,7 @@ class Transitions extends Phaser.Plugin {
 }
 
 
-import Iris   from 'objects/Iris';
-import Blinds from 'objects/Blinds';
+import Iris   from './Transitions/Iris';
+import Blinds from './Transitions/Blinds';
 
 export default Transitions;
