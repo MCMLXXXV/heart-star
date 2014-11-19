@@ -8,10 +8,10 @@ class Transitions extends Phaser.Plugin {
     this.transitionRegistered = null;
 
     this._group    = this.game.stage.addChild(this.game.make.group());
-    this._blackout = this._group.add(this._makeBlackout());
 
-    this._iris   = this._group.add(new Iris(this.game, 240, 160));
-    this._blinds = this._group.add(new Blinds(this.game, 240, 160));
+    this._iris     = this._group.add(new Iris(this.game, 240, 160));
+    this._blinds   = this._group.add(new Blinds(this.game, 240, 160));
+    this._blackout = this._group.add(new Blackout(this.game, 240, 160));
 
     this.transitionCompleted.add(this._clearRegisteredTransition, this);
   }
@@ -62,27 +62,6 @@ class Transitions extends Phaser.Plugin {
   }
 
   // --------------------------------------------------------------------------
-
-  _makeBitmap (width, height) {
-    var bitmap = this.game.make.bitmapData(width, height);
-
-    bitmap.fill(255, 255, 255);
-
-    return bitmap;
-  }
-
-  _makeImage (x, y, width, height, alpha = 0, tint = 0x000000) {
-    var image = this.game.make.image(x, y, this._makeBitmap(width, height));
-
-    image.alpha = alpha;
-    image.tint  = tint;
-
-    return image;
-  }
-
-  _makeBlackout () {
-    return this._makeImage(0, 0, 240, 160);
-  }
 
   _makeTween (object) {
     return this.game.add.tween(object);
@@ -137,7 +116,8 @@ class Transitions extends Phaser.Plugin {
 }
 
 
-import Iris   from './Transitions/Iris';
-import Blinds from './Transitions/Blinds';
+import Iris     from './Transitions/Iris';
+import Blinds   from './Transitions/Blinds';
+import Blackout from './Transitions/Blackout';
 
 export default Transitions;
