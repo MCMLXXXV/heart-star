@@ -4,8 +4,9 @@ class Transitions extends Phaser.Plugin {
     super(game, parent);
 
     this.transitionCompleted  = new Phaser.Signal();
-    this.transitionRunning    = false;
     this.transitionRegistered = null;
+
+    this._runningTransition = null;
 
     this._group    = this.game.stage.addChild(this.game.make.group());
 
@@ -21,7 +22,6 @@ class Transitions extends Phaser.Plugin {
   registerTransition (transitionName) {
     if (this.transitionRunning) return;
 
-    this.transitionRunning    = false;
     this.transitionRegistered = transitionName;
   }
 
@@ -33,8 +33,6 @@ class Transitions extends Phaser.Plugin {
 
   doTransition () {
     if (this.transitionRunning) return;
-
-    this.transitionRunning = true;
 
     switch (this.transitionRegistered) {
       case 'iris':
@@ -79,6 +77,8 @@ class Transitions extends Phaser.Plugin {
 
     tween
       .onComplete.addOnce(this.transitionCompleted.dispatch, this);
+
+    this._runningTransition = object;
   }
 
   _openIris () {
@@ -109,8 +109,14 @@ class Transitions extends Phaser.Plugin {
   }
 
   _clearRegisteredTransition () {
-    this.transitionRunning    = false;
+    this._runningTransition   = null;
     this.transitionRegistered = null;
+  }
+
+  // --------------------------------------------------------------------------
+
+  get transitionRunning () {
+    return this._runningTransition !== null;
   }
 
 }
