@@ -4,14 +4,15 @@ class Transitions extends Phaser.Plugin {
     super(game, parent);
 
     this.transitionCompleted  = new Phaser.Signal();
-    this.transitionRunning    = false;
     this.transitionRegistered = null;
 
-    this._group    = this.game.stage.addChild(this.game.make.group());
-    this._blackout = this._group.add(this._makeBlackout());
+    this._runningTransition = null;
 
-    this._iris   = this._group.add(new Iris(this.game, 240, 160));
-    this._blinds = this._group.add(new Blinds(this.game, 240, 160));
+    this._group    = this.game.stage.addChild(this.game.make.group());
+
+    this._iris     = this._group.add(new Iris(this.game, 240, 160));
+    this._blinds   = this._group.add(new Blinds(this.game, 240, 160));
+    this._blackout = this._group.add(new Blackout(this.game, 240, 160));
 
     this.transitionCompleted.add(this._clearRegisteredTransition, this);
   }
@@ -21,7 +22,6 @@ class Transitions extends Phaser.Plugin {
   registerTransition (transitionName) {
     if (this.transitionRunning) return;
 
-    this.transitionRunning    = false;
     this.transitionRegistered = transitionName;
   }
 
@@ -33,8 +33,6 @@ class Transitions extends Phaser.Plugin {
 
   doTransition () {
     if (this.transitionRunning) return;
-
-    this.transitionRunning = true;
 
     switch (this.transitionRegistered) {
       case 'iris':
@@ -63,27 +61,6 @@ class Transitions extends Phaser.Plugin {
 
   // --------------------------------------------------------------------------
 
-  _makeBitmap (width, height) {
-    var bitmap = this.game.make.bitmapData(width, height);
-
-    bitmap.fill(255, 255, 255);
-
-    return bitmap;
-  }
-
-  _makeImage (x, y, width, height, alpha = 0, tint = 0x000000) {
-    var image = this.game.make.image(x, y, this._makeBitmap(width, height));
-
-    image.alpha = alpha;
-    image.tint  = tint;
-
-    return image;
-  }
-
-  _makeBlackout () {
-    return this._makeImage(0, 0, 240, 160);
-  }
-
   _makeTween (object) {
     return this.game.add.tween(object);
   }
@@ -100,6 +77,8 @@ class Transitions extends Phaser.Plugin {
 
     tween
       .onComplete.addOnce(this.transitionCompleted.dispatch, this);
+
+    this._runningTransition = object;
   }
 
   _openIris () {
@@ -130,14 +109,21 @@ class Transitions extends Phaser.Plugin {
   }
 
   _clearRegisteredTransition () {
-    this.transitionRunning    = false;
+    this._runningTransition   = null;
     this.transitionRegistered = null;
+  }
+
+  // --------------------------------------------------------------------------
+
+  get transitionRunning () {
+    return this._runningTransition !== null;
   }
 
 }
 
 
-import Iris   from 'objects/Iris';
-import Blinds from 'objects/Blinds';
+import Iris     from './Transitions/Iris';
+import Blinds   from './Transitions/Blinds';
+import Blackout from './Transitions/Blackout';
 
 export default Transitions;
