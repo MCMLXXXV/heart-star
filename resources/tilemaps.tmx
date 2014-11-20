@@ -215,7 +215,7 @@
     <property name="orientation" value="north"/>
    </properties>
   </object>
-  <object name="platform" type="platform" x="192" y="72" width="32" height="8">
+  <object name="platform" type="platform" x="192" y="80" width="32" height="8">
    <properties>
     <property name="affects" value="star"/>
     <property name="type" value="medium"/>
