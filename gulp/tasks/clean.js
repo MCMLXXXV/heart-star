@@ -1,8 +1,8 @@
-var gulp         = require('gulp'),
-    del          = require('del'),
-    handleErrors = require('../util/handleErrors');
+var gulp         = require('gulp');
+var del          = require('del');
+var handleErrors = require('../util/handleErrors');
 
 
 gulp.task('clean', function (cb) {
-    del([ paths['temp'], paths['product'] ], cb);
+  del([ paths['temp'], paths['product'] ], cb);
 });

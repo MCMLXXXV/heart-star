@@ -1,5 +1,5 @@
-var notify  = require("gulp-notify"),
-    plumber = require("gulp-plumber");
+var notify  = require("gulp-notify");
+var plumber = require("gulp-plumber");
 
 
 module.exports = function () {
