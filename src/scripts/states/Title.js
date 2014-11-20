@@ -17,6 +17,8 @@ class Title extends Phaser.State {
 
     var titleLabel = this._addTitleLabel(18);
     this._swingTitleLabel(titleLabel);
+
+    this.game.storage.fetch('stages', this._probeUnlockedStages, this);
   }
 
   // --------------------------------------------------------------------------
@@ -45,8 +47,15 @@ class Title extends Phaser.State {
       .start();
   }
 
+  _probeUnlockedStages (err, unlockedStages) {
+    if (unlockedStages === null)
+      this.game.storage.store('stages', gameStages);
+  }
+
 }
 
+
+import gameStages from 'common/gameStages';
 
 import MenuButton        from 'objects/MenuButton';
 import BackgroundPattern from 'objects/BackgroundPattern';
