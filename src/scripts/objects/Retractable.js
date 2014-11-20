@@ -5,7 +5,7 @@ class Retractable extends Phaser.Sprite {
 
     this.anchor.set(0.5, 0);
 
-    this._setupPhysicsBody(16, 48);
+    this._setupPhysicsBody(16, 56);
     this._setupAnimations();
   }
 
