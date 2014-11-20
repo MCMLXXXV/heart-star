@@ -5,7 +5,6 @@ class StageButton extends Phaser.Group {
 
     this.position.set(x, y);
 
-    this.clicked   = false;
     this.stageName = stageName;
 
     this._makeUnlockableButton(buttonKey, locked);
@@ -24,9 +23,6 @@ class StageButton extends Phaser.Group {
   }
 
   _doTransition () {
-    if (this.clicked) return;
-    this.clicked = true;
-
     this.game.transitions.registerTransition('fade-to-black');
     this.game.transitions.registerTransitionCallback(this._goToStageNumber, this);
     this.game.transitions.doTransition();
