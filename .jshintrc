@@ -7,10 +7,9 @@
   "eqeqeq": true,
   "esnext": true,
   "globals": {
-    "require": true,
-    "module": true,
+    "PIXI": true,
     "Phaser": true,
-    "PIXI": true
+    "localforage": true
   },
   "indent": 2,
   "laxcomma": true,

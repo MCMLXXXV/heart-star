@@ -4,6 +4,7 @@ class Boot extends Phaser.State {
   init () {
     this.load.baseURL = './assets/';
 
+    this.game.storage     = this.game.plugins.add(Storage, 'heart-star');
     this.game.controls    = this.game.plugins.add(GameControl);
     this.game.transitions = this.game.plugins.add(Transitions);
 
@@ -47,6 +48,7 @@ class Boot extends Phaser.State {
 
 import gameAssets from 'common/gameAssets';
 
+import Storage     from 'plugins/Storage';
 import GameControl from 'plugins/GameControl';
 import Transitions from 'plugins/Transitions';
 

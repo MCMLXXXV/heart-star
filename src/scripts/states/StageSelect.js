@@ -14,19 +14,25 @@ class StageSelect extends Phaser.State {
 
     this.add.existing(new BackButton(this.game));
 
-    this.add.existing(new StageButton(this.game,  48, 64, '01', 'button-stage-01', false));
-    this.add.existing(new StageButton(this.game,  80, 64, '02', 'button-stage-02', true));
-    this.add.existing(new StageButton(this.game, 112, 64, '03', 'button-stage-03', true));
-    this.add.existing(new StageButton(this.game, 144, 64, '04', 'button-stage-04', true));
-    this.add.existing(new StageButton(this.game, 176, 64, '05', 'button-stage-05', true));
-    this.add.existing(new StageButton(this.game,  48, 96, '06', 'button-stage-06', true));
-    this.add.existing(new StageButton(this.game,  80, 96, '07', 'button-stage-07', true));
-    this.add.existing(new StageButton(this.game, 112, 96, '08', 'button-stage-08', true));
-    this.add.existing(new StageButton(this.game, 144, 96, '09', 'button-stage-09', true));
-    this.add.existing(new StageButton(this.game, 176, 96, '10', 'button-stage-10', true));
+    this.game.storage.fetch('stages', this._addStageButtons, this);
   }
 
   // --------------------------------------------------------------------------
+
+  _addStageButtons (err, unlockedStages) {
+    for (var len = unlockedStages.length, i = 0; i < len; ++i) {
+      var { stage, buttonFace, locked } = unlockedStages[i];
+      var x = 48 + 32 * (i % 5);
+      var y = 64 + 32 * Math.floor(i / 5);
+
+      this.add.existing(
+        this._makeStageButton(x, y, stage, buttonFace, locked));
+    }
+  }
+
+  _makeStageButton (x, y, stage, buttonFace, locked) {
+    return new StageButton(this.game, x, y, stage, locked);
+  }
 
 }
 

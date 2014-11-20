@@ -18,9 +18,12 @@ class GameStageManager {
     var objectLayers = this._getTilemapObjectLayers();
     var definitions  = {};
 
-    for (var stageName of Object.keys(stages))
-      definitions[stageName] = this._makeGameStage(
-        stages[stageName], objectLayers[stageName]);
+    for (var gameStage of gameStages) {
+      var { stage } = gameStage;
+
+      definitions[stage] = this._makeGameStage(
+        gameStage, objectLayers[stage]);
+    }
 
     return definitions;
   }
@@ -145,6 +148,6 @@ class GameStageManager {
 }
 
 
-import stages from 'common/stages';
+import gameStages from 'common/gameStages';
 
 export default GameStageManager;

@@ -44,6 +44,8 @@ class Game extends Phaser.State {
 
     this.controls.spacebar.onUp.add(this._togglePlayerActor, this);
     this.controls.backspace.onUp.add(this._preRestartActors, this);
+
+    this.game.storage.fetch('stages', this._unlockCurrentGameStage, this);
   }
 
   update () {
@@ -179,6 +181,17 @@ class Game extends Phaser.State {
       this.state.start('Credits');
     else
       this.state.start('Game', true, false, nextStage, 'blinds-open');
+  }
+
+  _unlockCurrentGameStage (err, unlockedStages) {
+    for (var unlockedStage of unlockedStages) {
+      if (unlockedStage.stage === this.stageName) {
+        unlockedStage.locked = false;
+        break;
+      }
+    }
+
+    this.game.storage.store('stages', unlockedStages);
   }
 
   // --------------------------------------------------------------------------
