@@ -8,9 +8,8 @@ var gulp       = require('gulp'),
 gulp.task('uglify', [ 'scripts' ], function () {
     return gulp.src([
             './static/bower_components/traceur-runtime/traceur-runtime.js',
-
+            './static/bower_components/localforage/dist/localforage.js',
             './static/bower_components/phaser-official/build/custom/phaser-arcade-physics.js',
-
             './.tmp/game.js'
         ])
         .pipe(sourcemaps.init())
