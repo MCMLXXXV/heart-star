@@ -1,10 +1,10 @@
-const DEFAULT_DRAG              = 600;
-const DEFAULT_DRAG_WHEN_JUMPING = 250;
-const DEFAULT_GRAVITY           = 350;
-const DEFAULT_JUMP_POWER        = 14;
-const DEFAULT_ACCELERATION      = 600;
-const DEFAULT_SPEED_LIMITS      = [ 64, 180 ];
-const DEFAULT_JUMP_VELOCITY     = -100;
+var DEFAULT_DRAG              = 600;
+var DEFAULT_DRAG_WHEN_JUMPING = 250;
+var DEFAULT_GRAVITY           = 350;
+var DEFAULT_JUMP_POWER        = 14;
+var DEFAULT_ACCELERATION      = 600;
+var DEFAULT_SPEED_LIMITS      = [ 64, 180 ];
+var DEFAULT_JUMP_VELOCITY     = -100;
 
 
 class Actor extends Phaser.Sprite {
@@ -234,7 +234,7 @@ class Actor extends Phaser.Sprite {
   set idle (newValue) {
     this._idle = newValue;
 
-    this.alpha = this._idle ? .50 : 1;
+    this.alpha = this._idle ? 0.50 : 1;
   }
 
   get emotion () {
