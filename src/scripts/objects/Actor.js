@@ -1,9 +1,10 @@
-var DEFAULT_DRAG          = 600;
-var DEFAULT_GRAVITY       = 300;
-var DEFAULT_JUMP_POWER    = 10;
-var DEFAULT_ACCELERATION  = 600;
-var DEFAULT_SPEED_LIMITS  = [ 64, 180 ];
-var DEFAULT_JUMP_VELOCITY = -120;
+const DEFAULT_DRAG              = 600;
+const DEFAULT_DRAG_WHEN_JUMPING = 250;
+const DEFAULT_GRAVITY           = 350;
+const DEFAULT_JUMP_POWER        = 14;
+const DEFAULT_ACCELERATION      = 600;
+const DEFAULT_SPEED_LIMITS      = [ 64, 180 ];
+const DEFAULT_JUMP_VELOCITY     = -100;
 
 
 class Actor extends Phaser.Sprite {
@@ -27,6 +28,7 @@ class Actor extends Phaser.Sprite {
   }
 
   update () {
+    this._updateDrag();
     this._updateAnimation();
     this._updateCarryingFriend();
     this._updateJumpPower();
@@ -87,9 +89,14 @@ class Actor extends Phaser.Sprite {
     this._carryingFriend = condition ? actor : null;
   }
 
-  harm () {
+  harm (fromBelow = false) {
     this.emotion = 'hurt';
-    this.body.velocity.y = -100;
+
+    this.body.velocity.x = 0;
+
+    if (fromBelow)
+      this.body.velocity.y = -100;
+
     this.wasHurt.dispatch(this);
   }
 
@@ -129,6 +136,13 @@ class Actor extends Phaser.Sprite {
   _move (direction, speed) {
     this.facing              = direction;
     this.body.acceleration.x = direction * speed;
+  }
+
+  _updateDrag () {
+    if (this.jumping)
+      this.body.drag.x = DEFAULT_DRAG_WHEN_JUMPING;
+    else
+      this.body.drag.x = DEFAULT_DRAG;
   }
 
   _updateAnimation () {
@@ -220,7 +234,7 @@ class Actor extends Phaser.Sprite {
   set idle (newValue) {
     this._idle = newValue;
 
-    this.alpha = this._idle ?  0.75 : 1;
+    this.alpha = this._idle ? .50 : 1;
   }
 
   get emotion () {
@@ -232,7 +246,9 @@ class Actor extends Phaser.Sprite {
       this.animation = newValue;
 
     this._emotion = newValue;
+    this.facing = Actor.FACE_RIGHT;
   }
+
   get hurt () {
     return this.emotion === 'hurt';
   }

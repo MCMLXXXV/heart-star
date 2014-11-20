@@ -155,7 +155,7 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   _trapCollisionCallback (actor) {
-    actor.harm();
+    actor.harm(true);
   }
 
   _collisionProcess (actor) {
