@@ -196,7 +196,8 @@ class Game extends Phaser.State {
   }
 
   get inGame () {
-    return this._playerActor && this._playerActor.emotion === null;
+    return !this.game.transitions.transitionRunning &&
+      this._playerActor && this._playerActor.emotion === null;
   }
 
 }
