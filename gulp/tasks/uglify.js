@@ -4,6 +4,8 @@ var concat     = require('gulp-concat');
 var uglify     = require('gulp-uglify');
 var sourcemaps = require('gulp-sourcemaps');
 
+var paths = projectConfig.paths;
+
 
 gulp.task('uglify', [ 'scripts' ], function () {
   return gulp.src([

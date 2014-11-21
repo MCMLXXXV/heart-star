@@ -4,6 +4,8 @@ var rename       = require('gulp-rename');
 var minifycss    = require('gulp-minify-css');
 var handleErrors = require('../util/handleErrors');
 
+var paths = projectConfig.paths;
+
 
 gulp.task('minifyCss', function () {
   return gulp.src(paths['less'])

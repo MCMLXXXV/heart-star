@@ -1,6 +1,8 @@
 var gulp         = require('gulp');
 var handleErrors = require('../util/handleErrors');
 
+var paths = projectConfig.paths;
+
 
 gulp.task('processAssets', function () {
   gulp.src([

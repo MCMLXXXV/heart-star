@@ -7,15 +7,14 @@ var sourcemaps   = require('gulp-sourcemaps');
 var browserSync  = require('browser-sync');
 var handleErrors = require('../util/handleErrors');
 
+var paths = projectConfig.paths;
+
 
 gulp.task('scripts', [ 'lint' ], function () {
   return gulp.src(paths['scripts'])
     .pipe(handleErrors())
     .pipe(sourcemaps.init())
-    .pipe(traceur({
-      modules: 'register',
-      moduleName: true
-    }))
+    .pipe(traceur(projectConfig.traceurOptions))
     .pipe(concat('game.js'))
     .pipe(footer(";!function(A){A.start();}(System.get('main')['default']);"))
     .pipe(sourcemaps.write())

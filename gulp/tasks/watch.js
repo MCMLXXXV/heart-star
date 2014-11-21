@@ -3,6 +3,8 @@ var path   = require('path');
 var gutil  = require('gulp-util');
 var reload = require('browser-sync').reload;
 
+var paths = projectConfig.paths;
+
 
 function logChanges (event) {
   gutil.log(

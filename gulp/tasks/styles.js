@@ -4,6 +4,8 @@ var concat       = require('gulp-concat');
 var browserSync  = require('browser-sync');
 var handleErrors = require('../util/handleErrors');
 
+var paths = projectConfig.paths;
+
 
 gulp.task('styles', function () {
   return gulp.src(paths['less'])

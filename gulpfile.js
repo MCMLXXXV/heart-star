@@ -17,7 +17,7 @@ var requireDir = require('require-dir');
 
 
 // Specify game project paths for tasks.
-global[ 'paths' ] = require('./project.config');
+global[ 'projectConfig' ] = require('./project.config');
 
 
 // Require all tasks in gulp/tasks, including subfolders
