@@ -1,7 +1,7 @@
-var gulp        = require('gulp');
-var path        = require('path');
-var gutil       = require('gulp-util');
-var browserSync = require('browser-sync');
+var gulp   = require('gulp');
+var path   = require('path');
+var gutil  = require('gulp-util');
+var reload = require('browser-sync').reload;
 
 
 function logChanges (event) {
@@ -13,10 +13,10 @@ function logChanges (event) {
 
 
 gulp.task('watch', function () {
-  gulp.watch(paths['scripts'], [ 'lint', browserSync.reload ])
+  gulp.watch(paths['scripts'], [ 'lint', reload ])
     .on('change', logChanges);
-  gulp.watch(paths['less'], [ 'styles', browserSync.reload ])
+  gulp.watch(paths['less'], [ 'styles', reload ])
     .on('change', logChanges);
-  gulp.watch(paths['develop'] + '/index.html', [ 'html', browserSync.reload ])
+  gulp.watch(paths['develop'] + '/index.html', [ 'html', reload ])
     .on('change', logChanges);
 });
