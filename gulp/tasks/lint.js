@@ -11,5 +11,5 @@ gulp.task('lint', function () {
     .pipe(handleErrors())
     .pipe(jshint('.jshintrc'))
     .pipe(jshint.reporter('jshint-stylish'))
-    .pipe(reload());
+    .pipe(reload({ stream: true }));
 });
