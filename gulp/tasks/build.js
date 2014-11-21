@@ -6,7 +6,6 @@ gulp.task('build', function (done) {
   runSequence('clean', [
     'processHtml',
     'minifyCss',
-    'scripts',
     'uglify',
     'processAssets'
   ], done);
