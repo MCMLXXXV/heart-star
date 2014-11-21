@@ -1,18 +1,18 @@
-var gulp         = require('gulp'),
-    less         = require('gulp-less'),
-    rename       = require('gulp-rename'),
-    minifycss    = require('gulp-minify-css'),
-    handleErrors = require('../util/handleErrors');
+var gulp         = require('gulp');
+var rename       = require('gulp-rename');
+var minifycss    = require('gulp-minify-css');
+var handleErrors = require('../util/handleErrors');
+
+var paths = projectConfig.paths;
 
 
-gulp.task('minifyCss', function () {
-    return gulp.src(paths['less'])
-        .pipe(handleErrors())
-        .pipe(less())
-        .pipe(minifycss({
-            keepSpecialComments: false,
-            removeEmpty: true
-        }))
-        .pipe(rename('style.min.css'))
-        .pipe(gulp.dest(paths['product']));
+gulp.task('minifyCss', [ 'less' ], function () {
+  return gulp.src(paths['temp'] + '/style.css')
+    .pipe(handleErrors())
+    .pipe(minifycss({
+      keepSpecialComments: false,
+      removeEmpty: true
+    }))
+    .pipe(rename('style.min.css'))
+    .pipe(gulp.dest(paths['dist']));
 });

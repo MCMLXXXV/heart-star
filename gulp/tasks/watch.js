@@ -1,22 +1,23 @@
-var gulp        = require('gulp'),
-    path        = require('path'),
-    gutil       = require('gulp-util'),
-    browserSync = require('browser-sync');
+var gulp   = require('gulp');
+var path   = require('path');
+var gutil  = require('gulp-util');
+
+var paths = projectConfig.paths;
 
 
 function logChanges (event) {
-    gutil.log(
-        gutil.colors.green('File ' + event.type + ': ') +
-        gutil.colors.magenta(path.basename(event.path))
-    );
+  gutil.log(
+    gutil.colors.green('File ' + event.type + ': ') +
+    gutil.colors.magenta(path.basename(event.path))
+  );
 }
 
 
 gulp.task('watch', function () {
-    gulp.watch(paths['scripts'], [ 'lint', browserSync.reload ])
-        .on('change', logChanges);
-    gulp.watch(paths['less'], [ 'styles', browserSync.reload ])
-        .on('change', logChanges);
-    gulp.watch(paths['develop'] + '/index.html', [ 'html', browserSync.reload ])
-        .on('change', logChanges);
+  gulp.watch(paths['scripts'], [ 'lint' ])
+    .on('change', logChanges);
+  gulp.watch(paths['less'], [ 'less' ])
+    .on('change', logChanges);
+  gulp.watch(paths['src'] + '/index.html', [ 'html' ])
+    .on('change', logChanges);
 });
