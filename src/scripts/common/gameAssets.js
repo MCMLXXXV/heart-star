@@ -298,8 +298,14 @@ export default {
 
     {
       'type': 'image',
-      'key': 'label-credits',
-      'url': 'images/label-credits.png',
+      'key': 'label-credits-ai',
+      'url': 'images/label-credits-ai.png',
+    },
+
+    {
+      'type': 'image',
+      'key': 'label-credits-rb',
+      'url': 'images/label-credits-rb.png',
     },
 
     {
