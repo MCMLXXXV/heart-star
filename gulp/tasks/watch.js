@@ -1,7 +1,6 @@
 var gulp   = require('gulp');
 var path   = require('path');
 var gutil  = require('gulp-util');
-var reload = require('browser-sync').reload;
 
 var paths = projectConfig.paths;
 
@@ -15,10 +14,10 @@ function logChanges (event) {
 
 
 gulp.task('watch', function () {
-  gulp.watch(paths['scripts'], [ 'lint', reload ])
+  gulp.watch(paths['scripts'], [ 'lint' ])
     .on('change', logChanges);
-  gulp.watch(paths['less'], [ 'styles', reload ])
+  gulp.watch(paths['less'], [ 'less' ])
     .on('change', logChanges);
-  gulp.watch(paths['src'] + '/index.html', [ 'html', reload ])
+  gulp.watch(paths['src'] + '/index.html', [ 'html' ])
     .on('change', logChanges);
 });

@@ -4,7 +4,7 @@ var browserSync = require('browser-sync');
 var paths = projectConfig.paths;
 
 
-gulp.task('server', function () {
+gulp.task('server', [ 'compile' ], function () {
   browserSync({
     server: {
       baseDir: [

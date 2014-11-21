@@ -1,10 +1,10 @@
-var gulp        = require('gulp');
-var browserSync = require('browser-sync');
+var gulp   = require('gulp');
+var reload = require('browser-sync').reload;
 
 var paths = projectConfig.paths;
 
 
 gulp.task('html', function () {
   return gulp.src(paths['src'] + '/index.html')
-    .pipe(gulp.dest(paths['temp']));
+    .pipe(reload({ stream: true }));
 });
