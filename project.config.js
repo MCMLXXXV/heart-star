@@ -1,13 +1,13 @@
 module.exports = {
 
   'paths': {
-    'develop': 'src',
-    'product': 'build',
-    'static' : 'static',
-    'temp'   : '.tmp',
+    'src'   : 'src',
+    'dist'  : 'build',
+    'static': 'static',
+    'temp'  : '.tmp',
 
-    get less    () { return this['develop'] + '/less/*.less'; },
-    get scripts () { return this['develop'] + '/scripts/**/*.js'; }
+    get less    () { return this['src'] + '/less/*.less'; },
+    get scripts () { return this['src'] + '/scripts/**/*.js'; }
   },
 
   'traceurOptions': {

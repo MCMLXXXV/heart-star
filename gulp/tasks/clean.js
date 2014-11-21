@@ -6,5 +6,5 @@ var paths = projectConfig.paths;
 
 
 gulp.task('clean', function (cb) {
-  del([ paths['temp'], paths['product'] ], cb);
+  del([ paths['temp'], paths['dist'] ], cb);
 });

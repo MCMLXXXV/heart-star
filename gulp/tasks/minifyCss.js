@@ -16,5 +16,5 @@ gulp.task('minifyCss', function () {
       removeEmpty: true
     }))
     .pipe(rename('style.min.css'))
-    .pipe(gulp.dest(paths['product']));
+    .pipe(gulp.dest(paths['dist']));
 });

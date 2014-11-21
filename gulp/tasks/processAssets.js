@@ -11,5 +11,5 @@ gulp.task('processAssets', function () {
     '!static/bower_components/**'   // and its contents don't get copied.
   ])
     .pipe(handleErrors())
-    .pipe(gulp.dest(paths['product']));
+    .pipe(gulp.dest(paths['dist']));
 });
