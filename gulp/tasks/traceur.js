@@ -10,7 +10,7 @@ var handleErrors = require('../util/handleErrors');
 var paths = projectConfig.paths;
 
 
-gulp.task('scripts', [ 'lint' ], function () {
+gulp.task('traceur', [ 'lint' ], function () {
   return gulp.src(paths['scripts'])
     .pipe(handleErrors())
     .pipe(sourcemaps.init())

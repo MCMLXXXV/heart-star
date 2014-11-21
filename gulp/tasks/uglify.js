@@ -7,7 +7,7 @@ var sourcemaps = require('gulp-sourcemaps');
 var paths = projectConfig.paths;
 
 
-gulp.task('uglify', [ 'scripts' ], function () {
+gulp.task('uglify', [ 'traceur' ], function () {
   return gulp.src([
     './static/bower_components/traceur-runtime/traceur-runtime.js',
     './static/bower_components/localforage/dist/localforage.js',
