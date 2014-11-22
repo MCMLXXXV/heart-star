@@ -12,6 +12,8 @@ class Game extends Phaser.State {
 
     this._playerActor = null;
     this._idleActor   = null;
+
+    this._tutorialLabel = null;
   }
 
   create () {
@@ -26,6 +28,7 @@ class Game extends Phaser.State {
     this._moonGroup  = this._objectsManager.createLayerFor('both');
 
     this._objectsManager.createObjects(this._stageDefinitions.objects);
+    this._placeTutorialLabel(this._stageDefinitions.label);
 
     this._goal = this.add.existing(new Goal(this.game));
     this._goal.reset(this.goalCoordinates.x, this.goalCoordinates.y);
@@ -96,6 +99,21 @@ class Game extends Phaser.State {
 
   _makeActor (roleName) {
     return new Actor(this.game, roleName);
+  }
+
+  _placeTutorialLabel (name) {
+    if (this._tutorialLabel === null) {
+      this._tutorialLabel = this.make.image(0, 0, null);
+      this._moonGroup.add(this._tutorialLabel);
+    }
+
+    if (name === null) {
+      this._tutorialLabel.alpha = 0;
+    }
+    else {
+      this._tutorialLabel.alpha = 1;
+      this._tutorialLabel.loadTexture(name);
+    }
   }
 
   _changeActors (playerActor, idleActor) {

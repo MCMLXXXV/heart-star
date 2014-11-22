@@ -40,6 +40,7 @@ class GameStageManager {
     return {
       'actors' : this._parseLayerActors(layerObjects),
       'objects': this._parseLayerObjects(layerObjects),
+      'label'  : this._parseTutorialLabel(layerObjects),
       'next'   : next
     };
   }
@@ -54,6 +55,14 @@ class GameStageManager {
     }
 
     return actors;
+  }
+
+  _parseTutorialLabel (layerObjects) {
+    for (var { type, name } of layerObjects)
+      if (type === 'label')
+        return name;
+
+    return null;
   }
 
   _parseLayerObjects (layerObjects) {
