@@ -11,6 +11,7 @@ class Transitions extends Phaser.Plugin {
 
     this._group    = this.game.stage.addChild(this.game.make.group());
 
+    this._copy     = this._group.add(new Copy(this.game, 240, 160));
     this._iris     = this._group.add(new Iris(this.game, 240, 160));
     this._blinds   = this._group.add(new Blinds(this.game, 240, 160));
     this._blackout = this._group.add(new Blackout(this.game, 240, 160));
@@ -60,6 +61,9 @@ class Transitions extends Phaser.Plugin {
         break;
       case 'blink-blue':
         this._blink(0x6baff5);
+        break;
+      case 'copy':
+        this._copyScreen();
         break;
     }
   }
@@ -113,6 +117,11 @@ class Transitions extends Phaser.Plugin {
     this._doTransition(this._blackout, 'alpha', 1, 0, 400, 0);
   }
 
+  _copyScreen () {
+    this._copy.copyScreen();
+    this._doTransition(this._copy, 'alpha', 1, 0, 400, 100);
+  }
+
   _clearRegisteredTransition () {
     this._previousRunningTransition = this._runningTransition;
     this._runningTransition         = null;
@@ -128,6 +137,7 @@ class Transitions extends Phaser.Plugin {
 }
 
 
+import Copy     from './Transitions/Copy';
 import Iris     from './Transitions/Iris';
 import Blinds   from './Transitions/Blinds';
 import Blackout from './Transitions/Blackout';
