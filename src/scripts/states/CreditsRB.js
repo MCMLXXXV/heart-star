@@ -7,8 +7,8 @@ class Credits extends Phaser.State {
   create () {
     this.game.transitions.doTransition();
 
-    this.add.existing(new BackgroundPattern(this.game));
-    this.add.image(0, 0, 'background-credits');
+    this.add.existing(new BackgroundPattern(this.game, BackgroundPattern.MOON));
+    this.add.image(0, 0, 'background-credits-rb');
 
     this.add.image(0, 0, 'label-credits-rb');
 

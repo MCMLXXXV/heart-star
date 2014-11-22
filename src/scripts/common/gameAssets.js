@@ -22,8 +22,14 @@ export default {
 
     {
       'type': 'image',
-      'key': 'background-credits',
-      'url': 'images/background-credits.png',
+      'key': 'background-credits-ai',
+      'url': 'images/background-credits-ai.png',
+    },
+
+    {
+      'type': 'image',
+      'key': 'background-credits-rb',
+      'url': 'images/background-credits-rb.png',
     },
 
     {
