@@ -1,4 +1,4 @@
-class Credits extends Phaser.State {
+class CreditsAI extends Phaser.State {
 
   init () {
     this.game.transitions.registerTransition('fade-from-black');
@@ -31,4 +31,4 @@ import MoreButton        from 'objects/MoreButton';
 import LinkButton        from 'objects/LinkButton';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
-export default Credits;
+export default CreditsAI;

@@ -3,7 +3,7 @@ import Preload     from './states/Preload';
 import Logo        from './states/Logo';
 import Title       from './states/Title';
 import StageSelect from './states/StageSelect';
-import Credits     from './states/Credits';
+import CreditsAI   from './states/CreditsAI';
 import CreditsRB   from './states/CreditsRB';
 import Game        from './states/Game';
 
@@ -17,7 +17,7 @@ export default {
     game.state.add('Logo',        Logo);
     game.state.add('Title',       Title);
     game.state.add('StageSelect', StageSelect);
-    game.state.add('Credits',     Credits);
+    game.state.add('CreditsAI',   CreditsAI);
     game.state.add('CreditsRB',   CreditsRB);
     game.state.add('Game',        Game);
 
