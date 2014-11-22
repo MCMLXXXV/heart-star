@@ -6,6 +6,7 @@ class GameControl extends Phaser.Plugin {
 
   init () {
     this.up = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
+    this.esc = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
     this.down = this.game.input.keyboard.addKey(Phaser.Keyboard.DOWN);
     this.left = this.game.input.keyboard.addKey(Phaser.Keyboard.LEFT);
     this.right = this.game.input.keyboard.addKey(Phaser.Keyboard.RIGHT);

@@ -46,6 +46,7 @@ class Game extends Phaser.State {
     this._changeActors(this._heart, this._star);
 
     this.controls.spacebar.onUp.add(this._togglePlayerActor, this);
+    this.controls.esc.onUp.add(this._goBackToStageSelection, this);
     this.controls.backspace.onUp.add(this._resetGameStage, this);
 
     this.game.storage.fetch('stages', this._unlockCurrentGameStage, this);
@@ -223,6 +224,18 @@ class Game extends Phaser.State {
     }
 
     this.game.storage.store('stages', unlockedStages);
+  }
+
+  _goToStageSelection () {
+    this.state.start('StageSelect');
+  }
+
+  _goBackToStageSelection () {
+    if (!this.inGame) return;
+
+    this.game.transitions.registerTransition('fade-to-black');
+    this.game.transitions.registerTransitionCallback(this._goToStageSelection, this);
+    this.game.transitions.doTransition();
   }
 
   // --------------------------------------------------------------------------
