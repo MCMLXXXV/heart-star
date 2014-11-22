@@ -1,7 +1,9 @@
 class BackButton extends Phaser.Button {
 
   constructor(game) {
-    super(game, 0, 0, 'button-menu-back', this._doTransition, this, 1, 0);
+    super(game, 240, 160, 'button-menu-more', this._doTransition, this, 1, 0);
+
+    this.anchor.set(1);
 
     this.input.useHandCursor = true;
   }
@@ -10,12 +12,12 @@ class BackButton extends Phaser.Button {
 
   _doTransition () {
     this.game.transitions.registerTransition('fade-to-black');
-    this.game.transitions.registerTransitionCallback(this._goToTitle, this);
+    this.game.transitions.registerTransitionCallback(this._goToMoreCredits, this);
     this.game.transitions.doTransition();
   }
 
-  _goToTitle () {
-    this.game.state.start('Title');
+  _goToMoreCredits () {
+    this.game.state.start('CreditsRB');
   }
 
 }

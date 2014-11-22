@@ -22,8 +22,14 @@ export default {
 
     {
       'type': 'image',
-      'key': 'background-credits',
-      'url': 'images/background-credits.png',
+      'key': 'background-credits-ai',
+      'url': 'images/background-credits-ai.png',
+    },
+
+    {
+      'type': 'image',
+      'key': 'background-credits-rb',
+      'url': 'images/background-credits-rb.png',
     },
 
     {
@@ -147,6 +153,16 @@ export default {
       'key': 'button-menu-credits',
       'url': 'images/button-menu-credits.png',
       'frameWidth': 80,
+      'frameHeight': 16,
+      'margin': 0,
+      'spacing': 0
+    },
+
+    {
+      'type': 'spritesheet',
+      'key': 'button-menu-more',
+      'url': 'images/button-menu-more.png',
+      'frameWidth': 48,
       'frameHeight': 16,
       'margin': 0,
       'spacing': 0
@@ -298,8 +314,14 @@ export default {
 
     {
       'type': 'image',
-      'key': 'label-credits',
-      'url': 'images/label-credits.png',
+      'key': 'label-credits-ai',
+      'url': 'images/label-credits-ai.png',
+    },
+
+    {
+      'type': 'image',
+      'key': 'label-credits-rb',
+      'url': 'images/label-credits-rb.png',
     },
 
     {

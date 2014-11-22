@@ -1,4 +1,4 @@
-class Credits extends Phaser.State {
+class CreditsAI extends Phaser.State {
 
   init () {
     this.game.transitions.registerTransition('fade-from-black');
@@ -8,11 +8,12 @@ class Credits extends Phaser.State {
     this.game.transitions.doTransition();
 
     this.add.existing(new BackgroundPattern(this.game));
-    this.add.image(0, 0, 'background-credits');
+    this.add.image(0, 0, 'background-credits-ai');
 
-    this.add.image(0, 0, 'label-credits');
+    this.add.image(0, 0, 'label-credits-ai');
 
     this.add.existing(new BackButton(this.game));
+    this.add.existing(new MoreButton(this.game));
 
     this.add.existing(new LinkButton(this.game,  64, LinkButton.FACEBOOK));
     this.add.existing(new LinkButton(this.game,  96, LinkButton.TWITTER));
@@ -26,7 +27,8 @@ class Credits extends Phaser.State {
 
 
 import BackButton        from 'objects/BackButton';
+import MoreButton        from 'objects/MoreButton';
 import LinkButton        from 'objects/LinkButton';
 import BackgroundPattern from 'objects/BackgroundPattern';
 
-export default Credits;
+export default CreditsAI;

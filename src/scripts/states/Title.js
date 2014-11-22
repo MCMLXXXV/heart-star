@@ -25,7 +25,7 @@ class Title extends Phaser.State {
 
   _makeMenuButtons () {
     this.add.existing(new MenuButton(this.game, 110, 'button-menu-start', 'StageSelect'));
-    this.add.existing(new MenuButton(this.game, 130, 'button-menu-credits', 'Credits'));
+    this.add.existing(new MenuButton(this.game, 130, 'button-menu-credits', 'CreditsAI'));
   }
 
   _placeCharacter (name, x) {

@@ -3,26 +3,38 @@ class Logo extends Phaser.State {
   create () {
     this.stage.backgroundColor = 0x000000; // black
 
-    var logo = this.add.image(
-      this.world.centerX,
-      this.world.centerY,
-      'logo-adventure-islands');
-    logo.anchor.set(0.5);
+    var aiLogo = this.add.image(0, 0, 'logo-adventure-islands');
+    var rbLogo = this.add.image(0, 0, 'logo-rb');
 
-    var easingFunction = Phaser.Easing.Linear.Out;
-    var fadeFromBlack = this.add.tween(logo);
-    var fadeToBlack   = this.add.tween(logo);
+    var [ first, second ] = this._makeLogoFadeEffect(aiLogo);
+    var [      , last   ] = this._makeLogoFadeEffect(rbLogo, second);
 
-    fadeFromBlack.from({ alpha: 0 }, 1000, easingFunction, false, 1000);
-    fadeFromBlack.chain(fadeToBlack);
-
-    fadeToBlack.to({ alpha: 0 }, 1000, easingFunction, false, 1000);
-    fadeToBlack.onComplete.addOnce(this._goToNextState, this);
-
-    fadeFromBlack.start();
+    first.start();
+    last.onComplete.addOnce(this._goToNextState, this);
   }
 
   // --------------------------------------------------------------------------
+
+  _makeTween (object, chainWith = null) {
+    var tween = this.add.tween(object);
+
+    if (chainWith !== null)
+      chainWith.chain(tween);
+
+    return tween;
+  }
+
+  _makeLogoFadeEffect (logo, chainWith = null) {
+    var easingFunction = Phaser.Easing.Sinusoidal.Out;
+
+    var reveal = this._makeTween(logo, chainWith);
+    var fade   = this._makeTween(logo, reveal);
+
+    reveal.from({ alpha: 0 }, 1000, easingFunction, false, 1500);
+    fade.to({ alpha: 0 }, 1000, easingFunction, false, 1500);
+
+    return [ reveal, fade ];
+  }
 
   _goToNextState () {
     this.state.start(this._nextState, true, false, 'iris');
