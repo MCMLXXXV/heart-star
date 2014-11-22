@@ -154,6 +154,16 @@ export default {
 
     {
       'type': 'spritesheet',
+      'key': 'button-menu-more',
+      'url': 'images/button-menu-more.png',
+      'frameWidth': 48,
+      'frameHeight': 16,
+      'margin': 0,
+      'spacing': 0
+    },
+
+    {
+      'type': 'spritesheet',
       'key': 'button-menu-start',
       'url': 'images/button-menu-start.png',
       'frameWidth': 80,
