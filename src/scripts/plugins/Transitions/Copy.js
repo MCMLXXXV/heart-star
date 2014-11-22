@@ -1,8 +1,7 @@
 class Copy extends Phaser.Image {
 
   constructor (game, width, height) {
-    this._texture = new PIXI.RenderTexture(
-      game.width, game.height, game.renderer);
+    this._texture = new PIXI.RenderTexture(width, height, game.renderer);
 
     super(game, 0, 0, this._texture);
 
