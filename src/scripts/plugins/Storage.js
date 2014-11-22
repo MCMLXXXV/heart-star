@@ -11,13 +11,17 @@ class Storage extends Phaser.Plugin {
   // --------------------------------------------------------------------------
 
   fetch (key, callback = () => {}, context = null) {
-    localforage.getItem(
-      key, function (err, value) { callback.call(context, err, value); });
+    localforage.getItem(key, this._wrap(callback, context));
   }
 
   store (key, value, callback = () => {}, context = null) {
-    localforage.setItem(
-      key, value, function (err, value) { callback.call(context, err, value); });
+    localforage.setItem(key, value, this._wrap(callback, context));
+  }
+
+  // --------------------------------------------------------------------------
+
+  _wrap (callback, context) {
+    return (... args) => { callback.apply(context, args); };
   }
 
 }
