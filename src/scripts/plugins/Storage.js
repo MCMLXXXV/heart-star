@@ -47,7 +47,7 @@ class Storage extends Phaser.Plugin {
   // --------------------------------------------------------------------------
 
   _wrap (callback, context) {
-    return (... args) => { callback.apply(context, args); };
+    return function () { callback.apply(context, arguments); };
   }
 
 }
