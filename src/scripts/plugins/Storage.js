@@ -4,8 +4,8 @@ class Storage extends Phaser.Plugin {
     super(game, parent);
   }
 
-  init (name) {
-    localforage.config({ name });
+  init (name, version = '1.0') {
+    localforage.config({ name, version });
   }
 
   // --------------------------------------------------------------------------
