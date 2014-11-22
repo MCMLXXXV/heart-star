@@ -178,7 +178,7 @@ class Game extends Phaser.State {
     var nextStage = this._stageDefinitions.next;
 
     if (nextStage === null)
-      this.state.start('Credits');
+      this.state.start('CreditsAI');
     else
       this.state.start('Game', true, false, nextStage, 'blinds-open');
   }
