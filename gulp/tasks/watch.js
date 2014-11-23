@@ -5,19 +5,8 @@ var gutil  = require('gulp-util');
 var paths = projectConfig.paths;
 
 
-function logChanges (event) {
-  gutil.log(
-    gutil.colors.green('File ' + event.type + ': ') +
-    gutil.colors.magenta(path.basename(event.path))
-  );
-}
-
-
 gulp.task('watch', function () {
-  gulp.watch(paths['scripts'], [ 'lint' ])
-    .on('change', logChanges);
-  gulp.watch(paths['less'], [ 'less' ])
-    .on('change', logChanges);
-  gulp.watch(paths['src'] + '/index.html', [ 'html' ])
-    .on('change', logChanges);
+  gulp.watch(paths['scripts'],             [ 'jshint' ]);
+  gulp.watch(paths['less'],                [ 'less' ]);
+  gulp.watch(paths['src'] + '/index.html', [ 'html' ]);
 });
