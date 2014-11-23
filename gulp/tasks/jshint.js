@@ -6,7 +6,7 @@ var handleErrors = require('../util/handleErrors');
 var paths = projectConfig.paths;
 
 
-gulp.task('lint', function () {
+gulp.task('jshint', function () {
   return gulp.src([ paths['scripts'] ])
     .pipe(handleErrors())
     .pipe(jshint('.jshintrc'))

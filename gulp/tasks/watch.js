@@ -14,7 +14,7 @@ function logChanges (event) {
 
 
 gulp.task('watch', function () {
-  gulp.watch(paths['scripts'], [ 'lint' ])
+  gulp.watch(paths['scripts'], [ 'jshint' ])
     .on('change', logChanges);
   gulp.watch(paths['less'], [ 'less' ])
     .on('change', logChanges);
