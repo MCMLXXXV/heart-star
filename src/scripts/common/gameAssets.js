@@ -120,6 +120,16 @@ export default {
 
     {
       'type': 'spritesheet',
+      'key': 'button-link-github',
+      'url': 'images/button-link-github.png',
+      'frameWidth': 16,
+      'frameHeight': 16,
+      'margin': 0,
+      'spacing': 0
+    },
+
+    {
+      'type': 'spritesheet',
       'key': 'button-link-facebook',
       'url': 'images/button-link-facebook.png',
       'frameWidth': 16,

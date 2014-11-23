@@ -33,6 +33,7 @@ class LinkButton extends Phaser.Button {
 }
 
 
+LinkButton.GITHUB            = 'button-link-github';
 LinkButton.FACEBOOK          = 'button-link-facebook';
 LinkButton.TWITTER           = 'button-link-twitter';
 LinkButton.DEVIANTART        = 'button-link-deviantart';
