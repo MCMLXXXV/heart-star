@@ -1,35 +1,18 @@
 class LinkButton extends Phaser.Button {
 
-  constructor (game, x, key) {
+  constructor (game, x, key, url = null) {
     super(game, x, 47, key, this._openPopup, this, 1, 0);
 
     this.input.useHandCursor = true;
+    this.url = url;
   }
 
   // --------------------------------------------------------------------------
 
   _openPopup () {
-    // TODO
-    console.info('Launching pop-up for "%s".', this._url);
+    if (this.url !== null) window.open(this.url);
   }
 
-  // --------------------------------------------------------------------------
-
-  get _url () {
-    // if (this.key === LinkButton.FACEBOOK) {
-    //   return 'fb';
-    // }
-    // else if (this.key === LinkButton.TWITTER) {
-    //   return 'tt';
-    // }
-    // else if (this.key === LinkButton.DEVIANTART) {
-    //   return 'da';
-    // }
-    // else if (this.key === LinkButton.ADVENTURE_ISLANDS) {
-    //   return 'ai';
-    // }
-    return this.key;
-  }
 }
 
 
