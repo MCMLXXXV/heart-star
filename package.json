@@ -2,7 +2,7 @@
   "name": "heart-star",
   "version": "0.0.1",
   "private": true,
-  "description": "HTML pot of Heart-Star",
+  "description": "Phaser port of Heart-Star by Jussi Simpanen",
   "devDependencies": {
     "bower": "^1.3.9",
     "browser-sync": "^1.3.3",
@@ -25,9 +25,5 @@
     "jshint-stylish": "^0.4.0",
     "require-dir": "^0.1.0",
     "run-sequence": "^0.3.6"
-  },
-  "scripts": {
-    "post-install": "node ./node_modules/bower/bin/bower install",
-    "start": "./node_modules/.bin/gulp default"
   }
 }
