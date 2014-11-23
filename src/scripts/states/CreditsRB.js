@@ -14,14 +14,27 @@ class Credits extends Phaser.State {
 
     this.add.existing(new BackButton(this.game));
 
-    this.add.existing(new LinkButton(this.game,  96, LinkButton.TWITTER));
-    this.add.existing(new LinkButton(this.game, 128, LinkButton.DEVIANTART));
+    this._addLinkButtons(credits[ 'rb' ].links);
   }
 
   // --------------------------------------------------------------------------
 
+  _makeLinkButton(x, { page, url }) {
+    return new LinkButton(this.game, x, page, url);
+  }
+
+  _addLinkButtons (links) {
+    var len      = links.length;
+    var firstCol = 120 - (len - 1) * 16;
+
+    for (var i = 0; i < len; ++i)
+      this.add.existing(this._makeLinkButton(firstCol + 32 * i, links[i]));
+  }
+
 }
 
+
+import credits from 'common/credits';
 
 import BackButton        from 'objects/BackButton';
 import LinkButton        from 'objects/LinkButton';
