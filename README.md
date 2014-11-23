@@ -126,8 +126,8 @@ license][cc-l].
 [advi]: http://simpanen.carbonmade.com/
 [demo]: http://rblopes.github.io/heart-star/
 [lfor]: http://mozilla.github.io/localForage/
-[dwnl]: /rblopes/heart-star/archive/master.zip
-[mitl]: /rblopes/heart-star/blob/master/LICENSE
 [trcr]: https://github.com/google/traceur-compiler
 [cc-l]: http://creativecommons.org/licenses/by-nc-sa/3.0/
+[dwnl]: https://github.com/rblopes/heart-star/archive/master.zip
+[mitl]: https://github.com/rblopes/heart-star/blob/master/LICENSE
 [ld-g]: http://ludumdare.com/compo/ludum-dare-30/?action=preview&uid=11391
