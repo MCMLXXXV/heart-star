@@ -1,9 +1,5 @@
 class GameControl extends Phaser.Plugin {
 
-  constructor (game, parent) {
-    super(game, parent);
-  }
-
   init () {
     this.up = this.game.input.keyboard.addKey(Phaser.Keyboard.UP);
     this.esc = this.game.input.keyboard.addKey(Phaser.Keyboard.ESC);
