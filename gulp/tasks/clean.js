@@ -1,6 +1,5 @@
-var gulp         = require('gulp');
-var del          = require('del');
-var handleErrors = require('../util/handleErrors');
+var del  = require('del');
+var gulp = require('gulp');
 
 var paths = projectConfig.paths;
 

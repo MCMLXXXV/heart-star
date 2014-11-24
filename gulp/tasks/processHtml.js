@@ -1,5 +1,4 @@
 var gulp         = require('gulp');
-var gutil        = require('gulp-util');
 var processhtml  = require('gulp-processhtml');
 var handleErrors = require('../util/handleErrors');
 
