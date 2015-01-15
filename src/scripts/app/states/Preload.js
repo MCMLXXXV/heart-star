@@ -31,7 +31,10 @@ export default {
   // --------------------------------------------------------------------------
 
   _getSoundsToDecode () {
-    return gameAssets['sfx'].map(function (sfx) { return sfx.key; });
+    if (this._webAudioSupported)
+      return gameAssets['sfx'].map((sfx) => sfx.key);
+
+    return [];
   },
 
   _preparePreloadStage () {
