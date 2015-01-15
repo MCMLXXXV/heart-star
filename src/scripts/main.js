@@ -1,11 +1,11 @@
-import Boot        from './states/Boot';
-import Preload     from './states/Preload';
-import Logo        from './states/Logo';
-import Title       from './states/Title';
-import StageSelect from './states/StageSelect';
-import CreditsAI   from './states/CreditsAI';
-import CreditsRB   from './states/CreditsRB';
-import Game        from './states/Game';
+import Boot        from 'states/Boot';
+import Preload     from 'states/Preload';
+import Logo        from 'states/Logo';
+import Title       from 'states/Title';
+import StageSelect from 'states/StageSelect';
+import CreditsAI   from 'states/CreditsAI';
+import CreditsRB   from 'states/CreditsRB';
+import Game        from 'states/Game';
 
 export default {
 

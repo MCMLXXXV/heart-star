@@ -12,6 +12,10 @@ gulp.task('server', [ 'compile' ], function () {
         paths['static'],
         paths['temp']
       ]
-    }
+    },
+
+    ghostMode: false,
+
+    notify: false
   });
 });

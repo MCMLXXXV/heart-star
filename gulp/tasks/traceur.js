@@ -1,10 +1,8 @@
 var gulp         = require('gulp');
 var concat       = require('gulp-concat');
 var footer       = require('gulp-footer');
-var plumber      = require('gulp-plumber');
 var traceur      = require('gulp-traceur');
 var sourcemaps   = require('gulp-sourcemaps');
-var browserSync  = require('browser-sync');
 var handleErrors = require('../util/handleErrors');
 
 var paths = projectConfig.paths;

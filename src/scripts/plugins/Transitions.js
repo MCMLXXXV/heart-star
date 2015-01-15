@@ -1,8 +1,6 @@
 class Transitions extends Phaser.Plugin {
 
-  constructor (game, parent) {
-    super(game, parent);
-
+  init () {
     this.transitionCompleted  = new Phaser.Signal();
     this.transitionRegistered = null;
 
