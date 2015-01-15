@@ -1,3 +1,8 @@
+import BackButton        from '../objects/BackButton';
+import StageButton       from '../objects/StageButton';
+import BackgroundPattern from '../objects/BackgroundPattern';
+
+
 class StageSelect extends Phaser.State {
 
   init () {
@@ -36,9 +41,5 @@ class StageSelect extends Phaser.State {
 
 }
 
-
-import BackButton        from '../objects/BackButton';
-import StageButton       from '../objects/StageButton';
-import BackgroundPattern from '../objects/BackgroundPattern';
 
 export default StageSelect;

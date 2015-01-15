@@ -1,3 +1,6 @@
+import gameStages from '../data/gameStages';
+
+
 class GameStageManager {
 
   constructor (game) {
@@ -156,7 +159,5 @@ class GameStageManager {
 
 }
 
-
-import gameStages from '../data/gameStages';
 
 export default GameStageManager;

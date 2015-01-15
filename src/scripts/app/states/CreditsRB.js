@@ -1,3 +1,10 @@
+import credits from '../data/credits';
+
+import BackButton        from '../objects/BackButton';
+import LinkButton        from '../objects/LinkButton';
+import BackgroundPattern from '../objects/BackgroundPattern';
+
+
 class CreditsRB extends Phaser.State {
 
   init () {
@@ -33,11 +40,5 @@ class CreditsRB extends Phaser.State {
 
 }
 
-
-import credits from '../data/credits';
-
-import BackButton        from '../objects/BackButton';
-import LinkButton        from '../objects/LinkButton';
-import BackgroundPattern from '../objects/BackgroundPattern';
 
 export default CreditsRB;

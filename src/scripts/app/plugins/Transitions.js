@@ -1,3 +1,9 @@
+import Copy     from './Transitions/Copy';
+import Iris     from './Transitions/Iris';
+import Blinds   from './Transitions/Blinds';
+import Blackout from './Transitions/Blackout';
+
+
 class Transitions extends Phaser.Plugin {
 
   init () {
@@ -134,10 +140,5 @@ class Transitions extends Phaser.Plugin {
 
 }
 
-
-import Copy     from './Transitions/Copy';
-import Iris     from './Transitions/Iris';
-import Blinds   from './Transitions/Blinds';
-import Blackout from './Transitions/Blackout';
 
 export default Transitions;

@@ -1,3 +1,11 @@
+import ObjectsManager   from '../managers/ObjectsManager';
+import GameStageManager from '../managers/GameStageManager';
+
+import Goal   from '../objects/Goal';
+import Actor  from '../objects/Actor';
+import Agents from '../objects/Agents';
+
+
 class Game extends Phaser.State {
 
   init (stageName = '01', transitionName = 'fade-from-black') {
@@ -259,12 +267,5 @@ class Game extends Phaser.State {
 
 }
 
-
-import ObjectsManager   from '../managers/ObjectsManager';
-import GameStageManager from '../managers/GameStageManager';
-
-import Goal   from '../objects/Goal';
-import Actor  from '../objects/Actor';
-import Agents from '../objects/Agents';
 
 export default Game;

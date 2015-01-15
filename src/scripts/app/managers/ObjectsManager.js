@@ -1,3 +1,6 @@
+import ObjectsLayer from '../objects/ObjectsLayer';
+
+
 class ObjectsManager {
 
   constructor (game) {
@@ -74,7 +77,5 @@ class ObjectsManager {
 
 }
 
-
-import ObjectsLayer from '../objects/ObjectsLayer';
 
 export default ObjectsManager;

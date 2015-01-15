@@ -1,3 +1,9 @@
+import gameStages from '../data/gameStages';
+
+import MenuButton        from '../objects/MenuButton';
+import BackgroundPattern from '../objects/BackgroundPattern';
+
+
 class Title extends Phaser.State {
 
   init (transitionName = 'fade-from-black') {
@@ -54,10 +60,5 @@ class Title extends Phaser.State {
 
 }
 
-
-import gameStages from '../data/gameStages';
-
-import MenuButton        from '../objects/MenuButton';
-import BackgroundPattern from '../objects/BackgroundPattern';
 
 export default Title;

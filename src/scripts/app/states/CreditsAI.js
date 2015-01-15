@@ -1,3 +1,11 @@
+import credits from '../data/credits';
+
+import BackButton        from '../objects/BackButton';
+import MoreButton        from '../objects/MoreButton';
+import LinkButton        from '../objects/LinkButton';
+import BackgroundPattern from '../objects/BackgroundPattern';
+
+
 class CreditsAI extends Phaser.State {
 
   init () {
@@ -34,12 +42,5 @@ class CreditsAI extends Phaser.State {
 
 }
 
-
-import credits from '../data/credits';
-
-import BackButton        from '../objects/BackButton';
-import MoreButton        from '../objects/MoreButton';
-import LinkButton        from '../objects/LinkButton';
-import BackgroundPattern from '../objects/BackgroundPattern';
 
 export default CreditsAI;
