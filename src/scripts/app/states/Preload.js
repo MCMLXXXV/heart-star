@@ -74,8 +74,8 @@ class Preload extends Phaser.State {
 }
 
 
-import gameAssets from 'common/gameAssets';
+import gameAssets from '../data/gameAssets';
 
-import PreloadInfo from 'objects/PreloadInfo';
+import PreloadInfo from '../objects/PreloadInfo';
 
 export default Preload;

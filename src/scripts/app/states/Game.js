@@ -1,6 +1,6 @@
 class Game extends Phaser.State {
 
-  init (stageName, transitionName = 'fade-from-black') {
+  init (stageName = '01', transitionName = 'fade-from-black') {
     this.game.transitions.registerTransition(transitionName);
 
     this.controls = this.game.controls;
@@ -49,7 +49,7 @@ class Game extends Phaser.State {
     this.controls.esc.onUp.add(this._goBackToStageSelection, this);
     this.controls.backspace.onUp.add(this._resetGameStage, this);
 
-    this.game.storage.fetch('stages', this._unlockCurrentGameStage, this);
+    this.game.storage.getItem('stages', this._unlockCurrentGameStage, this);
   }
 
   update () {
@@ -223,7 +223,7 @@ class Game extends Phaser.State {
       }
     }
 
-    this.game.storage.store('stages', unlockedStages);
+    this.game.storage.setItem('stages', unlockedStages);
   }
 
   _goToStageSelection () {
@@ -260,11 +260,11 @@ class Game extends Phaser.State {
 }
 
 
-import ObjectsManager   from 'managers/ObjectsManager';
-import GameStageManager from 'managers/GameStageManager';
+import ObjectsManager   from '../managers/ObjectsManager';
+import GameStageManager from '../managers/GameStageManager';
 
-import Goal   from 'objects/Goal';
-import Actor  from 'objects/Actor';
-import Agents from 'objects/Agents';
+import Goal   from '../objects/Goal';
+import Actor  from '../objects/Actor';
+import Agents from '../objects/Agents';
 
 export default Game;

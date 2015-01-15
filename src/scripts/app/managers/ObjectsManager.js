@@ -75,6 +75,6 @@ class ObjectsManager {
 }
 
 
-import ObjectsLayer from 'objects/ObjectsLayer';
+import ObjectsLayer from '../objects/ObjectsLayer';
 
 export default ObjectsManager;

@@ -175,10 +175,10 @@ class ObjectsLayer extends Phaser.Group {
 }
 
 
-import Trap              from 'objects/Trap';
-import Button            from 'objects/Button';
-import Platform          from 'objects/Platform';
-import Retractable       from 'objects/Retractable';
-import BackgroundPattern from 'objects/BackgroundPattern';
+import Trap              from '../objects/Trap';
+import Button            from '../objects/Button';
+import Platform          from '../objects/Platform';
+import Retractable       from '../objects/Retractable';
+import BackgroundPattern from '../objects/BackgroundPattern';
 
 export default ObjectsLayer;

@@ -55,9 +55,9 @@ class Title extends Phaser.State {
 }
 
 
-import gameStages from 'common/gameStages';
+import gameStages from '../data/gameStages';
 
-import MenuButton        from 'objects/MenuButton';
-import BackgroundPattern from 'objects/BackgroundPattern';
+import MenuButton        from '../objects/MenuButton';
+import BackgroundPattern from '../objects/BackgroundPattern';
 
 export default Title;

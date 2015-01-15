@@ -1,11 +1,11 @@
-import Boot        from 'states/Boot';
-import Preload     from 'states/Preload';
-import Logo        from 'states/Logo';
-import Title       from 'states/Title';
-import StageSelect from 'states/StageSelect';
-import CreditsAI   from 'states/CreditsAI';
-import CreditsRB   from 'states/CreditsRB';
-import Game        from 'states/Game';
+import Boot        from './app/states/Boot';
+import Preload     from './app/states/Preload';
+import Logo        from './app/states/Logo';
+import Title       from './app/states/Title';
+import StageSelect from './app/states/StageSelect';
+import CreditsAI   from './app/states/CreditsAI';
+import CreditsRB   from './app/states/CreditsRB';
+import Game        from './app/states/Game';
 
 export function start () {
   var game = new Phaser.Game(240, 160, Phaser.AUTO);

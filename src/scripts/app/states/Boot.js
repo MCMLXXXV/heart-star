@@ -45,10 +45,10 @@ class Boot extends Phaser.State {
 }
 
 
-import gameAssets from 'common/gameAssets';
+import gameAssets from '../data/gameAssets';
 
-import Storage     from 'plugins/Storage';
-import GameControl from 'plugins/GameControl';
-import Transitions from 'plugins/Transitions';
+import Storage     from '../plugins/Storage';
+import GameControl from '../plugins/GameControl';
+import Transitions from '../plugins/Transitions';
 
 export default Boot;

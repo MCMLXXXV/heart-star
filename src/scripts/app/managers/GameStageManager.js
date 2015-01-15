@@ -157,6 +157,6 @@ class GameStageManager {
 }
 
 
-import gameStages from 'common/gameStages';
+import gameStages from '../data/gameStages';
 
 export default GameStageManager;

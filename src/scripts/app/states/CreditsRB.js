@@ -34,10 +34,10 @@ class CreditsRB extends Phaser.State {
 }
 
 
-import credits from 'common/credits';
+import credits from '../data/credits';
 
-import BackButton        from 'objects/BackButton';
-import LinkButton        from 'objects/LinkButton';
-import BackgroundPattern from 'objects/BackgroundPattern';
+import BackButton        from '../objects/BackButton';
+import LinkButton        from '../objects/LinkButton';
+import BackgroundPattern from '../objects/BackgroundPattern';
 
 export default CreditsRB;
