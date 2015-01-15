@@ -7,6 +7,7 @@
 !.jshintrc
 !.editorconfig
 
+dist
 build
 node_modules
 bower_components

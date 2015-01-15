@@ -1,0 +1,25 @@
+* {
+  &, &:before, &:after {
+    box-sizing: border-box;
+  }
+
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  background: #000;
+  overflow: hidden;
+  touch-action: none;
+}
+
+canvas {
+  touch-action-delay: none;
+  touch-action: none;
+
+  -ms-interpolation-mode: nearest-neighbor;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: -moz-crisp-edges;
+  image-rendering: -o-crisp-edges;
+  image-rendering: crisp-edges;
+}

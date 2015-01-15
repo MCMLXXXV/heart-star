@@ -1,14 +1,14 @@
 {
   "name": "heart-star",
-  "version": "0.0.1",
-  "description": "Phaser port of Heart-Star by Jussi Simpanen",
-  "authors": [
-    "Rafael Barbosa Lopes <rafael.barbosalopes@gmail.com>"
-  ],
   "dependencies": {
-    "localforage": "latest",
-    "phaser-official": "latest",
-    "traceur": "latest",
-    "traceur-runtime": "latest"
-  }
+    "almond": "~0.3.0",
+    "localforage": "~1.2.0",
+    "phaser": "~2.2.2"
+  },
+  "overrides": {
+    "phaser": {
+      "main": "build/custom/phaser-arcade-physics.js"
+    }
+  },
+  "private": true
 }
