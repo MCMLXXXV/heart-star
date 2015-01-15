@@ -8,20 +8,20 @@ A port of the game originally created by [Jussi Simpanen][advi] for [Ludum Dare
 Story
 -------------------------------------------------------------------------------
 
-> Two friends want to reach the same place together but they have a little
-> problem: They live in completely different worlds! Help the friends reach the
-> common goal while swapping between the red and blue world. While the friends
-> might not be able to see each others worlds, they can still interact by
-> serving as a platform or carrying each other.
+>   Two friends want to reach the same place together but they have a little
+>   problem: They live in completely different worlds! Help the friends reach
+>   the common goal while swapping between the red and blue world. While the
+>   friends might not be able to see each others worlds, they can still
+>   interact by serving as a platform or carrying each other.
 
 
-Motivations and Objectives
+Project Motivation and Objective
 -------------------------------------------------------------------------------
 
 'Heart Star' is a Flash game, designed and created using the game authoring
 software Stencyl.
 
-For learning purposes, I took the opportunity and wrote this HTML/JavaScript
+For educational purposes, I took the opportunity and wrote this HTML/JavaScript
 port, using [Phaser][phsr].
 
 This port is a remake of the Ludum Dare version, aiming to be accurate as the
@@ -42,42 +42,33 @@ to the stage selection screen.
 Development Instructions
 -------------------------------------------------------------------------------
 
-You can either [play the pre-built version of the game][demo], or clone this
-project locally, provided you meet the following pre-requisites:
-
-*   You already have [Node.js][node] properly installed and configured.
-
-*   You also have [Gulp][gulp] installed globally in your system.
-
-*   Optionally: you have [Git][gscm] installed in your system, as well.
-    Alternatively, you can download the [packaged project's source 
-    code][dwnl].
-
-Either way, you have to issue the following commands on a terminal:
+Download and extract the [packaged project][dwld] contents, or clone this
+repository locally. Either way, the following npm scripts are available to you,
+performing the tasks described below.
 
 ```sh
-npm install
-bower install
-gulp
+npm install   # Installs all required project dependencies.
+npm start     # Launches the development server.
+npm run dist  # Prepare the game release for distribution.
+npm run clean # Wipes the project from temporary and distribution build files.
 ```
 
-Then, a tab in your prefered browser should open, pointed to the address
-`http://localhost:3000/`.
+Then, a tab on your favorite browser should open, pointed to
+`http://localhost:3000/`. Happy coding!
 
 
-### Project Features ##########################################################
+### Features ##################################################################
 
 *   Game ported with [Phaser][phsr] framework.
 
-*   Game levels and some background images composed usign [Tiled Map
-    Editor][tled].
+*   Game levels and some background images composed using [Tiled Map
+    Editor][tild].
 
 *   [localForage][lfor], responsible for in game data storage management—mainly
     the unlockable levels!
 
 *   All program code is written using the ECMAScript 6 dialect of JavaScript.
-    [Traceur Compiler][trcr] is used to make it compatible with today's 
-    browsers.
+    [6to5][6to5] is used to make it compatible with today's browsers.
 
 *   [BrowserSync][bsnc] as development server.
 
@@ -116,17 +107,16 @@ license][cc-l].
 
 <!-- ---------------------------------------------------------------------- -->
 
+[6to5]: https://6to5.org/
 [phsr]: http://phaser.io/
-[gulp]: http://gulpjs.com/
 [gulp]: http://gulpjs.com/
 [node]: http://nodejs.org/
 [gscm]: http://git-scm.com/
 [bsnc]: http://browsersync.io/
-[tled]: http://www.mapeditor.org/
+[tild]: http://www.mapeditor.org/
 [advi]: http://simpanen.carbonmade.com/
 [demo]: http://rblopes.github.io/heart-star/
 [lfor]: http://mozilla.github.io/localForage/
-[trcr]: https://github.com/google/traceur-compiler
 [cc-l]: http://creativecommons.org/licenses/by-nc-sa/3.0/
 [dwnl]: https://github.com/rblopes/heart-star/archive/master.zip
 [mitl]: https://github.com/rblopes/heart-star/blob/master/LICENSE
