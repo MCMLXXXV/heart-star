@@ -1,4 +1,4 @@
-class Logo extends Phaser.State {
+export default {
 
   create () {
     this.stage.backgroundColor = 0x000000; // black
@@ -11,7 +11,7 @@ class Logo extends Phaser.State {
 
     first.start();
     last.onComplete.addOnce(this._goToNextState, this);
-  }
+  },
 
   // --------------------------------------------------------------------------
 
@@ -22,7 +22,7 @@ class Logo extends Phaser.State {
       chainWith.chain(tween);
 
     return tween;
-  }
+  },
 
   _makeLogoFadeEffect (logo, chainWith = null) {
     var easingFunction = Phaser.Easing.Sinusoidal.Out;
@@ -34,11 +34,11 @@ class Logo extends Phaser.State {
     fade.to({ alpha: 0 }, 1000, easingFunction, false, 1500);
 
     return [ reveal, fade ];
-  }
+  },
 
   _goToNextState () {
     this.state.start(this._nextState, true, false, 'iris');
-  }
+  },
 
   // --------------------------------------------------------------------------
 
@@ -46,7 +46,4 @@ class Logo extends Phaser.State {
     return 'Title';
   }
 
-}
-
-
-export default Logo;
+};

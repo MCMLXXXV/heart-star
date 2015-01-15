@@ -5,7 +5,7 @@ import GameControl from '../plugins/GameControl';
 import Transitions from '../plugins/Transitions';
 
 
-class Boot extends Phaser.State {
+export default {
 
   // Initialize any plugins and start physics system.
   init () {
@@ -16,17 +16,17 @@ class Boot extends Phaser.State {
     this.game.transitions = this.game.plugins.add(Transitions);
 
     this.physics.startSystem(Phaser.Physics.ARCADE);
-  }
+  },
 
   preload () {
     this.load.pack('bootAssets', null, gameAssets);
-  }
+  },
 
   create () {
     this._setupStage();
 
     this.state.start(this._nextState);
-  }
+  },
 
   // --------------------------------------------------------------------------
 
@@ -41,7 +41,7 @@ class Boot extends Phaser.State {
     this.scale.setScreenSize(true);
 
     this.stage.smoothed = false;
-  }
+  },
 
   // --------------------------------------------------------------------------
 
@@ -49,7 +49,4 @@ class Boot extends Phaser.State {
     return 'Preload';
   }
 
-}
-
-
-export default Boot;
+};

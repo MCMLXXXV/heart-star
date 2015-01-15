@@ -4,13 +4,13 @@ import MenuButton        from '../objects/MenuButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
 
-class Title extends Phaser.State {
+export default {
 
   init (transitionName = 'fade-from-black') {
     this.game.transitions.registerTransition(transitionName);
     this.game.transitions.registerTransitionCallback(
       this._makeMenuButtons, this);
-  }
+  },
 
   create () {
     this.game.transitions.doTransition();
@@ -25,25 +25,25 @@ class Title extends Phaser.State {
     this._swingTitleLabel(titleLabel);
 
     this.game.storage.getItem('stages', this._probeUnlockedStages, this);
-  }
+  },
 
   // --------------------------------------------------------------------------
 
   _makeMenuButtons () {
     this.add.existing(new MenuButton(this.game, 110, 'button-menu-start', 'StageSelect'));
     this.add.existing(new MenuButton(this.game, 130, 'button-menu-credits', 'CreditsAI'));
-  }
+  },
 
   _placeCharacter (name, x) {
     var sprite = this.add.sprite(x, 96, name);
 
     sprite.anchor.set(0.5, 1);
     sprite.animations.add('star', [ 4, 5, 6, 7 ], 4, true).play();
-  }
+  },
 
   _addTitleLabel (y) {
     return this.add.image(0, y, 'label-title');
-  }
+  },
 
   _swingTitleLabel (image) {
     this.add.tween(image)
@@ -51,14 +51,11 @@ class Title extends Phaser.State {
       .to({ y: image.y }, 1500, Phaser.Easing.Quadratic.InOut)
       .loop()
       .start();
-  }
+  },
 
   _probeUnlockedStages (err, unlockedStages) {
     if (unlockedStages === null)
       this.game.storage.setItem('stages', gameStages);
   }
 
-}
-
-
-export default Title;
+};
