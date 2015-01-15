@@ -118,6 +118,6 @@ license][cc-l].
 [demo]: http://rblopes.github.io/heart-star/
 [lfor]: http://mozilla.github.io/localForage/
 [cc-l]: http://creativecommons.org/licenses/by-nc-sa/3.0/
-[dwnl]: https://github.com/rblopes/heart-star/archive/master.zip
+[dwld]: https://github.com/rblopes/heart-star/archive/dev.zip
 [mitl]: https://github.com/rblopes/heart-star/blob/master/LICENSE
 [ld-g]: http://ludumdare.com/compo/ludum-dare-30/?action=preview&uid=11391
