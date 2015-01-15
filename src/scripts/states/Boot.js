@@ -27,7 +27,6 @@ class Boot extends Phaser.State {
     this.input.maxPointers = 1;
 
     this.scale.pageAlignHorizontally   = true;
-    this.scale.pageAlignVertically     = true;
     this.stage.disableVisibilityChange = true;
 
     this.scale.setMinMax(720, 480, 960, 640);

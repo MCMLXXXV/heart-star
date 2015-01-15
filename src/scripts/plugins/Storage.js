@@ -1,3 +1,6 @@
+import localforage from 'localforage';
+
+
 class Storage extends Phaser.Plugin {
 
   init (name, version = '1.0') {

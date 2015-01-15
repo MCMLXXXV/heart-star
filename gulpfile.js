@@ -1,24 +1,18 @@
-/*
- *  gulpfile.js
- *  ===========
- *
- *  Rather than manage one giant configuration file responsible
- *  for creating multiple tasks, each task has been broken out into
- *  its own file in gulp/tasks. Any files in that directory get
- *  automatically required below.
- *
- *  To add a new task, simply add a new task file in that directory.
- *  gulp/tasks/default.js specifies the default set of tasks to run
- *  when you run `gulp`.
- *
- */
+var gulp    = require('gulp');
+var plugins = require('gulp-load-plugins')();
+var tasks   = require('require-dir')('./lib/tasks');
+var config  = require('./project-config.json');
 
-var requireDir = require('require-dir');
+var taskDeps = {
+  'del'            : require('del'),
+  'browserSync'    : require('browser-sync'),
+  'runSequence'    : require('run-sequence'),
+  'autoprefixer'   : require('autoprefixer-core'),
+  'handleErrors'   : require('./lib/utils/handleErrors'),
+  'mainBowerFiles' : require('main-bower-files')
+};
 
-
-// Specify game project paths for tasks.
-global[ 'projectConfig' ] = require('./project.config');
-
-
-// Require all tasks in gulp/tasks, including subfolders
-requireDir('./gulp/tasks', { recurse: true });
+Object.keys(tasks)
+  .map(function (key) { return tasks[key] })
+  .filter(function (obj) { return typeof obj === 'function' })
+  .forEach(function (task) { task(gulp, plugins, config, taskDeps) });
