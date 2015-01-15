@@ -14,7 +14,7 @@ class StageSelect extends Phaser.State {
 
     this.add.existing(new BackButton(this.game));
 
-    this.game.storage.fetch('stages', this._addStageButtons, this);
+    this.game.storage.getItem('stages', this._addStageButtons, this);
   }
 
   // --------------------------------------------------------------------------

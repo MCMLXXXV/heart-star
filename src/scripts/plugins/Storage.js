@@ -1,51 +1,134 @@
+/**
+ *  @author    Rafael Barbosa Lopes
+ *  @copyright 2014 Rafael Barbosa Lopes
+ *  @license   {@link https://github.com/rblopes/my-phaser-template/blob/dev/LICENSE|MIT License}
+ */
+
+
+import Phaser      from 'Phaser';
 import localforage from 'localforage';
 
 
+/**
+ *  Wrapper plugin for Mozilla's {@link http://mozilla.github.io/localForage/|localForage} offline storage library.
+ *
+ *  @class Storage
+ *  @extends {Phaser.Plugin}
+ */
 class Storage extends Phaser.Plugin {
 
+  /**
+   *  Initialize the localForage library for use with this game.
+   *
+   *  This method is used by `PluginManager#add`.
+   *
+   *  @param {string} name          - The storage name, in general, this game's name.
+   *  @param {string} [version=1.0] - The storage version number.
+   *  @private
+   */
   init (name, version = '1.0') {
     localforage.config({ name, version });
   }
 
-  // --------------------------------------------------------------------------
-
-  fetch (key, callback = () => {}, context = null) {
-    localforage.getItem(key, this._wrap(callback, context));
+  /**
+   *  Get an object from the storage library and supplies the result to the given callback.
+   *
+   *  @param {string}   key      - The referencing key of the object to be fetched.
+   *  @param {function} callback - The asynchronous callback invoked after the operation completes.
+   *  @param {object}   context  - The context of the callback.
+   */
+  getItem (key, callback, context) {
+    localforage.getItem(key, this.wrapCallback(callback, context));
   }
 
-  store (key, value, callback = () => {}, context = null) {
-    localforage.setItem(key, value, this._wrap(callback, context));
+  /**
+   *  Saves the given object to the offline store.
+   *
+   *  @param {string}   key      - The referencing key of the object to be fetched.
+   *  @param {*}        value    - The object to be stored.
+   *  @param {function} callback - The asynchronous callback invoked after the operation completes.
+   *  @param {object}   context  - The context of the callback.
+   */
+  setItem (key, value, callback, context) {
+    localforage.setItem(key, value, this.wrapCallback(callback, context));
   }
 
-  remove (key, callback = () => {}, context = null) {
-    localforage.removeItem(key, this._wrap(callback, context));
+  /**
+   *  Removes the object identified by `key` from the offline store.
+   *
+   *  @param {string}   key      - The key to remove.
+   *  @param {function} callback - The asynchronous callback invoked after the operation completes.
+   *  @param {object}   context  - The context of the callback.
+   */
+  removeItem (key, callback, context) {
+    localforage.removeItem(key, this.wrapCallback(callback, context));
   }
 
-  clear (callback = () => {}, context = null) {
-    localforage.clear(this._wrap(callback, context));
+  /**
+   *  Removes all keys from the database, returning it to a blank slate.
+   *
+   *  @param {function} callback - The asynchronous callback invoked after the operation completes.
+   *  @param {object}   context  - The context of the callback.
+   */
+  clear (callback, context) {
+    localforage.clear(this.wrapCallback(callback, context));
   }
 
-  length (callback = () => {}, context = null) {
-    localforage.length(this._wrap(callback, context));
+  /**
+   *  Gets the number of keys in the offline store (i.e. its "length").
+   *
+   *  @param {function} callback - The asynchronous callback invoked after the operation completes.
+   *  @param {object}   context  - The context of the callback.
+   */
+  length (callback, context) {
+    localforage.length(this.wrapCallback(callback, context));
   }
 
-  key (keyIndex, callback = () => {}, context = null) {
-    localforage.key(keyIndex, this._wrap(callback, context));
+  /**
+   *  Get the name of a key based on its ID.
+   *
+   *  @param {function} callback - The asynchronous callback invoked after the operation completes.
+   *  @param {object}   context  - The context of the callback.
+   */
+  key (keyIndex, callback, context) {
+    localforage.key(keyIndex, this.wrapCallback(callback, context));
   }
 
-  keys (callback = () => {}, context = null) {
-    localforage.keys(this._wrap(callback, context));
+  /**
+   *  Get the list of all keys in the datastore.
+   *
+   *  @param {function} callback - The asynchronous callback invoked after the operation completes.
+   *  @param {object}   context  - The context of the callback.
+   */
+  keys (callback, context) {
+    localforage.keys(this.wrapCallback(callback, context));
   }
 
-  iterate (iterator, iterContext, callback = () => {}, cbContext = null) {
+  /**
+   *  Iterate over all value/key pairs in datastore.
+   *
+   *  @param {function} iterator        - The iterator callback.
+   *  @param {object}   iteratorContext - The iterator callback context.
+   *  @param {function} callback        - The success callback.
+   *  @param {object}   callbackContext - The success callback context.
+   */
+  iterate (iterator, iteratorContext, callback, callbackContext) {
     localforage.iterate(
-      this._wrap(iterator, iterContext),
-      this._wrap(callback, cbContext));
+      this.wrapCallback(iterator, iteratorContext),
+      this.wrapCallback(callback, callbackContext));
   }
 
   // --------------------------------------------------------------------------
 
-  _wrap (callback, context) {
+  /**
+   *  Use internally to wrap both callback and context passed to the
+   *  localForage methods.
+   *
+   *  @param {function} [callback=()=>{}]
+   *  @param {object}   [context=null]
+   *  @private
+   */
+  wrapCallback (callback = () => {}, context = null) {
     return function () { callback.apply(context, arguments); };
   }
 

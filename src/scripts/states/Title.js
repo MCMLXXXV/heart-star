@@ -18,7 +18,7 @@ class Title extends Phaser.State {
     var titleLabel = this._addTitleLabel(18);
     this._swingTitleLabel(titleLabel);
 
-    this.game.storage.fetch('stages', this._probeUnlockedStages, this);
+    this.game.storage.getItem('stages', this._probeUnlockedStages, this);
   }
 
   // --------------------------------------------------------------------------
@@ -49,7 +49,7 @@ class Title extends Phaser.State {
 
   _probeUnlockedStages (err, unlockedStages) {
     if (unlockedStages === null)
-      this.game.storage.store('stages', gameStages);
+      this.game.storage.setItem('stages', gameStages);
   }
 
 }
