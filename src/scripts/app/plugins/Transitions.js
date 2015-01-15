@@ -89,7 +89,7 @@ class Transitions extends Phaser.Plugin {
       .start();
 
     tween
-      .onComplete.addOnce(this.transitionCompleted.dispatch, this);
+      .onComplete.addOnce(() => this.transitionCompleted.dispatch(), this);
 
     this._runningTransition = object;
   }
