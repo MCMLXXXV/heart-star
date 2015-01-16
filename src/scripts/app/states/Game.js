@@ -224,7 +224,6 @@ export default {
   },
 
   _unlockCurrentGameStage (err, unlockedLevels) {
-    console.log(unlockedLevels);
     for (var unlockedLevel of unlockedLevels) {
       if (unlockedLevel.name === this.level) {
         unlockedLevel.locked = false;
