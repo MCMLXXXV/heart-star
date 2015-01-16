@@ -5,11 +5,13 @@ export default {
 
     var aiLogo = this.add.image(0, 0, 'logo-adventure-islands');
     var rbLogo = this.add.image(0, 0, 'logo-rb');
+    rbLogo.alpha = 0; // Phaser BUG
 
     var [ first, second ] = this._makeLogoFadeEffect(aiLogo);
     var [      , last   ] = this._makeLogoFadeEffect(rbLogo, second);
 
     first.start();
+    second.onComplete.addOnce(() => rbLogo.alpha = 1, this); // Phaser BUG
     last.onComplete.addOnce(this._goToNextState, this);
   },
 
