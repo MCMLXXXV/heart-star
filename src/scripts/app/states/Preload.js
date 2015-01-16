@@ -1,4 +1,4 @@
-import gameAssets from '../data/gameAssets';
+import assets from '../data/assets';
 
 import PreloadInfo from '../objects/PreloadInfo';
 
@@ -32,7 +32,7 @@ export default {
 
   _getSoundsToDecode () {
     if (this._webAudioSupported)
-      return gameAssets['sfx'].map((sfx) => sfx.key);
+      return assets['sfx'].map((sfx) => sfx.key);
 
     return [];
   },
@@ -48,13 +48,13 @@ export default {
   },
 
   _loadGraphicalAssets () {
-    this.load.pack('graphics', null, gameAssets);
+    this.load.pack('graphics', null, assets);
   },
 
   _loadAudioAssets () {
     if (this._webAudioSupported) {
       this.sound.onSoundDecode.add(this._unqueueDecodedSound, this);
-      this.load.pack('sfx', null, gameAssets);
+      this.load.pack('sfx', null, assets);
     }
   },
 

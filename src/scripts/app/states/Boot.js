@@ -1,4 +1,4 @@
-import gameAssets from '../data/gameAssets';
+import assets from '../data/assets';
 
 import Storage     from '../plugins/Storage';
 import GameControl from '../plugins/GameControl';
@@ -19,7 +19,7 @@ export default {
   },
 
   preload () {
-    this.load.pack('bootAssets', null, gameAssets);
+    this.load.pack('bootAssets', null, assets);
   },
 
   create () {
