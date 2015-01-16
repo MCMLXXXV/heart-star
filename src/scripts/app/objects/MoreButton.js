@@ -17,7 +17,7 @@ class BackButton extends Phaser.Button {
   }
 
   _goToMoreCredits () {
-    this.game.state.start('CreditsRB');
+    this.game.state.start('Credits', true, false, 'rb');
   }
 
 }
