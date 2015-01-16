@@ -1,5 +1,5 @@
-import ObjectsManager   from '../managers/ObjectsManager';
-import GameStageManager from '../managers/GameStageManager';
+import ObjectsManager from '../managers/ObjectsManager';
+import LevelManager   from '../managers/LevelManager';
 
 import Goal   from '../objects/Goal';
 import Actor  from '../objects/Actor';
@@ -8,15 +8,15 @@ import Agents from '../objects/Agents';
 
 export default {
 
-  init (stageName = '01', transitionName = 'fade-from-black') {
+  init (level = '01', transitionName = 'fade-from-black') {
     this.game.transitions.registerTransition(transitionName);
 
     this.controls = this.game.controls;
 
-    this.stageName = stageName;
+    this.level = level;
 
-    this._gameStageManager = this._makeManager(GameStageManager);
-    this._objectsManager   = this._makeManager(ObjectsManager);
+    this._levelManager   = this._makeManager(LevelManager);
+    this._objectsManager = this._makeManager(ObjectsManager);
 
     this._playerActor = null;
     this._idleActor   = null;
@@ -27,7 +27,7 @@ export default {
   create () {
     this.game.transitions.doTransition();
 
-    this._stageDefinitions = this._getStageDefinitions(this.stageName);
+    this._levelDefinitions = this._getStageDefinitions(this.level);
 
     this._agents = this.add.existing(new Agents(this.game));
 
@@ -35,8 +35,8 @@ export default {
     this._starGroup  = this._objectsManager.createLayerFor('star', true);
     this._moonGroup  = this._objectsManager.createLayerFor('both');
 
-    this._objectsManager.createObjects(this._stageDefinitions.objects);
-    this._placeTutorialLabel(this._stageDefinitions.label);
+    this._objectsManager.createObjects(this._levelDefinitions.objects);
+    this._placeTutorialLabel(this._levelDefinitions.label);
 
     this._goal = this.add.existing(new Goal(this.game));
     this._goal.reset(this.goalCoordinates.x, this.goalCoordinates.y);
@@ -57,7 +57,7 @@ export default {
     this.controls.esc.onUp.add(this._goBackToStageSelection, this);
     this.controls.backspace.onUp.add(this._resetGameStage, this);
 
-    this.game.storage.getItem('stages', this._unlockCurrentGameStage, this);
+    this.game.storage.getItem('levels', this._unlockCurrentGameStage, this);
   },
 
   update () {
@@ -102,8 +102,8 @@ export default {
     return new factory(this.game, ... args);
   },
 
-  _getStageDefinitions (stageName) {
-    return this._gameStageManager.getStage(stageName);
+  _getStageDefinitions (level) {
+    return this._levelManager.getLevel(level);
   },
 
   _makeActor (roleName) {
@@ -215,7 +215,7 @@ export default {
   },
 
   _goToNextStage () {
-    var nextStage = this._stageDefinitions.next;
+    var nextStage = this._levelDefinitions.next;
 
     if (nextStage === null)
       this.state.start('CreditsAI');
@@ -223,19 +223,20 @@ export default {
       this.state.start('Game', true, false, nextStage, 'blinds-open');
   },
 
-  _unlockCurrentGameStage (err, unlockedStages) {
-    for (var unlockedStage of unlockedStages) {
-      if (unlockedStage.stage === this.stageName) {
-        unlockedStage.locked = false;
+  _unlockCurrentGameStage (err, unlockedLevels) {
+    console.log(unlockedLevels);
+    for (var unlockedLevel of unlockedLevels) {
+      if (unlockedLevel.name === this.level) {
+        unlockedLevel.locked = false;
         break;
       }
     }
 
-    this.game.storage.setItem('stages', unlockedStages);
+    this.game.storage.setItem('levels', unlockedLevels);
   },
 
   _goToStageSelection () {
-    this.state.start('StageSelect');
+    this.state.start('Levels');
   },
 
   _goBackToStageSelection () {
@@ -249,15 +250,15 @@ export default {
   // --------------------------------------------------------------------------
 
   get heartCoordinates () {
-    return this._stageDefinitions.actors.heart;
+    return this._levelDefinitions.actors.heart;
   },
 
   get starCoordinates () {
-    return this._stageDefinitions.actors.star;
+    return this._levelDefinitions.actors.star;
   },
 
   get goalCoordinates () {
-    return this._stageDefinitions.actors.goal;
+    return this._levelDefinitions.actors.goal;
   },
 
   get inGame () {

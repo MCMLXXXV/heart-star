@@ -1,31 +1,30 @@
-import gameStages from '../data/gameStages';
+import levels from '../data/levels';
 
 
-class GameStageManager {
+class LevelManager {
 
   constructor (game) {
     this.game = game;
 
-    this.definitions = this._createStageDefinitions();
+    this.definitions = this._createLevelDefinitions();
   }
 
   // --------------------------------------------------------------------------
 
-  getStage (stageName) {
-    return this.definitions[stageName] || null;
+  getLevel (name) {
+    return this.definitions[name] || null;
   }
 
   // --------------------------------------------------------------------------
 
-  _createStageDefinitions () {
+  _createLevelDefinitions () {
     var objectLayers = this._getTilemapObjectLayers();
     var definitions  = {};
 
-    for (var gameStage of gameStages) {
-      var { stage } = gameStage;
+    for (var level of levels) {
+      var { name } = level;
 
-      definitions[stage] = this._makeGameStage(
-        gameStage, objectLayers[stage]);
+      definitions[name] = this._makeLevel(level, objectLayers[name]);
     }
 
     return definitions;
@@ -39,7 +38,7 @@ class GameStageManager {
     return Phaser.TilemapParser.parse(this.game, 'tilemaps');
   }
 
-  _makeGameStage ({ next }, layerObjects) {
+  _makeLevel ({ next }, layerObjects) {
     return {
       'actors' : this._parseLayerActors(layerObjects),
       'objects': this._parseLayerObjects(layerObjects),
@@ -49,6 +48,7 @@ class GameStageManager {
   }
 
   _parseLayerActors (layerObjects) {
+    // debugger;
     var actors = {};
 
     for (var object of layerObjects) {
@@ -160,4 +160,4 @@ class GameStageManager {
 }
 
 
-export default GameStageManager;
+export default LevelManager;

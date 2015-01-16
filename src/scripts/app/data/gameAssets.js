@@ -34,8 +34,8 @@ export default {
 
     {
       'type': 'image',
-      'key': 'background-stage-select',
-      'url': 'images/background-stage-select.png',
+      'key': 'background-level-select',
+      'url': 'images/background-level-select.png',
     },
 
     {
@@ -190,8 +190,8 @@ export default {
 
     {
       'type': 'spritesheet',
-      'key': 'button-stage-01',
-      'url': 'images/button-stage-01.png',
+      'key': 'button-level-01',
+      'url': 'images/button-level-01.png',
       'frameWidth': 16,
       'frameHeight': 16,
       'margin': 0,
@@ -200,8 +200,8 @@ export default {
 
     {
       'type': 'spritesheet',
-      'key': 'button-stage-02',
-      'url': 'images/button-stage-02.png',
+      'key': 'button-level-02',
+      'url': 'images/button-level-02.png',
       'frameWidth': 16,
       'frameHeight': 16,
       'margin': 0,
@@ -210,8 +210,8 @@ export default {
 
     {
       'type': 'spritesheet',
-      'key': 'button-stage-03',
-      'url': 'images/button-stage-03.png',
+      'key': 'button-level-03',
+      'url': 'images/button-level-03.png',
       'frameWidth': 16,
       'frameHeight': 16,
       'margin': 0,
@@ -220,8 +220,8 @@ export default {
 
     {
       'type': 'spritesheet',
-      'key': 'button-stage-04',
-      'url': 'images/button-stage-04.png',
+      'key': 'button-level-04',
+      'url': 'images/button-level-04.png',
       'frameWidth': 16,
       'frameHeight': 16,
       'margin': 0,
@@ -230,8 +230,8 @@ export default {
 
     {
       'type': 'spritesheet',
-      'key': 'button-stage-05',
-      'url': 'images/button-stage-05.png',
+      'key': 'button-level-05',
+      'url': 'images/button-level-05.png',
       'frameWidth': 16,
       'frameHeight': 16,
       'margin': 0,
@@ -240,8 +240,8 @@ export default {
 
     {
       'type': 'spritesheet',
-      'key': 'button-stage-06',
-      'url': 'images/button-stage-06.png',
+      'key': 'button-level-06',
+      'url': 'images/button-level-06.png',
       'frameWidth': 16,
       'frameHeight': 16,
       'margin': 0,
@@ -250,8 +250,8 @@ export default {
 
     {
       'type': 'spritesheet',
-      'key': 'button-stage-07',
-      'url': 'images/button-stage-07.png',
+      'key': 'button-level-07',
+      'url': 'images/button-level-07.png',
       'frameWidth': 16,
       'frameHeight': 16,
       'margin': 0,
@@ -260,8 +260,8 @@ export default {
 
     {
       'type': 'spritesheet',
-      'key': 'button-stage-08',
-      'url': 'images/button-stage-08.png',
+      'key': 'button-level-08',
+      'url': 'images/button-level-08.png',
       'frameWidth': 16,
       'frameHeight': 16,
       'margin': 0,
@@ -270,8 +270,8 @@ export default {
 
     {
       'type': 'spritesheet',
-      'key': 'button-stage-09',
-      'url': 'images/button-stage-09.png',
+      'key': 'button-level-09',
+      'url': 'images/button-level-09.png',
       'frameWidth': 16,
       'frameHeight': 16,
       'margin': 0,
@@ -280,8 +280,8 @@ export default {
 
     {
       'type': 'spritesheet',
-      'key': 'button-stage-10',
-      'url': 'images/button-stage-10.png',
+      'key': 'button-level-10',
+      'url': 'images/button-level-10.png',
       'frameWidth': 16,
       'frameHeight': 16,
       'margin': 0,
@@ -290,8 +290,8 @@ export default {
 
     {
       'type': 'image',
-      'key': 'button-stage-locked',
-      'url': 'images/button-stage-locked.png',
+      'key': 'button-level-locked',
+      'url': 'images/button-level-locked.png',
     },
 
     {
@@ -348,8 +348,8 @@ export default {
 
     {
       'type': 'image',
-      'key': 'label-stage-select',
-      'url': 'images/label-stage-select.png',
+      'key': 'label-level-select',
+      'url': 'images/label-level-select.png',
     },
 
     {

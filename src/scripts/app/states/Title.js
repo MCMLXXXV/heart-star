@@ -1,4 +1,4 @@
-import gameStages from '../data/gameStages';
+import levels from '../data/levels';
 
 import MenuButton        from '../objects/MenuButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
@@ -24,13 +24,13 @@ export default {
     var titleLabel = this._addTitleLabel(18);
     this._swingTitleLabel(titleLabel);
 
-    this.game.storage.getItem('stages', this._probeUnlockedStages, this);
+    this.game.storage.getItem('levels', this._probeUnlockedStages, this);
   },
 
   // --------------------------------------------------------------------------
 
   _makeMenuButtons () {
-    this.add.existing(new MenuButton(this.game, 110, 'button-menu-start', 'StageSelect'));
+    this.add.existing(new MenuButton(this.game, 110, 'button-menu-start', 'Levels'));
     this.add.existing(new MenuButton(this.game, 130, 'button-menu-credits', 'Credits'));
   },
 
@@ -55,7 +55,7 @@ export default {
 
   _probeUnlockedStages (err, unlockedStages) {
     if (unlockedStages === null)
-      this.game.storage.setItem('stages', gameStages);
+      this.game.storage.setItem('levels', levels);
   }
 
 };

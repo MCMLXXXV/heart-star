@@ -1,5 +1,5 @@
 import BackButton        from '../objects/BackButton';
-import StageButton       from '../objects/StageButton';
+import StageButton       from '../objects/LevelButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
 
@@ -13,30 +13,30 @@ export default {
     this.game.transitions.doTransition();
 
     this.add.existing(new BackgroundPattern(this.game));
-    this.add.image(0, 0, 'background-stage-select');
+    this.add.image(0, 0, 'background-level-select');
 
-    this.add.image(0, 32, 'label-stage-select');
+    this.add.image(0, 32, 'label-level-select');
 
     this.add.existing(new BackButton(this.game));
 
-    this.game.storage.getItem('stages', this._addStageButtons, this);
+    this.game.storage.getItem('levels', this._addStageButtons, this);
   },
 
   // --------------------------------------------------------------------------
 
-  _addStageButtons (err, unlockedStages) {
-    for (var len = unlockedStages.length, i = 0; i < len; ++i) {
-      var { stage, buttonFace, locked } = unlockedStages[i];
+  _addStageButtons (err, unlockedLevels) {
+    for (var len = unlockedLevels.length, i = 0; i < len; ++i) {
+      var { name, buttonFace, locked } = unlockedLevels[i];
       var x = 48 + 32 * (i % 5);
       var y = 64 + 32 * Math.floor(i / 5);
 
       this.add.existing(
-        this._makeStageButton(x, y, stage, buttonFace, locked));
+        this._makeStageButton(x, y, name, buttonFace, locked));
     }
   },
 
-  _makeStageButton (x, y, stage, buttonFace, locked) {
-    return new StageButton(this.game, x, y, stage, locked);
+  _makeStageButton (x, y, level, buttonFace, locked) {
+    return new StageButton(this.game, x, y, level, locked);
   }
 
 };
