@@ -48,7 +48,6 @@ class LevelManager {
   }
 
   _parseLayerActors (layerObjects) {
-    // debugger;
     var actors = {};
 
     for (var object of layerObjects) {
