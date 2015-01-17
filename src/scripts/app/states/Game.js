@@ -6,7 +6,7 @@ import Actor  from '../objects/Actor';
 import Agents from '../objects/Agents';
 
 
-export default {
+export default class Game extends Phaser.State {
 
   init (level = '01', transitionName = 'fade-from-black') {
     this.game.transitions.registerTransition(transitionName);
@@ -22,7 +22,7 @@ export default {
     this._idleActor   = null;
 
     this._tutorialLabel = null;
-  },
+  }
 
   create () {
     this.game.transitions.doTransition();
@@ -58,7 +58,7 @@ export default {
     this.controls.backspace.onUp.add(this._resetGameStage, this);
 
     this.game.storage.getItem('levels', this._unlockCurrentGameStage, this);
-  },
+  }
 
   update () {
     this._playerActor.collideActor(this._idleActor);
@@ -94,21 +94,21 @@ export default {
       this._playerActor.stop();
       this._idleActor.stop();
     }
-  },
+  }
 
   // --------------------------------------------------------------------------
 
   _makeManager (factory, ... args) {
     return new factory(this.game, ... args);
-  },
+  }
 
   _getStageDefinitions (level) {
     return this._levelManager.getLevel(level);
-  },
+  }
 
   _makeActor (roleName) {
     return new Actor(this.game, roleName);
-  },
+  }
 
   _placeTutorialLabel (name) {
     if (this._tutorialLabel === null) {
@@ -123,7 +123,7 @@ export default {
       this._tutorialLabel.alpha = 1;
       this._tutorialLabel.loadTexture(name);
     }
-  },
+  }
 
   _changeActors (playerActor, idleActor) {
     this._playerActor      = playerActor;
@@ -135,12 +135,12 @@ export default {
     this._idleActor.stop();
 
     this._toggleLayers();
-  },
+  }
 
   _toggleLayers () {
     this._heartGroup.toggle(!this._heart.idle);
     this._starGroup.toggle(!this._star.idle);
-  },
+  }
 
   _blink () {
     if (this._heart.idle)
@@ -150,13 +150,13 @@ export default {
       this.game.transitions.registerTransition('blink-pink');
 
     this.game.transitions.doTransition();
-  },
+  }
 
   _closeBlinds () {
     this.game.transitions.registerTransition('blinds-close');
     this.game.transitions.registerTransitionCallback(this._goToNextStage, this);
     this.game.transitions.doTransition();
-  },
+  }
 
   _togglePlayerActor () {
     if (!this.inGame) return;
@@ -166,7 +166,7 @@ export default {
     this._changeActors(this._idleActor, this._playerActor);
 
     this._blink();
-  },
+  }
 
   _resetGameStage () {
     if (!this.inGame) return;
@@ -179,13 +179,13 @@ export default {
     this._restartActor(this._star, this.starCoordinates);
 
     this._objectsManager.reset();
-  },
+  }
 
   _preRestartActors () {
     this.game.transitions.registerTransition('blinds-close');
     this.game.transitions.registerTransitionCallback(this._restartActors, this);
     this.game.transitions.doTransition();
-  },
+  }
 
   _restartActors () {
     this._restartActor(this._heart, this.heartCoordinates);
@@ -196,23 +196,23 @@ export default {
 
     this._changeActors(this._heart, this._star);
     this._objectsManager.reset();
-  },
+  }
 
   _restartActor(actor, { x, y }) {
     actor.reset(x, y);
     actor.sink();
-  },
+  }
 
   _actorHurt () {
     this.time.events.add(1500, this._preRestartActors, this);
-  },
+  }
 
   _celebrate () {
     this._heart.emotion = 'cheering';
     this._star.emotion  = 'cheering';
 
     this.time.events.add(1000, this._closeBlinds, this);
-  },
+  }
 
   _goToNextStage () {
     var nextStage = this._levelDefinitions.next;
@@ -221,7 +221,7 @@ export default {
       this.state.start('CreditsAI');
     else
       this.state.start('Game', true, false, nextStage, 'blinds-open');
-  },
+  }
 
   _unlockCurrentGameStage (err, unlockedLevels) {
     for (var unlockedLevel of unlockedLevels) {
@@ -232,11 +232,11 @@ export default {
     }
 
     this.game.storage.setItem('levels', unlockedLevels);
-  },
+  }
 
   _goToStageSelection () {
     this.state.start('Levels');
-  },
+  }
 
   _goBackToStageSelection () {
     if (!this.inGame) return;
@@ -244,25 +244,25 @@ export default {
     this.game.transitions.registerTransition('fade-to-black');
     this.game.transitions.registerTransitionCallback(this._goToStageSelection, this);
     this.game.transitions.doTransition();
-  },
+  }
 
   // --------------------------------------------------------------------------
 
   get heartCoordinates () {
     return this._levelDefinitions.actors.heart;
-  },
+  }
 
   get starCoordinates () {
     return this._levelDefinitions.actors.star;
-  },
+  }
 
   get goalCoordinates () {
     return this._levelDefinitions.actors.goal;
-  },
+  }
 
   get inGame () {
     return !this.game.transitions.transitionRunning &&
       this._playerActor && this._playerActor.emotion === null;
   }
 
-};
+}

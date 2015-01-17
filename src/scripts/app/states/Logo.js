@@ -1,4 +1,4 @@
-export default {
+export default class Logo extends Phaser.State {
 
   create () {
     this.stage.backgroundColor = 0x000000; // black
@@ -13,7 +13,7 @@ export default {
     first.start();
     second.onComplete.addOnce(() => rbLogo.alpha = 1, this); // Phaser BUG
     last.onComplete.addOnce(this._goToNextState, this);
-  },
+  }
 
   // --------------------------------------------------------------------------
 
@@ -24,7 +24,7 @@ export default {
       chainWith.chain(tween);
 
     return tween;
-  },
+  }
 
   _makeLogoFadeEffect (logo, chainWith = null) {
     var easingFunction = Phaser.Easing.Sinusoidal.Out;
@@ -36,11 +36,11 @@ export default {
     fade.to({ alpha: 0 }, 1000, easingFunction, false, 1500);
 
     return [ reveal, fade ];
-  },
+  }
 
   _goToNextState () {
     this.state.start(this._nextState, true, false, 'iris');
-  },
+  }
 
   // --------------------------------------------------------------------------
 
@@ -48,4 +48,4 @@ export default {
     return 'Title';
   }
 
-};
+}

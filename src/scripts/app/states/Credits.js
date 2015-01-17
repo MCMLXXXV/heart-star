@@ -8,13 +8,13 @@ import BackgroundPattern from '../objects/BackgroundPattern';
 const DEFAULT_SCREEN = 'adventure-islands';
 
 
-export default {
+export default class Credits extends Phaser.State {
 
   init (screen = DEFAULT_SCREEN) {
     this.screen = screen;
 
     this.game.transitions.registerTransition('fade-from-black');
-  },
+  }
 
   create () {
     let { screen }            = this;
@@ -25,7 +25,7 @@ export default {
     this._addMenuButtons(screen, (screen === DEFAULT_SCREEN));
 
     this.game.transitions.doTransition();
-  },
+  }
 
   // --------------------------------------------------------------------------
 
@@ -33,11 +33,11 @@ export default {
     this.add.existing(new BackgroundPattern(this.game, pattern));
     this.add.image(0, 0, layer);
     this.add.image(0, 0, label);
-  },
+  }
 
   _makeLinkButton(x, page, url) {
     return new LinkButton(this.game, x, page, url);
-  },
+  }
 
   _addLinkButtons (links) {
     let firstCol = 120 - (links.length - 1) * 16;
@@ -46,7 +46,7 @@ export default {
       let x = firstCol + 32 * i;
       this.add.existing(this._makeLinkButton(x, page, url));
     });
-  },
+  }
 
   _addMenuButtons (screen, addMoreButton = false) {
     this.add.existing(new BackButton(this.game));
@@ -55,4 +55,4 @@ export default {
       this.add.existing(new MoreButton(this.game));
   }
 
-};
+}

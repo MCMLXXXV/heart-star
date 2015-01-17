@@ -3,11 +3,11 @@ import StageButton       from '../objects/LevelButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
 
-export default {
+export default class Levels extends Phaser.State {
 
   init () {
     this.game.transitions.registerTransition('fade-from-black');
-  },
+  }
 
   create () {
     this.game.transitions.doTransition();
@@ -20,7 +20,7 @@ export default {
     this.add.existing(new BackButton(this.game));
 
     this.game.storage.getItem('levels', this._addStageButtons, this);
-  },
+  }
 
   // --------------------------------------------------------------------------
 
@@ -33,10 +33,10 @@ export default {
       this.add.existing(
         this._makeStageButton(x, y, name, buttonFace, locked));
     }
-  },
+  }
 
   _makeStageButton (x, y, level, buttonFace, locked) {
     return new StageButton(this.game, x, y, level, locked);
   }
 
-};
+}
