@@ -1,27 +1,26 @@
-class LevelButton extends Phaser.Group {
+const DISABLED_BUTTON_FRAME = 'button-level-locked';
+
+
+class LevelButton extends Phaser.Button {
 
   constructor (game, x, y, level, locked = true) {
-    super(game);
+    super(game, x, y, DISABLED_BUTTON_FRAME);
 
     this.position.set(x, y);
 
     this.level = level;
 
-    this._makeUnlockableButton(level, locked);
+    if (!locked)
+      this._unlockButton(level);
   }
 
   // --------------------------------------------------------------------------
 
-  _makeUnlockableButton (level, locked) {
-    if (locked) {
-      this.add(this.game.make.image(0, 0, 'button-level-locked'));
-    }
-    else {
-      this.add(
-        this.game.make.button(
-          0, 0, this._getButtonTextureKey(level),
-          this._doTransition, this, 1, 0));
-    }
+  _unlockButton (level) {
+    this.loadTexture(this._getButtonTextureKey(level));
+    this.setFrames(1, 0);
+    this.input.useHandCursor = true;
+    this.onInputUp.add(this._doTransition, this);
   }
 
   _doTransition () {
@@ -35,18 +34,7 @@ class LevelButton extends Phaser.Group {
   }
 
   _getButtonTextureKey (level) {
-    switch (level) {
-      case '01': return 'button-level-01';
-      case '02': return 'button-level-02';
-      case '03': return 'button-level-03';
-      case '04': return 'button-level-04';
-      case '05': return 'button-level-05';
-      case '06': return 'button-level-06';
-      case '07': return 'button-level-07';
-      case '08': return 'button-level-08';
-      case '09': return 'button-level-09';
-      case '10': return 'button-level-10';
-    }
+    return `button-level-${level}`;
   }
 
 }
