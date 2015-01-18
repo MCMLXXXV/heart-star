@@ -2,7 +2,7 @@
     "name": "Heart Star",
     "start_url": "/index.html",
     "display": "fullscreen",
-    "orientation": "portrait",
+    "orientation": "landscape",
     "icons": [
         {
             "src": "icon/apple-touch-icon-60x60.png",
