@@ -10,14 +10,14 @@ export function start () {
   var game = new Phaser.Game(240, 160, Phaser.AUTO);
 
   [
-    Boot,
-    Preload,
-    Logo,
-    Title,
-    Levels,
-    Credits,
-    Game
-  ].map(state => game.state.add(state.name, state));
+    [ 'Boot'   , Boot    ],
+    [ 'Preload', Preload ],
+    [ 'Logo'   , Logo    ],
+    [ 'Title'  , Title   ],
+    [ 'Levels' , Levels  ],
+    [ 'Credits', Credits ],
+    [ 'Game'   , Game    ],
+  ].map(([name, state]) => game.state.add(name, state));
 
   game.state.start('Boot');
 
