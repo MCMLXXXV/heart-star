@@ -91,6 +91,8 @@ Planned Updates
 *   Sound effects.
 *   Mobile controls (still being considered).
 *   Make a Texture Atlas of all the graphical assets used in the game.
+*   Properly manage settings, including game progress.
+*   Feature, off-line pages; click-to-play on feature page.
 
 
 Licensing
