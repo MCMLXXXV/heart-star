@@ -90,7 +90,6 @@ Planned Updates
 
 *   Sound effects.
 *   Mobile controls (still being considered).
-*   Make game playable offline (offline-cache & webapp manifest review).
 *   Make a Texture Atlas of all the graphical assets used in the game.
 
 
