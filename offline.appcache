@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Time: Sun Jan 18 2015 13:43:21 GMT-0200 (BRST)
+# Time: Tue Mar 03 2015 16:33:44 GMT-0300 (BRT)
 
 
 CACHE:
@@ -28,6 +28,7 @@ icon/mstile-150x150.png
 icon/mstile-310x150.png
 icon/mstile-310x310.png
 icon/mstile-70x70.png
+assets/tilemaps/tilemaps.json
 assets/images/background-credits-ai.png
 assets/images/background-credits-rb.png
 assets/images/background-level-select.png
@@ -80,7 +81,6 @@ assets/images/retractable-heart.png
 assets/images/retractable-star.png
 assets/images/tileset.png
 assets/images/trap.png
-assets/tilemaps/tilemaps.json
 
 
 NETWORK:
