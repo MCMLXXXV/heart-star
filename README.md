@@ -67,12 +67,15 @@ Then, a tab on your favorite browser should open, pointed to
 *   [localForage][lfor], responsible for in game data storage management—mainly
     the unlockable levels!
 
-*   All program code is written using the ECMAScript 6 dialect of JavaScript.
-    [6to5][6to5] is used to make it compatible with today's browsers.
+*   All game code written in the upcoming ECMAScript 2015 JavaScript dialect.
+    Source-to-source compiler [Babel][babl] is used to make it compatible with
+    today's browsers.
 
 *   [BrowserSync][bsnc] as development server.
 
-*   [Node.js][node] development environment; [Gulp][gulp] task manager.
+*   [Gulp][gulp] task manager.
+
+*   Development environment compatible with [Node][node] and [io.js][iojs].
 
 
 Planned Updates
@@ -108,17 +111,18 @@ license][cc-l].
 
 <!-- ---------------------------------------------------------------------- -->
 
-[6to5]: https://6to5.org/
-[phsr]: http://phaser.io/
-[gulp]: http://gulpjs.com/
-[node]: http://nodejs.org/
+[iojs]: https://iojs.org/
+[phsr]: https://phaser.io/
 [gscm]: http://git-scm.com/
+[babl]: https://babeljs.io/
+[gulp]: https://gulpjs.com/
+[node]: https://nodejs.org/
 [bsnc]: http://browsersync.io/
 [tild]: http://www.mapeditor.org/
 [advi]: http://simpanen.carbonmade.com/
-[demo]: http://rblopes.github.io/heart-star/
-[lfor]: http://mozilla.github.io/localForage/
-[cc-l]: http://creativecommons.org/licenses/by-nc-sa/3.0/
+[demo]: https://rblopes.github.io/heart-star/
+[lfor]: https://mozilla.github.io/localForage/
+[cc-l]: https://creativecommons.org/licenses/by-nc-sa/3.0/
 [dwld]: https://github.com/rblopes/heart-star/archive/dev.zip
 [mitl]: https://github.com/rblopes/heart-star/blob/master/LICENSE
 [ld-g]: http://ludumdare.com/compo/ludum-dare-30/?action=preview&uid=11391
