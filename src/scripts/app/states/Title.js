@@ -47,8 +47,8 @@ export default class Title extends Phaser.State {
 
   _swingTitleLabel (image) {
     this.add.tween(image)
-      .to({ y: image.y + 8 }, 1500, Phaser.Easing.Quadratic.InOut)
-      .to({ y: image.y }, 1500, Phaser.Easing.Quadratic.InOut)
+      .to({ y: '+8' }, 1500, 'Quad.easeInOut')
+      .to({ y: '-8' }, 1500, 'Quad.easeInOut')
       .loop()
       .start();
   }
