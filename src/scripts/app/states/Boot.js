@@ -38,7 +38,6 @@ export default class Boot extends Phaser.State {
 
     this.scale.setMinMax(720, 480, 960, 640);
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
-    this.scale.setScreenSize(true);
 
     this.stage.smoothed = false;
   }
