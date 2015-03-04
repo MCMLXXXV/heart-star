@@ -27,13 +27,11 @@ export default class Logo extends Phaser.State {
   }
 
   _makeLogoFadeEffect (logo, chainWith = null) {
-    var easingFunction = Phaser.Easing.Sinusoidal.Out;
-
     var reveal = this._makeTween(logo, chainWith);
     var fade   = this._makeTween(logo, reveal);
 
-    reveal.from({ alpha: 0 }, 1000, easingFunction, false, 1500);
-    fade.to({ alpha: 0 }, 1000, easingFunction, false, 1500);
+    reveal.from({ alpha: 0 }, 1000, 'Sine.easeOut', false, 1500);
+    fade.to({ alpha: 0 }, 1000, 'Sine.easeOut', false, 1500);
 
     return [ reveal, fade ];
   }
