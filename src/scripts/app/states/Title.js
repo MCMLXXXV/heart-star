@@ -30,8 +30,8 @@ export default class Title extends Phaser.State {
   // --------------------------------------------------------------------------
 
   _makeMenuButtons () {
-    this.add.existing(new MenuButton(this.game, 110, 'button-menu-start', 'Levels'));
-    this.add.existing(new MenuButton(this.game, 130, 'button-menu-credits', 'Credits'));
+    this.add.existing(new MenuButton(this.game, 110, 'start', 'Levels'));
+    this.add.existing(new MenuButton(this.game, 130, 'credits', 'Credits'));
   }
 
   _placeCharacter (name, x) {

@@ -1,10 +1,7 @@
-const DISABLED_BUTTON_FRAME = 'button-level-locked';
-
-
 class LevelButton extends Phaser.Button {
 
   constructor (game, x, y, level, locked = true) {
-    super(game, x, y, DISABLED_BUTTON_FRAME);
+    super(game, x, y, 'buttons', null, null, 'level-locked', 'level-locked');
 
     this.position.set(x, y);
 
@@ -17,8 +14,7 @@ class LevelButton extends Phaser.Button {
   // --------------------------------------------------------------------------
 
   _unlockButton (level) {
-    this.loadTexture(this._getButtonTextureKey(level));
-    this.setFrames(1, 0);
+    this.setFrames(`level-${level}-over`, `level-${level}-out`);
     this.input.useHandCursor = true;
     this.onInputUp.add(this._doTransition, this);
   }

@@ -1,7 +1,9 @@
 class BackButton extends Phaser.Button {
 
   constructor(game) {
-    super(game, 240, 160, 'button-menu-more', this._doTransition, this, 1, 0);
+    super(
+      game, 240, 160, 'buttons', this._doTransition, this,
+      'more-over', 'more-out');
 
     this.anchor.set(1);
 

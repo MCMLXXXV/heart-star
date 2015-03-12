@@ -1,7 +1,9 @@
 class MenuButton extends Phaser.Button {
 
   constructor (game, y, key, nextState) {
-    super(game, 120, y, key, this._doTransition, this, 1, 0);
+    super(
+      game, 120, y, 'buttons', this._doTransition, this,
+      `${key}-over`, `${key}-out`);
 
     this.anchor.set(0.5, 0);
     this.input.useHandCursor = true;
