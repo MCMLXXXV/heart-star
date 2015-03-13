@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Time: Fri Mar 13 2015 19:18:33 GMT-0300 (BRT)
+# Time: Tue Mar 17 2015 18:44:07 GMT-0300 (BRT)
 
 
 CACHE:
@@ -36,22 +36,12 @@ assets/images/bg-pattern-heart-star.png
 assets/images/bg-pattern-heart.png
 assets/images/bg-pattern-moon.png
 assets/images/bg-pattern-star.png
-assets/images/button-game-heart.png
-assets/images/button-game-moon.png
-assets/images/button-game-star.png
 assets/images/buttons.png
-assets/images/character-heart.png
-assets/images/character-star.png
+assets/images/characters.png
 assets/images/labels.png
-assets/images/platform-fixed-1.png
-assets/images/platform-fixed-2.png
-assets/images/platform-goal.png
-assets/images/preloader-background.png
-assets/images/retractable-both.png
-assets/images/retractable-heart.png
-assets/images/retractable-star.png
+assets/images/objects.png
+assets/images/splash-screen.png
 assets/images/tileset.png
-assets/images/trap.png
 assets/tilemaps/tilemaps.json
 
 
