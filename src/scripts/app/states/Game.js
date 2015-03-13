@@ -112,7 +112,7 @@ export default class Game extends Phaser.State {
 
   _placeTutorialLabel (name) {
     if (this._tutorialLabel === null) {
-      this._tutorialLabel = this.make.image(0, 0, null);
+      this._tutorialLabel = this.make.image(0, 0, 'labels');
       this._moonGroup.add(this._tutorialLabel);
     }
 
@@ -121,7 +121,7 @@ export default class Game extends Phaser.State {
     }
     else {
       this._tutorialLabel.alpha = 1;
-      this._tutorialLabel.loadTexture(name);
+      this._tutorialLabel.frameName = name;
     }
   }
 

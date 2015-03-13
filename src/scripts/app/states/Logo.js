@@ -3,8 +3,8 @@ export default class Logo extends Phaser.State {
   create () {
     this.stage.backgroundColor = 0x000000; // black
 
-    var aiLogo = this.add.image(0, 0, 'logo-adventure-islands');
-    var rbLogo = this.add.image(0, 0, 'logo-rb');
+    var aiLogo = this.add.image(0, 0, 'labels', 'logo-adventure-islands');
+    var rbLogo = this.add.image(0, 0, 'labels', 'logo-rb');
     rbLogo.alpha = 0; // Phaser BUG
 
     var [ first, second ] = this._makeLogoFadeEffect(aiLogo);

@@ -1,3 +1,4 @@
+import labels  from './labels';
 import buttons from './buttons';
 
 
@@ -131,63 +132,10 @@ export default {
     },
 
     {
-      'type': 'image',
-      'key': 'label-carrying-partners',
-      'url': 'images/label-carrying-partners.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-credits-ai',
-      'url': 'images/label-credits-ai.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-credits-rb',
-      'url': 'images/label-credits-rb.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-game-primer',
-      'url': 'images/label-game-primer.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-hero-blocks',
-      'url': 'images/label-hero-blocks.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-level-select',
-      'url': 'images/label-level-select.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-title',
-      'url': 'images/label-title.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-version',
-      'url': 'images/label-version.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'logo-adventure-islands',
-      'url': 'images/logo-adventure-islands.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'logo-rb',
-      'url': 'images/logo-rb.png',
+      'type': 'atlasJSONHash',
+      'key': 'labels',
+      'textureURL': 'images/labels.png',
+      'atlasData': labels
     },
 
     {
