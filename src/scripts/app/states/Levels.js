@@ -1,5 +1,5 @@
-import BackButton        from '../objects/BackButton';
 import StageButton       from '../objects/LevelButton';
+import MenuOptionButton  from '../objects/MenuOptionButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
 
@@ -17,7 +17,7 @@ export default class Levels extends Phaser.State {
 
     this.add.image(0, 32, 'labels', 'label-level-select');
 
-    this.add.existing(new BackButton(this.game));
+    this.add.existing(new MenuOptionButton(this.game));
 
     this.game.storage.getItem('levels', this._addStageButtons, this);
   }

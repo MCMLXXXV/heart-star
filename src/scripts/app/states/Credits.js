@@ -1,7 +1,7 @@
 import credits from '../data/credits';
 
-import BackButton        from '../objects/BackButton';
 import LinkButton        from '../objects/LinkButton';
+import MenuOptionButton  from '../objects/MenuOptionButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
 const DEFAULT_SCREEN = 'adventure-islands';
@@ -48,12 +48,12 @@ export default class Credits extends Phaser.State {
   }
 
   _addMenuButtons (screen, addMoreButton = false) {
-    let backButton = this.add.existing(new BackButton(this.game, 0, 0));
+    let backButton = this.add.existing(new MenuOptionButton(this.game, 0, 0));
     backButton.onInputUp.addOnce(() => this._doTransition('Title'));
 
     if (addMoreButton) {
       let moreButton = this.add.existing(
-        new BackButton(this.game, 192, 144, BackButton.MORE));
+        new MenuOptionButton(this.game, 192, 144, MenuOptionButton.MORE));
       moreButton.onInputUp.addOnce(() => this._doTransition('Credits', 'rb'));
     }
   }
