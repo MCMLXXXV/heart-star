@@ -1,5 +1,7 @@
-const BACK = 'back';
-const MORE = 'more';
+const BACK    = 'back';
+const MORE    = 'more';
+const START   = 'start';
+const CREDITS = 'credits';
 
 
 class MenuOptionButton extends Phaser.Button {
@@ -13,8 +15,10 @@ class MenuOptionButton extends Phaser.Button {
 }
 
 
-MenuOptionButton.BACK = BACK;
-MenuOptionButton.MORE = MORE;
+MenuOptionButton.BACK    = BACK;
+MenuOptionButton.MORE    = MORE;
+MenuOptionButton.START   = START;
+MenuOptionButton.CREDITS = CREDITS;
 
 
 export default MenuOptionButton;

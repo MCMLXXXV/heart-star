@@ -1,6 +1,6 @@
 import levels from '../data/levels';
 
-import MenuButton        from '../objects/MenuButton';
+import MenuOptionButton  from '../objects/MenuOptionButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
 
@@ -9,7 +9,7 @@ export default class Title extends Phaser.State {
   init (transitionName = 'fade-from-black') {
     this.game.transitions.registerTransition(transitionName);
     this.game.transitions.registerTransitionCallback(
-      this._makeMenuButtons, this);
+      () => this._makeMenuButtons());
   }
 
   create () {
@@ -30,8 +30,18 @@ export default class Title extends Phaser.State {
   // --------------------------------------------------------------------------
 
   _makeMenuButtons () {
-    this.add.existing(new MenuButton(this.game, 110, 'start', 'Levels'));
-    this.add.existing(new MenuButton(this.game, 130, 'credits', 'Credits'));
+    this.add.existing(
+      this._makeMenuOptionButton(110, MenuOptionButton.START, 'Levels'));
+    this.add.existing(
+      this._makeMenuOptionButton(130, MenuOptionButton.CREDITS, 'Credits'));
+  }
+
+  _makeMenuOptionButton(y, type, stateName) {
+    let button = new MenuOptionButton(this.game, 80, y, type);
+
+    button.onInputUp.add(() => this._doTransition(stateName));
+
+    return button;
   }
 
   _placeCharacter (name, x) {
@@ -56,6 +66,17 @@ export default class Title extends Phaser.State {
   _probeUnlockedStages (err, unlockedStages) {
     if (unlockedStages === null)
       this.game.storage.setItem('levels', levels);
+  }
+
+  _doTransition (stateName, ... params) {
+    this.game.transitions.registerTransition('fade-to-black');
+    this.game.transitions.registerTransitionCallback(
+      () => this._goToState(stateName, ... params));
+    this.game.transitions.doTransition();
+  }
+
+  _goToState (stateName, ... params) {
+    this.game.state.start(stateName, true, false, ... params);
   }
 
 }
