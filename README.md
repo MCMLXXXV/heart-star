@@ -1,4 +1,4 @@
-Heart Star
+[Heart Star][demo]
 ===============================================================================
 
 A port of the game originally created by [Jussi Simpanen][advi] for [Ludum Dare
@@ -64,6 +64,9 @@ Then, a tab on your favorite browser should open, pointed to
 *   Game levels and some background images composed using [Tiled Map
     Editor][tild].
 
+*   Some graphics converted into Texture Atlases using
+    [@krzysztof-o's `spritesheet-js`][ssjs] CLI tool.
+
 *   [localForage][lfor], responsible for in game data storage management—mainly
     the unlockable levels!
 
@@ -122,6 +125,7 @@ license][cc-l].
 [advi]: http://simpanen.carbonmade.com/
 [demo]: https://rblopes.github.io/heart-star/
 [lfor]: https://mozilla.github.io/localForage/
+[ssjs]: https://github.com/krzysztof-o/spritesheet.js
 [cc-l]: https://creativecommons.org/licenses/by-nc-sa/3.0/
 [dwld]: https://github.com/rblopes/heart-star/archive/dev.zip
 [mitl]: https://github.com/rblopes/heart-star/blob/master/LICENSE
