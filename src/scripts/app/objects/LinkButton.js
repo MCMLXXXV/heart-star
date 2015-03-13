@@ -1,7 +1,9 @@
 class LinkButton extends Phaser.Button {
 
   constructor (game, x, key, url = null) {
-    super(game, x, 47, this._getFaceTexture(key), this._openPopup, this, 1, 0);
+    super(
+      game, x, 47, 'buttons', this._openPopup, this,
+      `link-${key}-over`, `link-${key}-out`);
 
     this.anchor.set(0.5, 0);
 
@@ -10,16 +12,6 @@ class LinkButton extends Phaser.Button {
   }
 
   // --------------------------------------------------------------------------
-
-  _getFaceTexture (key) {
-    switch (key) {
-      case 'github'           : return 'button-link-github';
-      case 'facebook'         : return 'button-link-facebook';
-      case 'twitter'          : return 'button-link-twitter';
-      case 'deviantart'       : return 'button-link-deviantart';
-      case 'adventure-islands': return 'button-link-adventure-islands';
-    }
-  }
 
   _openPopup () {
     if (this.url !== null) window.open(this.url);

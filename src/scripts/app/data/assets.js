@@ -1,3 +1,7 @@
+import labels  from './atlases/labels';
+import buttons from './atlases/buttons';
+
+
 export default {
 
   // - Game Boot Assets -------------------------------------------------------
@@ -99,199 +103,10 @@ export default {
     },
 
     {
-      'type': 'spritesheet',
-      'key': 'button-link-adventure-islands',
-      'url': 'images/button-link-adventure-islands.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-link-deviantart',
-      'url': 'images/button-link-deviantart.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-link-github',
-      'url': 'images/button-link-github.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-link-facebook',
-      'url': 'images/button-link-facebook.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-link-twitter',
-      'url': 'images/button-link-twitter.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-menu-back',
-      'url': 'images/button-menu-back.png',
-      'frameWidth': 48,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-menu-credits',
-      'url': 'images/button-menu-credits.png',
-      'frameWidth': 80,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-menu-more',
-      'url': 'images/button-menu-more.png',
-      'frameWidth': 48,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-menu-start',
-      'url': 'images/button-menu-start.png',
-      'frameWidth': 80,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-level-01',
-      'url': 'images/button-level-01.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-level-02',
-      'url': 'images/button-level-02.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-level-03',
-      'url': 'images/button-level-03.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-level-04',
-      'url': 'images/button-level-04.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-level-05',
-      'url': 'images/button-level-05.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-level-06',
-      'url': 'images/button-level-06.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-level-07',
-      'url': 'images/button-level-07.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-level-08',
-      'url': 'images/button-level-08.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-level-09',
-      'url': 'images/button-level-09.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-level-10',
-      'url': 'images/button-level-10.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 0,
-      'spacing': 0
-    },
-
-    {
-      'type': 'image',
-      'key': 'button-level-locked',
-      'url': 'images/button-level-locked.png',
+      'type': 'atlasJSONHash',
+      'key': 'buttons',
+      'textureURL': 'images/buttons.png',
+      'atlasData': buttons
     },
 
     {
@@ -317,63 +132,10 @@ export default {
     },
 
     {
-      'type': 'image',
-      'key': 'label-carrying-partners',
-      'url': 'images/label-carrying-partners.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-credits-ai',
-      'url': 'images/label-credits-ai.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-credits-rb',
-      'url': 'images/label-credits-rb.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-game-primer',
-      'url': 'images/label-game-primer.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-hero-blocks',
-      'url': 'images/label-hero-blocks.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-level-select',
-      'url': 'images/label-level-select.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-title',
-      'url': 'images/label-title.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'label-version',
-      'url': 'images/label-version.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'logo-adventure-islands',
-      'url': 'images/logo-adventure-islands.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'logo-rb',
-      'url': 'images/logo-rb.png',
+      'type': 'atlasJSONHash',
+      'key': 'labels',
+      'textureURL': 'images/labels.png',
+      'atlasData': labels
     },
 
     {

@@ -17,7 +17,7 @@ export default class Title extends Phaser.State {
 
     this.add.existing(new BackgroundPattern(this.game));
     this.add.image(0, 0, 'background-title');
-    this.add.image(this.world.width, 0, 'label-version').anchor.set(1, 0);
+    this.add.image(this.world.width, 0, 'labels', 'label-version').anchor.set(1, 0);
     this._placeCharacter('character-heart',  64);
     this._placeCharacter('character-star' , 176);
 
@@ -30,8 +30,8 @@ export default class Title extends Phaser.State {
   // --------------------------------------------------------------------------
 
   _makeMenuButtons () {
-    this.add.existing(new MenuButton(this.game, 110, 'button-menu-start', 'Levels'));
-    this.add.existing(new MenuButton(this.game, 130, 'button-menu-credits', 'Credits'));
+    this.add.existing(new MenuButton(this.game, 110, 'start', 'Levels'));
+    this.add.existing(new MenuButton(this.game, 130, 'credits', 'Credits'));
   }
 
   _placeCharacter (name, x) {
@@ -42,7 +42,7 @@ export default class Title extends Phaser.State {
   }
 
   _addTitleLabel (y) {
-    return this.add.image(0, y, 'label-title');
+    return this.add.image(0, y, 'labels', 'label-title');
   }
 
   _swingTitleLabel (image) {

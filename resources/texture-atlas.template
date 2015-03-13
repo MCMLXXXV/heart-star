@@ -1,0 +1,16 @@
+export default {
+  meta: {
+    image: '{{{name}}}.png',
+    size: { w: {{width}}, h: {{height}} },
+    scale: '1'
+  },
+  frames: {
+  {{#files}}
+    '{{{name}}}': {
+      frame: { x: {{x}}, y: {{y}}, w: {{width}}, h: {{height}} },
+      spriteSourceSize: { x: 0, y: 0, w: {{width}}, h: {{height}} },
+      sourceSize: { w: {{width}}, h: {{height}} }
+    }{{^isLast}},{{/isLast}}
+  {{/files}}
+  }
+};
