@@ -44,6 +44,7 @@
     "start": "gulp default",
     "resources:buttons": "spritesheet-js --extension js --cf resources/texture-atlas.template -n buttons --powerOfTwo --padding 2 resources/graphics/buttons/*.png",
     "resources:labels": "spritesheet-js --extension js --cf resources/texture-atlas.template -n labels --powerOfTwo --padding 2 resources/graphics/labels/*.png",
+    "resources:characters": "spritesheet-js --extension js --cf resources/texture-atlas.template -n characters --powerOfTwo resources/graphics/characters/*.png",
     "postinstall": "bower install"
   },
   "license": "MIT"
