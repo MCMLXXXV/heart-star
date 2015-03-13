@@ -49,10 +49,24 @@ export default class Credits extends Phaser.State {
   }
 
   _addMenuButtons (screen, addMoreButton = false) {
-    this.add.existing(new BackButton(this.game));
+    let backButton = this.add.existing(new BackButton(this.game));
+    backButton.onInputUp.addOnce(() => this._doTransition('Title'));
 
-    if (addMoreButton)
-      this.add.existing(new MoreButton(this.game));
+    if (addMoreButton) {
+      let moreButton = this.add.existing(new MoreButton(this.game));
+      moreButton.onInputUp.addOnce(() => this._doTransition('Credits', 'rb'));
+    }
+  }
+
+  _doTransition (stateName, ... params) {
+    this.game.transitions.registerTransition('fade-to-black');
+    this.game.transitions.registerTransitionCallback(
+      () => this._goToState(stateName, ... params));
+    this.game.transitions.doTransition();
+  }
+
+  _goToState (stateName, ... params) {
+    this.game.state.start(stateName, true, false, ... params);
   }
 
 }
