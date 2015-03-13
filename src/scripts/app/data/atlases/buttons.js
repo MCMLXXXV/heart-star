@@ -1,9 +1,4 @@
 export default {
-  meta: {
-    image: 'buttons.png',
-    size: { w: 256, h: 256 },
-    scale: '1'
-  },
   frames: {
     'start-over': {
       frame: { x: 158, y: 22, w: 80, h: 16 },

@@ -1,9 +1,4 @@
 export default {
-  meta: {
-    image: 'labels.png',
-    size: { w: 1024, h: 512 },
-    scale: '1'
-  },
   frames: {
     'label-version': {
       frame: { x: 490, y: 344, w: 34, h: 8 },

@@ -1,9 +1,4 @@
 export default {
-  meta: {
-    image: '{{{name}}}.png',
-    size: { w: {{width}}, h: {{height}} },
-    scale: '1'
-  },
   frames: {
   {{#files}}
     '{{{name}}}': {
