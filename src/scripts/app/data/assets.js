@@ -1,5 +1,5 @@
-import labels  from './labels';
-import buttons from './buttons';
+import labels  from './atlases/labels';
+import buttons from './atlases/buttons';
 
 
 export default {
