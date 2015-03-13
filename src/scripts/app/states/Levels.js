@@ -18,7 +18,7 @@ export default class Levels extends Phaser.State {
     this.add.image(0, 32, 'labels', 'label-level-select');
 
     let backButton = new MenuOptionButton(this.game, 0, 0);
-    backButton.onInputUp.addOnce(() => this._doTransition('Title'));
+    backButton.onInputUp.add(() => this._doTransition('Title'));
     this.add.existing(backButton);
 
     this.game.storage.getItem('levels', this._addStageButtons, this);
