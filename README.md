@@ -67,7 +67,7 @@ Then, a tab on your favorite browser should open, pointed to
 *   Some graphics converted into Texture Atlases using
     [@krzysztof-o's `spritesheet-js`][ssjs] CLI tool.
 
-*   [localForage][lfor], responsible for in game data storage management—mainly
+*   [localForage][lfor], responsible for in-game data storage management—mainly
     the unlockable levels!
 
 *   All game code written in the upcoming ECMAScript 2015 JavaScript dialect.
