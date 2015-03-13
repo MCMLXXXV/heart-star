@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Time: Tue Mar 03 2015 16:33:44 GMT-0300 (BRT)
+# Time: Fri Mar 13 2015 19:18:33 GMT-0300 (BRT)
 
 
 CACHE:
@@ -28,7 +28,6 @@ icon/mstile-150x150.png
 icon/mstile-310x150.png
 icon/mstile-310x310.png
 icon/mstile-70x70.png
-assets/tilemaps/tilemaps.json
 assets/images/background-credits-ai.png
 assets/images/background-credits-rb.png
 assets/images/background-level-select.png
@@ -40,38 +39,10 @@ assets/images/bg-pattern-star.png
 assets/images/button-game-heart.png
 assets/images/button-game-moon.png
 assets/images/button-game-star.png
-assets/images/button-level-01.png
-assets/images/button-level-02.png
-assets/images/button-level-03.png
-assets/images/button-level-04.png
-assets/images/button-level-05.png
-assets/images/button-level-06.png
-assets/images/button-level-07.png
-assets/images/button-level-08.png
-assets/images/button-level-09.png
-assets/images/button-level-10.png
-assets/images/button-level-locked.png
-assets/images/button-link-adventure-islands.png
-assets/images/button-link-deviantart.png
-assets/images/button-link-facebook.png
-assets/images/button-link-github.png
-assets/images/button-link-twitter.png
-assets/images/button-menu-back.png
-assets/images/button-menu-credits.png
-assets/images/button-menu-more.png
-assets/images/button-menu-start.png
+assets/images/buttons.png
 assets/images/character-heart.png
 assets/images/character-star.png
-assets/images/label-carrying-partners.png
-assets/images/label-credits-ai.png
-assets/images/label-credits-rb.png
-assets/images/label-game-primer.png
-assets/images/label-hero-blocks.png
-assets/images/label-level-select.png
-assets/images/label-title.png
-assets/images/label-version.png
-assets/images/logo-adventure-islands.png
-assets/images/logo-rb.png
+assets/images/labels.png
 assets/images/platform-fixed-1.png
 assets/images/platform-fixed-2.png
 assets/images/platform-goal.png
@@ -81,6 +52,7 @@ assets/images/retractable-heart.png
 assets/images/retractable-star.png
 assets/images/tileset.png
 assets/images/trap.png
+assets/tilemaps/tilemaps.json
 
 
 NETWORK:
