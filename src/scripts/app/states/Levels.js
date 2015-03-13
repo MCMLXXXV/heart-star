@@ -38,7 +38,14 @@ export default class Levels extends Phaser.State {
   }
 
   _makeStageButton (x, y, level, buttonFace, locked) {
-    return new StageButton(this.game, x, y, level, locked);
+    let button = new StageButton(this.game, x, y, level);
+
+    if (!locked) {
+      button.unlock();
+      button.onInputUp.add(() => this._doTransition('Game', level));
+    }
+
+    return button;
   }
 
   _doTransition (stateName, ... params) {
