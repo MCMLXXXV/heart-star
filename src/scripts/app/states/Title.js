@@ -18,11 +18,9 @@ export default class Title extends Phaser.State {
     this.add.existing(new BackgroundPattern(this.game));
     this.add.image(0, 0, 'background-title');
     this.add.image(this.world.width, 0, 'labels', 'label-version').anchor.set(1, 0);
-    this._placeCharacter('character-heart',  64);
-    this._placeCharacter('character-star' , 176);
-
-    var titleLabel = this._addTitleLabel(18);
-    this._swingTitleLabel(titleLabel);
+    this._addSwingingTitleLabel(18);
+    this._placeCharacter('heart',  64);
+    this._placeCharacter('star' , 176);
 
     this.game.storage.getItem('levels', this._probeUnlockedStages, this);
   }
@@ -45,18 +43,14 @@ export default class Title extends Phaser.State {
   }
 
   _placeCharacter (name, x) {
-    var sprite = this.add.sprite(x, 96, name);
+    let sprite = this.add.sprite(x, 96, `character-${name}`);
 
     sprite.anchor.set(0.5, 1);
-    sprite.animations.add('star', [ 4, 5, 6, 7 ], 4, true).play();
+    sprite.animations.add('main', [ 4, 5, 6, 7 ], 4, true).play();
   }
 
-  _addTitleLabel (y) {
-    return this.add.image(0, y, 'labels', 'label-title');
-  }
-
-  _swingTitleLabel (image) {
-    this.add.tween(image)
+  _addSwingingTitleLabel (y) {
+    this.add.tween(this.add.image(0, y, 'labels', 'label-title'))
       .to({ y: '+8' }, 1500, 'Quad.easeInOut')
       .to({ y: '-8' }, 1500, 'Quad.easeInOut')
       .loop()
