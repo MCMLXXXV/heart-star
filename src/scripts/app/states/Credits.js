@@ -39,9 +39,9 @@ export default class Credits extends Phaser.State {
   }
 
   _addLinkButtons (links) {
-    let firstCol = 120 - (links.length - 1) * 16;
+    const firstCol = 120 - (links.length - 1) * 16;
 
-    links.map(({ page, url }, i) => {
+    links.forEach(({ page, url }, i) => {
       let x = firstCol + 32 * i;
       this.add.existing(this._makeLinkButton(x, page, url));
     });
