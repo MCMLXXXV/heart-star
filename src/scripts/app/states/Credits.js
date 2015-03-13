@@ -1,7 +1,6 @@
 import credits from '../data/credits';
 
 import BackButton        from '../objects/BackButton';
-import MoreButton        from '../objects/MoreButton';
 import LinkButton        from '../objects/LinkButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
@@ -49,11 +48,12 @@ export default class Credits extends Phaser.State {
   }
 
   _addMenuButtons (screen, addMoreButton = false) {
-    let backButton = this.add.existing(new BackButton(this.game));
+    let backButton = this.add.existing(new BackButton(this.game, 0, 0));
     backButton.onInputUp.addOnce(() => this._doTransition('Title'));
 
     if (addMoreButton) {
-      let moreButton = this.add.existing(new MoreButton(this.game));
+      let moreButton = this.add.existing(
+        new BackButton(this.game, 192, 144, BackButton.MORE));
       moreButton.onInputUp.addOnce(() => this._doTransition('Credits', 'rb'));
     }
   }
