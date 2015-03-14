@@ -4,11 +4,11 @@ import Base from './Base';
 export default class Blinds extends Base {
 
   reveal (duration) {
-    this._tweenProperty(duration, 0, -1).start();
+    this._tweenProperty(duration, 0, 1).start();
   }
 
   hide (duration) {
-    this._tweenProperty(duration, 1, 0).start();
+    this._tweenProperty(duration, -1, 0).start();
   }
 
   // --------------------------------------------------------------------------
