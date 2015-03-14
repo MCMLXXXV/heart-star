@@ -7,10 +7,6 @@ export default class Blackout extends Base {
     this.buffer.fill(0, 0, 0);
   }
 
-  _closeEffect () {
-    this.buffer.fill(0, 0, 0, 0);
-  }
-
   _processEffect () {
     this.sprite.alpha = 1 - this.tweeningProperty;
   }
