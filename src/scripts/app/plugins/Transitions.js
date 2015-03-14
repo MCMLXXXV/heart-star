@@ -4,7 +4,8 @@ export default class Transitions extends Phaser.Plugin {
     this.effects = {};
 
     this.buffer = this._makeBuffer();
-    this.game.stage.addChild(this.game.make.sprite(0, 0, this.buffer));
+    this.sprite = this.game.make.image(0, 0, this.buffer);
+    this.game.stage.addChild(this.sprite);
   }
 
   // --------------------------------------------------------------------------
@@ -16,15 +17,15 @@ export default class Transitions extends Phaser.Plugin {
     this.effects[effectName] = effect;
   }
 
-  clear () {
-    this.buffer.clear();
-  }
-
   reveal (effectName, duration, callback = () => {}, context = null) {
     let effect = this.effects[effectName];
 
     effect.reveal(duration);
     effect.completed.addOnce(callback, context);
+  }
+
+  hide (effectName, duration, callback = () => {}, context = null) {
+    // TODO
   }
 
   toState (stateName, effectName, duration, ... args) {
