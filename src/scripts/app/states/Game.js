@@ -166,8 +166,7 @@ export default class Game extends Phaser.State {
   _resetGameStage () {
     if (!this.inGame) return;
 
-    // this.game.transitions.registerTransition('copy');
-    // this.game.transitions.doTransition();
+    this.game.transitions.reveal('copy', 500);
 
     this._changeActors(this._heart, this._star);
     this._restartActor(this._heart, this.heartCoordinates);
