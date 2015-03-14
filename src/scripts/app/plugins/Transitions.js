@@ -12,7 +12,6 @@ export default class Transitions extends Phaser.Plugin {
 
   register (effectName, factory) {
     let effect = new factory(this.game, this.buffer, this.sprite);
-    effect.completed.add(() => console.log('...'));
 
     this.effects[effectName] = effect;
   }
