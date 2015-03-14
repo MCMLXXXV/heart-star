@@ -1,44 +1,21 @@
-class Iris extends Phaser.Image {
+import Base from './Base';
 
-  constructor (game, width, height) {
-    this._bitmap = game.make.bitmapData(width, height);
 
-    super(game, 0, 0, this._bitmap);
+export default class Iris extends Base {
 
-    this.clear();
+  _closeEffect () {
+    this.buffer.blendSourceOver();
   }
 
-  // --------------------------------------------------------------------------
+  _processEffect (value) {
+    let { buffer } = this;
+    let { width, height } = buffer;
+    const radius = Math.sqrt(width * width + height * height) / 2 * value;
 
-  clear () {
-    this.aperture = 1;
-  }
-
-  // --------------------------------------------------------------------------
-
-  _drawAperture (aperture) {
-    var bitmap = this._bitmap;
-    var { width, height } = bitmap;
-    var radius = aperture * Phaser.Math.distance(width, height, 0, 0) / 2;
-
-    bitmap.blendSourceOver();
-    bitmap.fill(0, 0, 0);
-    bitmap.blendDestinationOut();
-    bitmap.circle(width / 2, height / 2, radius, 'white');
-  }
-
-  // --------------------------------------------------------------------------
-
-  get aperture () {
-    return this._aperture;
-  }
-
-  set aperture (newValue) {
-    this._drawAperture(newValue);
-    this._aperture = newValue;
+    buffer.blendSourceOver();
+    buffer.fill(0, 0, 0);
+    buffer.blendDestinationOut();
+    buffer.circle(width / 2, height / 2, radius, 'white');
   }
 
 }
-
-
-export default Iris;

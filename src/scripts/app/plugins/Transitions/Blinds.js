@@ -1,44 +1,37 @@
-class Blinds extends Phaser.Image {
+import Base from './Base';
 
-  constructor (game, width, height) {
-    this._bitmap = game.make.bitmapData(width, height);
 
-    super(game, 0, 0, this._bitmap);
+export default class Blinds extends Base {
 
-    this.clear();
+  reveal (duration) {
+    this._tweenProperty(duration, 0, -1).start();
+  }
+
+  hide (duration) {
+    this._tweenProperty(duration, 1, 0).start();
   }
 
   // --------------------------------------------------------------------------
 
-  clear () {
-    this.aperture = 0;
+  _prepareEffect () {
+    this.sprite.alpha = 1;
   }
 
-  // --------------------------------------------------------------------------
-
-  _drawAperture (aperture) {
-    var bitmap = this._bitmap;
-    var { height } = bitmap;
-
-    bitmap.clear();
-
-    for (var i = 0; i < 12; ++i)
-      bitmap.rect(24 * i, 0, 24 * aperture, height);
-
-    this._aperture = aperture;
+  _closeEffect () {
+    this.buffer.blendSourceOver();
   }
 
-  // --------------------------------------------------------------------------
+  _processEffect (value) {
+    let { buffer } = this;
+    let { height } = buffer;
 
-  get aperture () {
-    return this._aperture;
-  }
+    buffer.blendSourceOver();
+    buffer.fill(0, 0, 0);
+    buffer.blendDestinationOut();
 
-  set aperture (newValue) {
-    this._drawAperture(newValue);
+    for (let i = 0; i < 12; ++i) {
+      buffer.rect(24 * i, 0, 24 * value, height);
+    }
   }
 
 }
-
-
-export default Blinds;

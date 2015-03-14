@@ -6,15 +6,12 @@ import BackgroundPattern from '../objects/BackgroundPattern';
 
 export default class Title extends Phaser.State {
 
-  init (transitionName = 'fade-from-black') {
-    this.game.transitions.registerTransition(transitionName);
-    this.game.transitions.registerTransitionCallback(
-      () => this._makeMenuButtons());
+  init (effectName = 'iris') {
+    this.game.transitions.reveal(
+      effectName, 1000, this._makeMenuButtons, this);
   }
 
   create () {
-    this.game.transitions.doTransition();
-
     this.add.existing(new BackgroundPattern(this.game));
     this.add.image(0, 0, 'background-title');
     this.add.image(this.world.width, 0, 'labels', 'label-version').anchor.set(1, 0);
@@ -37,7 +34,8 @@ export default class Title extends Phaser.State {
   _makeMenuOptionButton(y, type, stateName) {
     let button = new MenuOptionButton(this.game, 80, y, type);
 
-    button.onInputUp.add(() => this._doTransition(stateName));
+    button.onInputUp.add(
+      () => this.game.transitions.toState(stateName, 'blackout', 1000));
 
     return button;
   }
@@ -60,17 +58,6 @@ export default class Title extends Phaser.State {
   _probeUnlockedStages (err, unlockedStages) {
     if (unlockedStages === null)
       this.game.storage.setItem('levels', levels);
-  }
-
-  _doTransition (stateName, ... params) {
-    this.game.transitions.registerTransition('fade-to-black');
-    this.game.transitions.registerTransitionCallback(
-      () => this._goToState(stateName, ... params));
-    this.game.transitions.doTransition();
-  }
-
-  _goToState (stateName, ... params) {
-    this.game.state.start(stateName, true, false, ... params);
   }
 
 }
