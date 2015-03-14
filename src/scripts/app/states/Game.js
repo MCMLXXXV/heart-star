@@ -144,12 +144,10 @@ export default class Game extends Phaser.State {
     let effectName;
 
     if (this._heart.idle) {
-      // TODO: Will use 'sky-blue' effect.
-      effectName = 'blackout';
+      effectName = 'sky-blue';
     }
     else if (this._star.idle) {
-      // TODO: Will use 'pink' effect.
-      effectName = 'blackout';
+      effectName = 'pink';
     }
 
     this.game.transitions.reveal(effectName, 400);
