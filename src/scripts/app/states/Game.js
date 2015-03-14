@@ -194,7 +194,7 @@ export default class Game extends Phaser.State {
   }
 
   _actorHurt () {
-    this.time.events.add(1500, this._preRestartActors, this);
+    this.time.events.add(1000, this._preRestartActors, this);
   }
 
   _celebrate () {

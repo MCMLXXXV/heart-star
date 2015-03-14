@@ -13,6 +13,10 @@ export default class Blinds extends Base {
 
   // --------------------------------------------------------------------------
 
+  _prepareEffect () {
+    this.sprite.alpha = 1;
+  }
+
   _closeEffect () {
     this.buffer.blendSourceOver();
   }
