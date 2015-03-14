@@ -2,7 +2,12 @@ import assets from '../data/assets';
 
 import Storage     from '../plugins/Storage';
 import GameControl from '../plugins/GameControl';
-// import Transitions from '../plugins/Transitions';
+import Transitions from '../plugins/Transitions';
+
+import Iris     from '../plugins/Transitions/Iris';
+// import Copy     from '../plugins/Transitions/Copy';
+// import Blinds   from '../plugins/Transitions/Blinds';
+import Blackout from '../plugins/Transitions/Blackout';
 
 
 export default class Boot extends Phaser.State {
@@ -11,9 +16,14 @@ export default class Boot extends Phaser.State {
   init () {
     this.load.baseURL = './assets/';
 
-    this.game.storage     = this.game.plugins.add(Storage, 'heart-star');
-    this.game.controls    = this.game.plugins.add(GameControl);
-    // this.game.transitions = this.game.plugins.add(Transitions);
+    this.game.storage  = this.game.plugins.add(Storage, 'heart-star');
+    this.game.controls = this.game.plugins.add(GameControl);
+
+    this.game.transitions = this.game.plugins.add(Transitions);
+    this.game.transitions.register('iris',     Iris);
+    // this.game.transitions.register('copy',     Copy);
+    // this.game.transitions.register('blinds',   Blinds);
+    this.game.transitions.register('blackout', Blackout);
 
     this.physics.startSystem(Phaser.Physics.ARCADE);
   }
