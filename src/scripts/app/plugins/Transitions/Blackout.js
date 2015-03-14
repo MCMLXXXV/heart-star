@@ -1,8 +1,9 @@
 export default class Iris {
 
-  constructor (game, buffer) {
+  constructor (game, buffer, sprite) {
     this.game   = game;
     this.buffer = buffer;
+    this.sprite = sprite;
 
     this.completed = new Phaser.Signal();
     this._alpha = 0;
@@ -11,28 +12,43 @@ export default class Iris {
   // --------------------------------------------------------------------------
 
   reveal (duration) {
-    this.tweeningProperty = 1;
-
-    this.game.add.tween(this)
-      .to({ tweeningProperty: 0 }, duration)
-      .start()
-      .onComplete.addOnce(() => this.completed.dispatch());
+    this._tweenProperty(duration, 1, 0).start();
   }
 
   hide (duration) {
-    this.tweeningProperty = 0;
-
-    this.game.add.tween(this)
-      .to({ tweeningProperty: 1 }, duration)
-      .start()
-      .onComplete.addOnce(() => this.completed.dispatch());
+    this._tweenProperty(duration, 0, 1).start();
   }
 
   // --------------------------------------------------------------------------
 
-  _draw () {
-    this.buffer.clear();
-    this.buffer.fill(0, 0, 0, this.tweeningProperty);
+  _tweenProperty (duration, initialValue, finalValue) {
+    this.tweeningProperty = initialValue;
+
+    this._prepareEffect();
+
+    let tween = this.game.add.tween(this)
+      .to({ tweeningProperty: finalValue }, duration);
+
+    tween.onComplete.addOnce(() => this.completed.dispatch());
+    tween.onComplete.addOnce(() => this._closeEffect());
+
+    return tween;
+  }
+
+  _prepareEffect () {
+    console.info('Blackout effect preparation…');
+
+    this.buffer.fill(0, 0, 0);
+  }
+
+  _closeEffect () {
+    console.info('Blackout effect closure…');
+
+    this.buffer.fill(0, 0, 0, 0);
+  }
+
+  _processEffect () {
+    this.sprite.alpha = this.tweeningProperty;
   }
 
   // --------------------------------------------------------------------------
@@ -43,7 +59,7 @@ export default class Iris {
 
   set tweeningProperty (value) {
     this._alpha = value;
-    this._draw();
+    this._processEffect();
   }
 
 }

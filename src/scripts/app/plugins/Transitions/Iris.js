@@ -11,29 +11,42 @@ export default class Iris {
   // --------------------------------------------------------------------------
 
   reveal (duration) {
-    this.tweeningProperty = 0;
-
-    this.game.add.tween(this)
-      .to({ tweeningProperty: 1 }, duration)
-      .start()
-      .onComplete.addOnce(() => this.completed.dispatch());
+    this._tweenProperty(duration, 0, 1).start();
   }
 
-  hide (duration, callback, context) {
-    this.tweeningProperty = 1;
-
-    this.game.add.tween(this)
-      .to({ tweeningProperty: 0 }, duration)
-      .start()
-      .onComplete.addOnce(callback, context);
+  hide (duration) {
+    this._tweenProperty(duration, 1, 0).start();
   }
 
   // --------------------------------------------------------------------------
 
-  _draw () {
-    let { buffer, _aperture: aperture } = this;
+  _tweenProperty (duration, initialValue, finalValue) {
+    this.tweeningProperty = initialValue;
+
+    this._prepareEffect();
+
+    let tween = this.game.add.tween(this)
+      .to({ tweeningProperty: finalValue }, duration);
+
+    tween.onComplete.addOnce(() => this.completed.dispatch());
+    tween.onComplete.addOnce(() => this._closeEffect());
+
+    return tween;
+  }
+
+  _prepareEffect () {
+    console.info('Iris effect preparation…');
+  }
+
+  _closeEffect () {
+    console.info('Iris effect closure…');
+    this.buffer.blendSourceOver();
+  }
+
+  _processEffect (value) {
+    let { buffer } = this;
     let { width, height } = buffer;
-    const radius = Math.sqrt(width * width + height * height) / 2 * aperture;
+    const radius = Math.sqrt(width * width + height * height) / 2 * value;
 
     buffer.blendSourceOver();
     buffer.fill(0, 0, 0);
@@ -49,7 +62,7 @@ export default class Iris {
 
   set tweeningProperty (value) {
     this._aperture = value;
-    this._draw();
+    this._processEffect(value);
   }
 
 }
