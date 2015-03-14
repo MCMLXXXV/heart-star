@@ -41,8 +41,9 @@ export default class Levels extends Phaser.State {
 
     if (!locked) {
       button.unlock();
-      // button.onInputUp.add(() => this._doTransition('Game', level));
-      button.onInputUp.add(() => this.state.start('Game', true, false, level));
+      button.onInputUp.addOnce(() => {
+        this.game.transitions.toState('Game', 'blackout', 1000, level);
+      });
     }
 
     return button;

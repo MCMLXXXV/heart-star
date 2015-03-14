@@ -8,8 +8,8 @@ import Agents from '../objects/Agents';
 
 export default class Game extends Phaser.State {
 
-  init (level = '01'/*, transitionName = 'fade-from-black'*/) {
-    // this.game.transitions.registerTransition(transitionName);
+  init (level = '01', effectName = 'blackout') {
+    this.game.transitions.reveal(effectName, 1000);
 
     this.controls = this.game.controls;
 
@@ -25,8 +25,6 @@ export default class Game extends Phaser.State {
   }
 
   create () {
-    // this.game.transitions.doTransition();
-
     this._levelDefinitions = this._getStageDefinitions(this.level);
 
     this._agents = this.add.existing(new Agents(this.game));
@@ -54,7 +52,7 @@ export default class Game extends Phaser.State {
     this._changeActors(this._heart, this._star);
 
     this.controls.spacebar.onUp.add(this._togglePlayerActor, this);
-    this.controls.esc.onUp.add(this._goBackToStageSelection, this);
+    this.controls.esc.onUp.add(this._goToStageSelection, this);
     this.controls.backspace.onUp.add(this._resetGameStage, this);
 
     this.game.storage.getItem('levels', this._unlockCurrentGameStage, this);
@@ -143,21 +141,18 @@ export default class Game extends Phaser.State {
   }
 
   _blink () {
-    // if (this._heart.idle)
-    //   this.game.transitions.registerTransition('blink-blue');
-    //
-    // else if (this._star.idle)
-    //   this.game.transitions.registerTransition('blink-pink');
-    //
-    // this.game.transitions.doTransition();
-  }
+    let effectName;
 
-  _closeBlinds () {
-    // this.game.transitions.registerTransition('blinds-close');
-    // this.game.transitions.registerTransitionCallback(this._goToNextStage, this);
-    // this.game.transitions.doTransition();
+    if (this._heart.idle) {
+      // TODO: Will use 'sky-blue' effect.
+      effectName = 'blackout';
+    }
+    else if (this._star.idle) {
+      // TODO: Will use 'pink' effect.
+      effectName = 'blackout';
+    }
 
-    this._goToNextStage();
+    this.game.transitions.reveal(effectName, 400);
   }
 
   _togglePlayerActor () {
@@ -214,16 +209,19 @@ export default class Game extends Phaser.State {
     this._heart.emotion = 'cheering';
     this._star.emotion  = 'cheering';
 
-    this.time.events.add(1000, this._closeBlinds, this);
+    this.time.events.add(1000, this._goToNextStage, this);
   }
 
   _goToNextStage () {
     var nextStage = this._levelDefinitions.next;
 
-    if (nextStage === null)
-      this.state.start('CreditsAI');
-    else
-      this.state.start('Game', true, false, nextStage, 'blinds-open');
+    if (nextStage === null) {
+      this.game.transitions.toState('Credits', 'blackout', 1000);
+    }
+    else {
+      // TODO: Will use 'blinds' effect.
+      this.game.transitions.toState('Game', 'blackout', 1000, nextStage);
+    }
   }
 
   _unlockCurrentGameStage (err, unlockedLevels) {
@@ -238,16 +236,9 @@ export default class Game extends Phaser.State {
   }
 
   _goToStageSelection () {
-    this.state.start('Levels');
-  }
-
-  _goBackToStageSelection () {
     if (!this.inGame) return;
 
-    // this.game.transitions.registerTransition('fade-to-black');
-    // this.game.transitions.registerTransitionCallback(this._goToStageSelection, this);
-    // this.game.transitions.doTransition();
-    this._goToStageSelection();
+    this.game.transitions.toState('Levels', 'blackout', 1000);
   }
 
   // --------------------------------------------------------------------------
