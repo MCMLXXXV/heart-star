@@ -12,7 +12,7 @@ export default class Credits extends Phaser.State {
   init (screen = DEFAULT_SCREEN) {
     this.screen = screen;
 
-    this.game.transitions.registerTransition('fade-from-black');
+    // this.game.transitions.registerTransition('fade-from-black');
   }
 
   create () {
@@ -23,7 +23,7 @@ export default class Credits extends Phaser.State {
     this._addLinkButtons(links);
     this._addMenuButtons(screen, (screen === DEFAULT_SCREEN));
 
-    this.game.transitions.doTransition();
+    // this.game.transitions.doTransition();
   }
 
   // --------------------------------------------------------------------------
@@ -49,24 +49,26 @@ export default class Credits extends Phaser.State {
 
   _addMenuButtons (screen, addMoreButton = false) {
     let backButton = this.add.existing(new MenuOptionButton(this.game, 0, 0));
-    backButton.onInputUp.add(() => this._doTransition('Title'));
+    // backButton.onInputUp.add(() => this._doTransition('Title'));
+    backButton.onInputUp.add(() => this.state.start('Title'));
 
     if (addMoreButton) {
       let moreButton = this.add.existing(
         new MenuOptionButton(this.game, 192, 144, MenuOptionButton.MORE));
-      moreButton.onInputUp.add(() => this._doTransition('Credits', 'rb'));
+      // moreButton.onInputUp.add(() => this._doTransition('Credits', 'rb'));
+      moreButton.onInputUp.add(() => this.state.start('Credits', true, false, 'rb'));
     }
   }
 
-  _doTransition (stateName, ... params) {
-    this.game.transitions.registerTransition('fade-to-black');
-    this.game.transitions.registerTransitionCallback(
-      () => this._goToState(stateName, ... params));
-    this.game.transitions.doTransition();
-  }
+  // _doTransition (stateName, ... params) {
+  //   this.game.transitions.registerTransition('fade-to-black');
+  //   this.game.transitions.registerTransitionCallback(
+  //     () => this._goToState(stateName, ... params));
+  //   this.game.transitions.doTransition();
+  // }
 
-  _goToState (stateName, ... params) {
-    this.game.state.start(stateName, true, false, ... params);
-  }
+  // _goToState (stateName, ... params) {
+  //   this.game.state.start(stateName, true, false, ... params);
+  // }
 
 }

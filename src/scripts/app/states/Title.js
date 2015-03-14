@@ -6,14 +6,14 @@ import BackgroundPattern from '../objects/BackgroundPattern';
 
 export default class Title extends Phaser.State {
 
-  init (transitionName = 'fade-from-black') {
-    this.game.transitions.registerTransition(transitionName);
-    this.game.transitions.registerTransitionCallback(
-      () => this._makeMenuButtons());
-  }
+  // init (transitionName = 'fade-from-black') {
+  //   this.game.transitions.registerTransition(transitionName);
+  //   this.game.transitions.registerTransitionCallback(
+  //     () => this._makeMenuButtons());
+  // }
 
   create () {
-    this.game.transitions.doTransition();
+    // this.game.transitions.doTransition();
 
     this.add.existing(new BackgroundPattern(this.game));
     this.add.image(0, 0, 'background-title');
@@ -21,6 +21,8 @@ export default class Title extends Phaser.State {
     this._addSwingingTitleLabel(18);
     this._placeCharacter('heart',  64);
     this._placeCharacter('star' , 176);
+
+    this._makeMenuButtons();
 
     this.game.storage.getItem('levels', this._probeUnlockedStages, this);
   }
@@ -37,7 +39,8 @@ export default class Title extends Phaser.State {
   _makeMenuOptionButton(y, type, stateName) {
     let button = new MenuOptionButton(this.game, 80, y, type);
 
-    button.onInputUp.add(() => this._doTransition(stateName));
+    // button.onInputUp.add(() => this._doTransition(stateName));
+    button.onInputUp.add(() => this.state.start(stateName));
 
     return button;
   }
@@ -62,15 +65,15 @@ export default class Title extends Phaser.State {
       this.game.storage.setItem('levels', levels);
   }
 
-  _doTransition (stateName, ... params) {
-    this.game.transitions.registerTransition('fade-to-black');
-    this.game.transitions.registerTransitionCallback(
-      () => this._goToState(stateName, ... params));
-    this.game.transitions.doTransition();
-  }
+  // _doTransition (stateName, ... params) {
+  //   this.game.transitions.registerTransition('fade-to-black');
+  //   this.game.transitions.registerTransitionCallback(
+  //     () => this._goToState(stateName, ... params));
+  //   this.game.transitions.doTransition();
+  // }
 
-  _goToState (stateName, ... params) {
-    this.game.state.start(stateName, true, false, ... params);
-  }
+  // _goToState (stateName, ... params) {
+  //   this.game.state.start(stateName, true, false, ... params);
+  // }
 
 }

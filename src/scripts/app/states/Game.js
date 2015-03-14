@@ -8,8 +8,8 @@ import Agents from '../objects/Agents';
 
 export default class Game extends Phaser.State {
 
-  init (level = '01', transitionName = 'fade-from-black') {
-    this.game.transitions.registerTransition(transitionName);
+  init (level = '01'/*, transitionName = 'fade-from-black'*/) {
+    // this.game.transitions.registerTransition(transitionName);
 
     this.controls = this.game.controls;
 
@@ -25,7 +25,7 @@ export default class Game extends Phaser.State {
   }
 
   create () {
-    this.game.transitions.doTransition();
+    // this.game.transitions.doTransition();
 
     this._levelDefinitions = this._getStageDefinitions(this.level);
 
@@ -143,24 +143,26 @@ export default class Game extends Phaser.State {
   }
 
   _blink () {
-    if (this._heart.idle)
-      this.game.transitions.registerTransition('blink-blue');
-
-    else if (this._star.idle)
-      this.game.transitions.registerTransition('blink-pink');
-
-    this.game.transitions.doTransition();
+    // if (this._heart.idle)
+    //   this.game.transitions.registerTransition('blink-blue');
+    //
+    // else if (this._star.idle)
+    //   this.game.transitions.registerTransition('blink-pink');
+    //
+    // this.game.transitions.doTransition();
   }
 
   _closeBlinds () {
-    this.game.transitions.registerTransition('blinds-close');
-    this.game.transitions.registerTransitionCallback(this._goToNextStage, this);
-    this.game.transitions.doTransition();
+    // this.game.transitions.registerTransition('blinds-close');
+    // this.game.transitions.registerTransitionCallback(this._goToNextStage, this);
+    // this.game.transitions.doTransition();
+
+    this._goToNextStage();
   }
 
   _togglePlayerActor () {
     if (!this.inGame) return;
-    if (this.game.transitions.transitionRunning) return;
+    // if (this.game.transitions.transitionRunning) return;
     if (!this._playerActor.standing) return;
 
     this._changeActors(this._idleActor, this._playerActor);
@@ -171,8 +173,8 @@ export default class Game extends Phaser.State {
   _resetGameStage () {
     if (!this.inGame) return;
 
-    this.game.transitions.registerTransition('copy');
-    this.game.transitions.doTransition();
+    // this.game.transitions.registerTransition('copy');
+    // this.game.transitions.doTransition();
 
     this._changeActors(this._heart, this._star);
     this._restartActor(this._heart, this.heartCoordinates);
@@ -182,17 +184,18 @@ export default class Game extends Phaser.State {
   }
 
   _preRestartActors () {
-    this.game.transitions.registerTransition('blinds-close');
-    this.game.transitions.registerTransitionCallback(this._restartActors, this);
-    this.game.transitions.doTransition();
+    // this.game.transitions.registerTransition('blinds-close');
+    // this.game.transitions.registerTransitionCallback(this._restartActors, this);
+    // this.game.transitions.doTransition();
+    this._restartActors();
   }
 
   _restartActors () {
     this._restartActor(this._heart, this.heartCoordinates);
     this._restartActor(this._star, this.starCoordinates);
 
-    this.game.transitions.registerTransition('blinds-open');
-    this.game.transitions.doTransition();
+    // this.game.transitions.registerTransition('blinds-open');
+    // this.game.transitions.doTransition();
 
     this._changeActors(this._heart, this._star);
     this._objectsManager.reset();
@@ -241,9 +244,10 @@ export default class Game extends Phaser.State {
   _goBackToStageSelection () {
     if (!this.inGame) return;
 
-    this.game.transitions.registerTransition('fade-to-black');
-    this.game.transitions.registerTransitionCallback(this._goToStageSelection, this);
-    this.game.transitions.doTransition();
+    // this.game.transitions.registerTransition('fade-to-black');
+    // this.game.transitions.registerTransitionCallback(this._goToStageSelection, this);
+    // this.game.transitions.doTransition();
+    this._goToStageSelection();
   }
 
   // --------------------------------------------------------------------------
@@ -261,8 +265,9 @@ export default class Game extends Phaser.State {
   }
 
   get inGame () {
-    return !this.game.transitions.transitionRunning &&
-      this._playerActor && this._playerActor.emotion === null;
+    // return !this.game.transitions.transitionRunning &&
+    //   this._playerActor && this._playerActor.emotion === null;
+    return this._playerActor && this._playerActor.emotion === null;
   }
 
 }

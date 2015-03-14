@@ -5,12 +5,12 @@ import BackgroundPattern from '../objects/BackgroundPattern';
 
 export default class Levels extends Phaser.State {
 
-  init () {
-    this.game.transitions.registerTransition('fade-from-black');
-  }
+  // init () {
+  //   this.game.transitions.registerTransition('fade-from-black');
+  // }
 
   create () {
-    this.game.transitions.doTransition();
+    // this.game.transitions.doTransition();
 
     this.add.existing(new BackgroundPattern(this.game));
     this.add.image(0, 0, 'background-level-select');
@@ -18,7 +18,8 @@ export default class Levels extends Phaser.State {
     this.add.image(0, 32, 'labels', 'label-level-select');
 
     let backButton = new MenuOptionButton(this.game, 0, 0);
-    backButton.onInputUp.add(() => this._doTransition('Title'));
+    // backButton.onInputUp.add(() => this._doTransition('Title'));
+    backButton.onInputUp.add(() => this.state.start('Title'));
     this.add.existing(backButton);
 
     this.game.storage.getItem('levels', this._addStageButtons, this);
@@ -41,21 +42,22 @@ export default class Levels extends Phaser.State {
 
     if (!locked) {
       button.unlock();
-      button.onInputUp.add(() => this._doTransition('Game', level));
+      // button.onInputUp.add(() => this._doTransition('Game', level));
+      button.onInputUp.add(() => this.state.start('Game', true, false, level));
     }
 
     return button;
   }
 
-  _doTransition (stateName, ... params) {
-    this.game.transitions.registerTransition('fade-to-black');
-    this.game.transitions.registerTransitionCallback(
-      () => this._goToState(stateName, ... params));
-    this.game.transitions.doTransition();
-  }
+  // _doTransition (stateName, ... params) {
+  //   this.game.transitions.registerTransition('fade-to-black');
+  //   this.game.transitions.registerTransitionCallback(
+  //     () => this._goToState(stateName, ... params));
+  //   this.game.transitions.doTransition();
+  // }
 
-  _goToState (stateName, ... params) {
-    this.game.state.start(stateName, true, false, ... params);
-  }
+  // _goToState (stateName, ... params) {
+  //   this.game.state.start(stateName, true, false, ... params);
+  // }
 
 }
