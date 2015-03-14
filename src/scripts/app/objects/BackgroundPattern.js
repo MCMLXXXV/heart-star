@@ -1,3 +1,5 @@
+const SCROLL = 16;
+
 class BackgroundPattern extends Phaser.TileSprite {
 
   constructor (game, texture = BackgroundPattern.HEART_STAR) {
@@ -10,10 +12,10 @@ class BackgroundPattern extends Phaser.TileSprite {
 
   _getScrollSpeed (texture) {
     switch (texture) {
-      case BackgroundPattern.HEART_STAR: return [   0,  15 ];
-      case BackgroundPattern.HEART:      return [ -15,  15 ];
-      case BackgroundPattern.MOON:       return [ -15, -15 ];
-      case BackgroundPattern.STAR:       return [  15, -15 ];
+      case BackgroundPattern.HEART_STAR: return [       0,  SCROLL ];
+      case BackgroundPattern.HEART:      return [ -SCROLL,  SCROLL ];
+      case BackgroundPattern.MOON:       return [ -SCROLL, -SCROLL ];
+      case BackgroundPattern.STAR:       return [  SCROLL, -SCROLL ];
     }
   }
 

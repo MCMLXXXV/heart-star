@@ -6,19 +6,19 @@ import BackgroundPattern from '../objects/BackgroundPattern';
 export default class Levels extends Phaser.State {
 
   init () {
-    this.game.transitions.registerTransition('fade-from-black');
+    this.game.transitions.reveal('blackout', 1000);
   }
 
   create () {
-    this.game.transitions.doTransition();
-
     this.add.existing(new BackgroundPattern(this.game));
     this.add.image(0, 0, 'background-level-select');
 
     this.add.image(0, 32, 'labels', 'label-level-select');
 
     let backButton = new MenuOptionButton(this.game, 0, 0);
-    backButton.onInputUp.add(() => this._doTransition('Title'));
+    backButton.onInputUp.add(() => {
+      this.game.transitions.toState('Title', 'blackout', 1000, 'blackout');
+    });
     this.add.existing(backButton);
 
     this.game.storage.getItem('levels', this._addStageButtons, this);
@@ -41,21 +41,12 @@ export default class Levels extends Phaser.State {
 
     if (!locked) {
       button.unlock();
-      button.onInputUp.add(() => this._doTransition('Game', level));
+      button.onInputUp.add(() => {
+        this.game.transitions.toState('Game', 'blackout', 1000, level);
+      });
     }
 
     return button;
-  }
-
-  _doTransition (stateName, ... params) {
-    this.game.transitions.registerTransition('fade-to-black');
-    this.game.transitions.registerTransitionCallback(
-      () => this._goToState(stateName, ... params));
-    this.game.transitions.doTransition();
-  }
-
-  _goToState (stateName, ... params) {
-    this.game.state.start(stateName, true, false, ... params);
   }
 
 }

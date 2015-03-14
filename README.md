@@ -89,7 +89,6 @@ Planned Updates
 *   Proper reuse of resources (i.e. less `this.state.start` calls in game 
     levels).
 *   Make friends carry each other while falling (bug).
-*   Rewrite the Transitions plugin (it's ugly!).
 *   Huge code clean up.
 
 ### Improvements ##############################################################

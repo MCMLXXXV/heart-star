@@ -1,24 +1,24 @@
-class Copy extends Phaser.Image {
+import Base from './Base';
 
-  constructor (game, width, height) {
-    this._texture = new PIXI.RenderTexture(width, height, game.renderer);
 
-    super(game, 0, 0, this._texture);
+export default class Blackout extends Base {
 
-    this.clear();
+  _prepareEffect () {
+    if (!this._texture) {
+      let { width, height } = this.game.world;
+      this._texture = new Phaser.RenderTexture(this.game, width, height);
+    }
+
+    this._texture.renderXY(this.game.world, 0, 0, true);
+    this.buffer.copy(this._texture.getImage());
   }
 
-  // --------------------------------------------------------------------------
-
-  copyScreen () {
-    this._texture.render(this.game.world);
+  _closeEffect () {
+    this.buffer.clear();
   }
 
-  clear () {
-    this.alpha = 0;
+  _processEffect () {
+    this.sprite.alpha = 1 - this.tweeningProperty;
   }
 
 }
-
-
-export default Copy;
