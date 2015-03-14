@@ -155,7 +155,6 @@ export default class Game extends Phaser.State {
 
   _togglePlayerActor () {
     if (!this.inGame) return;
-    // if (this.game.transitions.transitionRunning) return;
     if (!this._playerActor.standing) return;
 
     this._changeActors(this._idleActor, this._playerActor);
@@ -212,7 +211,7 @@ export default class Game extends Phaser.State {
       this.game.transitions.toState('Credits', 'blackout', 1000);
     }
     else {
-      this.game.transitions.toState('Game', 'blinds', 1000, nextStage);
+      this.game.transitions.toState('Game', 'blinds', 1000, nextStage, 'blinds');
     }
   }
 
@@ -248,9 +247,8 @@ export default class Game extends Phaser.State {
   }
 
   get inGame () {
-    // return !this.game.transitions.transitionRunning &&
-    //   this._playerActor && this._playerActor.emotion === null;
-    return this._playerActor && this._playerActor.emotion === null;
+    return !this.game.transitions.isRunning &&
+      this._playerActor && this._playerActor.emotion === null;
   }
 
 }

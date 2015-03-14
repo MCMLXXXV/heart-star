@@ -2,6 +2,7 @@ export default class Transitions extends Phaser.Plugin {
 
   init () {
     this.effects = {};
+    this._currentEffect = null;
 
     this.buffer = this._makeBuffer();
     this.sprite = this.game.make.image(0, 0, this.buffer);
@@ -13,27 +14,31 @@ export default class Transitions extends Phaser.Plugin {
   register (effectName, factory) {
     let effect = new factory(this.game, this.buffer, this.sprite);
 
+    effect.completed.add(() => {
+      this._currentEffect = null;
+    });
+
     this.effects[effectName] = effect;
   }
 
   reveal (effectName, duration, callback = () => {}, context = null) {
-    let effect = this.effects[effectName];
+    if (this._currentEffect !== null) return;
 
+    let effect = this._getEffect(effectName, callback, context);
     effect.reveal(duration);
-    effect.completed.addOnce(callback, context);
   }
 
   hide (effectName, duration, callback = () => {}, context = null) {
-    let effect = this.effects[effectName];
+    if (this._currentEffect !== null) return;
 
+    let effect = this._getEffect(effectName, callback, context);
     effect.hide(duration);
-    effect.completed.addOnce(callback, context);
   }
 
   toState (stateName, effectName, duration, ... args) {
-    let effect = this.effects[effectName];
+    if (this._currentEffect !== null) return;
 
-    this.buffer.blendSourceOver();
+    let effect = this._getEffect(effectName, () => {}, null);
 
     effect.hide(duration);
     effect.completed.addOnce(
@@ -46,6 +51,22 @@ export default class Transitions extends Phaser.Plugin {
     let { width, height } = this.game.world;
 
     return this.game.make.bitmapData(width, height);
+  }
+
+  _getEffect (effectName, callback, context) {
+    let effect = this.effects[effectName];
+
+    effect.completed.addOnce(callback, context);
+
+    this._currentEffect = effect;
+
+    return effect;
+  }
+
+  // --------------------------------------------------------------------------
+
+  get isRunning () {
+    return this._currentEffect !== null;
   }
 
 }
