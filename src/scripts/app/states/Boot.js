@@ -7,7 +7,7 @@ import Transitions from '../plugins/Transitions';
 import Iris     from '../plugins/Transitions/Iris';
 // import Copy     from '../plugins/Transitions/Copy';
 import Pink     from '../plugins/Transitions/Pink';
-// import Blinds   from '../plugins/Transitions/Blinds';
+import Blinds   from '../plugins/Transitions/Blinds';
 import SkyBlue  from '../plugins/Transitions/SkyBlue';
 import Blackout from '../plugins/Transitions/Blackout';
 
@@ -25,7 +25,7 @@ export default class Boot extends Phaser.State {
     this.game.transitions.register('iris',     Iris);
     // this.game.transitions.register('copy',     Copy);
     this.game.transitions.register('pink',     Pink);
-    // this.game.transitions.register('blinds',   Blinds);
+    this.game.transitions.register('blinds',   Blinds);
     this.game.transitions.register('sky-blue', SkyBlue);
     this.game.transitions.register('blackout', Blackout);
 

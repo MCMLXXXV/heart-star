@@ -177,18 +177,14 @@ export default class Game extends Phaser.State {
   }
 
   _preRestartActors () {
-    // this.game.transitions.registerTransition('blinds-close');
-    // this.game.transitions.registerTransitionCallback(this._restartActors, this);
-    // this.game.transitions.doTransition();
-    this._restartActors();
+    this.game.transitions.hide('blinds', 1000, this._restartActors, this);
   }
 
   _restartActors () {
     this._restartActor(this._heart, this.heartCoordinates);
     this._restartActor(this._star, this.starCoordinates);
 
-    // this.game.transitions.registerTransition('blinds-open');
-    // this.game.transitions.doTransition();
+    this.game.transitions.reveal('blinds', 1000);
 
     this._changeActors(this._heart, this._star);
     this._objectsManager.reset();
@@ -217,8 +213,7 @@ export default class Game extends Phaser.State {
       this.game.transitions.toState('Credits', 'blackout', 1000);
     }
     else {
-      // TODO: Will use 'blinds' effect.
-      this.game.transitions.toState('Game', 'blackout', 1000, nextStage);
+      this.game.transitions.toState('Game', 'blinds', 1000, nextStage);
     }
   }
 

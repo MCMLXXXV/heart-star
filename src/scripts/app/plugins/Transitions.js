@@ -24,7 +24,10 @@ export default class Transitions extends Phaser.Plugin {
   }
 
   hide (effectName, duration, callback = () => {}, context = null) {
-    // TODO
+    let effect = this.effects[effectName];
+
+    effect.hide(duration);
+    effect.completed.addOnce(callback, context);
   }
 
   toState (stateName, effectName, duration, ... args) {
