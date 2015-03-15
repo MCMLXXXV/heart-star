@@ -45,6 +45,7 @@
     "resources:buttons": "spritesheet-js --extension js --cf resources/texture-atlas.template -n buttons --powerOfTwo --padding 2 resources/graphics/buttons/*.png",
     "resources:labels": "spritesheet-js --extension js --cf resources/texture-atlas.template -n labels --powerOfTwo --padding 2 resources/graphics/labels/*.png",
     "resources:characters": "spritesheet-js --extension js --cf resources/texture-atlas.template -n characters --powerOfTwo resources/graphics/characters/*.png",
+    "resources:objects": "spritesheet-js --extension js --cf resources/texture-atlas.template -n objects --powerOfTwo --fullpath resources/graphics/objects/*.png resources/graphics/objects/*/*.png",
     "postinstall": "bower install"
   },
   "license": "MIT"
