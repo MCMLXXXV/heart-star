@@ -10,11 +10,13 @@ var DEFAULT_JUMP_VELOCITY     = -100;
 class Actor extends Phaser.Sprite {
 
   constructor (game, role) {
-    super(game, 0, 0, role);
+    super(game, 0, 0, 'characters');
 
     this.anchor.set(0.5, 1);
 
     this.wasHurt = new Phaser.Signal();
+
+    this.role = role;
 
     this._setupPhysicsBody(10, 16);
     this._setupAnimations();
@@ -119,18 +121,21 @@ class Actor extends Phaser.Sprite {
   }
 
   _setupAnimations () {
-    this.animations.add('idle',             [  0,  1,  2,  3 ], 4, true);
-    this.animations.add('happy',            [  4,  5,  6,  7 ], 4, true);
-    this.animations.add('facing',           [  8,  9, 10, 11 ], 4, true);
-    this.animations.add('walking',          [ 12, 13, 14, 15 ], 4, true);
-    this.animations.add('carrying-idle',                [ 16 ], 0, false);
-    this.animations.add('carrying-facing',  [ 17, 18, 19, 20 ], 4, true);
-    this.animations.add('carrying-walking', [ 21, 22, 23, 24 ], 4, true);
-    this.animations.add('jumping',                      [ 25 ], 0, false);
-    this.animations.add('falling',                      [ 26 ], 0, false);
-    this.animations.add('hurt',                         [ 27 ], 0, false);
-    this.animations.add('scared',                       [ 28 ], 0, false);
-    this.animations.add('cheering',                 [ 29, 30 ], 2, true);
+    const frames = (i, j = i) =>
+      Phaser.Animation.generateFrameNames(`${this.role}-`, i, j, '', 2);
+
+    this.animations.add('idle',             frames( 0,  3), 4, true);
+    this.animations.add('happy',            frames( 4,  7), 4, true);
+    this.animations.add('facing',           frames( 8, 11), 4, true);
+    this.animations.add('walking',          frames(12, 15), 4, true);
+    this.animations.add('carrying-idle',    frames(16    ), 0, false);
+    this.animations.add('carrying-facing',  frames(17, 20), 4, true);
+    this.animations.add('carrying-walking', frames(21, 24), 4, true);
+    this.animations.add('jumping',          frames(25    ), 0, false);
+    this.animations.add('falling',          frames(26    ), 0, false);
+    this.animations.add('hurt',             frames(27    ), 0, false);
+    this.animations.add('scared',           frames(28    ), 0, false);
+    this.animations.add('cheering',         frames(29, 30), 2, true);
   }
 
   _move (direction, speed) {
@@ -259,7 +264,7 @@ class Actor extends Phaser.Sprite {
 Actor.FACE_LEFT  = -1;
 Actor.FACE_RIGHT =  1;
 
-Actor.HEART = 'character-heart';
-Actor.STAR  = 'character-star';
+Actor.HEART = 'heart';
+Actor.STAR  = 'star';
 
 export default Actor;

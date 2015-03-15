@@ -1,5 +1,6 @@
-import labels  from './atlases/labels';
-import buttons from './atlases/buttons';
+import labels     from './atlases/labels';
+import buttons    from './atlases/buttons';
+import characters from './atlases/characters';
 
 
 export default {
@@ -110,25 +111,10 @@ export default {
     },
 
     {
-      'type': 'spritesheet',
-      'key': 'character-heart',
-      'url': 'images/character-heart.png',
-      'frameWidth': 24,
-      'frameHeight': 24,
-      'margin': 4,
-      'spacing': 8,
-      'frameMax': 31
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'character-star',
-      'url': 'images/character-star.png',
-      'frameWidth': 24,
-      'frameHeight': 24,
-      'margin': 4,
-      'spacing': 8,
-      'frameMax': 31
+      'type': 'atlasJSONHash',
+      'key': 'characters',
+      'textureURL': 'images/characters.png',
+      'atlasData': characters
     },
 
     {

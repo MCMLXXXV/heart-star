@@ -41,10 +41,11 @@ export default class Title extends Phaser.State {
   }
 
   _placeCharacter (name, x) {
-    let sprite = this.add.sprite(x, 96, `character-${name}`);
+    const frames = Phaser.Animation.generateFrameNames(`${name}-`, 4, 7, '', 2);
+    let sprite = this.add.sprite(x, 96, 'characters');
 
     sprite.anchor.set(0.5, 1);
-    sprite.animations.add('main', [ 4, 5, 6, 7 ], 4, true).play();
+    sprite.animations.add('main', frames, 4, true).play();
   }
 
   _addSwingingTitleLabel (y) {
