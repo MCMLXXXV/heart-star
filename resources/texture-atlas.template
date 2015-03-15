@@ -1,11 +1,11 @@
 export default {
   frames: {
-  {{#files}}
+  {{#items}}
     '{{{name}}}': {
       frame: { x: {{x}}, y: {{y}}, w: {{width}}, h: {{height}} },
       spriteSourceSize: { x: 0, y: 0, w: {{width}}, h: {{height}} },
       sourceSize: { w: {{width}}, h: {{height}} }
-    }{{^isLast}},{{/isLast}}
-  {{/files}}
+    },
+  {{/items}}
   }
 };
