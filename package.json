@@ -3,9 +3,6 @@
   "version": "0.0.1",
   "private": true,
   "description": "Phaser port of Heart-Star by Jussi Simpanen",
-  "dependencies": {
-    "spritesheet-js": "^1.0.2"
-  },
   "devDependencies": {
     "autoprefixer-core": "^5.0.0",
     "babel-core": "^4.0.0",
@@ -32,6 +29,7 @@
     "gulp-sourcemaps": "^1.1.5",
     "gulp-uglify": "^1.0.1",
     "gulp-util": "^3.0.0",
+    "gulp.spritesmith": "^3.2.0",
     "jshint-stylish": "^1.0.0",
     "main-bower-files": "^2.4.1",
     "postcss": "^4.0.1",
@@ -42,8 +40,6 @@
     "dist": "gulp dist",
     "clean": "gulp dist:clean",
     "start": "gulp default",
-    "resources:buttons": "spritesheet-js --extension js --cf resources/texture-atlas.template -n buttons --powerOfTwo --padding 2 resources/graphics/buttons/*.png",
-    "resources:labels": "spritesheet-js --extension js --cf resources/texture-atlas.template -n labels --powerOfTwo --padding 2 resources/graphics/labels/*.png",
     "postinstall": "bower install"
   },
   "license": "MIT"
