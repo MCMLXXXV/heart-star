@@ -1,32 +1,30 @@
-var DEFAULT_DRAG              = 600;
-var DEFAULT_DRAG_WHEN_JUMPING = 250;
-var DEFAULT_GRAVITY           = 350;
-var DEFAULT_JUMP_POWER        = 14;
-var DEFAULT_ACCELERATION      = 600;
-var DEFAULT_SPEED_LIMITS      = [ 64, 180 ];
-var DEFAULT_JUMP_VELOCITY     = -100;
+const DEFAULT_DRAG              = 600;
+const DEFAULT_DRAG_WHEN_JUMPING = 250;
+const DEFAULT_GRAVITY           = 350;
+const DEFAULT_JUMP_POWER        = 14;
+const DEFAULT_ACCELERATION      = 600;
+const DEFAULT_SPEED_LIMITS      = [ 64, 180 ];
+const DEFAULT_JUMP_VELOCITY     = -100;
 
 
 class Actor extends Phaser.Sprite {
 
   constructor (game, role) {
     super(game, 0, 0, 'characters');
-
     this.anchor.set(0.5, 1);
 
     this.wasHurt = new Phaser.Signal();
 
-    this.role = role;
+    this.role      = role;
+    this.idle      = true;
+    this.emotion   = null;
+    this.animation = 'idle';
+
+    this._friendBeingCarried     = null;
+    this._remainingJumpingFrames = 0;
 
     this._setupPhysicsBody(10, 16);
     this._setupAnimations();
-
-    this.animation = 'idle';
-    this.idle      = true;
-    this.emotion   = null;
-
-    this._jumpPower      = 0;
-    this._carryingFriend = null;
   }
 
   update () {
@@ -66,14 +64,14 @@ class Actor extends Phaser.Sprite {
   jump () {
     if (this.canJump) {
       this.body.velocity.y = DEFAULT_JUMP_VELOCITY;
-      this._jumpPower -= 1;
+      this._remainingJumpingFrames -= 1;
     }
   }
 
   cancelPowerJump () {
-    if (this.standing) return;
-
-    this._jumpPower = 0;
+    if (this.jumping) {
+      this._remainingJumpingFrames = 0;
+    }
   }
 
   collideActor (actor) {
@@ -88,7 +86,7 @@ class Actor extends Phaser.Sprite {
   }
 
   carry (condition, actor) {
-    this._carryingFriend = condition ? actor : null;
+    this._friendBeingCarried = condition ? actor : null;
   }
 
   harm (fromBelow = false) {
@@ -169,14 +167,14 @@ class Actor extends Phaser.Sprite {
   }
 
   _updateCarryingFriend () {
-    if (this._carryingFriend && !this._carryingFriend.standing) {
-      this._carryingFriend = null;
+    if (this._friendBeingCarried && !this._friendBeingCarried.standing) {
+      this._friendBeingCarried = null;
     }
   }
 
   _updateJumpPower () {
     if (this.standing) {
-      this._jumpPower = DEFAULT_JUMP_POWER;
+      this._remainingJumpingFrames = DEFAULT_JUMP_POWER;
     }
   }
 
@@ -221,7 +219,7 @@ class Actor extends Phaser.Sprite {
   }
 
   get canPowerJump () {
-    return this.jumping && this._jumpPower > 0;
+    return this.jumping && this._remainingJumpingFrames > 0;
   }
 
   get falling () {
@@ -229,7 +227,7 @@ class Actor extends Phaser.Sprite {
   }
 
   get carrying () {
-    return this._carryingFriend !== null && this.body.touching.up;
+    return this._friendBeingCarried !== null && this.body.touching.up;
   }
 
   get idle () {
