@@ -80,23 +80,15 @@ Then, a tab on your favorite browser should open, pointed to
 *   Development environment compatible with [Node][node] and [io.js][iojs].
 
 
-Planned Updates
+Planned Updates and Improvements
 -------------------------------------------------------------------------------
 
-### Fixes #####################################################################
-
-*   Proper reuse of resources (i.e. less `this.state.start` calls in game 
-    levels).
-*   Make friends carry each other while falling (bug).
-*   Huge code clean up.
-
-### Improvements ##############################################################
-
-*   Sound effects.
-*   Mobile controls (still being considered).
-*   Make a Texture Atlas of all the graphical assets used in the game.
+*   Fix friends hopping and carrying behavior.
+*   Resource recycling and better level initialization/resetting.
+*   Convert all graphical assets into a single texture atlas.
 *   Properly manage settings, including game progress.
-*   Feature, off-line pages; click-to-play on feature page.
+*   Sound effects (and music?).
+*   Code clean up.
 
 
 Licensing
