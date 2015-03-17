@@ -102,6 +102,15 @@ class ObjectsLayer extends Phaser.Group {
       function (button) { button.switchOff(); });
   }
 
+  recycle () {
+    this._backgroundGroup.callAll('kill');
+    this._tilemapGroup.callAll('kill');
+    this._retractableGroup.callAll('kill');
+    this._buttonGroup.callAll('kill');
+    this._trapsGroup.callAll('kill');
+    this._platformsGroup.callAll('kill');
+  }
+
   // --------------------------------------------------------------------------
 
   _makeTilemap (tilemapKey) {
