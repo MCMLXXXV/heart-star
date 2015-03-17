@@ -75,36 +75,6 @@ export default {
     },
 
     {
-      'type': 'spritesheet',
-      'key': 'button-game-heart',
-      'url': 'images/button-game-heart.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-game-moon',
-      'url': 'images/button-game-moon.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-game-star',
-      'url': 'images/button-game-star.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
       'type': 'atlasJSONHash',
       'key': 'buttons',
       'textureURL': 'images/buttons.png',
@@ -156,36 +126,6 @@ export default {
       'type': 'image',
       'key': 'preloader-background',
       'url': 'images/preloader-background.png',
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'retractable-both',
-      'url': 'images/retractable-both.png',
-      'frameWidth': 16,
-      'frameHeight': 48,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'retractable-heart',
-      'url': 'images/retractable-heart.png',
-      'frameWidth': 16,
-      'frameHeight': 48,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'retractable-star',
-      'url': 'images/retractable-star.png',
-      'frameWidth': 16,
-      'frameHeight': 48,
-      'margin': 8,
-      'spacing': 8
     },
 
     {

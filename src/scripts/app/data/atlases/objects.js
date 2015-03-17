@@ -80,52 +80,52 @@ export default {
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }
     },
-    'moon-button-1': {
+    'both-button-1': {
       frame: { x: 156, y: 100, w: 16, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }
     },
-    'moon-button-2': {
+    'both-button-2': {
       frame: { x: 138, y: 118, w: 16, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }
     },
-    'moon-platform-fixed-normal': {
+    'both-platform-fixed-normal': {
       frame: { x: 36, y: 118, w: 32, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 32, h: 16 },
       sourceSize: { w: 32, h: 16 }
     },
-    'moon-platform-fixed-small': {
+    'both-platform-fixed-small': {
       frame: { x: 138, y: 100, w: 16, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }
     },
-    'moon-retractable-1': {
+    'both-retractable-1': {
       frame: { x: 156, y: 0, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'moon-retractable-2': {
+    'both-retractable-2': {
       frame: { x: 156, y: 50, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'moon-retractable-3': {
+    'both-retractable-3': {
       frame: { x: 0, y: 118, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'moon-retractable-4': {
+    'both-retractable-4': {
       frame: { x: 54, y: 68, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'moon-retractable-5': {
+    'both-retractable-5': {
       frame: { x: 138, y: 50, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'moon-trap': {
+    'both-trap': {
       frame: { x: 36, y: 136, w: 16, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }
