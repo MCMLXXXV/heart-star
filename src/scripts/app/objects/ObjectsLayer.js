@@ -144,9 +144,13 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   _addButton ({ position: { x, y }, orientation }) {
-    return this._addObject(
+    let button = this._addObject(
       x, y, this._buttonGroup,
-      Button, this._roleName, orientation);
+      Button, this._roleName);
+
+    button.orientation = orientation;
+
+    return button;
   }
 
   _getOrCreateObject (group, factory, ... features) {
