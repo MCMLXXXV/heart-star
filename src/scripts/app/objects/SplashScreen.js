@@ -1,4 +1,4 @@
-class PreloadInfo extends Phaser.Group {
+class SplashScreen extends Phaser.Group {
 
   constructor (game) {
     super(game);
@@ -17,7 +17,7 @@ class PreloadInfo extends Phaser.Group {
   }
 
   _makeBackground () {
-    return this.game.make.image(0, 0, 'preloader-background');
+    return this.game.make.image(0, 0, 'splash-screen');
   }
 
   _makeBarFiller () {
@@ -37,4 +37,4 @@ class PreloadInfo extends Phaser.Group {
 }
 
 
-export default PreloadInfo;
+export default SplashScreen;

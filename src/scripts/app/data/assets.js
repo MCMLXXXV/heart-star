@@ -8,12 +8,12 @@ export default {
 
   // - Game Boot Assets -------------------------------------------------------
 
-  'bootAssets': [
+  'boot': [
 
     {
       'type': 'image',
-      'key': 'preloader-background',
-      'url': 'images/preloader-background.png'
+      'key': 'splash-screen',
+      'url': 'images/splash-screen.png'
     }
 
   ],
@@ -100,12 +100,6 @@ export default {
       'key': 'labels',
       'textureURL': 'images/labels.png',
       'atlasData': labels
-    },
-
-    {
-      'type': 'image',
-      'key': 'preloader-background',
-      'url': 'images/preloader-background.png',
     },
 
     {

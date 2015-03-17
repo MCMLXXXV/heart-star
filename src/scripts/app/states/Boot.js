@@ -33,7 +33,7 @@ export default class Boot extends Phaser.State {
   }
 
   preload () {
-    this.load.pack('bootAssets', null, assets);
+    this.load.pack('boot', null, assets);
   }
 
   create () {
