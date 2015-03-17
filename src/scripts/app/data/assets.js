@@ -199,16 +199,6 @@ export default {
       'key': 'tilemaps',
       'url': 'tilemaps/tilemaps.json',
       'format': 'TILED_JSON'
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'trap',
-      'url': 'images/trap.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
     }
 
   ],
