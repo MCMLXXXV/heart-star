@@ -43,10 +43,12 @@ class ObjectsLayer extends Phaser.Group {
       Trap, this._roleName);
   }
 
-  addPlatform (x, y, type) {
-    this._addObject(
+  addPlatform (x, y, range) {
+    let platform = this._addObject(
       x, y, this._platformsGroup,
-      Platform, type, this._roleName);
+      Platform, this._roleName);
+
+    platform.range = range;
   }
 
   addRetractable ({ retractable, button }) {
@@ -102,6 +104,15 @@ class ObjectsLayer extends Phaser.Group {
       function (button) { button.switchOff(); });
   }
 
+  recycle () {
+    this._backgroundGroup.callAll('kill');
+    this._tilemapGroup.callAll('kill');
+    this._retractableGroup.callAll('kill');
+    this._buttonGroup.callAll('kill');
+    this._trapsGroup.callAll('kill');
+    this._platformsGroup.callAll('kill');
+  }
+
   // --------------------------------------------------------------------------
 
   _makeTilemap (tilemapKey) {
@@ -135,9 +146,13 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   _addButton ({ position: { x, y }, orientation }) {
-    return this._addObject(
+    let button = this._addObject(
       x, y, this._buttonGroup,
-      Button, this._roleName, orientation);
+      Button, this._roleName);
+
+    button.orientation = orientation;
+
+    return button;
   }
 
   _getOrCreateObject (group, factory, ... features) {

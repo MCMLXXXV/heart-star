@@ -1,9 +1,11 @@
 class Platform extends Phaser.Sprite {
 
-  constructor (game, type, availableTo) {
-    super(game, 0, 0, this._getType(type), this._getColor(availableTo));
+  constructor (game, role, range = 'short') {
+    super(game, 0, 0, 'objects');
 
-    this._setupPhysicsBody(this.width - 4, 8, 2);
+    this._setupAnimations(role);
+
+    this.range = range;
   }
 
   // --------------------------------------------------------------------------
@@ -22,19 +24,30 @@ class Platform extends Phaser.Sprite {
     this.body.setSize(width, height, offsetX, offsetY);
   }
 
-  _getType (type) {
-    switch (type) {
-      case 'short' : return 'platform-fixed-1';
-      case 'medium': return 'platform-fixed-2';
+  _setupAnimations (role) {
+    for (let range of [ 'short', 'medium' ]) {
+      this.animations.add(
+        range, [ `${role}-platform-fixed-${range}` ], 0, false);
     }
   }
 
-  _getColor (role) {
-    switch (role) {
-      case 'heart': return 0;
-      case 'star' : return 1;
-      default     : return 2;
+  // --------------------------------------------------------------------------
+
+  get range () {
+    return this._range;
+  }
+
+  set range (value) {
+    this.animations.play(value);
+
+    if (value === 'short') {
+      this._setupPhysicsBody(12, 8, 2);
     }
+    else if (value === 'medium') {
+      this._setupPhysicsBody(28, 8, 2);
+    }
+
+    this._range = value;
   }
 
 }

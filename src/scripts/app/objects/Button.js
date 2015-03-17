@@ -1,13 +1,15 @@
 class Button extends Phaser.Sprite {
 
-  constructor (game, availableTo, orientation = Button.SOUTH) {
-    super(game, 0, 0, this._getColor(availableTo));
+  constructor (game, role, orientation = Button.SOUTH) {
+    super(game, 0, 0, 'objects');
 
     this.wasTriggered = new Phaser.Signal();
 
     this.anchor.set(0.5);
 
     this.orientation = orientation;
+
+    this._setupAnimations(role);
   }
 
   // --------------------------------------------------------------------------
@@ -21,14 +23,14 @@ class Button extends Phaser.Sprite {
   }
 
   switchOn () {
-    this.frame     = 1;
+    this.animations.play('on');
     this.triggered = true;
 
     this.wasTriggered.dispatch();
   }
 
   switchOff () {
-    this.frame     = 0;
+    this.animations.play('off');
     this.triggered = false;
   }
 
@@ -43,12 +45,12 @@ class Button extends Phaser.Sprite {
     this.body.setSize(width, height, offsetX, offsetY);
   }
 
-  _getColor (type) {
-    switch (type) {
-      case 'heart': return 'button-game-heart';
-      case 'star' : return 'button-game-star';
-      default     : return 'button-game-moon';
-    }
+  _setupAnimations (role) {
+    const frames = (i) =>
+      Phaser.Animation.generateFrameNames(`${role}-button-`, i, i, '', 1);
+
+    this.animations.add('on',  frames(2), 0, false);
+    this.animations.add('off', frames(1), 0, false);
   }
 
   _setOrientation (orientation) {

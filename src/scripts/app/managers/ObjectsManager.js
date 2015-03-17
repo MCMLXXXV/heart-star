@@ -23,6 +23,7 @@ class ObjectsManager {
   }
 
   createObjects (mapObjects) {
+    this._recycle();
     this._makeTilemapLayers(mapObjects.layers);
     this._makeTraps(mapObjects.traps);
     this._makePlatforms(mapObjects.platforms);
@@ -35,6 +36,11 @@ class ObjectsManager {
   }
 
   // --------------------------------------------------------------------------
+
+  _recycle () {
+    Object.keys(this._layers)
+      .forEach((key) => this._layers[key].recycle());
+  }
 
   _makeTilemapLayers (layers) {
     for (var layer in layers)

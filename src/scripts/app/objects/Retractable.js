@@ -1,12 +1,12 @@
 class Retractable extends Phaser.Sprite {
 
-  constructor (game, availableTo) {
-    super(game, 0, 0, this._getColor(availableTo));
+  constructor (game, role) {
+    super(game, 0, 0, 'objects');
 
     this.anchor.set(0.5, 0);
 
     this._setupPhysicsBody(16, 56);
-    this._setupAnimations();
+    this._setupAnimations(role);
   }
 
   // --------------------------------------------------------------------------
@@ -39,17 +39,12 @@ class Retractable extends Phaser.Sprite {
     this.body.setSize(width, height, offsetX, offsetY);
   }
 
-  _getColor (type) {
-    switch (type) {
-      case 'heart': return 'retractable-heart';
-      case 'star' : return 'retractable-star';
-      default     : return 'retractable-both';
-    }
-  }
+  _setupAnimations (role) {
+    const frames = (i, j = i) =>
+      Phaser.Animation.generateFrameNames(`${role}-retractable-`, i, j, '', 1);
 
-  _setupAnimations () {
-    this.animations.add('close', [ 0 ],  0, false);
-    this.animations.add('open',   null, 10, false)
+    this.animations.add('close', frames(1),     0, false);
+    this.animations.add('open',  frames(1, 5), 10, false)
       .onComplete.add(this._openingComplete, this);
   }
 

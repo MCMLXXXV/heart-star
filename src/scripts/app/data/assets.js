@@ -1,5 +1,6 @@
 import labels     from './atlases/labels';
 import buttons    from './atlases/buttons';
+import objects    from './atlases/objects';
 import characters from './atlases/characters';
 
 
@@ -74,40 +75,17 @@ export default {
     },
 
     {
-      'type': 'spritesheet',
-      'key': 'button-game-heart',
-      'url': 'images/button-game-heart.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-game-moon',
-      'url': 'images/button-game-moon.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'button-game-star',
-      'url': 'images/button-game-star.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
       'type': 'atlasJSONHash',
       'key': 'buttons',
       'textureURL': 'images/buttons.png',
       'atlasData': buttons
+    },
+
+    {
+      'type': 'atlasJSONHash',
+      'key': 'objects',
+      'textureURL': 'images/objects.png',
+      'atlasData': objects
     },
 
     {
@@ -125,69 +103,9 @@ export default {
     },
 
     {
-      'type': 'spritesheet',
-      'key': 'platform-fixed-1',
-      'url': 'images/platform-fixed-1.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'platform-fixed-2',
-      'url': 'images/platform-fixed-2.png',
-      'frameWidth': 32,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'platform-goal',
-      'url': 'images/platform-goal.png',
-      'frameWidth': 32,
-      'frameHeight': 32,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
       'type': 'image',
       'key': 'preloader-background',
       'url': 'images/preloader-background.png',
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'retractable-both',
-      'url': 'images/retractable-both.png',
-      'frameWidth': 16,
-      'frameHeight': 48,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'retractable-heart',
-      'url': 'images/retractable-heart.png',
-      'frameWidth': 16,
-      'frameHeight': 48,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'retractable-star',
-      'url': 'images/retractable-star.png',
-      'frameWidth': 16,
-      'frameHeight': 48,
-      'margin': 8,
-      'spacing': 8
     },
 
     {
@@ -201,16 +119,6 @@ export default {
       'key': 'tilemaps',
       'url': 'tilemaps/tilemaps.json',
       'format': 'TILED_JSON'
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'trap',
-      'url': 'images/trap.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
     }
 
   ],

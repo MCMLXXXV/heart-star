@@ -8,88 +8,74 @@ import Agents from '../objects/Agents';
 
 export default class Game extends Phaser.State {
 
-  init (level = '01', effectName = 'blackout') {
-    this.game.transitions.reveal(effectName, 1000);
-
-    this.controls = this.game.controls;
-
+  init (level = '01') {
     this.level = level;
+
+    this.controls    = this.game.controls;
+    this.transitions = this.game.transitions;
 
     this._levelManager   = this._makeManager(LevelManager);
     this._objectsManager = this._makeManager(ObjectsManager);
 
-    this._playerActor = null;
-    this._idleActor   = null;
+    this._goal         = null;
+    this._star         = null;
+    this._heart        = null;
+    this._idleActor    = null;
+    this._activePlayer = null;
 
-    this._tutorialLabel = null;
+    this._tutorialLabel    = null;
+    this._levelDefinitions = null;
   }
 
   create () {
-    this._levelDefinitions = this._getStageDefinitions(this.level);
-
     this._agents = this.add.existing(new Agents(this.game));
 
     this._heartGroup = this._objectsManager.createLayerFor('heart', true);
     this._starGroup  = this._objectsManager.createLayerFor('star', true);
     this._moonGroup  = this._objectsManager.createLayerFor('both');
 
-    this._objectsManager.createObjects(this._levelDefinitions.objects);
-    this._placeTutorialLabel(this._levelDefinitions.label);
-
-    this._goal = this.add.existing(new Goal(this.game));
-    this._goal.reset(this.goalCoordinates.x, this.goalCoordinates.y);
-    this._goal.actorsLanded.addOnce(this._celebrate, this);
-
-    this._heart = this.add.existing(this._makeActor(Actor.HEART));
-    this._star  = this.add.existing(this._makeActor(Actor.STAR));
-
-    this._heart.wasHurt.add(this._star.startle, this._star);
-    this._star.wasHurt.add(this._heart.startle, this._heart);
-    this._heart.wasHurt.add(this._actorHurt, this);
-    this._star.wasHurt.add(this._actorHurt, this);
-
-    this._restartActors();
-    this._changeActors(this._heart, this._star);
-
-    this.controls.spacebar.onUp.add(this._togglePlayerActor, this);
-    this.controls.esc.onUp.add(this._goToStageSelection, this);
+    this.controls.spacebar.onUp.add(this._switchActiveActor, this);
+    this.controls.esc.onUp.add(this._goToLevelState, this);
     this.controls.backspace.onUp.add(this._resetGameStage, this);
+
+    this.transitions.reveal('blackout', 1000);
+    this._prepareLevel(this.level);
 
     this.game.storage.getItem('levels', this._unlockCurrentGameStage, this);
   }
 
   update () {
-    this._playerActor.collideActor(this._idleActor);
-    this._goal.collideActors(this._playerActor, this._idleActor);
+    this._activePlayer.collideActor(this._idleActor);
+    this._goal.collideActors(this._activePlayer, this._idleActor);
 
     this._heartGroup.collide(this._heart);
     this._starGroup.collide(this._star);
     this._moonGroup.collide([ this._heart, this._star ]);
 
-    this._agents.collide(this._playerActor);
+    this._agents.collide(this._activePlayer);
     this._agents.collide(this._idleActor);
 
     if (this.inGame) {
       if (this.controls.left.isDown) {
-        this._playerActor.walkLeft();
+        this._activePlayer.walkLeft();
       }
       else if (this.controls.right.isDown) {
-        this._playerActor.walkRight();
+        this._activePlayer.walkRight();
       }
       else {
-        this._playerActor.stop();
+        this._activePlayer.stop();
         this._idleActor.stop();
       }
 
       if (this.controls.up.isDown) {
-        this._playerActor.jump();
+        this._activePlayer.jump();
       }
       else {
-        this._playerActor.cancelPowerJump();
+        this._activePlayer.cancelPowerJump();
       }
     }
     else {
-      this._playerActor.stop();
+      this._activePlayer.stop();
       this._idleActor.stop();
     }
   }
@@ -100,15 +86,30 @@ export default class Game extends Phaser.State {
     return new factory(this.game, ... args);
   }
 
-  _getStageDefinitions (level) {
+  _makeActor (roleName) {
+    let actor = new Actor(this.game, roleName);
+
+    actor.wasHurt.add(() => this._loseLevel());
+
+    return actor;
+  }
+
+  _prepareLevel (level) {
+    this._levelDefinitions = this._getLevelDefinitions(level);
+    this._objectsManager.createObjects(this._levelDefinitions.objects);
+
+    this._placeTutorialLabel();
+    this._placeGoal();
+    this._placeActors();
+  }
+
+  _getLevelDefinitions (level) {
     return this._levelManager.getLevel(level);
   }
 
-  _makeActor (roleName) {
-    return new Actor(this.game, roleName);
-  }
+  _placeTutorialLabel () {
+    const name = this._tutorialLabelName;
 
-  _placeTutorialLabel (name) {
     if (this._tutorialLabel === null) {
       this._tutorialLabel = this.make.image(0, 0, 'labels');
       this._moonGroup.add(this._tutorialLabel);
@@ -123,69 +124,29 @@ export default class Game extends Phaser.State {
     }
   }
 
-  _changeActors (playerActor, idleActor) {
-    this._playerActor      = playerActor;
-    this._playerActor.idle = false;
-    this._playerActor.stop();
+  _placeGoal () {
+    const { x, y } = this.goalCoordinates;
 
-    this._idleActor      = idleActor;
-    this._idleActor.idle = true;
-    this._idleActor.stop();
-
-    this._toggleLayers();
-  }
-
-  _toggleLayers () {
-    this._heartGroup.toggle(!this._heart.idle);
-    this._starGroup.toggle(!this._star.idle);
-  }
-
-  _blink () {
-    let effectName;
-
-    if (this._heart.idle) {
-      effectName = 'sky-blue';
-    }
-    else if (this._star.idle) {
-      effectName = 'pink';
+    if (this._goal === null) {
+      this._goal = this.add.existing(new Goal(this.game));
+      this._goal.actorsLanded.add(this._winLevel, this);
     }
 
-    this.game.transitions.reveal(effectName, 400);
+    this._goal.reset(x, y);
   }
 
-  _togglePlayerActor () {
-    if (!this.inGame) return;
-    if (!this._playerActor.standing) return;
+  _placeActors () {
+    if (this._heart === null && this._star === null) {
+      this._heart = this.add.existing(this._makeActor(Actor.HEART));
+      this._star  = this.add.existing(this._makeActor(Actor.STAR));
 
-    this._changeActors(this._idleActor, this._playerActor);
+      this._heart.wasHurt.add(this._star.startle, this._star);
+      this._star.wasHurt.add(this._heart.startle, this._heart);
+    }
 
-    this._blink();
-  }
-
-  _resetGameStage () {
-    if (!this.inGame) return;
-
-    this.game.transitions.reveal('copy', 500);
-
-    this._changeActors(this._heart, this._star);
     this._restartActor(this._heart, this.heartCoordinates);
     this._restartActor(this._star, this.starCoordinates);
-
-    this._objectsManager.reset();
-  }
-
-  _preRestartActors () {
-    this.game.transitions.hide('blinds', 1000, this._restartActors, this);
-  }
-
-  _restartActors () {
-    this._restartActor(this._heart, this.heartCoordinates);
-    this._restartActor(this._star, this.starCoordinates);
-
-    this.game.transitions.reveal('blinds', 1000);
-
-    this._changeActors(this._heart, this._star);
-    this._objectsManager.reset();
+    this._switchActors(this._heart, this._star);
   }
 
   _restartActor(actor, { x, y }) {
@@ -193,25 +154,85 @@ export default class Game extends Phaser.State {
     actor.sink();
   }
 
-  _actorHurt () {
-    this.time.events.add(1000, this._preRestartActors, this);
+  _switchActors (playerActor, idleActor) {
+    this._activePlayer      = playerActor;
+    this._activePlayer.idle = false;
+    this._activePlayer.stop();
+
+    this._idleActor      = idleActor;
+    this._idleActor.idle = true;
+    this._idleActor.stop();
+
+    this._switchLayers();
   }
 
-  _celebrate () {
+  _switchLayers () {
+    this._heartGroup.toggle(!this._heart.idle);
+    this._starGroup.toggle(!this._star.idle);
+  }
+
+  _switchActiveActor () {
+    if (!this.inGame) return;
+    if (!this._activePlayer.standing) return;
+
+    this._doActorSwitchEffect(this._idleActor.role);
+    this._switchActors(this._idleActor, this._activePlayer);
+  }
+
+  _doActorSwitchEffect (role) {
+    let effectName;
+
+    if (role === 'heart') {
+      effectName = 'pink';
+    }
+    else if (role === 'star') {
+      effectName = 'sky-blue';
+    }
+
+    this.transitions.reveal(effectName, 400);
+  }
+
+  _resetGameStage () {
+    if (!this.inGame) return;
+
+    this.transitions.reveal('copy', 500);
+    this._placeActors();
+    this._objectsManager.reset();
+  }
+
+  _loseLevel () {
+    this.time.events.add(1000, () => {
+      this.transitions.hide('blinds', 1000, () => {
+        this._placeActors();
+        this._objectsManager.reset();
+        this.transitions.reveal('blinds', 1000);
+      });
+    });
+  }
+
+  _winLevel () {
     this._heart.emotion = 'cheering';
-    this._star.emotion  = 'cheering';
+    this._heart.float();
+    this._heart.stop();
 
-    this.time.events.add(1000, this._goToNextStage, this);
+    this._star.emotion  = 'cheering';
+    this._star.float();
+    this._star.stop();
+
+    this.time.events.add(1500, () => this._startNextLevel());
   }
 
-  _goToNextStage () {
-    var nextStage = this._levelDefinitions.next;
+  _startNextLevel () {
+    let nextLevel = this._levelDefinitions.next;
 
-    if (nextStage === null) {
-      this.game.transitions.toState('Credits', 'blackout', 1000);
+    if (nextLevel === null) {
+      this.transitions.toState('Credits', 'blackout', 1000);
     }
     else {
-      this.game.transitions.toState('Game', 'blinds', 1000, nextStage, 'blinds');
+      this.transitions.hide('blinds', 1000, () => {
+        this._prepareLevel(nextLevel);
+        this.transitions.reveal('blinds', 1000);
+      });
     }
   }
 
@@ -226,13 +247,19 @@ export default class Game extends Phaser.State {
     this.game.storage.setItem('levels', unlockedLevels);
   }
 
-  _goToStageSelection () {
-    if (!this.inGame) return;
-
-    this.game.transitions.toState('Levels', 'blackout', 1000);
+  _goToLevelState () {
+    this.transitions.toState('Levels', 'blackout', 1000);
   }
 
   // --------------------------------------------------------------------------
+
+  get _tutorialLabelName () {
+    return this._levelDefinitions.label;
+  }
+
+  get goalCoordinates () {
+    return this._levelDefinitions.actors.goal;
+  }
 
   get heartCoordinates () {
     return this._levelDefinitions.actors.heart;
@@ -242,13 +269,9 @@ export default class Game extends Phaser.State {
     return this._levelDefinitions.actors.star;
   }
 
-  get goalCoordinates () {
-    return this._levelDefinitions.actors.goal;
-  }
-
   get inGame () {
-    return !this.game.transitions.isRunning &&
-      this._playerActor && this._playerActor.emotion === null;
+    return !this.transitions.isRunning &&
+      this._activePlayer && this._activePlayer.emotion === null;
   }
 
 }
