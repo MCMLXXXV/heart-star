@@ -103,26 +103,6 @@ export default {
     },
 
     {
-      'type': 'spritesheet',
-      'key': 'platform-fixed-1',
-      'url': 'images/platform-fixed-1.png',
-      'frameWidth': 16,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'platform-fixed-2',
-      'url': 'images/platform-fixed-2.png',
-      'frameWidth': 32,
-      'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
       'type': 'image',
       'key': 'preloader-background',
       'url': 'images/preloader-background.png',

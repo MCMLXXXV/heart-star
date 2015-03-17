@@ -40,12 +40,12 @@ export default {
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }
     },
-    'heart-platform-fixed-normal': {
+    'heart-platform-fixed-medium': {
       frame: { x: 70, y: 118, w: 32, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 32, h: 16 },
       sourceSize: { w: 32, h: 16 }
     },
-    'heart-platform-fixed-small': {
+    'heart-platform-fixed-short': {
       frame: { x: 72, y: 136, w: 16, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }
@@ -90,12 +90,12 @@ export default {
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }
     },
-    'both-platform-fixed-normal': {
+    'both-platform-fixed-medium': {
       frame: { x: 36, y: 118, w: 32, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 32, h: 16 },
       sourceSize: { w: 32, h: 16 }
     },
-    'both-platform-fixed-small': {
+    'both-platform-fixed-short': {
       frame: { x: 138, y: 100, w: 16, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }
@@ -140,12 +140,12 @@ export default {
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }
     },
-    'star-platform-fixed-normal': {
+    'star-platform-fixed-medium': {
       frame: { x: 104, y: 118, w: 32, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 32, h: 16 },
       sourceSize: { w: 32, h: 16 }
     },
-    'star-platform-fixed-small': {
+    'star-platform-fixed-short': {
       frame: { x: 156, y: 118, w: 16, h: 16 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 16 },
       sourceSize: { w: 16, h: 16 }

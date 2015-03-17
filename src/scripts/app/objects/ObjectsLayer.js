@@ -43,10 +43,12 @@ class ObjectsLayer extends Phaser.Group {
       Trap, this._roleName);
   }
 
-  addPlatform (x, y, type) {
-    this._addObject(
+  addPlatform (x, y, range) {
+    let platform = this._addObject(
       x, y, this._platformsGroup,
-      Platform, type, this._roleName);
+      Platform, this._roleName);
+
+    platform.range = range;
   }
 
   addRetractable ({ retractable, button }) {
