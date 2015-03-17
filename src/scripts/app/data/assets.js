@@ -1,5 +1,6 @@
 import labels     from './atlases/labels';
 import buttons    from './atlases/buttons';
+import objects    from './atlases/objects';
 import characters from './atlases/characters';
 
 
@@ -112,6 +113,13 @@ export default {
 
     {
       'type': 'atlasJSONHash',
+      'key': 'objects',
+      'textureURL': 'images/objects.png',
+      'atlasData': objects
+    },
+
+    {
+      'type': 'atlasJSONHash',
       'key': 'characters',
       'textureURL': 'images/characters.png',
       'atlasData': characters
@@ -140,16 +148,6 @@ export default {
       'url': 'images/platform-fixed-2.png',
       'frameWidth': 32,
       'frameHeight': 16,
-      'margin': 8,
-      'spacing': 8
-    },
-
-    {
-      'type': 'spritesheet',
-      'key': 'platform-goal',
-      'url': 'images/platform-goal.png',
-      'frameWidth': 32,
-      'frameHeight': 32,
       'margin': 8,
       'spacing': 8
     },

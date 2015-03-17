@@ -1,7 +1,7 @@
 class Goal extends Phaser.Sprite {
 
   constructor (game) {
-    super(game, 0, 0, 'platform-goal');
+    super(game, 0, 0, 'objects');
 
     this.anchor.set(0.5);
 
@@ -36,7 +36,9 @@ class Goal extends Phaser.Sprite {
   }
 
   _setupAnimation () {
-    this.animations.add('main', null, 8, true).play();
+    const frames = Phaser.Animation.generateFrameNames('goal-', 1, 6, '', 1);
+
+    this.animations.add('main', frames, 8, true).play();
   }
 
   // --------------------------------------------------------------------------
