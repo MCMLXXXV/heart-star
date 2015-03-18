@@ -36,9 +36,9 @@ export default {
       sourceSize: { w: 240, h: 48 }
     },
     'label-version': {
-      frame: { x: 484, y: 336, w: 34, h: 8 },
-      spriteSourceSize: { x: 0, y: 0, w: 34, h: 8 },
-      sourceSize: { w: 34, h: 8 }
+      frame: { x: 484, y: 336, w: 32, h: 8 },
+      spriteSourceSize: { x: 0, y: 0, w: 32, h: 8 },
+      sourceSize: { w: 32, h: 8 }
     },
     'logo-adventure-islands': {
       frame: { x: 484, y: 162, w: 240, h: 160 },
