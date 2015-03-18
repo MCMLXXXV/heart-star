@@ -20,10 +20,6 @@ export default {
   ],
 
   // - Graphics section -------------------------------------------------------
-  //
-  // TODO: Most of the graphical assets defined individually below must be
-  //       repackaged as a graphics atlas to simplify loading process, GPU
-  //       memory consumption etc.
 
   'graphics': [
 
