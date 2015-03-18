@@ -1,6 +1,7 @@
 import labels     from './atlases/labels';
 import buttons    from './atlases/buttons';
 import objects    from './atlases/objects';
+import background from './atlases/background';
 import characters from './atlases/characters';
 
 
@@ -27,51 +28,10 @@ export default {
   'graphics': [
 
     {
-      'type': 'image',
-      'key': 'background-credits-ai',
-      'url': 'images/background-credits-ai.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'background-credits-rb',
-      'url': 'images/background-credits-rb.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'background-level-select',
-      'url': 'images/background-level-select.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'background-title',
-      'url': 'images/background-title.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'bg-pattern-heart',
-      'url': 'images/bg-pattern-heart.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'bg-pattern-heart-star',
-      'url': 'images/bg-pattern-heart-star.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'bg-pattern-moon',
-      'url': 'images/bg-pattern-moon.png',
-    },
-
-    {
-      'type': 'image',
-      'key': 'bg-pattern-star',
-      'url': 'images/bg-pattern-star.png',
+      'type': 'atlasJSONHash',
+      'key': 'background',
+      'textureURL': 'images/background.png',
+      'atlasData': background
     },
 
     {
@@ -79,13 +39,6 @@ export default {
       'key': 'buttons',
       'textureURL': 'images/buttons.png',
       'atlasData': buttons
-    },
-
-    {
-      'type': 'atlasJSONHash',
-      'key': 'objects',
-      'textureURL': 'images/objects.png',
-      'atlasData': objects
     },
 
     {
@@ -100,6 +53,13 @@ export default {
       'key': 'labels',
       'textureURL': 'images/labels.png',
       'atlasData': labels
+    },
+
+    {
+      'type': 'atlasJSONHash',
+      'key': 'objects',
+      'textureURL': 'images/objects.png',
+      'atlasData': objects
     },
 
     {

@@ -11,7 +11,7 @@ export default class Levels extends Phaser.State {
 
   create () {
     this.add.existing(new BackgroundPattern(this.game));
-    this.add.image(0, 0, 'background-level-select');
+    this.add.image(0, 0, 'background', 'background-level-select');
 
     this.add.image(0, 32, 'labels', 'label-level-select');
 

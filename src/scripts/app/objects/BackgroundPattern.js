@@ -3,7 +3,7 @@ const SCROLL = 16;
 class BackgroundPattern extends Phaser.TileSprite {
 
   constructor (game, texture = BackgroundPattern.HEART_STAR) {
-    super(game, 0, 0, 240, 160, texture);
+    super(game, 0, 0, 240, 160, 'background', texture);
 
     this._changeScroll(texture);
   }
@@ -26,9 +26,9 @@ class BackgroundPattern extends Phaser.TileSprite {
 }
 
 
-BackgroundPattern.HEART      = 'bg-pattern-heart';
-BackgroundPattern.HEART_STAR = 'bg-pattern-heart-star';
-BackgroundPattern.MOON       = 'bg-pattern-moon';
-BackgroundPattern.STAR       = 'bg-pattern-star';
+BackgroundPattern.HEART      = 'pattern-heart';
+BackgroundPattern.HEART_STAR = 'pattern-heart-star';
+BackgroundPattern.MOON       = 'pattern-moon';
+BackgroundPattern.STAR       = 'pattern-star';
 
 export default BackgroundPattern;

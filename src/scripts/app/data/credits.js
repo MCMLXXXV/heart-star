@@ -2,7 +2,7 @@ export default {
 
   'adventure-islands': {
     background: {
-      pattern: 'bg-pattern-heart-star',
+      pattern: 'pattern-heart-star',
       layer:   'background-credits-ai',
       label:   'label-credits-ai'
     },
@@ -29,7 +29,7 @@ export default {
 
   'rb': {
     background: {
-      pattern: 'bg-pattern-moon',
+      pattern: 'pattern-moon',
       layer:   'background-credits-rb',
       label:   'label-credits-rb'
     },

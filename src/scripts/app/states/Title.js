@@ -13,7 +13,7 @@ export default class Title extends Phaser.State {
 
   create () {
     this.add.existing(new BackgroundPattern(this.game));
-    this.add.image(0, 0, 'background-title');
+    this.add.image(0, 0, 'background', 'background-title');
     this.add.image(this.world.width, 0, 'labels', 'label-version').anchor.set(1, 0);
     this._addSwingingTitleLabel(18);
     this._placeCharacter('heart',  64);
