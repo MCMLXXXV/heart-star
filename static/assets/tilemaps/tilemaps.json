@@ -30,6 +30,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":1,
                  "name":"heart",
                  "properties":
                     {
@@ -44,6 +45,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":2,
                  "name":"star",
                  "properties":
                     {
@@ -58,6 +60,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":3,
                  "name":"goal",
                  "properties":
                     {
@@ -72,6 +75,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":4,
                  "name":"",
                  "properties":
                     {
@@ -87,6 +91,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":5,
                  "name":"label-game-primer",
                  "properties":
                     {
@@ -135,6 +140,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":6,
                  "name":"heart",
                  "properties":
                     {
@@ -149,6 +155,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":7,
                  "name":"star",
                  "properties":
                     {
@@ -163,6 +170,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":8,
                  "name":"goal",
                  "properties":
                     {
@@ -177,6 +185,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":9,
                  "name":"",
                  "properties":
                     {
@@ -192,6 +201,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":10,
                  "name":"label-hero-blocks",
                  "properties":
                     {
@@ -240,6 +250,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":11,
                  "name":"heart",
                  "properties":
                     {
@@ -254,6 +265,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":12,
                  "name":"star",
                  "properties":
                     {
@@ -268,6 +280,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":13,
                  "name":"goal",
                  "properties":
                     {
@@ -282,6 +295,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":14,
                  "name":"",
                  "properties":
                     {
@@ -331,6 +345,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":15,
                  "name":"heart",
                  "properties":
                     {
@@ -340,11 +355,12 @@
                  "type":"position",
                  "visible":true,
                  "width":16,
-                 "x":168,
+                 "x":172,
                  "y":104
                 }, 
                 {
                  "height":24,
+                 "id":16,
                  "name":"star",
                  "properties":
                     {
@@ -359,6 +375,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":17,
                  "name":"goal",
                  "properties":
                     {
@@ -373,6 +390,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":18,
                  "name":"",
                  "properties":
                     {
@@ -388,6 +406,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":19,
                  "name":"label-carrying-partners",
                  "properties":
                     {
@@ -436,6 +455,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":20,
                  "name":"heart",
                  "properties":
                     {
@@ -450,6 +470,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":21,
                  "name":"star",
                  "properties":
                     {
@@ -464,6 +485,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":22,
                  "name":"goal",
                  "properties":
                     {
@@ -478,6 +500,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":23,
                  "name":"",
                  "properties":
                     {
@@ -527,6 +550,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":24,
                  "name":"heart",
                  "properties":
                     {
@@ -541,6 +565,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":25,
                  "name":"star",
                  "properties":
                     {
@@ -555,6 +580,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":26,
                  "name":"goal",
                  "properties":
                     {
@@ -569,6 +595,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":27,
                  "name":"",
                  "properties":
                     {
@@ -618,6 +645,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":28,
                  "name":"heart",
                  "properties":
                     {
@@ -632,6 +660,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":29,
                  "name":"star",
                  "properties":
                     {
@@ -646,6 +675,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":30,
                  "name":"goal",
                  "properties":
                     {
@@ -660,6 +690,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":31,
                  "name":"trap",
                  "properties":
                     {
@@ -675,6 +706,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":32,
                  "name":"trap",
                  "properties":
                     {
@@ -690,6 +722,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":33,
                  "name":"trap",
                  "properties":
                     {
@@ -705,6 +738,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":34,
                  "name":"trap",
                  "properties":
                     {
@@ -720,6 +754,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":35,
                  "name":"trap",
                  "properties":
                     {
@@ -735,6 +770,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":36,
                  "name":"trap",
                  "properties":
                     {
@@ -750,6 +786,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":37,
                  "name":"trap",
                  "properties":
                     {
@@ -765,6 +802,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":38,
                  "name":"trap",
                  "properties":
                     {
@@ -780,6 +818,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":39,
                  "name":"trap",
                  "properties":
                     {
@@ -795,6 +834,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":40,
                  "name":"trap",
                  "properties":
                     {
@@ -810,6 +850,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":41,
                  "name":"trap",
                  "properties":
                     {
@@ -825,6 +866,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":42,
                  "name":"trap",
                  "properties":
                     {
@@ -840,6 +882,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":43,
                  "name":"platform",
                  "properties":
                     {
@@ -855,6 +898,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":44,
                  "name":"",
                  "properties":
                     {
@@ -904,6 +948,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":45,
                  "name":"heart",
                  "properties":
                     {
@@ -918,6 +963,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":46,
                  "name":"star",
                  "properties":
                     {
@@ -932,6 +978,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":47,
                  "name":"goal",
                  "properties":
                     {
@@ -946,6 +993,7 @@
                 }, 
                 {
                  "height":48,
+                 "id":48,
                  "name":"retractable-a",
                  "properties":
                     {
@@ -960,6 +1008,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":49,
                  "name":"platform",
                  "properties":
                     {
@@ -975,6 +1024,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":50,
                  "name":"button",
                  "properties":
                     {
@@ -990,6 +1040,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":51,
                  "name":"trap",
                  "properties":
                     {
@@ -1005,6 +1056,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":52,
                  "name":"trap",
                  "properties":
                     {
@@ -1020,6 +1072,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":53,
                  "name":"trap",
                  "properties":
                     {
@@ -1035,6 +1088,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":54,
                  "name":"trap",
                  "properties":
                     {
@@ -1050,6 +1104,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":55,
                  "name":"trap",
                  "properties":
                     {
@@ -1065,6 +1120,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":56,
                  "name":"trap",
                  "properties":
                     {
@@ -1080,6 +1136,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":57,
                  "name":"trap",
                  "properties":
                     {
@@ -1095,6 +1152,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":58,
                  "name":"trap",
                  "properties":
                     {
@@ -1110,6 +1168,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":59,
                  "name":"",
                  "properties":
                     {
@@ -1159,6 +1218,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":60,
                  "name":"heart",
                  "properties":
                     {
@@ -1173,6 +1233,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":61,
                  "name":"star",
                  "properties":
                     {
@@ -1187,6 +1248,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":62,
                  "name":"goal",
                  "properties":
                     {
@@ -1201,6 +1263,7 @@
                 }, 
                 {
                  "height":48,
+                 "id":63,
                  "name":"retractable-a",
                  "properties":
                     {
@@ -1215,6 +1278,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":64,
                  "name":"button",
                  "properties":
                     {
@@ -1230,6 +1294,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":65,
                  "name":"platform",
                  "properties":
                     {
@@ -1245,6 +1310,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":66,
                  "name":"platform",
                  "properties":
                     {
@@ -1260,6 +1326,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":67,
                  "name":"trap",
                  "properties":
                     {
@@ -1275,6 +1342,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":68,
                  "name":"trap",
                  "properties":
                     {
@@ -1290,6 +1358,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":69,
                  "name":"trap",
                  "properties":
                     {
@@ -1305,6 +1374,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":70,
                  "name":"trap",
                  "properties":
                     {
@@ -1320,6 +1390,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":71,
                  "name":"trap",
                  "properties":
                     {
@@ -1335,6 +1406,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":72,
                  "name":"trap",
                  "properties":
                     {
@@ -1350,6 +1422,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":73,
                  "name":"trap",
                  "properties":
                     {
@@ -1365,6 +1438,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":74,
                  "name":"trap",
                  "properties":
                     {
@@ -1380,6 +1454,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":75,
                  "name":"",
                  "properties":
                     {
@@ -1429,6 +1504,7 @@
          "objects":[
                 {
                  "height":24,
+                 "id":76,
                  "name":"heart",
                  "properties":
                     {
@@ -1443,6 +1519,7 @@
                 }, 
                 {
                  "height":24,
+                 "id":77,
                  "name":"star",
                  "properties":
                     {
@@ -1457,6 +1534,7 @@
                 }, 
                 {
                  "height":32,
+                 "id":78,
                  "name":"goal",
                  "properties":
                     {
@@ -1471,6 +1549,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":79,
                  "name":"platform",
                  "properties":
                     {
@@ -1486,6 +1565,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":80,
                  "name":"platform",
                  "properties":
                     {
@@ -1501,6 +1581,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":81,
                  "name":"platform",
                  "properties":
                     {
@@ -1516,6 +1597,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":82,
                  "name":"button",
                  "properties":
                     {
@@ -1531,6 +1613,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":83,
                  "name":"trap",
                  "properties":
                     {
@@ -1546,6 +1629,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":84,
                  "name":"trap",
                  "properties":
                     {
@@ -1561,6 +1645,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":85,
                  "name":"trap",
                  "properties":
                     {
@@ -1576,6 +1661,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":86,
                  "name":"trap",
                  "properties":
                     {
@@ -1591,6 +1677,7 @@
                 }, 
                 {
                  "height":48,
+                 "id":87,
                  "name":"retractable-b",
                  "properties":
                     {
@@ -1605,6 +1692,7 @@
                 }, 
                 {
                  "height":16,
+                 "id":88,
                  "name":"button",
                  "properties":
                     {
@@ -1620,6 +1708,7 @@
                 }, 
                 {
                  "height":48,
+                 "id":89,
                  "name":"retractable-a",
                  "properties":
                     {
@@ -1634,6 +1723,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":90,
                  "name":"platform",
                  "properties":
                     {
@@ -1645,10 +1735,11 @@
                  "visible":true,
                  "width":16,
                  "x":16,
-                 "y":72
+                 "y":64
                 }, 
                 {
                  "height":8,
+                 "id":91,
                  "name":"platform",
                  "properties":
                     {
@@ -1664,6 +1755,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":92,
                  "name":"platform",
                  "properties":
                     {
@@ -1679,6 +1771,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":93,
                  "name":"platform",
                  "properties":
                     {
@@ -1694,6 +1787,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":94,
                  "name":"platform",
                  "properties":
                     {
@@ -1709,6 +1803,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":95,
                  "name":"trap",
                  "properties":
                     {
@@ -1724,6 +1819,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":96,
                  "name":"trap",
                  "properties":
                     {
@@ -1739,6 +1835,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":97,
                  "name":"trap",
                  "properties":
                     {
@@ -1754,6 +1851,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":98,
                  "name":"trap",
                  "properties":
                     {
@@ -1769,6 +1867,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":99,
                  "name":"trap",
                  "properties":
                     {
@@ -1784,6 +1883,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":100,
                  "name":"trap",
                  "properties":
                     {
@@ -1799,6 +1899,7 @@
                 }, 
                 {
                  "height":8,
+                 "id":101,
                  "name":"",
                  "properties":
                     {
@@ -1819,6 +1920,7 @@
          "x":0,
          "y":0
         }],
+ "nextobjectid":102,
  "orientation":"orthogonal",
  "properties":
     {
