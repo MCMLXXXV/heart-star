@@ -1,6 +1,6 @@
 /**
  *  @author    Rafael Barbosa Lopes
- *  @copyright 2014 Rafael Barbosa Lopes
+ *  @copyright 2014-2015 Rafael Barbosa Lopes
  *  @license   {@link https://github.com/rblopes/my-phaser-template/blob/dev/LICENSE|MIT License}
  */
 
@@ -38,7 +38,7 @@ class Storage extends Phaser.Plugin {
    *  @param {object}   context  - The context of the callback.
    */
   getItem (key, callback, context) {
-    localforage.getItem(key, this.wrapCallback(callback, context));
+    return localforage.getItem(key, this.wrapCallback(callback, context));
   }
 
   /**
@@ -50,7 +50,7 @@ class Storage extends Phaser.Plugin {
    *  @param {object}   context  - The context of the callback.
    */
   setItem (key, value, callback, context) {
-    localforage.setItem(key, value, this.wrapCallback(callback, context));
+    return localforage.setItem(key, value, this.wrapCallback(callback, context));
   }
 
   /**
@@ -61,7 +61,7 @@ class Storage extends Phaser.Plugin {
    *  @param {object}   context  - The context of the callback.
    */
   removeItem (key, callback, context) {
-    localforage.removeItem(key, this.wrapCallback(callback, context));
+    return localforage.removeItem(key, this.wrapCallback(callback, context));
   }
 
   /**
@@ -71,7 +71,7 @@ class Storage extends Phaser.Plugin {
    *  @param {object}   context  - The context of the callback.
    */
   clear (callback, context) {
-    localforage.clear(this.wrapCallback(callback, context));
+    return localforage.clear(this.wrapCallback(callback, context));
   }
 
   /**
@@ -81,7 +81,7 @@ class Storage extends Phaser.Plugin {
    *  @param {object}   context  - The context of the callback.
    */
   length (callback, context) {
-    localforage.length(this.wrapCallback(callback, context));
+    return localforage.length(this.wrapCallback(callback, context));
   }
 
   /**
@@ -91,7 +91,7 @@ class Storage extends Phaser.Plugin {
    *  @param {object}   context  - The context of the callback.
    */
   key (keyIndex, callback, context) {
-    localforage.key(keyIndex, this.wrapCallback(callback, context));
+    return localforage.key(keyIndex, this.wrapCallback(callback, context));
   }
 
   /**
@@ -101,7 +101,7 @@ class Storage extends Phaser.Plugin {
    *  @param {object}   context  - The context of the callback.
    */
   keys (callback, context) {
-    localforage.keys(this.wrapCallback(callback, context));
+    return localforage.keys(this.wrapCallback(callback, context));
   }
 
   /**
@@ -113,7 +113,7 @@ class Storage extends Phaser.Plugin {
    *  @param {object}   callbackContext - The success callback context.
    */
   iterate (iterator, iteratorContext, callback, callbackContext) {
-    localforage.iterate(
+    return localforage.iterate(
       this.wrapCallback(iterator, iteratorContext),
       this.wrapCallback(callback, callbackContext));
   }
