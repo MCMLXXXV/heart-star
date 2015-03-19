@@ -71,21 +71,6 @@ export default {
       'format': 'TILED_JSON'
     }
 
-  ],
-
-  // - Sound effects section --------------------------------------------------
-
-  'sfx': [
-
-    // TODO: No sound effects yet!
-
-    // {
-    //   'type': 'audio',
-    //   'key': 'none',
-    //   'urls': [ 'audio/none.m4a', 'audio/none.ogg' ],
-    //   'autoDecode': true
-    // }
-
   ]
 
 };
