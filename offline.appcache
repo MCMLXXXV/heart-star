@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Time: Wed Mar 18 2015 21:18:22 GMT-0300 (BRT)
+# Time: Fri Mar 20 2015 14:25:41 GMT-0300 (BRT)
 
 
 CACHE:
@@ -8,6 +8,11 @@ styles.min.css
 app.manifest
 browserconfig.xml
 favicon.ico
+assets/graphics.png
+assets/splash-screen.png
+assets/sprites.png
+assets/tilemaps.json
+assets/tileset.png
 icon/apple-touch-icon-114x114.png
 icon/apple-touch-icon-120x120.png
 icon/apple-touch-icon-144x144.png
@@ -28,14 +33,6 @@ icon/mstile-150x150.png
 icon/mstile-310x150.png
 icon/mstile-310x310.png
 icon/mstile-70x70.png
-assets/images/background.png
-assets/images/buttons.png
-assets/images/characters.png
-assets/images/labels.png
-assets/images/objects.png
-assets/images/splash-screen.png
-assets/images/tileset.png
-assets/tilemaps/tilemaps.json
 
 
 NETWORK:
