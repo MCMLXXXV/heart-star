@@ -1,4 +1,6 @@
-import StageButton       from '../objects/LevelButton';
+import levels from '../data/levels';
+
+import LevelButton       from '../objects/LevelButton';
 import MenuOptionButton  from '../objects/MenuOptionButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
@@ -27,17 +29,23 @@ export default class Levels extends Phaser.State {
   // --------------------------------------------------------------------------
 
   _addStageButtons (err, unlockedLevels) {
-    for (let len = unlockedLevels.length, i = 0; i < len; ++i) {
-      let { name, locked } = unlockedLevels[i];
-      let x = 48 + 32 * (i % 5);
-      let y = 64 + 32 * Math.floor(i / 5);
-
-      this.add.existing(this._makeStageButton(x, y, name, locked));
+    if (unlockedLevels === null) {
+      // The game is being played for the first time,
+      // no unlocked levels yet.
+      unlockedLevels = levels;
     }
+
+    const x = (n) => 48 + 32 * (n % 5);
+    const y = (n) => 64 + 32 * Math.floor(n / 5);
+
+    unlockedLevels
+      .map(({ name, locked }, i) => [ x(i), y(i), name, locked ])
+      .map((args) => this._makeLevelButton(... args))
+      .forEach((button) => this.add.existing(button));
   }
 
-  _makeStageButton (x, y, level, locked) {
-    let button = new StageButton(this.game, x, y, level);
+  _makeLevelButton (x, y, level, locked) {
+    let button = new LevelButton(this.game, x, y, level);
 
     if (!locked) {
       button.unlock();

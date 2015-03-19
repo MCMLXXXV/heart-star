@@ -1,3 +1,5 @@
+import levels from '../data/levels';
+
 import ObjectsManager from '../managers/ObjectsManager';
 import LevelManager   from '../managers/LevelManager';
 
@@ -11,6 +13,7 @@ export default class Game extends Phaser.State {
   init (level = '01') {
     this.level = level;
 
+    this.storage     = this.game.storage;
     this.controls    = this.game.controls;
     this.transitions = this.game.transitions;
 
@@ -24,6 +27,7 @@ export default class Game extends Phaser.State {
     this._activePlayer = null;
 
     this._tutorialLabel    = null;
+    this._unlockedLevels   = null;
     this._levelDefinitions = null;
   }
 
@@ -41,7 +45,11 @@ export default class Game extends Phaser.State {
     this.transitions.reveal('blackout', 1000);
     this._prepareLevel(this.level);
 
-    this.game.storage.getItem('levels', this._unlockCurrentGameStage, this);
+    this.storage
+      .getItem('levels')
+      .then((unlockedLevels) => {
+        this._unlockedLevels = unlockedLevels || levels;
+      });
   }
 
   update () {
@@ -230,21 +238,22 @@ export default class Game extends Phaser.State {
     }
     else {
       this.transitions.hide('blinds', 1000, () => {
+        this._unlockLevel(nextLevel);
         this._prepareLevel(nextLevel);
         this.transitions.reveal('blinds', 1000);
       });
     }
   }
 
-  _unlockCurrentGameStage (err, unlockedLevels) {
-    for (var unlockedLevel of unlockedLevels) {
-      if (unlockedLevel.name === this.level) {
-        unlockedLevel.locked = false;
-        break;
-      }
-    }
+  _unlockLevel (level) {
+    let lvl = this._unlockedLevels
+      .find((lvl) => lvl.name === level);
 
-    this.game.storage.setItem('levels', unlockedLevels);
+    if (lvl.locked) {
+      lvl.locked = false;
+
+      this.storage.setItem('levels', this._unlockedLevels);
+    }
   }
 
   _goToLevelState () {

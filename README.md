@@ -85,7 +85,6 @@ Planned Updates and Improvements
 
 *   Fix friends hopping and carrying behavior.
 *   Convert all graphical assets into a single texture atlas.
-*   Properly manage settings, including game progress.
 *   Sound effects (and music?).
 *   Code clean up.
 

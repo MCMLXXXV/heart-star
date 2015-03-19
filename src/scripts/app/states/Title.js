@@ -1,5 +1,3 @@
-import levels from '../data/levels';
-
 import MenuOptionButton  from '../objects/MenuOptionButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
@@ -18,8 +16,6 @@ export default class Title extends Phaser.State {
     this._addSwingingTitleLabel(18);
     this._placeCharacter('heart',  64);
     this._placeCharacter('star' , 176);
-
-    this.game.storage.getItem('levels', this._probeUnlockedStages, this);
   }
 
   // --------------------------------------------------------------------------
@@ -54,11 +50,6 @@ export default class Title extends Phaser.State {
       .to({ y: '-8' }, 1500, 'Quad.easeInOut')
       .loop()
       .start();
-  }
-
-  _probeUnlockedStages (err, unlockedStages) {
-    if (unlockedStages === null)
-      this.game.storage.setItem('levels', levels);
   }
 
 }
