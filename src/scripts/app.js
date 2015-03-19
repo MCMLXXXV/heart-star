@@ -1,7 +1,7 @@
 import * as states from './app/states';
 
 
-export function start () {
+export default function () {
   var game = new Phaser.Game(240, 160, Phaser.AUTO);
 
   Object.keys(states)
