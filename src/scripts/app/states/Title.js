@@ -30,8 +30,9 @@ export default class Title extends Phaser.State {
   _makeMenuOptionButton(y, type, stateName) {
     let button = new MenuOptionButton(this.game, 80, y, type);
 
-    button.onInputUp.add(
-      () => this.game.transitions.toState(stateName, 'blackout', 1000));
+    button.onInputUp.add(() => {
+      this.game.transitions.toState(stateName, 'blackout', 1000);
+    });
 
     return button;
   }
