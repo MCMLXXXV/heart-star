@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Time: Tue Mar 17 2015 18:44:07 GMT-0300 (BRT)
+# Time: Wed Mar 18 2015 21:18:22 GMT-0300 (BRT)
 
 
 CACHE:
@@ -28,14 +28,7 @@ icon/mstile-150x150.png
 icon/mstile-310x150.png
 icon/mstile-310x310.png
 icon/mstile-70x70.png
-assets/images/background-credits-ai.png
-assets/images/background-credits-rb.png
-assets/images/background-level-select.png
-assets/images/background-title.png
-assets/images/bg-pattern-heart-star.png
-assets/images/bg-pattern-heart.png
-assets/images/bg-pattern-moon.png
-assets/images/bg-pattern-star.png
+assets/images/background.png
 assets/images/buttons.png
 assets/images/characters.png
 assets/images/labels.png
