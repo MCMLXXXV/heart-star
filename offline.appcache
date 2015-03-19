@@ -1,5 +1,5 @@
 CACHE MANIFEST
-# Time: Sun Mar 22 2015 12:52:44 GMT-0300 (BRT)
+# Time: Wed Apr 22 2015 12:25:41 GMT-0300 (BRT)
 
 
 CACHE:
@@ -13,31 +13,33 @@ assets/splash-screen.png
 assets/sprites.png
 assets/tilemaps.json
 assets/tileset.png
-icon/android-chrome-144x144.png
-icon/android-chrome-192x192.png
-icon/android-chrome-36x36.png
-icon/android-chrome-48x48.png
-icon/android-chrome-72x72.png
-icon/android-chrome-96x96.png
-icon/apple-touch-icon-114x114.png
-icon/apple-touch-icon-120x120.png
-icon/apple-touch-icon-144x144.png
-icon/apple-touch-icon-152x152.png
-icon/apple-touch-icon-180x180.png
-icon/apple-touch-icon-57x57.png
-icon/apple-touch-icon-60x60.png
-icon/apple-touch-icon-72x72.png
-icon/apple-touch-icon-76x76.png
-icon/apple-touch-icon-precomposed.png
-icon/apple-touch-icon.png
-icon/favicon-16x16.png
-icon/favicon-32x32.png
-icon/favicon-96x96.png
-icon/mstile-144x144.png
-icon/mstile-150x150.png
-icon/mstile-310x150.png
-icon/mstile-310x310.png
-icon/mstile-70x70.png
+icons/android-chrome-144x144.png
+icons/android-chrome-192x192.png
+icons/android-chrome-36x36.png
+icons/android-chrome-48x48.png
+icons/android-chrome-72x72.png
+icons/android-chrome-96x96.png
+icons/apple-touch-icon-114x114.png
+icons/apple-touch-icon-120x120.png
+icons/apple-touch-icon-144x144.png
+icons/apple-touch-icon-152x152.png
+icons/apple-touch-icon-180x180.png
+icons/apple-touch-icon-57x57.png
+icons/apple-touch-icon-60x60.png
+icons/apple-touch-icon-72x72.png
+icons/apple-touch-icon-76x76.png
+icons/apple-touch-icon-precomposed.png
+icons/apple-touch-icon.png
+icons/favicon-160x160.png
+icons/favicon-16x16.png
+icons/favicon-196x196.png
+icons/favicon-32x32.png
+icons/favicon-96x96.png
+icons/mstile-144x144.png
+icons/mstile-150x150.png
+icons/mstile-310x150.png
+icons/mstile-310x310.png
+icons/mstile-70x70.png
 
 
 NETWORK:
