@@ -24,7 +24,7 @@ export default class Boot extends Phaser.State {
   create () {
     this._setupStage();
 
-    this.state.start(this._nextState);
+    this.state.start('Preload');
   }
 
   // --------------------------------------------------------------------------
@@ -39,12 +39,6 @@ export default class Boot extends Phaser.State {
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
     this.stage.smoothed = false;
-  }
-
-  // --------------------------------------------------------------------------
-
-  get _nextState () {
-    return 'Preload';
   }
 
 }

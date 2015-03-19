@@ -24,7 +24,7 @@ export default class Preload extends Phaser.State {
 
   update () {
     if (this._assetsReady && this._allSoundsDecoded) {
-      this.state.start(this._nextState);
+      this.state.start('Logo');
     }
   }
 
@@ -73,10 +73,6 @@ export default class Preload extends Phaser.State {
 
   get _webAudioSupported () {
     return this.game.device.webAudio;
-  }
-
-  get _nextState () {
-    return 'Logo';
   }
 
 }
