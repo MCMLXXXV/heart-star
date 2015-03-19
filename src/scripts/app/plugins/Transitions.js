@@ -1,12 +1,31 @@
+import Iris     from '../plugins/Transitions/Iris';
+import Copy     from '../plugins/Transitions/Copy';
+import Pink     from '../plugins/Transitions/Pink';
+import Blinds   from '../plugins/Transitions/Blinds';
+import SkyBlue  from '../plugins/Transitions/SkyBlue';
+import Blackout from '../plugins/Transitions/Blackout';
+
+
 export default class Transitions extends Phaser.Plugin {
 
-  init () {
+  constructor (game, parent) {
+    super(game, parent);
+
     this.effects = {};
     this._currentEffect = null;
+  }
 
+  init () {
     this.buffer = this._makeBuffer();
     this.sprite = this.game.make.image(0, 0, this.buffer);
     this.game.stage.addChild(this.sprite);
+
+    this.register('iris',     Iris);
+    this.register('copy',     Copy);
+    this.register('pink',     Pink);
+    this.register('blinds',   Blinds);
+    this.register('sky-blue', SkyBlue);
+    this.register('blackout', Blackout);
   }
 
   // --------------------------------------------------------------------------
