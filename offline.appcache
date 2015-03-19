@@ -1,31 +1,36 @@
 CACHE MANIFEST
-# Time: Fri Mar 20 2015 14:25:41 GMT-0300 (BRT)
+# Time: Sun Mar 22 2015 12:52:44 GMT-0300 (BRT)
 
 
 CACHE:
 game.min.js
 styles.min.css
-app.manifest
 browserconfig.xml
 favicon.ico
+manifest.json
 assets/graphics.png
 assets/splash-screen.png
 assets/sprites.png
 assets/tilemaps.json
 assets/tileset.png
+icon/android-chrome-144x144.png
+icon/android-chrome-192x192.png
+icon/android-chrome-36x36.png
+icon/android-chrome-48x48.png
+icon/android-chrome-72x72.png
+icon/android-chrome-96x96.png
 icon/apple-touch-icon-114x114.png
 icon/apple-touch-icon-120x120.png
 icon/apple-touch-icon-144x144.png
 icon/apple-touch-icon-152x152.png
+icon/apple-touch-icon-180x180.png
 icon/apple-touch-icon-57x57.png
 icon/apple-touch-icon-60x60.png
 icon/apple-touch-icon-72x72.png
 icon/apple-touch-icon-76x76.png
 icon/apple-touch-icon-precomposed.png
 icon/apple-touch-icon.png
-icon/favicon-160x160.png
 icon/favicon-16x16.png
-icon/favicon-196x196.png
 icon/favicon-32x32.png
 icon/favicon-96x96.png
 icon/mstile-144x144.png
