@@ -7,7 +7,7 @@
     "dist"    : "dist",
     "build"   : "build",
     "static"  : "static",
-    "images"  : "static/assets/images",
+    "assets"  : "static/assets",
     "atlases" : "src/scripts/app/data/atlases",
     "states"  : "src/scripts/app/states",
     "objects" : "src/scripts/app/objects",
