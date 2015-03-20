@@ -1,7 +1,7 @@
 class Platform extends Phaser.Sprite {
 
   constructor (game, role, range = 'short') {
-    super(game, 0, 0, 'objects');
+    super(game, 0, 0, 'sprites');
 
     this._setupAnimations(role);
 
@@ -27,7 +27,7 @@ class Platform extends Phaser.Sprite {
   _setupAnimations (role) {
     for (let range of [ 'short', 'medium' ]) {
       this.animations.add(
-        range, [ `${role}-platform-fixed-${range}` ], 0, false);
+        range, [ `stable-platform-${role}-${range}` ], 0, false);
     }
   }
 

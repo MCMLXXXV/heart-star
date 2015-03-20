@@ -11,8 +11,9 @@ export default class Title extends Phaser.State {
 
   create () {
     this.add.existing(new BackgroundPattern(this.game));
-    this.add.image(0, 0, 'background', 'background-title');
-    this.add.image(this.world.width, 0, 'labels', 'label-version').anchor.set(1, 0);
+    this.add.image(0, 0, 'graphics', 'background-title');
+    this.add.image(this.world.width, 0, 'graphics', 'version')
+      .anchor.set(1, 0);
     this._addSwingingTitleLabel(18);
     this._placeCharacter('heart',  64);
     this._placeCharacter('star' , 176);
@@ -38,15 +39,15 @@ export default class Title extends Phaser.State {
   }
 
   _placeCharacter (name, x) {
-    const frames = Phaser.Animation.generateFrameNames(`${name}-`, 4, 7, '', 2);
-    let sprite = this.add.sprite(x, 96, 'characters');
+    const frames = Phaser.Animation.generateFrameNames(`actor-${name}-`, 4, 7, '', 2);
+    let sprite = this.add.sprite(x, 96, 'sprites');
 
     sprite.anchor.set(0.5, 1);
     sprite.animations.add('main', frames, 4, true).play();
   }
 
   _addSwingingTitleLabel (y) {
-    this.add.tween(this.add.image(0, y, 'labels', 'label-title'))
+    this.add.tween(this.add.image(0, y, 'graphics', 'title'))
       .to({ y: '+8' }, 1500, 'Quad.easeInOut')
       .to({ y: '-8' }, 1500, 'Quad.easeInOut')
       .loop()

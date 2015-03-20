@@ -1,8 +1,5 @@
-import labels     from './atlases/labels';
-import buttons    from './atlases/buttons';
-import objects    from './atlases/objects';
-import background from './atlases/background';
-import characters from './atlases/characters';
+import sprites  from './atlases/sprites';
+import graphics from './atlases/graphics';
 
 
 export default {
@@ -14,7 +11,7 @@ export default {
     {
       'type': 'image',
       'key': 'splash-screen',
-      'url': 'images/splash-screen.png'
+      'url': 'splash-screen.png'
     }
 
   ],
@@ -25,49 +22,28 @@ export default {
 
     {
       'type': 'atlasJSONHash',
-      'key': 'background',
-      'textureURL': 'images/background.png',
-      'atlasData': background
+      'key': 'graphics',
+      'textureURL': 'graphics.png',
+      'atlasData': graphics
     },
 
     {
       'type': 'atlasJSONHash',
-      'key': 'buttons',
-      'textureURL': 'images/buttons.png',
-      'atlasData': buttons
-    },
-
-    {
-      'type': 'atlasJSONHash',
-      'key': 'characters',
-      'textureURL': 'images/characters.png',
-      'atlasData': characters
-    },
-
-    {
-      'type': 'atlasJSONHash',
-      'key': 'labels',
-      'textureURL': 'images/labels.png',
-      'atlasData': labels
-    },
-
-    {
-      'type': 'atlasJSONHash',
-      'key': 'objects',
-      'textureURL': 'images/objects.png',
-      'atlasData': objects
+      'key': 'sprites',
+      'textureURL': 'sprites.png',
+      'atlasData': sprites
     },
 
     {
       'type': 'image',
       'key': 'tileset',
-      'url': 'images/tileset.png',
+      'url': 'tileset.png',
     },
 
     {
       'type': 'tilemap',
       'key': 'tilemaps',
-      'url': 'tilemaps/tilemaps.json',
+      'url': 'tilemaps.json',
       'format': 'TILED_JSON'
     }
 

@@ -1,7 +1,7 @@
 class Trap extends Phaser.Sprite {
 
   constructor (game, role) {
-    super(game, 0, 0, 'objects', `${role}-trap`);
+    super(game, 0, 0, 'sprites', `trap-${role}`);
 
     this._setupPhysicsBody(this.width - 2, 8, 1, 8);
   }

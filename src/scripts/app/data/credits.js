@@ -4,7 +4,7 @@ export default {
     background: {
       pattern: 'pattern-heart-star',
       layer:   'background-credits-ai',
-      label:   'label-credits-ai'
+      label:   'credits-ai'
     },
 
     links: [
@@ -31,7 +31,7 @@ export default {
     background: {
       pattern: 'pattern-moon',
       layer:   'background-credits-rb',
-      label:   'label-credits-rb'
+      label:   'credits-rb'
     },
 
     links: [

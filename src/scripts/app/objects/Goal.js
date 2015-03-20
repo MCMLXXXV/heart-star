@@ -1,7 +1,7 @@
 class Goal extends Phaser.Sprite {
 
   constructor (game) {
-    super(game, 0, 0, 'objects');
+    super(game, 0, 0, 'sprites');
 
     this.anchor.set(0.5);
 

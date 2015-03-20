@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="8" tileheight="8" backgroundcolor="#585858" nextobjectid="102">
  <tileset firstgid="1" name="tileset" tilewidth="8" tileheight="8">
-  <image source="../static/assets/images/tileset.png" width="192" height="48"/>
+  <image source="../static/assets/tileset.png" width="192" height="48"/>
  </tileset>
  <layer name="01a" width="30" height="20">
   <data encoding="base64" compression="zlib">
@@ -23,7 +23,7 @@
     <property name="star" value="01b"/>
    </properties>
   </object>
-  <object id="5" name="label-game-primer" type="label" x="-24" y="0" width="8" height="8"/>
+  <object id="5" name="tutorial-game-primer" type="tutorial" x="-24" y="0" width="8" height="8"/>
  </objectgroup>
  <layer name="02a" width="30" height="20" visible="0">
   <data encoding="base64" compression="zlib">
@@ -45,7 +45,7 @@
     <property name="star" value="02b"/>
    </properties>
   </object>
-  <object id="10" name="label-hero-blocks" type="label" x="-24" y="0" width="8" height="8"/>
+  <object id="10" name="tutorial-hero-blocks" type="tutorial" x="-24" y="0" width="8" height="8"/>
  </objectgroup>
  <layer name="03a" width="30" height="20" visible="0">
   <data encoding="base64" compression="zlib">
@@ -88,7 +88,7 @@
     <property name="star" value="04b"/>
    </properties>
   </object>
-  <object id="19" name="label-carrying-partners" type="label" x="-24" y="0" width="8" height="8"/>
+  <object id="19" name="tutorial-carrying-partners" type="tutorial" x="-24" y="0" width="8" height="8"/>
  </objectgroup>
  <layer name="05a" width="30" height="20" visible="0">
   <data encoding="base64" compression="zlib">

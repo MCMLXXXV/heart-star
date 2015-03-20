@@ -10,7 +10,7 @@ const DEFAULT_JUMP_VELOCITY     = -100;
 class Actor extends Phaser.Sprite {
 
   constructor (game, role) {
-    super(game, 0, 0, 'characters');
+    super(game, 0, 0, 'sprites');
     this.anchor.set(0.5, 1);
 
     this.wasHurt = new Phaser.Signal();
@@ -120,7 +120,7 @@ class Actor extends Phaser.Sprite {
 
   _setupAnimations () {
     const frames = (i, j = i) =>
-      Phaser.Animation.generateFrameNames(`${this.role}-`, i, j, '', 2);
+      Phaser.Animation.generateFrameNames(`actor-${this.role}-`, i, j, '', 2);
 
     this.animations.add('idle',             frames( 0,  3), 4, true);
     this.animations.add('happy',            frames( 4,  7), 4, true);

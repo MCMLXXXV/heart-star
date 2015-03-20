@@ -28,8 +28,8 @@ export default class Credits extends Phaser.State {
 
   _addBackground ({ pattern, layer, label }) {
     this.add.existing(new BackgroundPattern(this.game, pattern));
-    this.add.image(0, 0, 'background', layer);
-    this.add.image(0, 0, 'labels', label);
+    this.add.image(0, 0, 'graphics', layer);
+    this.add.image(0, 0, 'graphics', label);
   }
 
   _makeLinkButton(x, page, url) {

@@ -1,7 +1,8 @@
 export default class Logo extends Phaser.State {
 
   create () {
-    let logo = this.add.image(0, 0, 'labels', 'logo-adventure-islands');
+    let logo = this.add.image(120, 80, 'graphics', 'logo-ai');
+    logo.anchor.set(0.5);
     logo.alpha = 0;
 
     const changeLogo = () => logo.frameName = 'logo-rb';

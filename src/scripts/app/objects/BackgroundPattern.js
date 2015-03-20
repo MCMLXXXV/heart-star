@@ -3,7 +3,7 @@ const SCROLL = 16;
 class BackgroundPattern extends Phaser.TileSprite {
 
   constructor (game, texture = BackgroundPattern.HEART_STAR) {
-    super(game, 0, 0, 240, 160, 'background', texture);
+    super(game, 0, 0, 240, 160, 'graphics', texture);
 
     this._changeScroll(texture);
   }
