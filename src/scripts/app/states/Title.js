@@ -38,8 +38,8 @@ export default class Title extends Phaser.State {
   }
 
   _placeCharacter (name, x) {
-    const frames = Phaser.Animation.generateFrameNames(`${name}-`, 4, 7, '', 2);
-    let sprite = this.add.sprite(x, 96, 'characters');
+    const frames = Phaser.Animation.generateFrameNames(`actor-${name}-`, 4, 7, '', 2);
+    let sprite = this.add.sprite(x, 96, 'sprites');
 
     sprite.anchor.set(0.5, 1);
     sprite.animations.add('main', frames, 4, true).play();

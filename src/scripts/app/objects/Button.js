@@ -1,7 +1,7 @@
 class Button extends Phaser.Sprite {
 
   constructor (game, role, orientation = Button.SOUTH) {
-    super(game, 0, 0, 'objects');
+    super(game, 0, 0, 'sprites');
 
     this.wasTriggered = new Phaser.Signal();
 
@@ -46,11 +46,8 @@ class Button extends Phaser.Sprite {
   }
 
   _setupAnimations (role) {
-    const frames = (i) =>
-      Phaser.Animation.generateFrameNames(`${role}-button-`, i, i, '', 1);
-
-    this.animations.add('on',  frames(2), 0, false);
-    this.animations.add('off', frames(1), 0, false);
+    this.animations.add('on',  [ `button-${role}-on`  ], 0, false);
+    this.animations.add('off', [ `button-${role}-off` ], 0, false);
   }
 
   _setOrientation (orientation) {

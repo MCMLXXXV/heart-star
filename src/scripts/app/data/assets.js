@@ -1,8 +1,7 @@
 import labels     from './atlases/labels';
 import buttons    from './atlases/buttons';
-import objects    from './atlases/objects';
+import sprites    from './atlases/sprites';
 import background from './atlases/background';
-import characters from './atlases/characters';
 
 
 export default {
@@ -39,13 +38,6 @@ export default {
 
     {
       'type': 'atlasJSONHash',
-      'key': 'characters',
-      'textureURL': 'images/characters.png',
-      'atlasData': characters
-    },
-
-    {
-      'type': 'atlasJSONHash',
       'key': 'labels',
       'textureURL': 'images/labels.png',
       'atlasData': labels
@@ -53,9 +45,9 @@ export default {
 
     {
       'type': 'atlasJSONHash',
-      'key': 'objects',
-      'textureURL': 'images/objects.png',
-      'atlasData': objects
+      'key': 'sprites',
+      'textureURL': 'images/sprites.png',
+      'atlasData': sprites
     },
 
     {
