@@ -40,23 +40,26 @@ class LevelManager {
 
   _makeLevel ({ next }, layerObjects) {
     return {
-      'actors'  : this._parseLayerActors(layerObjects),
+      'goal'    : this._parseGoal(layerObjects),
+      'actors'  : this._parseActors(layerObjects),
       'objects' : this._parseLayerObjects(layerObjects),
       'tutorial': this._parseTutorialLabel(layerObjects),
       'next'    : next
     };
   }
 
-  _parseLayerActors (layerObjects) {
-    var actors = {};
+  _parseGoal (layerObjects) {
+    const filter = ({ type }) => type === 'goal';
+    return this._makeGoalPosition(layerObjects.find(filter));
+  }
 
-    for (var object of layerObjects) {
-      if (object.type === 'position') {
-        actors[object.name] = this._makeActorPosition(object);
-      }
-    }
-
-    return actors;
+  _parseActors (layerObjects) {
+    return layerObjects
+      .filter(({ type }) => type === 'actor')
+      .reduce((memo, o) => {
+        memo[o.name] = this._makeActorPosition(o);
+        return memo;
+      }, {});
   }
 
   _parseTutorialLabel (layerObjects) {
@@ -110,15 +113,12 @@ class LevelManager {
     return { heart, star };
   }
 
-  _makeActorPosition ({ x, y, name }) {
-    switch (name) {
-      case 'heart':
-      case 'star':
-        return this._normalizeCoordinates(x, y, 8, 24);
+  _makeActorPosition ({ x, y }) {
+    return this._normalizeCoordinates(x, y, 8, 24);
+  }
 
-      case 'goal':
-        return this._normalizeCoordinates(x, y, 16, 16);
-    }
+  _makeGoalPosition ({ x, y }) {
+    return this._normalizeCoordinates(x, y, 16, 16);
   }
 
   _makeTrap ({ x, y, properties: { affects, orientation } }) {

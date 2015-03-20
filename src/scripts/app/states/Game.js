@@ -267,7 +267,7 @@ export default class Game extends Phaser.State {
   }
 
   get goalCoordinates () {
-    return this._levelDefinitions.actors.goal;
+    return this._levelDefinitions.goal;
   }
 
   get heartCoordinates () {
