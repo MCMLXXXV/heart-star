@@ -40,10 +40,10 @@ class LevelManager {
 
   _makeLevel ({ next }, layerObjects) {
     return {
-      'actors' : this._parseLayerActors(layerObjects),
-      'objects': this._parseLayerObjects(layerObjects),
-      'label'  : this._parseTutorialLabel(layerObjects),
-      'next'   : next
+      'actors'  : this._parseLayerActors(layerObjects),
+      'objects' : this._parseLayerObjects(layerObjects),
+      'tutorial': this._parseTutorialLabel(layerObjects),
+      'next'    : next
     };
   }
 
@@ -61,7 +61,7 @@ class LevelManager {
 
   _parseTutorialLabel (layerObjects) {
     for (var { type, name } of layerObjects)
-      if (type === 'label')
+      if (type === 'tutorial')
         return name;
 
     return null;

@@ -263,7 +263,7 @@ export default class Game extends Phaser.State {
   // --------------------------------------------------------------------------
 
   get _tutorialLabelName () {
-    return this._levelDefinitions.label;
+    return this._levelDefinitions.tutorial;
   }
 
   get goalCoordinates () {
