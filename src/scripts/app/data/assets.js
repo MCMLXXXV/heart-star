@@ -1,7 +1,5 @@
-import labels     from './atlases/labels';
-import buttons    from './atlases/buttons';
-import sprites    from './atlases/sprites';
-import background from './atlases/background';
+import sprites  from './atlases/sprites';
+import graphics from './atlases/graphics';
 
 
 export default {
@@ -24,23 +22,9 @@ export default {
 
     {
       'type': 'atlasJSONHash',
-      'key': 'background',
-      'textureURL': 'images/background.png',
-      'atlasData': background
-    },
-
-    {
-      'type': 'atlasJSONHash',
-      'key': 'buttons',
-      'textureURL': 'images/buttons.png',
-      'atlasData': buttons
-    },
-
-    {
-      'type': 'atlasJSONHash',
-      'key': 'labels',
-      'textureURL': 'images/labels.png',
-      'atlasData': labels
+      'key': 'graphics',
+      'textureURL': 'images/graphics.png',
+      'atlasData': graphics
     },
 
     {

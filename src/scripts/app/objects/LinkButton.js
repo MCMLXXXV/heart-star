@@ -1,9 +1,8 @@
 class LinkButton extends Phaser.Button {
 
   constructor (game, x, key, url = null) {
-    super(
-      game, x, 47, 'buttons', this._openPopup, this,
-      `link-${key}-over`, `link-${key}-out`);
+    super(game, x, 47, 'graphics', this._openPopup, this);
+    this.setFrames(`button-link-${key}-over`, `button-link-${key}-out`);
 
     this.anchor.set(0.5, 0);
 

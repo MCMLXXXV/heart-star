@@ -119,7 +119,7 @@ export default class Game extends Phaser.State {
     const name = this._tutorialLabelName;
 
     if (this._tutorialLabel === null) {
-      this._tutorialLabel = this.make.image(0, 0, 'labels');
+      this._tutorialLabel = this.make.image(0, 0, 'graphics');
       this._moonGroup.add(this._tutorialLabel);
     }
 
