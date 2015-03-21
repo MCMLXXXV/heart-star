@@ -3,35 +3,24 @@ class SplashScreen extends Phaser.Group {
   constructor (game) {
     super(game);
 
-    this._barFiller = null;
+    this.classType = Phaser.Image;
 
-    this._make();
+    this._addBackground();
+    this.barFiller = this._addProgressBar();
   }
 
   // --------------------------------------------------------------------------
 
-  _make () {
-    this.add(this._makeBackground());
-
-    this._barFiller = this.add(this._makeBarFiller());
+  _addBackground () {
+    return this.create(0, 0, 'splash-screen');
   }
 
-  _makeBackground () {
-    return this.game.make.image(0, 0, 'splash-screen');
-  }
-
-  _makeBarFiller () {
+  _addProgressBar () {
     var bitmap = this.game.make.bitmapData(120, 10);
 
     bitmap.fill(255, 184, 184);
 
-    return this.game.make.sprite(60, 130, bitmap);
-  }
-
-  // --------------------------------------------------------------------------
-
-  get barFiller () {
-    return this._barFiller;
+    return this.create(60, 130, bitmap);
   }
 
 }
