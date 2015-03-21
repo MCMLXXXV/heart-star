@@ -1,12 +1,12 @@
 'use strict';
 
 
-module.exports = function (gulp, $, config, deps) {
+module.exports = function (gulp, $, config) {
 
-  var browserSync    = deps['browserSync'];
-  var autoprefixer   = deps['autoprefixer'];
-  var handleErrors   = deps['handleErrors'];
-  var mainBowerFiles = deps['mainBowerFiles'];
+  var browserSync    = require('browser-sync');
+  var autoprefixer   = require('autoprefixer-core');
+  var handleErrors   = require('../utils/handleErrors');
+  var mainBowerFiles = require('main-bower-files');
 
   var meta    = config.meta;
   var dirs    = config.dirs;

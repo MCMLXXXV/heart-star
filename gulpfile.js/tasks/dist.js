@@ -1,10 +1,10 @@
 'use strict';
 
 
-module.exports = function (gulp, $, config, deps) {
+module.exports = function (gulp, $, config) {
 
-  var del          = deps['del'];
-  var handleErrors = deps['handleErrors'];
+  var del          = require('del');
+  var handleErrors = require('../utils/handleErrors');
 
   var dirs    = config.dirs;
   var globs   = config.globs;
