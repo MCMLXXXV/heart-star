@@ -4,7 +4,7 @@
 module.exports = function (gulp, $) {
 
   gulp.task('tasks:lint', function () {
-    gulp.src('./lib/**')
+    return gulp.src('./gulpfile.js/**/*.js')
       .pipe($.jshint('.jshintrc.tasks'))
       .pipe($.jshint.reporter('jshint-stylish'));
   });
