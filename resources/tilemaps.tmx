@@ -14,9 +14,9 @@
   </data>
  </layer>
  <objectgroup name="01">
-  <object id="1" name="heart" type="position" x="40" y="72" width="16" height="24"/>
-  <object id="2" name="star" type="position" x="184" y="72" width="16" height="24"/>
-  <object id="3" name="goal" type="position" x="104" y="88" width="32" height="32"/>
+  <object id="1" name="heart" type="actor" x="40" y="72" width="16" height="24"/>
+  <object id="2" name="star" type="actor" x="184" y="72" width="16" height="24"/>
+  <object id="3" type="goal" x="104" y="88" width="32" height="32"/>
   <object id="4" type="layers" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="01a"/>
@@ -36,9 +36,9 @@
   </data>
  </layer>
  <objectgroup name="02" visible="0">
-  <object id="6" name="heart" type="position" x="80" y="56" width="16" height="24"/>
-  <object id="7" name="star" type="position" x="144" y="56" width="16" height="24"/>
-  <object id="8" name="goal" type="position" x="104" y="120" width="32" height="32"/>
+  <object id="6" name="heart" type="actor" x="80" y="56" width="16" height="24"/>
+  <object id="7" name="star" type="actor" x="144" y="56" width="16" height="24"/>
+  <object id="8" type="goal" x="104" y="120" width="32" height="32"/>
   <object id="9" type="layers" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="02a"/>
@@ -58,9 +58,9 @@
   </data>
  </layer>
  <objectgroup name="03" visible="0">
-  <object id="11" name="heart" type="position" x="48" y="24" width="16" height="24"/>
-  <object id="12" name="star" type="position" x="48" y="88" width="16" height="24"/>
-  <object id="13" name="goal" type="position" x="176" y="96" width="32" height="32"/>
+  <object id="11" name="heart" type="actor" x="48" y="24" width="16" height="24"/>
+  <object id="12" name="star" type="actor" x="48" y="88" width="16" height="24"/>
+  <object id="13" type="goal" x="176" y="96" width="32" height="32"/>
   <object id="14" type="layers" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="03a"/>
@@ -79,9 +79,9 @@
   </data>
  </layer>
  <objectgroup name="04" visible="0">
-  <object id="15" name="heart" type="position" x="172" y="104" width="16" height="24"/>
-  <object id="16" name="star" type="position" x="24" y="72" width="16" height="24"/>
-  <object id="17" name="goal" type="position" x="192" y="96" width="32" height="32"/>
+  <object id="15" name="heart" type="actor" x="172" y="104" width="16" height="24"/>
+  <object id="16" name="star" type="actor" x="24" y="72" width="16" height="24"/>
+  <object id="17" type="goal" x="192" y="96" width="32" height="32"/>
   <object id="18" type="layers" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="04a"/>
@@ -101,9 +101,9 @@
   </data>
  </layer>
  <objectgroup name="05" visible="0">
-  <object id="20" name="heart" type="position" x="200" y="104" width="16" height="24"/>
-  <object id="21" name="star" type="position" x="24" y="104" width="16" height="24"/>
-  <object id="22" name="goal" type="position" x="104" y="48" width="32" height="32"/>
+  <object id="20" name="heart" type="actor" x="200" y="104" width="16" height="24"/>
+  <object id="21" name="star" type="actor" x="24" y="104" width="16" height="24"/>
+  <object id="22" type="goal" x="104" y="48" width="32" height="32"/>
   <object id="23" type="layers" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="05a"/>
@@ -122,9 +122,9 @@
   </data>
  </layer>
  <objectgroup name="06" visible="0">
-  <object id="24" name="heart" type="position" x="24" y="104" width="16" height="24"/>
-  <object id="25" name="star" type="position" x="184" y="104" width="16" height="24"/>
-  <object id="26" name="goal" type="position" x="160" y="32" width="32" height="32"/>
+  <object id="24" name="heart" type="actor" x="24" y="104" width="16" height="24"/>
+  <object id="25" name="star" type="actor" x="184" y="104" width="16" height="24"/>
+  <object id="26" type="goal" x="160" y="32" width="32" height="32"/>
   <object id="27" type="layers" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="06a"/>
@@ -143,9 +143,9 @@
   </data>
  </layer>
  <objectgroup name="07" visible="0">
-  <object id="28" name="heart" type="position" x="24" y="24" width="16" height="24"/>
-  <object id="29" name="star" type="position" x="176" y="88" width="16" height="24"/>
-  <object id="30" name="goal" type="position" x="16" y="112" width="32" height="32"/>
+  <object id="28" name="heart" type="actor" x="24" y="24" width="16" height="24"/>
+  <object id="29" name="star" type="actor" x="176" y="88" width="16" height="24"/>
+  <object id="30" type="goal" x="16" y="112" width="32" height="32"/>
   <object id="31" name="trap" type="trap" x="64" y="48" width="16" height="8">
    <properties>
     <property name="affects" value="heart"/>
@@ -242,9 +242,9 @@
   </data>
  </layer>
  <objectgroup name="08" visible="0">
-  <object id="45" name="heart" type="position" x="24" y="88" width="16" height="24"/>
-  <object id="46" name="star" type="position" x="48" y="88" width="16" height="24"/>
-  <object id="47" name="goal" type="position" x="192" y="96" width="32" height="32"/>
+  <object id="45" name="heart" type="actor" x="24" y="88" width="16" height="24"/>
+  <object id="46" name="star" type="actor" x="48" y="88" width="16" height="24"/>
+  <object id="47" type="goal" x="192" y="96" width="32" height="32"/>
   <object id="48" name="retractable-a" type="retractable" x="144" y="80" width="16" height="48">
    <properties>
     <property name="affects" value="star"/>
@@ -328,9 +328,9 @@
   </data>
  </layer>
  <objectgroup name="09" visible="0">
-  <object id="60" name="heart" type="position" x="200" y="88" width="16" height="24"/>
-  <object id="61" name="star" type="position" x="200" y="24" width="16" height="24"/>
-  <object id="62" name="goal" type="position" x="32" y="96" width="32" height="32"/>
+  <object id="60" name="heart" type="actor" x="200" y="88" width="16" height="24"/>
+  <object id="61" name="star" type="actor" x="200" y="24" width="16" height="24"/>
+  <object id="62" type="goal" x="32" y="96" width="32" height="32"/>
   <object id="63" name="retractable-a" type="retractable" x="80" y="64" width="16" height="48">
    <properties>
     <property name="affects" value="both"/>
@@ -420,9 +420,9 @@
   </data>
  </layer>
  <objectgroup name="10" visible="0">
-  <object id="76" name="heart" type="position" x="200" y="104" width="16" height="24"/>
-  <object id="77" name="star" type="position" x="24" y="104" width="16" height="24"/>
-  <object id="78" name="goal" type="position" x="88" y="16" width="32" height="32"/>
+  <object id="76" name="heart" type="actor" x="200" y="104" width="16" height="24"/>
+  <object id="77" name="star" type="actor" x="24" y="104" width="16" height="24"/>
+  <object id="78" type="goal" x="88" y="16" width="32" height="32"/>
   <object id="79" name="platform" type="platform" x="224" y="96" width="16" height="8">
    <properties>
     <property name="affects" value="star"/>
