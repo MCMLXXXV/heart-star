@@ -1,11 +1,10 @@
 'use strict';
 
 
-module.exports = function (gulp, $, config, deps) {
+module.exports = function (gulp, $, config) {
 
-  var del            = deps['del'];
-  var runSequence    = deps['runSequence'];
-  var handleErrors   = deps['handleErrors'];
+  var del          = require('del');
+  var handleErrors = require('../utils/handleErrors');
 
   var dirs    = config.dirs;
   var globs   = config.globs;
@@ -64,8 +63,8 @@ module.exports = function (gulp, $, config, deps) {
   });
 
   // The main distribution task.
-  gulp.task('dist', function (done) {
-    runSequence('dist:clean', [
+  gulp.task('dist', [ 'dist:clean' ], function (done) {
+    gulp.start([
       'dist:views',
       'dist:assets',
       'dist:styles',
