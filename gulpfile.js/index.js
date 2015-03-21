@@ -8,7 +8,6 @@ var config  = require('./config.json');
 var taskDeps = {
   'del'            : require('del'),
   'browserSync'    : require('browser-sync'),
-  'runSequence'    : require('run-sequence'),
   'autoprefixer'   : require('autoprefixer-core'),
   'handleErrors'   : require('./utils/handleErrors'),
   'mainBowerFiles' : require('main-bower-files')
