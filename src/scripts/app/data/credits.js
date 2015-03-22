@@ -37,7 +37,7 @@ export default {
     links: [
       {
         page: 'github',
-        url:  'https://github.com/rblopes'
+        url:  'https://github.com/rblopes/heart-star'
       },
       {
         page: 'twitter',
