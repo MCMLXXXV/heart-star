@@ -3,8 +3,7 @@
 
 module.exports = function (gulp, $, config) {
 
-  var del          = require('del');
-  var handleErrors = require('../utils/handleErrors');
+  var del = require('del');
 
   var dirs    = config.dirs;
   var globs   = config.globs;
@@ -18,7 +17,6 @@ module.exports = function (gulp, $, config) {
   // Process any markup files for distribution.
   gulp.task('dist:views', [ 'dev:build:views' ], function () {
     return gulp.src(dirs['build'] + '/*.html')
-      .pipe(handleErrors())
       .pipe($.processhtml())
       .pipe(gulp.dest(dirs['dist']));
   });
@@ -26,7 +24,6 @@ module.exports = function (gulp, $, config) {
   // Copy and minify all style sheet files.
   gulp.task('dist:styles', [ 'dev:build:styles' ], function () {
     return gulp.src(dirs['build'] + '/*.css')
-      .pipe(handleErrors())
       .pipe($.minifyCss(options['dist:styles']))
       .pipe($.rename({ extname: '.min.css' }))
       .pipe(gulp.dest(dirs['dist']));
@@ -57,7 +54,6 @@ module.exports = function (gulp, $, config) {
   // Generate the off-line application cache.
   gulp.task('dist:appcache', function () {
     return gulp.src(globs['assets'])
-      .pipe(handleErrors())
       .pipe($.manifest(options['dist:appcache']))
       .pipe(gulp.dest(dirs['dist']));
   });

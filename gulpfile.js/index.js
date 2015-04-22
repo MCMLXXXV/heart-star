@@ -1,9 +1,10 @@
 'use strict';
 
+
 var gulp    = require('gulp');
 var plugins = require('gulp-load-plugins')();
 var tasks   = require('require-dir')('./tasks');
-var config  = require('./config.json');
+var config  = require('./config');
 
 Object.keys(tasks)
   .map(function (key) { return tasks[key] })

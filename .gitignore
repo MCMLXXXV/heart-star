@@ -1,13 +1,14 @@
 .*
 *.log
-*.sw?
-
-!.git*
-!.bowerrc
-!.jshintrc
-!.editorconfig
+Thumbs.db
 
 dist
 build
 node_modules
 bower_components
+
+!.git*
+!.babelrc
+!.bowerrc
+!.jshintrc
+!.editorconfig
