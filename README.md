@@ -1,8 +1,10 @@
 [Heart Star][demo]
 ===============================================================================
 
-A port of the game originally created by [Jussi Simpanen][advi] for [Ludum Dare
-30][ld-g], Theme: "Connected Worlds".
+>   A port of the game originally created by [Jussi Simpanen][advi] for [Ludum
+>   Dare 30][ld-g], Theme: "Connected Worlds".
+
+![Screenshots](https://raw.githubusercontent.com/rblopes/heart-star/master/screenshots.png)
 
 
 Story
