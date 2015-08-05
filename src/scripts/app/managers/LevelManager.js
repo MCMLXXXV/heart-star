@@ -40,11 +40,11 @@ class LevelManager {
 
   _makeLevel ({ next }, layerObjects) {
     return {
-      'goal'    : this._parseGoal(layerObjects),
-      'actors'  : this._parseActors(layerObjects),
-      'objects' : this._parseLayerObjects(layerObjects),
-      'tutorial': this._parseTutorialLabel(layerObjects),
-      'next'    : next
+      goal: this._parseGoal(layerObjects),
+      actors: this._parseActors(layerObjects),
+      objects: this._parseLayerObjects(layerObjects),
+      tutorial: this._parseTutorialLabel(layerObjects),
+      next
     };
   }
 
@@ -63,19 +63,21 @@ class LevelManager {
   }
 
   _parseTutorialLabel (layerObjects) {
-    for (var { type, name } of layerObjects)
-      if (type === 'tutorial')
+    for (var { type, name } of layerObjects) {
+      if (type === 'tutorial') {
         return name;
+      }
+    }
 
     return null;
   }
 
   _parseLayerObjects (layerObjects) {
     var objects = {
-      'traps'        : [],
-      'layers'       : null,
-      'platforms'    : [],
-      'retractables' : {}
+      traps: [],
+      layers: null,
+      platforms: [],
+      retractables: {}
     };
 
     for (var object of layerObjects) {
@@ -128,7 +130,7 @@ class LevelManager {
     };
   }
 
-  _makePlatform ({ x, y, properties: { affects, type }}) {
+  _makePlatform ({ x, y, properties: { affects, type } }) {
     return { position: { x, y }, affects, type };
   }
 

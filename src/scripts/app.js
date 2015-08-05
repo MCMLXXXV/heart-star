@@ -2,7 +2,7 @@ import * as states from './app/states';
 
 
 export default function () {
-  var game = new Phaser.Game(240, 160, Phaser.AUTO);
+  const game = new Phaser.Game(240, 160, Phaser.CANVAS);
 
   Object.keys(states)
     .map((key) => [ key, states[key] ])

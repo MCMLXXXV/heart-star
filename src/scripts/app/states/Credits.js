@@ -32,7 +32,7 @@ export default class Credits extends Phaser.State {
     this.add.image(0, 0, 'graphics', label);
   }
 
-  _makeLinkButton(x, page, url) {
+  _makeLinkButton (x, page, url) {
     return new LinkButton(this.game, x, page, url);
   }
 

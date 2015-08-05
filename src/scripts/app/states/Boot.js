@@ -35,7 +35,7 @@ export default class Boot extends Phaser.State {
     this.scale.pageAlignHorizontally   = true;
     this.stage.disableVisibilityChange = true;
 
-    this.scale.setMinMax(720, 480, 960, 640);
+    this.scale.setMinMax(480, 320, 720, 480);
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
     this.stage.smoothed = false;

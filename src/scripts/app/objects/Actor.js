@@ -36,7 +36,7 @@ class Actor extends Phaser.Sprite {
 
   // --------------------------------------------------------------------------
 
-  reset(x, y) {
+  reset (x, y) {
     super.reset(x, y);
     this.emotion = null;
   }
@@ -142,10 +142,12 @@ class Actor extends Phaser.Sprite {
   }
 
   _updateDrag () {
-    if (this.jumping)
+    if (this.jumping) {
       this.body.drag.x = DEFAULT_DRAG_WHEN_JUMPING;
-    else
+    }
+    else {
       this.body.drag.x = DEFAULT_DRAG;
+    }
   }
 
   _updateAnimation () {
