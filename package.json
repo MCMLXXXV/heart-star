@@ -2,7 +2,7 @@
   "name": "heart-star",
   "version": "0.0.1",
   "private": true,
-  "description": "Phaser port of Heart-Star by Jussi Simpanen",
+  "description": "A port of the game originally created by Jussi Simpanen for Ludum Dare 30, Theme: \"Connected Worlds\".",
   "devDependencies": {
     "autoprefixer-core": "^5.0.0",
     "babel-core": "^5.0.0",
