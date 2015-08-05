@@ -105,7 +105,6 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   recycle () {
-    this._backgroundGroup.callAll('kill');
     this._tilemapGroup.callAll('kill');
     this._retractableGroup.callAll('kill');
     this._buttonGroup.callAll('kill');
