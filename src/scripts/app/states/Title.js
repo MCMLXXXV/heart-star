@@ -28,7 +28,7 @@ export default class Title extends Phaser.State {
       this._makeMenuOptionButton(130, MenuOptionButton.CREDITS, 'Credits'));
   }
 
-  _makeMenuOptionButton(y, type, stateName) {
+  _makeMenuOptionButton (y, type, stateName) {
     let button = new MenuOptionButton(this.game, 80, y, type);
 
     button.onInputUp.add(() => {

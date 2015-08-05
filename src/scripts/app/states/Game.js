@@ -157,7 +157,7 @@ export default class Game extends Phaser.State {
     this._switchActors(this._heart, this._star);
   }
 
-  _restartActor(actor, { x, y }) {
+  _restartActor (actor, { x, y }) {
     actor.reset(x, y);
     actor.sink();
   }
