@@ -1,6 +1,7 @@
 import levels from '../data/levels';
 
-import MenuOptionButton  from '../objects/MenuOptionButton';
+import { menuButton } from '../components/uiButtons';
+
 import BackgroundPattern from '../objects/BackgroundPattern';
 
 
@@ -14,15 +15,12 @@ export default class Levels extends Phaser.State {
   }
 
   create () {
+    const addBackButton = () => this.add.button(0, 0, 'graphics');
+
     this.add.existing(new BackgroundPattern(this.game));
     this.add.image(0, 0, 'graphics', 'background-level-select');
     this.add.image(0, 32, 'graphics', 'level-select');
-
-    let backButton = new MenuOptionButton(this.game, 0, 0);
-    backButton.onInputUp.add(() => {
-      this.game.transitions.toState('Title', 'blackout', 1000, 'blackout');
-    });
-    this.add.existing(backButton);
+    menuButton(addBackButton(), 'back', 'Title', 'blackout');
 
     this.game.storage.getItem('levels', this._makeLevelButtons, this);
   }
