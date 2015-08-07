@@ -1,8 +1,10 @@
 import levels from '../data/levels';
 
-import LevelButton       from '../objects/LevelButton';
 import MenuOptionButton  from '../objects/MenuOptionButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
+
+
+const LOCKED_FRAME_NAME = 'button-level-locked';
 
 
 export default class Levels extends Phaser.State {
@@ -22,12 +24,12 @@ export default class Levels extends Phaser.State {
     });
     this.add.existing(backButton);
 
-    this.game.storage.getItem('levels', this._addStageButtons, this);
+    this.game.storage.getItem('levels', this._makeLevelButtons, this);
   }
 
   // --------------------------------------------------------------------------
 
-  _addStageButtons (err, unlockedLevels) {
+  _makeLevelButtons (err, unlockedLevels) {
     if (unlockedLevels === null) {
       // The game is being played for the first time,
       // no unlocked levels yet.
@@ -44,13 +46,22 @@ export default class Levels extends Phaser.State {
   }
 
   _makeLevelButton (x, y, level, locked) {
-    let button = new LevelButton(this.game, x, y, level);
+    const toState = (level) =>
+      () => this.game.transitions.toState('Game', 'blackout', 1000, level);
 
-    if (!locked) {
-      button.unlock();
-      button.onInputUp.add(() => {
-        this.game.transitions.toState('Game', 'blackout', 1000, level);
-      });
+    const frameName = (level, state) => `button-level-${level}-${state}`;
+    const overFrame = (level) => frameName(level, 'over');
+    const outFrame  = (level) => frameName(level, 'out');
+
+    const button = this.make.button(x, y, 'graphics');
+    button.setFrames(LOCKED_FRAME_NAME, LOCKED_FRAME_NAME);
+
+    if (locked) {
+      button.input.useHandCursor = false;
+    }
+    else {
+      button.onInputUp.add(toState(level));
+      button.setFrames(overFrame(level), outFrame(level));
     }
 
     return button;

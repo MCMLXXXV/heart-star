@@ -1,6 +1,5 @@
 import credits from '../data/credits';
 
-import LinkButton        from '../objects/LinkButton';
 import MenuOptionButton  from '../objects/MenuOptionButton';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
@@ -33,7 +32,17 @@ export default class Credits extends Phaser.State {
   }
 
   _makeLinkButton (x, page, url) {
-    return new LinkButton(this.game, x, page, url);
+    const goToURL = (url) => () => window.open(url);
+
+    const frameName = (page, state) => `button-link-${page}-${state}`;
+    const overFrame = (page) => frameName(page, 'over');
+    const outFrame  = (page) => frameName(page, 'out');
+
+    const button = this.make.button(x, 47, 'graphics', goToURL(url));
+    button.setFrames(overFrame(page), outFrame(page));
+    button.anchor.set(0.5, 0);
+
+    return button;
   }
 
   _addLinkButtons (links) {
