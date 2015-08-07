@@ -1,6 +1,9 @@
 import credits from '../data/credits';
 
-import { menuButton } from '../components/uiButtons';
+import {
+  menuButton,
+  linkButton
+} from '../components/uiButtons';
 
 import BackgroundPattern from '../objects/BackgroundPattern';
 
@@ -32,27 +35,12 @@ export default class Credits extends Phaser.State {
     this.add.image(0, 0, 'graphics', label);
   }
 
-  _makeLinkButton (x, page, url) {
-    const goToURL = (url) => () => window.open(url);
-
-    const frameName = (page, state) => `button-link-${page}-${state}`;
-    const overFrame = (page) => frameName(page, 'over');
-    const outFrame  = (page) => frameName(page, 'out');
-
-    const button = this.make.button(x, 47, 'graphics', goToURL(url));
-    button.setFrames(overFrame(page), outFrame(page));
-    button.anchor.set(0.5, 0);
-
-    return button;
-  }
-
   _addLinkButtons (links) {
     const firstCol = 120 - (links.length - 1) * 16;
+    const x = (i) => firstCol + 32 * i;
+    const addButton = (i) => this.add.button(x(i), 47, 'graphics');
 
-    links.forEach(({ page, url }, i) => {
-      let x = firstCol + 32 * i;
-      this.add.existing(this._makeLinkButton(x, page, url));
-    });
+    links.forEach(({ page, url }, i) => linkButton(addButton(i), page, url));
   }
 
   _addMenuButtons (screen, addMoreButton = false) {
