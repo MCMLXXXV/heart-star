@@ -17,8 +17,8 @@ export default class Game extends Phaser.State {
     this.controls    = this.game.controls;
     this.transitions = this.game.transitions;
 
-    this._levelManager   = this._makeManager(LevelManager);
-    this._objectsManager = this._makeManager(ObjectsManager);
+    this._levelManager   = new LevelManager(this.game);
+    this._objectsManager = new ObjectsManager(this.game);
 
     this._goal         = null;
     this._star         = null;
@@ -90,10 +90,6 @@ export default class Game extends Phaser.State {
 
   // --------------------------------------------------------------------------
 
-  _makeManager (factory, ... args) {
-    return new factory(this.game, ... args);
-  }
-
   _makeActor (roleName) {
     let actor = new Actor(this.game, roleName);
 
@@ -103,16 +99,12 @@ export default class Game extends Phaser.State {
   }
 
   _prepareLevel (level) {
-    this._levelDefinitions = this._getLevelDefinitions(level);
+    this._levelDefinitions = this._levelManager.getLevel(level);
     this._objectsManager.createObjects(this._levelDefinitions.objects);
 
     this._placeTutorialLabel();
     this._placeGoal();
     this._placeActors();
-  }
-
-  _getLevelDefinitions (level) {
-    return this._levelManager.getLevel(level);
   }
 
   _placeTutorialLabel () {
