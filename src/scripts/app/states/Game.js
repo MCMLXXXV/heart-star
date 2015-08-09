@@ -198,13 +198,14 @@ export default class Game extends Phaser.State {
   }
 
   _winLevel () {
-    this._heart.emotion = 'cheering';
-    this._heart.float();
-    this._heart.stop();
+    const haltActor = (actor) => {
+      actor.emotion = 'cheering';
+      actor.float();
+      actor.stop();
+    };
 
-    this._star.emotion  = 'cheering';
-    this._star.float();
-    this._star.stop();
+    haltActor(this._heart);
+    haltActor(this._star);
 
     this.time.events.add(1500, () => this._startNextLevel());
   }
