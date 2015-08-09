@@ -18,24 +18,16 @@ class LevelManager {
   // --------------------------------------------------------------------------
 
   _createLevelDefinitions () {
-    var objectLayers = this._getTilemapObjectLayers();
-    var definitions  = {};
+    const getTilemapDefinitions = (tilemap) =>
+      Phaser.TilemapParser.parse(this.game, tilemap);
+    const { objects } = getTilemapDefinitions('tilemaps');
 
-    for (var level of levels) {
-      var { name } = level;
-
-      definitions[name] = this._makeLevel(level, objectLayers[name]);
-    }
-
-    return definitions;
-  }
-
-  _getTilemapObjectLayers () {
-    return this._getTilemapDefinitions().objects;
-  }
-
-  _getTilemapDefinitions () {
-    return Phaser.TilemapParser.parse(this.game, 'tilemaps');
+    return levels
+      .map((level) => [ level, level.name, objects[level.name] ])
+      .reduce((definitions, [ level, name, objects ]) => {
+        definitions[name] = this._makeLevel(level, objects);
+        return definitions;
+      }, {});
   }
 
   _makeLevel ({ next }, layerObjects) {
