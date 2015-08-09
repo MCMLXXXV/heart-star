@@ -1,6 +1,9 @@
 import levels from '../data/levels';
 
 
+const shiftCoordinates = (x, y, ox, oy) => ({ x: x + ox, y: y + oy });
+
+
 class LevelManager {
 
   constructor (game) {
@@ -41,12 +44,12 @@ class LevelManager {
   }
 
   _parseGoal (objects) {
-    const pos = ({ x, y }) => this._normalizeCoordinates(x, y, 16, 16);
+    const pos = ({ x, y }) => shiftCoordinates(x, y, 16, 16);
     return pos(objects.find(({ type }) => type === 'goal'));
   }
 
   _parseActors (objects) {
-    const pos = ({ x, y }) => this._normalizeCoordinates(x, y, 8, 24);
+    const pos = ({ x, y }) => shiftCoordinates(x, y, 8, 24);
     return objects
       .filter(({ type }) => type === 'actor')
       .reduce((memo, o) => (memo[o.name] = pos(o), memo), {});
@@ -102,7 +105,7 @@ class LevelManager {
 
   _makeTrap ({ x, y, properties: { affects, orientation } }) {
     return {
-      position: this._normalizeCoordinates(x, y, 0, -8),
+      position: shiftCoordinates(x, y, 0, -8),
       affects, orientation
     };
   }
@@ -113,14 +116,14 @@ class LevelManager {
 
   _makeButton ({ x, y, properties: { orientation } }) {
     return {
-      position: this._normalizeCoordinates(x, y, 8, 8),
+      position: shiftCoordinates(x, y, 8, 8),
       orientation
     };
   }
 
   _makeRetractable ({ x, y, name, properties: { affects, orientation } }) {
     return {
-      position: this._normalizeCoordinates(x, y, 8, 0),
+      position: shiftCoordinates(x, y, 8, 0),
       affects, orientation
     };
   }
@@ -129,10 +132,6 @@ class LevelManager {
     object[name] = object[name] || {};
 
     return object[name];
-  }
-
-  _normalizeCoordinates (x, y, offsetX, offsetY) {
-    return { x: x + offsetX, y: y + offsetY };
   }
 
 }
