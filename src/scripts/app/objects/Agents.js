@@ -21,8 +21,8 @@ class Agents extends Phaser.Group {
     this.game.physics.arcade.overlap(
       actor,
       this._bottomAgent,
-      this._bottomAgentOverlapCallback,
-      this._bottomAgentOverlapProcess,
+      () => actor.harm(),
+      () => !actor.hurt,
       this);
   }
 
@@ -33,14 +33,6 @@ class Agents extends Phaser.Group {
     sprite.body.setSize(width, height);
 
     return sprite;
-  }
-
-  _bottomAgentOverlapCallback (actor) {
-    actor.harm();
-  }
-
-  _bottomAgentOverlapProcess (actor) {
-    return !actor.hurt;
   }
 
 }
