@@ -20,7 +20,6 @@ export default class Game extends Phaser.State {
     this._levelManager   = new LevelManager(this.game);
     this._objectsManager = new ObjectsManager(this.game);
 
-    this._goal         = null;
     this._star         = null;
     this._heart        = null;
     this._idleActor    = null;
@@ -31,6 +30,8 @@ export default class Game extends Phaser.State {
   }
 
   create () {
+    const addObject = (F, ...a) => this.add.existing(new F(this.game, ...a));
+
     this._agents = this.add.existing(new Agents(this.game));
 
     this._heartGroup = this._objectsManager.createLayerFor('heart', true);
@@ -45,6 +46,10 @@ export default class Game extends Phaser.State {
     this._tutorialLabel = this.make.image(0, 0, 'graphics');
     this._tutorialLabel.visible = false;
     this._moonGroup.add(this._tutorialLabel);
+
+    // -- The goal platform ---------------------------------------------------
+    this._goal = addObject(Goal);
+    this._goal.actorsLanded.add(() => this._winLevel());
 
     this.transitions.reveal('blackout', 1000);
     this._prepareLevel(this.level);
@@ -107,7 +112,7 @@ export default class Game extends Phaser.State {
     this._objectsManager.createObjects(this._levelDefinitions.objects);
 
     this._showTutorialCaption(this._levelDefinitions.tutorial);
-    this._placeGoal();
+    this._resetGoal(this._levelDefinitions.goal);
     this._placeActors();
   }
 
@@ -118,14 +123,7 @@ export default class Game extends Phaser.State {
     }
   }
 
-  _placeGoal () {
-    const { x, y } = this.goalCoordinates;
-
-    if (this._goal === null) {
-      this._goal = this.add.existing(new Goal(this.game));
-      this._goal.actorsLanded.add(this._winLevel, this);
-    }
-
+  _resetGoal ({ x, y }) {
     this._goal.reset(x, y);
   }
 
@@ -247,10 +245,6 @@ export default class Game extends Phaser.State {
   }
 
   // --------------------------------------------------------------------------
-
-  get goalCoordinates () {
-    return this._levelDefinitions.goal;
-  }
 
   get heartCoordinates () {
     return this._levelDefinitions.actors.heart;
