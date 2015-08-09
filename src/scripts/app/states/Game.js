@@ -133,7 +133,7 @@ export default class Game extends Phaser.State {
   _placeActors () {
     this._restartActor(this._heart, this._levelDefinitions.actors.heart);
     this._restartActor(this._star, this._levelDefinitions.actors.star);
-    this._switchActors(this._heart, this._star);
+    this._changeActiveActor(this._heart, this._star);
     this._switchLayers();
   }
 
@@ -142,14 +142,16 @@ export default class Game extends Phaser.State {
     actor.sink();
   }
 
-  _switchActors (playerActor, idleActor) {
-    this._activePlayer      = playerActor;
-    this._activePlayer.idle = false;
-    this._activePlayer.stop();
+  _changeActiveActor (activeActor, waitingActor) {
+    const change = (actor, isWaiting) => {
+      actor.stop();
+      actor.idle = isWaiting;
 
-    this._idleActor      = idleActor;
-    this._idleActor.idle = true;
-    this._idleActor.stop();
+      return actor;
+    };
+
+    this._idleActor    = change(waitingActor, true);
+    this._activePlayer = change(activeActor,  false);
   }
 
   _switchLayers () {
@@ -162,7 +164,7 @@ export default class Game extends Phaser.State {
     if (!this._activePlayer.standing) return;
 
     this._doActorSwitchEffect(this._idleActor.role);
-    this._switchActors(this._idleActor, this._activePlayer);
+    this._changeActiveActor(this._idleActor, this._activePlayer);
     this._switchLayers();
   }
 
