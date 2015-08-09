@@ -20,8 +20,8 @@ export default class Game extends Phaser.State {
     this._levelManager   = new LevelManager(this.game);
     this._objectsManager = new ObjectsManager(this.game);
 
-    this._idleActor    = null;
-    this._activePlayer = null;
+    this._waitingActor = null;
+    this._activeActor  = null;
 
     this._unlockedLevels   = null;
     this._levelDefinitions = null;
@@ -35,9 +35,9 @@ export default class Game extends Phaser.State {
 
     this._agents = this.add.existing(new Agents(this.game));
 
-    this._heartGroup = this._objectsManager.createLayerFor('heart', true);
-    this._starGroup  = this._objectsManager.createLayerFor('star', true);
-    this._moonGroup  = this._objectsManager.createLayerFor('both');
+    this._heartLayer = this._objectsManager.createLayerFor('heart', true);
+    this._starLayer  = this._objectsManager.createLayerFor('star', true);
+    this._moonLayer  = this._objectsManager.createLayerFor('both');
 
     this.controls.spacebar.onUp.add(this._switchActiveActor, this);
     this.controls.esc.onUp.add(goBackLevelSelection);
@@ -46,7 +46,7 @@ export default class Game extends Phaser.State {
     // -- The tutorial caption ------------------------------------------------
     this._tutorialLabel = this.make.image(0, 0, 'graphics');
     this._tutorialLabel.visible = false;
-    this._moonGroup.add(this._tutorialLabel);
+    this._moonLayer.add(this._tutorialLabel);
 
     // -- The goal platform ---------------------------------------------------
     this._goal = addObject(Goal);
@@ -73,38 +73,38 @@ export default class Game extends Phaser.State {
   }
 
   update () {
-    this._activePlayer.collideActor(this._idleActor);
-    this._goal.collideActors(this._activePlayer, this._idleActor);
+    this._activeActor.collideActor(this._waitingActor);
+    this._goal.collideActors(this._activeActor, this._waitingActor);
 
-    this._heartGroup.collide(this._heart);
-    this._starGroup.collide(this._star);
-    this._moonGroup.collide([ this._heart, this._star ]);
+    this._heartLayer.collide(this._heart);
+    this._starLayer.collide(this._star);
+    this._moonLayer.collide([ this._heart, this._star ]);
 
-    this._agents.collide(this._activePlayer);
-    this._agents.collide(this._idleActor);
+    this._agents.collide(this._activeActor);
+    this._agents.collide(this._waitingActor);
 
     if (this.inGame) {
       if (this.controls.left.isDown) {
-        this._activePlayer.walkLeft();
+        this._activeActor.walkLeft();
       }
       else if (this.controls.right.isDown) {
-        this._activePlayer.walkRight();
+        this._activeActor.walkRight();
       }
       else {
-        this._activePlayer.stop();
-        this._idleActor.stop();
+        this._activeActor.stop();
+        this._waitingActor.stop();
       }
 
       if (this.controls.up.isDown) {
-        this._activePlayer.jump();
+        this._activeActor.jump();
       }
       else {
-        this._activePlayer.cancelPowerJump();
+        this._activeActor.cancelPowerJump();
       }
     }
     else {
-      this._activePlayer.stop();
-      this._idleActor.stop();
+      this._activeActor.stop();
+      this._waitingActor.stop();
     }
   }
 
@@ -116,7 +116,7 @@ export default class Game extends Phaser.State {
 
     this._showTutorialCaption(this._levelDefinitions.tutorial);
     this._resetGoal(this._levelDefinitions.goal);
-    this._placeActors();
+    this._resetActors();
   }
 
   _showTutorialCaption (name) {
@@ -130,14 +130,14 @@ export default class Game extends Phaser.State {
     this._goal.reset(x, y);
   }
 
-  _placeActors () {
-    this._restartActor(this._heart, this._levelDefinitions.actors.heart);
-    this._restartActor(this._star, this._levelDefinitions.actors.star);
+  _resetActors () {
+    this._resetActor(this._heart, this._levelDefinitions.actors.heart);
+    this._resetActor(this._star, this._levelDefinitions.actors.star);
     this._changeActiveActor(this._heart, this._star);
     this._switchLayers();
   }
 
-  _restartActor (actor, { x, y }) {
+  _resetActor (actor, { x, y }) {
     actor.reset(x, y);
     actor.sink();
   }
@@ -150,21 +150,21 @@ export default class Game extends Phaser.State {
       return actor;
     };
 
-    this._idleActor    = change(waitingActor, true);
-    this._activePlayer = change(activeActor,  false);
+    this._waitingActor = change(waitingActor, true);
+    this._activeActor  = change(activeActor,  false);
   }
 
   _switchLayers () {
-    this._heartGroup.visible = !this._heart.idle;
-    this._starGroup.visible = !this._star.idle;
+    this._heartLayer.visible = !this._heart.idle;
+    this._starLayer.visible = !this._star.idle;
   }
 
   _switchActiveActor () {
     if (!this.inGame) return;
-    if (!this._activePlayer.standing) return;
+    if (!this._activeActor.standing) return;
 
-    this._doActorSwitchEffect(this._idleActor.role);
-    this._changeActiveActor(this._idleActor, this._activePlayer);
+    this._doActorSwitchEffect(this._waitingActor.role);
+    this._changeActiveActor(this._waitingActor, this._activeActor);
     this._switchLayers();
   }
 
@@ -185,14 +185,14 @@ export default class Game extends Phaser.State {
     if (!this.inGame) return;
 
     this.transitions.reveal('copy', 500);
-    this._placeActors();
+    this._resetActors();
     this._objectsManager.reset();
   }
 
   _loseLevel () {
     this.time.events.add(1000, () => {
       this.transitions.hide('blinds', 1000, () => {
-        this._placeActors();
+        this._resetActors();
         this._objectsManager.reset();
         this.transitions.reveal('blinds', 1000);
       });
@@ -228,12 +228,10 @@ export default class Game extends Phaser.State {
   }
 
   _unlockLevel (level) {
-    let lvl = this._unlockedLevels
-      .find((lvl) => lvl.name === level);
+    const nextLevel = this._unlockedLevels.find(({ name }) => name === level);
 
-    if (lvl.locked) {
-      lvl.locked = false;
-
+    if (nextLevel.locked) {
+      nextLevel.locked = false;
       this.storage.setItem('levels', this._unlockedLevels);
     }
   }
@@ -242,7 +240,7 @@ export default class Game extends Phaser.State {
 
   get inGame () {
     return !this.transitions.isRunning &&
-      this._activePlayer && this._activePlayer.emotion === null;
+      this._activeActor && this._activeActor.emotion === null;
   }
 
 }
