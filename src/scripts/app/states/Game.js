@@ -30,6 +30,9 @@ export default class Game extends Phaser.State {
   create () {
     const addObject = (F, ...a) => this.add.existing(new F(this.game, ...a));
 
+    const goBackLevelSelection =
+      () => this.transitions.toState('Levels', 'blackout', 1000);
+
     this._agents = this.add.existing(new Agents(this.game));
 
     this._heartGroup = this._objectsManager.createLayerFor('heart', true);
@@ -37,7 +40,7 @@ export default class Game extends Phaser.State {
     this._moonGroup  = this._objectsManager.createLayerFor('both');
 
     this.controls.spacebar.onUp.add(this._switchActiveActor, this);
-    this.controls.esc.onUp.add(this._goToLevelState, this);
+    this.controls.esc.onUp.add(goBackLevelSelection);
     this.controls.backspace.onUp.add(this._resetGameStage, this);
 
     // -- The tutorial caption ------------------------------------------------
@@ -230,10 +233,6 @@ export default class Game extends Phaser.State {
 
       this.storage.setItem('levels', this._unlockedLevels);
     }
-  }
-
-  _goToLevelState () {
-    this.transitions.toState('Levels', 'blackout', 1000);
   }
 
   // --------------------------------------------------------------------------
