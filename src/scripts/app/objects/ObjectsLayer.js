@@ -63,10 +63,6 @@ class ObjectsLayer extends Phaser.Group {
       new BackgroundPattern(this.game, this.preferedBackground));
   }
 
-  toggle (visible) {
-    this.alpha = visible ? 1 : 0;
-  }
-
   collide (actor) {
     this.game.physics.arcade.collide(
       actor,

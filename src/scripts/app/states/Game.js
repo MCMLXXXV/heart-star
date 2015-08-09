@@ -153,8 +153,8 @@ export default class Game extends Phaser.State {
   }
 
   _switchLayers () {
-    this._heartGroup.toggle(!this._heart.idle);
-    this._starGroup.toggle(!this._star.idle);
+    this._heartGroup.visible = !this._heart.idle;
+    this._starGroup.visible = !this._star.idle;
   }
 
   _switchActiveActor () {
