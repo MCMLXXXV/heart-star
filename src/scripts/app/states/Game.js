@@ -26,7 +26,6 @@ export default class Game extends Phaser.State {
     this._idleActor    = null;
     this._activePlayer = null;
 
-    this._tutorialLabel    = null;
     this._unlockedLevels   = null;
     this._levelDefinitions = null;
   }
@@ -41,6 +40,11 @@ export default class Game extends Phaser.State {
     this.controls.spacebar.onUp.add(this._switchActiveActor, this);
     this.controls.esc.onUp.add(this._goToLevelState, this);
     this.controls.backspace.onUp.add(this._resetGameStage, this);
+
+    // -- The tutorial caption ------------------------------------------------
+    this._tutorialLabel = this.make.image(0, 0, 'graphics');
+    this._tutorialLabel.visible = false;
+    this._moonGroup.add(this._tutorialLabel);
 
     this.transitions.reveal('blackout', 1000);
     this._prepareLevel(this.level);
@@ -102,24 +106,14 @@ export default class Game extends Phaser.State {
     this._levelDefinitions = this._levelManager.getLevel(level);
     this._objectsManager.createObjects(this._levelDefinitions.objects);
 
-    this._placeTutorialLabel();
+    this._showTutorialCaption(this._levelDefinitions.tutorial);
     this._placeGoal();
     this._placeActors();
   }
 
-  _placeTutorialLabel () {
-    const name = this._tutorialLabelName;
-
-    if (this._tutorialLabel === null) {
-      this._tutorialLabel = this.make.image(0, 0, 'graphics');
-      this._moonGroup.add(this._tutorialLabel);
-    }
-
-    if (name === null) {
-      this._tutorialLabel.alpha = 0;
-    }
-    else {
-      this._tutorialLabel.alpha = 1;
+  _showTutorialCaption (name) {
+    this._tutorialLabel.visible = (name !== null);
+    if (name !== null) {
       this._tutorialLabel.frameName = name;
     }
   }
@@ -253,10 +247,6 @@ export default class Game extends Phaser.State {
   }
 
   // --------------------------------------------------------------------------
-
-  get _tutorialLabelName () {
-    return this._levelDefinitions.tutorial;
-  }
 
   get goalCoordinates () {
     return this._levelDefinitions.goal;
