@@ -20,8 +20,6 @@ export default class Game extends Phaser.State {
     this._levelManager   = new LevelManager(this.game);
     this._objectsManager = new ObjectsManager(this.game);
 
-    this._star         = null;
-    this._heart        = null;
     this._idleActor    = null;
     this._activePlayer = null;
 
@@ -50,6 +48,16 @@ export default class Game extends Phaser.State {
     // -- The goal platform ---------------------------------------------------
     this._goal = addObject(Goal);
     this._goal.actorsLanded.add(() => this._winLevel());
+
+    // -- The actors ----------------------------------------------------------
+    this._heart = addObject(Actor, Actor.HEART);
+    this._heart.wasHurt.add(() => this._loseLevel());
+
+    this._star = addObject(Actor, Actor.STAR);
+    this._star.wasHurt.add(() => this._loseLevel());
+
+    this._heart.wasHurt.add(() => this._star.startle());
+    this._star.wasHurt.add(() => this._heart.startle());
 
     this.transitions.reveal('blackout', 1000);
     this._prepareLevel(this.level);
@@ -99,14 +107,6 @@ export default class Game extends Phaser.State {
 
   // --------------------------------------------------------------------------
 
-  _makeActor (roleName) {
-    let actor = new Actor(this.game, roleName);
-
-    actor.wasHurt.add(() => this._loseLevel());
-
-    return actor;
-  }
-
   _prepareLevel (level) {
     this._levelDefinitions = this._levelManager.getLevel(level);
     this._objectsManager.createObjects(this._levelDefinitions.objects);
@@ -128,16 +128,8 @@ export default class Game extends Phaser.State {
   }
 
   _placeActors () {
-    if (this._heart === null && this._star === null) {
-      this._heart = this.add.existing(this._makeActor(Actor.HEART));
-      this._star  = this.add.existing(this._makeActor(Actor.STAR));
-
-      this._heart.wasHurt.add(this._star.startle, this._star);
-      this._star.wasHurt.add(this._heart.startle, this._heart);
-    }
-
-    this._restartActor(this._heart, this.heartCoordinates);
-    this._restartActor(this._star, this.starCoordinates);
+    this._restartActor(this._heart, this._levelDefinitions.actors.heart);
+    this._restartActor(this._star, this._levelDefinitions.actors.star);
     this._switchActors(this._heart, this._star);
   }
 
@@ -245,14 +237,6 @@ export default class Game extends Phaser.State {
   }
 
   // --------------------------------------------------------------------------
-
-  get heartCoordinates () {
-    return this._levelDefinitions.actors.heart;
-  }
-
-  get starCoordinates () {
-    return this._levelDefinitions.actors.star;
-  }
 
   get inGame () {
     return !this.transitions.isRunning &&
