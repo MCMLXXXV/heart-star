@@ -40,18 +40,16 @@ class LevelManager {
     };
   }
 
-  _parseGoal (layerObjects) {
-    const filter = ({ type }) => type === 'goal';
-    return this._makeGoalPosition(layerObjects.find(filter));
+  _parseGoal (objects) {
+    const pos = ({ x, y }) => this._normalizeCoordinates(x, y, 16, 16);
+    return pos(objects.find(({ type }) => type === 'goal'));
   }
 
-  _parseActors (layerObjects) {
-    return layerObjects
+  _parseActors (objects) {
+    const pos = ({ x, y }) => this._normalizeCoordinates(x, y, 8, 24);
+    return objects
       .filter(({ type }) => type === 'actor')
-      .reduce((memo, o) => {
-        memo[o.name] = this._makeActorPosition(o);
-        return memo;
-      }, {});
+      .reduce((memo, o) => (memo[o.name] = pos(o), memo), {});
   }
 
   _parseTutorialLabel (layerObjects) {
@@ -105,14 +103,6 @@ class LevelManager {
 
   _makeTilemapLayerNames ({ properties: { heart, star } }) {
     return { heart, star };
-  }
-
-  _makeActorPosition ({ x, y }) {
-    return this._normalizeCoordinates(x, y, 8, 24);
-  }
-
-  _makeGoalPosition ({ x, y }) {
-    return this._normalizeCoordinates(x, y, 16, 16);
   }
 
   _makeTrap ({ x, y, properties: { affects, orientation } }) {
