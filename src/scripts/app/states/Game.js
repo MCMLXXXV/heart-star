@@ -163,22 +163,9 @@ export default class Game extends Phaser.State {
     if (!this.inGame) return;
     if (!this._activeActor.standing) return;
 
-    this._doActorSwitchEffect(this._waitingActor.role);
+    this.transitions.reveal(`blink-${ this._waitingActor.role }`, 400);
     this._changeActiveActor(this._waitingActor, this._activeActor);
     this._switchLayers();
-  }
-
-  _doActorSwitchEffect (role) {
-    let effectName;
-
-    if (role === 'heart') {
-      effectName = 'pink';
-    }
-    else if (role === 'star') {
-      effectName = 'sky-blue';
-    }
-
-    this.transitions.reveal(effectName, 400);
   }
 
   _resetGameStage () {
