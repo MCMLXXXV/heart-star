@@ -52,14 +52,9 @@ class LevelManager {
       .reduce((memo, o) => (memo[o.name] = pos(o), memo), {});
   }
 
-  _parseTutorialLabel (layerObjects) {
-    for (var { type, name } of layerObjects) {
-      if (type === 'tutorial') {
-        return name;
-      }
-    }
-
-    return null;
+  _parseTutorialLabel (objects) {
+    const { name } = objects.find(({ type }) => type === 'tutorial') || {};
+    return name || null;
   }
 
   _parseLayerObjects (layerObjects) {
