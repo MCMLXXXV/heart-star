@@ -134,6 +134,7 @@ export default class Game extends Phaser.State {
     this._restartActor(this._heart, this._levelDefinitions.actors.heart);
     this._restartActor(this._star, this._levelDefinitions.actors.star);
     this._switchActors(this._heart, this._star);
+    this._switchLayers();
   }
 
   _restartActor (actor, { x, y }) {
@@ -149,8 +150,6 @@ export default class Game extends Phaser.State {
     this._idleActor      = idleActor;
     this._idleActor.idle = true;
     this._idleActor.stop();
-
-    this._switchLayers();
   }
 
   _switchLayers () {
@@ -164,6 +163,7 @@ export default class Game extends Phaser.State {
 
     this._doActorSwitchEffect(this._idleActor.role);
     this._switchActors(this._idleActor, this._activePlayer);
+    this._switchLayers();
   }
 
   _doActorSwitchEffect (role) {
