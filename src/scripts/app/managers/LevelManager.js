@@ -60,15 +60,8 @@ class LevelManager {
     return name || null;
   }
 
-  _parseLayerObjects (layerObjects) {
-    var objects = {
-      traps: [],
-      layers: null,
-      platforms: [],
-      retractables: {}
-    };
-
-    for (var object of layerObjects) {
+  _parseLayerObjects (objects) {
+    return objects.reduce((objects, object) => {
       switch (object.type) {
         case 'trap':
           objects['traps'].push(this._makeTrap(object));
@@ -94,9 +87,14 @@ class LevelManager {
               .retractable = this._makeRetractable(object);
           break;
       }
-    }
 
-    return objects;
+      return objects;
+    }, {
+      traps: [],
+      layers: null,
+      platforms: [],
+      retractables: {}
+    });
   }
 
   _makeTilemapLayerNames ({ properties: { heart, star } }) {
