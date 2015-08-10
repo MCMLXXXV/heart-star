@@ -3,6 +3,30 @@ import levels from '../data/levels';
 
 const shiftCoordinates = (x, y, ox, oy) => ({ x: x + ox, y: y + oy });
 
+function getLayers ({ properties: { heart, star } }) {
+  return { heart, star };
+}
+
+function getTrap ({ x, y, properties: { affects, orientation } }) {
+  return { position: shiftCoordinates(x, y, 0, -8), affects, orientation };
+}
+
+function getPlatform ({ x, y, properties: { affects, type } }) {
+  return { position: { x, y }, affects, type };
+}
+
+function getButton ({ x, y, properties: { orientation } }) {
+  return { position: shiftCoordinates(x, y, 8, 8), orientation };
+}
+
+function getRetractable ({ x, y, properties: { affects, orientation } }) {
+  return { position: shiftCoordinates(x, y, 8, 0), affects, orientation };
+}
+
+function getOrMakeRetractableObject (object, name) {
+  return object[name] = object[name] || {};
+}
+
 
 class LevelManager {
 
@@ -64,27 +88,27 @@ class LevelManager {
     return objects.reduce((objects, object) => {
       switch (object.type) {
         case 'trap':
-          objects['traps'].push(this._makeTrap(object));
+          objects['traps'].push(getTrap(object));
           break;
 
         case 'layers':
-          objects['layers'] = this._makeTilemapLayerNames(object);
+          objects['layers'] = getLayers(object);
           break;
 
         case 'platform':
-          objects['platforms'].push(this._makePlatform(object));
+          objects['platforms'].push(getPlatform(object));
           break;
 
         case 'button':
-          this._getOrMakeRetractableObject(
+          getOrMakeRetractableObject(
             objects['retractables'], object.properties.triggers)
-              .button = this._makeButton(object);
+              .button = getButton(object);
           break;
 
         case 'retractable':
-          this._getOrMakeRetractableObject(
+          getOrMakeRetractableObject(
             objects['retractables'], object.name)
-              .retractable = this._makeRetractable(object);
+              .retractable = getRetractable(object);
           break;
       }
 
@@ -95,41 +119,6 @@ class LevelManager {
       platforms: [],
       retractables: {}
     });
-  }
-
-  _makeTilemapLayerNames ({ properties: { heart, star } }) {
-    return { heart, star };
-  }
-
-  _makeTrap ({ x, y, properties: { affects, orientation } }) {
-    return {
-      position: shiftCoordinates(x, y, 0, -8),
-      affects, orientation
-    };
-  }
-
-  _makePlatform ({ x, y, properties: { affects, type } }) {
-    return { position: { x, y }, affects, type };
-  }
-
-  _makeButton ({ x, y, properties: { orientation } }) {
-    return {
-      position: shiftCoordinates(x, y, 8, 8),
-      orientation
-    };
-  }
-
-  _makeRetractable ({ x, y, name, properties: { affects, orientation } }) {
-    return {
-      position: shiftCoordinates(x, y, 8, 0),
-      affects, orientation
-    };
-  }
-
-  _getOrMakeRetractableObject (object, name) {
-    object[name] = object[name] || {};
-
-    return object[name];
   }
 
 }
