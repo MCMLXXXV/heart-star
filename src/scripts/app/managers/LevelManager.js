@@ -3,23 +3,23 @@ import levels from '../data/levels';
 
 const shiftCoordinates = (x, y, ox, oy) => ({ x: x + ox, y: y + oy });
 
-function getLayers ({ properties: { heart, star } }) {
+function getLayers ({ heart, star }) {
   return { heart, star };
 }
 
-function getTrap ({ x, y, properties: { affects, orientation } }) {
+function getTrap (x, y, { affects, orientation }) {
   return { position: shiftCoordinates(x, y, 0, -8), affects, orientation };
 }
 
-function getPlatform ({ x, y, properties: { affects, type } }) {
+function getPlatform (x, y, { affects, type }) {
   return { position: { x, y }, affects, type };
 }
 
-function getButton ({ x, y, properties: { orientation } }) {
+function getButton (x, y, { orientation }) {
   return { position: shiftCoordinates(x, y, 8, 8), orientation };
 }
 
-function getRetractable ({ x, y, properties: { affects, orientation } }) {
+function getRetractable (x, y, { affects, orientation }) {
   return { position: shiftCoordinates(x, y, 8, 0), affects, orientation };
 }
 
@@ -84,30 +84,29 @@ class LevelManager {
   }
 
   _parseLayerObjects (objects) {
-    return objects.reduce((objects, object) => {
-      switch (object.type) {
+    return objects.reduce((objects, { x, y, name, type, properties }) => {
+      switch (type) {
         case 'trap':
-          objects['traps'].push(getTrap(object));
+          objects['traps'].push(getTrap(x, y, properties));
           break;
 
         case 'layers':
-          objects['layers'] = getLayers(object);
+          objects['layers'] = getLayers(properties);
           break;
 
         case 'platform':
-          objects['platforms'].push(getPlatform(object));
+          objects['platforms'].push(getPlatform(x, y, properties));
           break;
 
         case 'button':
           getOrMakeRetractableObject(
-            objects['retractables'], object.properties.triggers)
-              .button = getButton(object);
+            objects['retractables'], properties.triggers)
+              .button = getButton(x, y, properties);
           break;
 
         case 'retractable':
-          getOrMakeRetractableObject(
-            objects['retractables'], object.name)
-              .retractable = getRetractable(object);
+          getOrMakeRetractableObject(objects['retractables'], name)
+            .retractable = getRetractable(x, y, properties);
           break;
       }
 
