@@ -68,8 +68,7 @@ class LevelManager {
   }
 
   _parseGoal (objects) {
-    const pos = ({ x, y }) => shiftCoordinates(x, y, 16, 16);
-    return pos(objects.find(({ type }) => type === 'goal'));
+    return objects.find(({ type }) => type === 'goal');
   }
 
   _parseActors (objects) {
