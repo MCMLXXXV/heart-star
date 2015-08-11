@@ -112,9 +112,9 @@ export default class Game extends Phaser.State {
 
   _prepareLevel (level) {
     this._levelDefinitions = this._levelManager.getLevel(level);
-    this._objectsManager.createObjects(this._levelDefinitions.objects);
+    this._objectsManager.createObjects(this._levelDefinitions);
 
-    this._showTutorialCaption(this._levelDefinitions.tutorial);
+    this._showTutorialCaption(this._levelDefinitions.meta.tutorial);
     this._resetGoal(this._levelDefinitions.goal);
     this._resetActors();
   }
@@ -126,18 +126,18 @@ export default class Game extends Phaser.State {
     }
   }
 
-  _resetGoal ({ x, y }) {
+  _resetGoal ({ position: { x, y } }) {
     this._goal.reset(x, y);
   }
 
   _resetActors () {
-    this._resetActor(this._heart, this._levelDefinitions.actors.heart);
-    this._resetActor(this._star, this._levelDefinitions.actors.star);
+    this._resetActor(this._heart, this._levelDefinitions.heart);
+    this._resetActor(this._star, this._levelDefinitions.star);
     this._changeActiveActor(this._heart, this._star);
     this._switchLayers();
   }
 
-  _resetActor (actor, { x, y }) {
+  _resetActor (actor, { position: { x, y } }) {
     actor.reset(x, y);
     actor.sink();
   }
@@ -200,7 +200,7 @@ export default class Game extends Phaser.State {
   }
 
   _startNextLevel () {
-    let nextLevel = this._levelDefinitions.next;
+    let nextLevel = this._levelDefinitions.meta.next;
 
     if (nextLevel === null) {
       this.transitions.toState('Credits', 'blackout', 1000);

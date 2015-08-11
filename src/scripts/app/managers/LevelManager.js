@@ -1,33 +1,6 @@
 import levels from '../data/levels';
 
 
-const shiftCoordinates = (x, y, ox, oy) => ({ x: x + ox, y: y + oy });
-
-function getLayers ({ heart, star }) {
-  return { heart, star };
-}
-
-function getTrap (x, y, { affects, orientation }) {
-  return { position: shiftCoordinates(x, y, 0, -8), affects, orientation };
-}
-
-function getPlatform (x, y, { affects, type }) {
-  return { position: { x, y }, affects, type };
-}
-
-function getButton (x, y, { orientation }) {
-  return { position: shiftCoordinates(x, y, 8, 8), orientation };
-}
-
-function getRetractable (x, y, { affects, orientation }) {
-  return { position: shiftCoordinates(x, y, 8, 0), affects, orientation };
-}
-
-function getOrMakeRetractableObject (object, name) {
-  return object[name] = object[name] || {};
-}
-
-
 class LevelManager {
 
   constructor (game) {
@@ -52,71 +25,39 @@ class LevelManager {
     return levels
       .map((level) => [ level, level.name, objects[level.name] ])
       .reduce((definitions, [ level, name, objects ]) => {
-        definitions[name] = this._makeLevel(level, objects);
+        definitions[name] = this._makeLevel(objects);
         return definitions;
-      }, {});
+      }, Object.create(null));
   }
 
-  _makeLevel ({ next }, layerObjects) {
-    return {
-      goal: this._parseGoal(layerObjects),
-      actors: this._parseActors(layerObjects),
-      objects: this._parseLayerObjects(layerObjects),
-      tutorial: this._parseTutorialLabel(layerObjects),
-      next
-    };
-  }
+  _makeLevel (objects) {
+    const type  = (t) => ({ type }) => type === t;
+    const find = (t, o) => o.find(type(t));
+    const filter = (t, o) => o.filter(type(t));
 
-  _parseGoal (objects) {
-    return objects.find(({ type }) => type === 'goal');
-  }
+    const shift = (ox, oy) => (x, y) => ({ x: x + ox, y: y + oy });
 
-  _parseActors (objects) {
-    const pos = ({ x, y }) => shiftCoordinates(x, y, 8, 24);
-    return objects
-      .filter(({ type }) => type === 'actor')
-      .reduce((memo, o) => (memo[o.name] = pos(o), memo), {});
-  }
+    const parseMeta =
+      ({ properties: { heart, star, next = null, tutorial = null } }) => ({
+        layers: { heart, star }, next, tutorial
+      });
 
-  _parseTutorialLabel (objects) {
-    const { name } = objects.find(({ type }) => type === 'tutorial') || {};
-    return name || null;
-  }
-
-  _parseLayerObjects (objects) {
-    return objects.reduce((objects, { x, y, name, type, properties }) => {
-      switch (type) {
-        case 'trap':
-          objects['traps'].push(getTrap(x, y, properties));
-          break;
-
-        case 'layers':
-          objects['layers'] = getLayers(properties);
-          break;
-
-        case 'platform':
-          objects['platforms'].push(getPlatform(x, y, properties));
-          break;
-
-        case 'button':
-          getOrMakeRetractableObject(
-            objects['retractables'], properties.triggers)
-              .button = getButton(x, y, properties);
-          break;
-
-        case 'retractable':
-          getOrMakeRetractableObject(objects['retractables'], name)
-            .retractable = getRetractable(x, y, properties);
-          break;
-      }
-
-      return objects;
-    }, {
-      traps: [],
-      layers: null,
-      platforms: [],
-      retractables: {}
+    const parseObject = (f = shift(0, 0)) => ({ x, y, properties }) => ({
+      position: f(x, y), properties
     });
+
+    const parseActor = parseObject(shift(8, 24));
+
+    return {
+      meta: parseMeta(find('meta', objects)),
+      heart: parseActor(find('heart', objects)),
+      star: parseActor(find('star', objects)),
+      goal: parseObject()(find('goal', objects)),
+      traps: filter('trap', objects).map(parseObject(shift(0, -8))),
+      platforms: filter('platform', objects).map(parseObject()),
+      buttons: filter('button', objects).map(parseObject(shift(8, 8))),
+      gates: filter('gate', objects).map(parseObject(shift(8, 0)))
+    };
   }
 
 }

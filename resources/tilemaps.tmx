@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="8" tileheight="8" backgroundcolor="#585858" nextobjectid="102">
+<map version="1.0" orientation="orthogonal" renderorder="right-down" width="30" height="20" tilewidth="8" tileheight="8" backgroundcolor="#585858">
+ <properties>
+  <property name="starting-level" value="01"/>
+ </properties>
  <tileset firstgid="1" name="tileset" tilewidth="8" tileheight="8">
   <image source="../static/assets/tileset.png" width="192" height="48"/>
  </tileset>
@@ -14,16 +17,17 @@
   </data>
  </layer>
  <objectgroup name="01">
-  <object id="1" name="heart" type="actor" x="40" y="72" width="16" height="24"/>
-  <object id="2" name="star" type="actor" x="184" y="72" width="16" height="24"/>
-  <object id="3" type="goal" x="104" y="88" width="32" height="32"/>
-  <object id="4" type="layers" x="-16" y="0" width="8" height="8">
+  <object type="meta" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="01a"/>
+    <property name="next" value="02"/>
     <property name="star" value="01b"/>
+    <property name="tutorial" value="tutorial-game-primer"/>
    </properties>
   </object>
-  <object id="5" name="tutorial-game-primer" type="tutorial" x="-24" y="0" width="8" height="8"/>
+  <object type="heart" x="40" y="72" width="16" height="24"/>
+  <object type="star" x="184" y="72" width="16" height="24"/>
+  <object type="goal" x="104" y="88" width="32" height="32"/>
  </objectgroup>
  <layer name="02a" width="30" height="20" visible="0">
   <data encoding="base64" compression="zlib">
@@ -36,16 +40,17 @@
   </data>
  </layer>
  <objectgroup name="02" visible="0">
-  <object id="6" name="heart" type="actor" x="80" y="56" width="16" height="24"/>
-  <object id="7" name="star" type="actor" x="144" y="56" width="16" height="24"/>
-  <object id="8" type="goal" x="104" y="120" width="32" height="32"/>
-  <object id="9" type="layers" x="-16" y="0" width="8" height="8">
+  <object type="meta" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="02a"/>
+    <property name="next" value="03"/>
     <property name="star" value="02b"/>
+    <property name="tutorial" value="tutorial-hero-blocks"/>
    </properties>
   </object>
-  <object id="10" name="tutorial-hero-blocks" type="tutorial" x="-24" y="0" width="8" height="8"/>
+  <object type="heart" x="80" y="56" width="16" height="24"/>
+  <object type="star" x="144" y="56" width="16" height="24"/>
+  <object type="goal" x="104" y="120" width="32" height="32"/>
  </objectgroup>
  <layer name="03a" width="30" height="20" visible="0">
   <data encoding="base64" compression="zlib">
@@ -58,15 +63,16 @@
   </data>
  </layer>
  <objectgroup name="03" visible="0">
-  <object id="11" name="heart" type="actor" x="48" y="24" width="16" height="24"/>
-  <object id="12" name="star" type="actor" x="48" y="88" width="16" height="24"/>
-  <object id="13" type="goal" x="176" y="96" width="32" height="32"/>
-  <object id="14" type="layers" x="-16" y="0" width="8" height="8">
+  <object type="meta" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="03a"/>
+    <property name="next" value="04"/>
     <property name="star" value="03b"/>
    </properties>
   </object>
+  <object type="heart" x="48" y="24" width="16" height="24"/>
+  <object type="star" x="48" y="88" width="16" height="24"/>
+  <object type="goal" x="176" y="96" width="32" height="32"/>
  </objectgroup>
  <layer name="04a" width="30" height="20" visible="0">
   <data encoding="base64" compression="zlib">
@@ -79,16 +85,17 @@
   </data>
  </layer>
  <objectgroup name="04" visible="0">
-  <object id="15" name="heart" type="actor" x="172" y="104" width="16" height="24"/>
-  <object id="16" name="star" type="actor" x="24" y="72" width="16" height="24"/>
-  <object id="17" type="goal" x="192" y="96" width="32" height="32"/>
-  <object id="18" type="layers" x="-16" y="0" width="8" height="8">
+  <object type="meta" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="04a"/>
+    <property name="next" value="05"/>
     <property name="star" value="04b"/>
+    <property name="tutorial" value="tutorial-carrying-partners"/>
    </properties>
   </object>
-  <object id="19" name="tutorial-carrying-partners" type="tutorial" x="-24" y="0" width="8" height="8"/>
+  <object type="heart" x="172" y="104" width="16" height="24"/>
+  <object type="star" x="24" y="72" width="16" height="24"/>
+  <object type="goal" x="192" y="96" width="32" height="32"/>
  </objectgroup>
  <layer name="05a" width="30" height="20" visible="0">
   <data encoding="base64" compression="zlib">
@@ -101,15 +108,16 @@
   </data>
  </layer>
  <objectgroup name="05" visible="0">
-  <object id="20" name="heart" type="actor" x="200" y="104" width="16" height="24"/>
-  <object id="21" name="star" type="actor" x="24" y="104" width="16" height="24"/>
-  <object id="22" type="goal" x="104" y="48" width="32" height="32"/>
-  <object id="23" type="layers" x="-16" y="0" width="8" height="8">
+  <object type="meta" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="05a"/>
+    <property name="next" value="06"/>
     <property name="star" value="05b"/>
    </properties>
   </object>
+  <object type="heart" x="200" y="104" width="16" height="24"/>
+  <object type="star" x="24" y="104" width="16" height="24"/>
+  <object type="goal" x="104" y="48" width="32" height="32"/>
  </objectgroup>
  <layer name="06a" width="30" height="20" visible="0">
   <data encoding="base64" compression="zlib">
@@ -122,15 +130,16 @@
   </data>
  </layer>
  <objectgroup name="06" visible="0">
-  <object id="24" name="heart" type="actor" x="24" y="104" width="16" height="24"/>
-  <object id="25" name="star" type="actor" x="184" y="104" width="16" height="24"/>
-  <object id="26" type="goal" x="160" y="32" width="32" height="32"/>
-  <object id="27" type="layers" x="-16" y="0" width="8" height="8">
+  <object type="meta" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="06a"/>
+    <property name="next" value="07"/>
     <property name="star" value="06b"/>
    </properties>
   </object>
+  <object type="heart" x="24" y="104" width="16" height="24"/>
+  <object type="star" x="184" y="104" width="16" height="24"/>
+  <object type="goal" x="160" y="32" width="32" height="32"/>
  </objectgroup>
  <layer name="07a" width="30" height="20" visible="0">
   <data encoding="base64" compression="zlib">
@@ -143,91 +152,92 @@
   </data>
  </layer>
  <objectgroup name="07" visible="0">
-  <object id="28" name="heart" type="actor" x="24" y="24" width="16" height="24"/>
-  <object id="29" name="star" type="actor" x="176" y="88" width="16" height="24"/>
-  <object id="30" type="goal" x="16" y="112" width="32" height="32"/>
-  <object id="31" name="trap" type="trap" x="64" y="48" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="32" name="trap" type="trap" x="80" y="48" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="33" name="trap" type="trap" x="96" y="48" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="34" name="trap" type="trap" x="112" y="48" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="35" name="trap" type="trap" x="128" y="48" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="36" name="trap" type="trap" x="144" y="48" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="37" name="trap" type="trap" x="64" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="38" name="trap" type="trap" x="80" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="39" name="trap" type="trap" x="96" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="40" name="trap" type="trap" x="112" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="41" name="trap" type="trap" x="128" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="42" name="trap" type="trap" x="144" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="43" name="platform" type="platform" x="192" y="80" width="32" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="type" value="medium"/>
-   </properties>
-  </object>
-  <object id="44" type="layers" x="-16" y="0" width="8" height="8">
+  <object type="meta" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="07a"/>
+    <property name="next" value="08"/>
     <property name="star" value="07b"/>
+   </properties>
+  </object>
+  <object type="heart" x="24" y="24" width="16" height="24"/>
+  <object type="star" x="176" y="88" width="16" height="24"/>
+  <object type="goal" x="16" y="112" width="32" height="32"/>
+  <object type="trap" x="64" y="48" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="80" y="48" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="96" y="48" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="112" y="48" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="128" y="48" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="144" y="48" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="64" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="80" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="96" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="112" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="128" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="144" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="platform" x="192" y="80" width="32" height="8">
+   <properties>
+    <property name="owner" value="star"/>
+    <property name="type" value="medium"/>
    </properties>
   </object>
  </objectgroup>
@@ -242,78 +252,79 @@
   </data>
  </layer>
  <objectgroup name="08" visible="0">
-  <object id="45" name="heart" type="actor" x="24" y="88" width="16" height="24"/>
-  <object id="46" name="star" type="actor" x="48" y="88" width="16" height="24"/>
-  <object id="47" type="goal" x="192" y="96" width="32" height="32"/>
-  <object id="48" name="retractable-a" type="retractable" x="144" y="80" width="16" height="48">
+  <object type="meta" x="-16" y="0" width="8" height="8">
    <properties>
-    <property name="affects" value="star"/>
+    <property name="heart" value="08a"/>
+    <property name="next" value="09"/>
+    <property name="star" value="08b"/>
    </properties>
   </object>
-  <object id="49" name="platform" type="platform" x="128" y="80" width="16" height="8">
+  <object type="heart" x="24" y="88" width="16" height="24"/>
+  <object type="star" x="48" y="88" width="16" height="24"/>
+  <object type="goal" x="192" y="96" width="32" height="32"/>
+  <object type="gate" x="144" y="80" width="16" height="48">
    <properties>
-    <property name="affects" value="star"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="platform" x="128" y="80" width="16" height="8">
+   <properties>
+    <property name="owner" value="star"/>
     <property name="type" value="short"/>
    </properties>
   </object>
-  <object id="50" name="button" type="button" x="200" y="32" width="16" height="16">
+  <object type="button" x="200" y="32" width="16" height="16">
    <properties>
     <property name="orientation" value="north"/>
-    <property name="triggers" value="retractable-a"/>
+    <property name="owner" value="star"/>
    </properties>
   </object>
-  <object id="51" name="trap" type="trap" x="64" y="120" width="16" height="8">
+  <object type="trap" x="64" y="120" width="16" height="8">
    <properties>
-    <property name="affects" value="star"/>
     <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
    </properties>
   </object>
-  <object id="52" name="trap" type="trap" x="80" y="120" width="16" height="8">
+  <object type="trap" x="80" y="120" width="16" height="8">
    <properties>
-    <property name="affects" value="star"/>
     <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
    </properties>
   </object>
-  <object id="53" name="trap" type="trap" x="96" y="120" width="16" height="8">
+  <object type="trap" x="96" y="120" width="16" height="8">
    <properties>
-    <property name="affects" value="star"/>
     <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
    </properties>
   </object>
-  <object id="54" name="trap" type="trap" x="112" y="120" width="16" height="8">
+  <object type="trap" x="112" y="120" width="16" height="8">
    <properties>
-    <property name="affects" value="star"/>
     <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
    </properties>
   </object>
-  <object id="55" name="trap" type="trap" x="128" y="120" width="16" height="8">
+  <object type="trap" x="128" y="120" width="16" height="8">
    <properties>
-    <property name="affects" value="star"/>
     <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
    </properties>
   </object>
-  <object id="56" name="trap" type="trap" x="144" y="120" width="16" height="8">
+  <object type="trap" x="144" y="120" width="16" height="8">
    <properties>
-    <property name="affects" value="star"/>
     <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
    </properties>
   </object>
-  <object id="57" name="trap" type="trap" x="160" y="120" width="16" height="8">
+  <object type="trap" x="160" y="120" width="16" height="8">
    <properties>
-    <property name="affects" value="star"/>
     <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
    </properties>
   </object>
-  <object id="58" name="trap" type="trap" x="176" y="120" width="16" height="8">
+  <object type="trap" x="176" y="120" width="16" height="8">
    <properties>
-    <property name="affects" value="star"/>
     <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="59" type="layers" x="-16" y="0" width="8" height="8">
-   <properties>
-    <property name="heart" value="08a"/>
-    <property name="star" value="08b"/>
+    <property name="owner" value="star"/>
    </properties>
   </object>
  </objectgroup>
@@ -328,84 +339,85 @@
   </data>
  </layer>
  <objectgroup name="09" visible="0">
-  <object id="60" name="heart" type="actor" x="200" y="88" width="16" height="24"/>
-  <object id="61" name="star" type="actor" x="200" y="24" width="16" height="24"/>
-  <object id="62" type="goal" x="32" y="96" width="32" height="32"/>
-  <object id="63" name="retractable-a" type="retractable" x="80" y="64" width="16" height="48">
-   <properties>
-    <property name="affects" value="both"/>
-   </properties>
-  </object>
-  <object id="64" name="button" type="button" x="32" y="32" width="16" height="16">
-   <properties>
-    <property name="orientation" value="north"/>
-    <property name="triggers" value="retractable-a"/>
-   </properties>
-  </object>
-  <object id="65" name="platform" type="platform" x="128" y="80" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="type" value="short"/>
-   </properties>
-  </object>
-  <object id="66" name="platform" type="platform" x="128" y="48" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="type" value="short"/>
-   </properties>
-  </object>
-  <object id="67" name="trap" type="trap" x="64" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="68" name="trap" type="trap" x="80" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="69" name="trap" type="trap" x="96" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="70" name="trap" type="trap" x="112" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="71" name="trap" type="trap" x="128" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="72" name="trap" type="trap" x="144" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="73" name="trap" type="trap" x="160" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="74" name="trap" type="trap" x="176" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="75" type="layers" x="-16" y="0" width="8" height="8">
+  <object type="meta" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="09a"/>
+    <property name="next" value="10"/>
     <property name="star" value="09b"/>
+   </properties>
+  </object>
+  <object type="heart" x="200" y="88" width="16" height="24"/>
+  <object type="star" x="200" y="24" width="16" height="24"/>
+  <object type="goal" x="32" y="96" width="32" height="32"/>
+  <object type="gate" x="80" y="64" width="16" height="48">
+   <properties>
+    <property name="owner" value="both"/>
+   </properties>
+  </object>
+  <object type="button" x="32" y="32" width="16" height="16">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="both"/>
+   </properties>
+  </object>
+  <object type="platform" x="128" y="80" width="16" height="8">
+   <properties>
+    <property name="owner" value="star"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object type="platform" x="128" y="48" width="16" height="8">
+   <properties>
+    <property name="owner" value="star"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object type="trap" x="64" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="80" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="96" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="112" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="128" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="144" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="160" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="176" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
    </properties>
   </object>
  </objectgroup>
@@ -420,143 +432,143 @@
   </data>
  </layer>
  <objectgroup name="10" visible="0">
-  <object id="76" name="heart" type="actor" x="200" y="104" width="16" height="24"/>
-  <object id="77" name="star" type="actor" x="24" y="104" width="16" height="24"/>
-  <object id="78" type="goal" x="88" y="16" width="32" height="32"/>
-  <object id="79" name="platform" type="platform" x="224" y="96" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="type" value="short"/>
-   </properties>
-  </object>
-  <object id="80" name="platform" type="platform" x="144" y="64" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="type" value="short"/>
-   </properties>
-  </object>
-  <object id="81" name="platform" type="platform" x="176" y="64" width="32" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="type" value="medium"/>
-   </properties>
-  </object>
-  <object id="82" name="button" type="button" x="200" y="32" width="16" height="16">
-   <properties>
-    <property name="orientation" value="south"/>
-    <property name="triggers" value="retractable-b"/>
-   </properties>
-  </object>
-  <object id="83" name="trap" type="trap" x="112" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="84" name="trap" type="trap" x="176" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="85" name="trap" type="trap" x="192" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="86" name="trap" type="trap" x="208" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="star"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="87" name="retractable-b" type="retractable" x="144" y="16" width="16" height="48">
-   <properties>
-    <property name="affects" value="star"/>
-   </properties>
-  </object>
-  <object id="88" name="button" type="button" x="24" y="32" width="16" height="16">
-   <properties>
-    <property name="orientation" value="south"/>
-    <property name="triggers" value="retractable-a"/>
-   </properties>
-  </object>
-  <object id="89" name="retractable-a" type="retractable" x="160" y="16" width="16" height="48">
-   <properties>
-    <property name="affects" value="heart"/>
-   </properties>
-  </object>
-  <object id="90" name="platform" type="platform" x="16" y="64" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="type" value="short"/>
-   </properties>
-  </object>
-  <object id="91" name="platform" type="platform" x="16" y="96" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="type" value="short"/>
-   </properties>
-  </object>
-  <object id="92" name="platform" type="platform" x="144" y="64" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="type" value="short"/>
-   </properties>
-  </object>
-  <object id="93" name="platform" type="platform" x="176" y="64" width="32" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="type" value="medium"/>
-   </properties>
-  </object>
-  <object id="94" name="platform" type="platform" x="224" y="96" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="type" value="short"/>
-   </properties>
-  </object>
-  <object id="95" name="trap" type="trap" x="16" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="96" name="trap" type="trap" x="32" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="97" name="trap" type="trap" x="48" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="98" name="trap" type="trap" x="64" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="99" name="trap" type="trap" x="80" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="100" name="trap" type="trap" x="144" y="120" width="16" height="8">
-   <properties>
-    <property name="affects" value="heart"/>
-    <property name="orientation" value="north"/>
-   </properties>
-  </object>
-  <object id="101" type="layers" x="-16" y="0" width="8" height="8">
+  <object type="meta" x="-16" y="0" width="8" height="8">
    <properties>
     <property name="heart" value="10a"/>
     <property name="star" value="10b"/>
+   </properties>
+  </object>
+  <object type="heart" x="200" y="104" width="16" height="24"/>
+  <object type="star" x="24" y="104" width="16" height="24"/>
+  <object type="goal" x="88" y="16" width="32" height="32"/>
+  <object type="platform" x="224" y="96" width="16" height="8">
+   <properties>
+    <property name="owner" value="star"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object type="platform" x="144" y="64" width="16" height="8">
+   <properties>
+    <property name="owner" value="star"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object type="platform" x="176" y="64" width="32" height="8">
+   <properties>
+    <property name="owner" value="star"/>
+    <property name="type" value="medium"/>
+   </properties>
+  </object>
+  <object type="button" x="200" y="32" width="16" height="16">
+   <properties>
+    <property name="orientation" value="south"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="112" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="176" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="192" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="trap" x="208" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="gate" x="144" y="16" width="16" height="48">
+   <properties>
+    <property name="owner" value="star"/>
+   </properties>
+  </object>
+  <object type="button" x="24" y="32" width="16" height="16">
+   <properties>
+    <property name="orientation" value="south"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="gate" x="160" y="16" width="16" height="48">
+   <properties>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="platform" x="16" y="64" width="16" height="8">
+   <properties>
+    <property name="owner" value="heart"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object type="platform" x="16" y="96" width="16" height="8">
+   <properties>
+    <property name="owner" value="heart"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object type="platform" x="144" y="64" width="16" height="8">
+   <properties>
+    <property name="owner" value="heart"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object type="platform" x="176" y="64" width="32" height="8">
+   <properties>
+    <property name="owner" value="heart"/>
+    <property name="type" value="medium"/>
+   </properties>
+  </object>
+  <object type="platform" x="224" y="96" width="16" height="8">
+   <properties>
+    <property name="owner" value="heart"/>
+    <property name="type" value="short"/>
+   </properties>
+  </object>
+  <object type="trap" x="16" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="32" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="48" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="64" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="80" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
+   </properties>
+  </object>
+  <object type="trap" x="144" y="120" width="16" height="8">
+   <properties>
+    <property name="orientation" value="north"/>
+    <property name="owner" value="heart"/>
    </properties>
   </object>
  </objectgroup>
