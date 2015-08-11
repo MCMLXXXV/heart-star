@@ -2,6 +2,9 @@ const type = (t) => ({ type }) => type === t;
 
 const find = (t, o) => o.find(type(t));
 const filter = (t, o) => o.filter(type(t));
+const keys = (o) => Object.keys(o);
+const reduce = (f, m, a) => a.reduce(f, m);
+const mapObj = (f, o) => reduce((m, k) => (m[k] = f(o[k]), m), {}, keys(o));
 
 const shift = (ox, oy) => (x, y) => ({ x: x + ox, y: y + oy });
 
@@ -31,21 +34,11 @@ function makeLevel (objects) {
 }
 
 
-function parseLevels (objects) {
-  return Object.keys(objects)
-    .map((name) => [ name, objects[name] ])
-    .reduce((definitions, [ name, objects ]) => {
-      definitions[name] = makeLevel(objects);
-      return definitions;
-    }, Object.create(null));
-}
-
-
 export default function parseLevelsFromTilemap (g, tilemap) {
   const { objects, properties } = Phaser.TilemapParser.parse(g, tilemap);
 
   return {
-    definitions: parseLevels(objects),
+    definitions: mapObj(makeLevel, objects),
     startingLevel: properties['starting-level'],
 
     getLevel (name) {
