@@ -1,6 +1,3 @@
-import levels from '../data/levels';
-
-
 class LevelManager {
 
   constructor (game) {
@@ -18,13 +15,11 @@ class LevelManager {
   // --------------------------------------------------------------------------
 
   _createLevelDefinitions () {
-    const getTilemapDefinitions = (tilemap) =>
-      Phaser.TilemapParser.parse(this.game, tilemap);
-    const { objects } = getTilemapDefinitions('tilemaps');
+    const { objects } = Phaser.TilemapParser.parse(this.game, 'tilemaps');
 
-    return levels
-      .map((level) => [ level, level.name, objects[level.name] ])
-      .reduce((definitions, [ level, name, objects ]) => {
+    return Object.keys(objects)
+      .map((name) => [ name, objects[name] ])
+      .reduce((definitions, [ name, objects ]) => {
         definitions[name] = this._makeLevel(objects);
         return definitions;
       }, Object.create(null));
