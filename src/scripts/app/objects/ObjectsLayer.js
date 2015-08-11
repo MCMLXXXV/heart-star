@@ -68,33 +68,23 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   collide (actor) {
-    this.game.physics.arcade.collide(
-      actor,
-      this._tilemapLayer,
-      null,
-      this._collisionProcess,
-      this);
-    this.game.physics.arcade.collide(
-      actor,
+    const collide = (o, f = null, g = null) =>
+      this.game.physics.arcade.collide(actor, o, f, g, this);
+
+    collide(this._tilemapLayer, null, this._collisionProcess);
+    collide(
       this._button,
       this._buttonCollisionCallback,
-      this._buttonCollisionProcess,
-      this);
-    this.game.physics.arcade.collide(
-      actor,
+      this._buttonCollisionProcess);
+    collide(
       this._gate,
       null,
-      this._retractableCollisionProcess,
-      this);
-    this.game.physics.arcade.collide(
-      actor,
+      this._retractableCollisionProcess);
+    collide(
       this._trapsGroup,
       this._trapCollisionCallback,
-      this._collisionProcess,
-      this);
-    this.game.physics.arcade.collide(
-      actor,
-      this._platformsGroup);
+      this._collisionProcess);
+    collide(this._platformsGroup);
   }
 
   reset () {
