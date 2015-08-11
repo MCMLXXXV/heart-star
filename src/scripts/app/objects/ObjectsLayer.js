@@ -17,8 +17,12 @@ class ObjectsLayer extends Phaser.Group {
 
     this._backgroundGroup  = this.add(this._makeGroup());
     this._tilemapGroup     = this.add(this._makeGroup());
-    this._retractableGroup = this.add(this._makeGroup());
-    this._buttonGroup      = this.add(this._makeGroup());
+
+    this._gateGroup = this.add(this._makeGroup());
+    this._gate = this._gateGroup.add(new Retractable(game, roleName));
+    this._button = this._gateGroup.add(new Button(game, roleName));
+    this._gate.bindTo(this._button);
+
     this._trapsGroup       = this.add(this._makeGroup());
     this._platformsGroup   = this.add(this._makeGroup());
   }
@@ -51,11 +55,13 @@ class ObjectsLayer extends Phaser.Group {
     platform.range = range;
   }
 
-  addRetractable ({ retractable, button }) {
-    var r = this._addRetractable(retractable);
-    var b = this._addButton(button);
+  placeGate (x, y) {
+    this._gate.reset(x, y);
+  }
 
-    r.bindTo(b);
+  placeButton (x, y, orientation) {
+    this._button.reset(x, y);
+    this._button.orientation = orientation;
   }
 
   enableBackground () {
@@ -72,13 +78,13 @@ class ObjectsLayer extends Phaser.Group {
       this);
     this.game.physics.arcade.collide(
       actor,
-      this._buttonGroup,
+      this._button,
       this._buttonCollisionCallback,
       this._buttonCollisionProcess,
       this);
     this.game.physics.arcade.collide(
       actor,
-      this._retractableGroup,
+      this._gate,
       null,
       this._retractableCollisionProcess,
       this);
@@ -94,16 +100,13 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   reset () {
-    this._retractableGroup.forEach(
-      function (retractable) { retractable.close(); });
-    this._buttonGroup.forEach(
-      function (button) { button.switchOff(); });
+    this._gate.close();
+    this._button.switchOff();
   }
 
   recycle () {
     this._tilemapGroup.callAll('kill');
-    this._retractableGroup.callAll('kill');
-    this._buttonGroup.callAll('kill');
+    this._gateGroup.callAll('kill');
     this._trapsGroup.callAll('kill');
     this._platformsGroup.callAll('kill');
   }
@@ -132,22 +135,6 @@ class ObjectsLayer extends Phaser.Group {
 
   _addObject (x, y, group, factory, ... features) {
     return this._getOrCreateObject(group, factory, ... features).reset(x, y);
-  }
-
-  _addRetractable ({ position: { x, y } }) {
-    return this._addObject(
-      x, y, this._retractableGroup,
-      Retractable, this._roleName);
-  }
-
-  _addButton ({ position: { x, y }, orientation }) {
-    let button = this._addObject(
-      x, y, this._buttonGroup,
-      Button, this._roleName);
-
-    button.orientation = orientation;
-
-    return button;
   }
 
   _getOrCreateObject (group, factory, ... features) {

@@ -22,12 +22,13 @@ class ObjectsManager {
     return layer;
   }
 
-  createObjects (mapObjects) {
+  createObjects (objects) {
     this._recycle();
-    this._makeTilemapLayers(mapObjects.meta.layers);
-    this._makeTraps(mapObjects.traps);
-    this._makePlatforms(mapObjects.platforms);
-    // this._makeRetractables(mapObjects.retractables);
+    this._makeTilemapLayers(objects.meta.layers);
+    this._makeTraps(objects.traps);
+    this._makePlatforms(objects.platforms);
+    this._makeGates(objects.gates);
+    this._makeButtons(objects.buttons);
   }
 
   reset () {
@@ -63,15 +64,19 @@ class ObjectsManager {
         position.x, position.y, type);
   }
 
-  // _makeRetractables (retractables) {
-  //   for (var key of Object.keys(retractables))
-  //     this._makeRetractable(retractables[key]);
-  // }
+  _makeGates (gates) {
+    for (const { position: { x, y }, properties: { owner } } of gates) {
+      this._getRecipientGroupFor(owner)
+        .placeGate(x, y);
+    }
+  }
 
-  // _makeRetractable ({ retractable, button }) {
-  //   this._getRecipientGroupFor(retractable.affects).addRetractable(
-  //     { retractable, button });
-  // }
+  _makeButtons (buttons) {
+    for (const { position: { x, y }, properties: { owner, orientation } } of buttons) {
+      this._getRecipientGroupFor(owner)
+        .placeButton(x, y, orientation);
+    }
+  }
 
   _getRecipientGroupFor (owner) {
     return this._layers[owner];
