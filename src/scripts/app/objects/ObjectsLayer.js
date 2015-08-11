@@ -1,7 +1,7 @@
+import Gate              from '../objects/Gate';
 import Trap              from '../objects/Trap';
 import Button            from '../objects/Button';
 import Platform          from '../objects/Platform';
-import Retractable       from '../objects/Retractable';
 import BackgroundPattern from '../objects/BackgroundPattern';
 
 
@@ -19,7 +19,7 @@ class ObjectsLayer extends Phaser.Group {
     this._tilemapGroup     = this.add(this._makeGroup());
 
     this._gateGroup = this.add(this._makeGroup());
-    this._gate = this._gateGroup.add(new Retractable(game, roleName));
+    this._gate = this._gateGroup.add(new Gate(game, roleName));
     this._button = this._gateGroup.add(new Button(game, roleName));
     this._gate.bindTo(this._button);
 

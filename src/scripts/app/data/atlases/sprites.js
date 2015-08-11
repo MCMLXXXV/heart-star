@@ -370,77 +370,77 @@ export default {
       spriteSourceSize: { x: 0, y: 0, w: 32, h: 32 },
       sourceSize: { w: 32, h: 32 }
     },
-    'retractable-both-1': {
+    'gate-both-1': {
       frame: { x: 120, y: 0, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-both-2': {
+    'gate-both-2': {
       frame: { x: 120, y: 50, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-both-3': {
+    'gate-both-3': {
       frame: { x: 138, y: 0, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-both-4': {
+    'gate-both-4': {
       frame: { x: 138, y: 50, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-both-5': {
+    'gate-both-5': {
       frame: { x: 156, y: 0, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-heart-1': {
+    'gate-heart-1': {
       frame: { x: 156, y: 50, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-heart-2': {
+    'gate-heart-2': {
       frame: { x: 0, y: 118, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-heart-3': {
+    'gate-heart-3': {
       frame: { x: 18, y: 118, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-heart-4': {
+    'gate-heart-4': {
       frame: { x: 0, y: 68, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-heart-5': {
+    'gate-heart-5': {
       frame: { x: 102, y: 0, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-star-1': {
+    'gate-star-1': {
       frame: { x: 90, y: 68, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-star-2': {
+    'gate-star-2': {
       frame: { x: 54, y: 68, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-star-3': {
+    'gate-star-3': {
       frame: { x: 36, y: 68, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-star-4': {
+    'gate-star-4': {
       frame: { x: 18, y: 68, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
     },
-    'retractable-star-5': {
+    'gate-star-5': {
       frame: { x: 72, y: 68, w: 16, h: 48 },
       spriteSourceSize: { x: 0, y: 0, w: 16, h: 48 },
       sourceSize: { w: 16, h: 48 }
