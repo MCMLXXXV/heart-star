@@ -1,7 +1,8 @@
 import levels from '../data/levels';
 
+import parseLevelsFromTilemap from '../components/parseLevelsFromTilemap';
+
 import ObjectsManager from '../managers/ObjectsManager';
-import LevelManager   from '../managers/LevelManager';
 
 import Goal   from '../objects/Goal';
 import Actor  from '../objects/Actor';
@@ -17,7 +18,7 @@ export default class Game extends Phaser.State {
     this.controls    = this.game.controls;
     this.transitions = this.game.transitions;
 
-    this._levelManager   = new LevelManager(this.game);
+    this._levelManager   = parseLevelsFromTilemap(this.game, 'tilemaps');
     this._objectsManager = new ObjectsManager(this.game);
 
     this._waitingActor = null;
