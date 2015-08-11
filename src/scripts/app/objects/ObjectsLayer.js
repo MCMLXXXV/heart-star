@@ -15,7 +15,6 @@ class ObjectsLayer extends Phaser.Group {
     this._tilemap      = null;
     this._tilemapLayer = null;
 
-    this._backgroundGroup  = this.add(this._makeGroup());
     this._tilemapGroup     = this.add(this._makeGroup());
 
     this._gateGroup = this.add(this._makeGroup());
@@ -65,8 +64,7 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   enableBackground () {
-    this._backgroundGroup.add(
-      new BackgroundPattern(this.game, this.preferedBackground));
+    this.addAt(new BackgroundPattern(this.game, this.preferedBackground), 0);
   }
 
   collide (actor) {
