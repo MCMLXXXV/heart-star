@@ -7,31 +7,28 @@ import BackgroundPattern from '../objects/BackgroundPattern';
 
 class ObjectsLayer extends Phaser.Group {
 
-  constructor (game, roleName) {
+  constructor (game, owner) {
     super(game);
 
-    this._roleName = roleName;
+    this._owner = owner;
 
-    this._tilemap      = null;
+    this._tilemap = this._makeTilemap('tilemaps');
     this._tilemapLayer = null;
 
-    this._tilemapGroup     = this.add(this._makeGroup());
+    this._tilemapGroup = this.add(game.make.group());
 
-    this._gateGroup = this.add(this._makeGroup());
-    this._gate = this._gateGroup.add(new Gate(game, roleName));
-    this._button = this._gateGroup.add(new Button(game, roleName));
+    this._gateGroup = this.add(game.make.group());
+    this._gate = this._gateGroup.add(new Gate(game, owner));
+    this._button = this._gateGroup.add(new Button(game, owner));
     this._gate.bindTo(this._button);
 
-    this._trapsGroup       = this.add(this._makeGroup());
-    this._platformsGroup   = this.add(this._makeGroup());
+    this._trapsGroup = this.add(game.make.group());
+    this._platformsGroup = this.add(game.make.group());
   }
 
   // --------------------------------------------------------------------------
 
-  addTilemapLayer (layerName) {
-    if (this._tilemap === null)
-      this._tilemap = this._makeTilemap('tilemaps');
-
+  changeTilemapLayer (layerName) {
     if (this._tilemapLayer !== null)
       this._tilemapLayer.destroy();
 
@@ -40,16 +37,14 @@ class ObjectsLayer extends Phaser.Group {
     this._tilemapGroup.add(this._tilemapLayer);
   }
 
-  addTrap (x, y) {
-    this._addObject(
-      x, y, this._trapsGroup,
-      Trap, this._roleName);
+  placeTrap (x, y) {
+    this._addObject(x, y, this._trapsGroup, Trap, this._owner);
   }
 
-  addPlatform (x, y, range) {
-    let platform = this._addObject(
+  placePlatform (x, y, range) {
+    const platform = this._addObject(
       x, y, this._platformsGroup,
-      Platform, this._roleName);
+      Platform, this._owner);
 
     platform.range = range;
   }
@@ -69,21 +64,18 @@ class ObjectsLayer extends Phaser.Group {
 
   collide (actor) {
     const collide = (o, f = null, g = null) =>
-      this.game.physics.arcade.collide(actor, o, f, g, this);
+      this.game.physics.arcade.collide(o, actor, f, g);
 
-    collide(this._tilemapLayer, null, this._collisionProcess);
-    collide(
-      this._button,
-      this._buttonCollisionCallback,
-      this._buttonCollisionProcess);
-    collide(
-      this._gate,
-      null,
-      this._retractableCollisionProcess);
-    collide(
-      this._trapsGroup,
-      this._trapCollisionCallback,
-      this._collisionProcess);
+    const harmActor = () => actor.harm(true);
+    const actorIsNotHurt = () => !actor.hurt;
+    const switchButtonOn = () => this._button.switchOn();
+    const buttonIsNotTriggered = () => !(this._button.triggered || actor.hurt);
+    const gateIsNotOpen = () => !(this._gate.open || actor.hurt);
+
+    collide(this._tilemapLayer, null, actorIsNotHurt);
+    collide(this._button, switchButtonOn, buttonIsNotTriggered);
+    collide(this._gate, null, gateIsNotOpen);
+    collide(this._trapsGroup, harmActor, actorIsNotHurt);
     collide(this._platformsGroup);
   }
 
@@ -102,7 +94,7 @@ class ObjectsLayer extends Phaser.Group {
   // --------------------------------------------------------------------------
 
   _makeTilemap (tilemapKey) {
-    var tilemap = this.game.make.tilemap(tilemapKey);
+    const tilemap = this.game.make.tilemap(tilemapKey);
 
     tilemap.addTilesetImage('tileset');
 
@@ -110,54 +102,24 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   _makeTilemapLayer (tilemap, layerName) {
-    var tilemapLayer = tilemap.createLayer(layerName);
+    const tilemapLayer = tilemap.createLayer(layerName);
 
     tilemap.setCollisionBetween(1, 144, true, layerName);
 
     return tilemapLayer;
   }
 
-  _makeGroup () {
-    return this.game.make.group();
-  }
+  _addObject (x, y, group, factory, ...features) {
+    const object = group.getFirstDead() ||
+      group.add(new factory(this.game, ...features));
 
-  _addObject (x, y, group, factory, ... features) {
-    return this._getOrCreateObject(group, factory, ... features).reset(x, y);
-  }
-
-  _getOrCreateObject (group, factory, ... features) {
-    var object = group.getFirstDead();
-
-    if (object === null)
-      object = group.add(new factory(this.game, ... features));
-
-    return object;
-  }
-
-  _buttonCollisionCallback (actor, button) {
-    button.switchOn();
-  }
-
-  _buttonCollisionProcess (actor, button) {
-    return !(button.triggered || actor.hurt);
-  }
-
-  _retractableCollisionProcess (actor, retractable) {
-    return !(retractable.open || actor.hurt);
-  }
-
-  _trapCollisionCallback (actor) {
-    actor.harm(true);
-  }
-
-  _collisionProcess (actor) {
-    return !actor.hurt;
+    return object.reset(x, y);
   }
 
   // --------------------------------------------------------------------------
 
   get preferedBackground () {
-    switch (this._roleName) {
+    switch (this._owner) {
       case 'heart': return BackgroundPattern.HEART;
       case 'star':  return BackgroundPattern.STAR;
       case 'both':  return BackgroundPattern.HEART_STAR;

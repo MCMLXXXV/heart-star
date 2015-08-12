@@ -49,18 +49,18 @@ class ObjectsManager {
   }
 
   _makeTilemapLayer (actor, layerName) {
-    this._getRecipientGroupFor(actor).addTilemapLayer(layerName);
+    this._getRecipientGroupFor(actor).changeTilemapLayer(layerName);
   }
 
   _makeTraps (traps) {
     for (var { position, properties: { owner } } of traps)
-      this._getRecipientGroupFor(owner).addTrap(
+      this._getRecipientGroupFor(owner).placeTrap(
         position.x, position.y);
   }
 
   _makePlatforms (platforms) {
     for (var { position, properties: { owner, type } } of platforms)
-      this._getRecipientGroupFor(owner).addPlatform(
+      this._getRecipientGroupFor(owner).placePlatform(
         position.x, position.y, type);
   }
 
