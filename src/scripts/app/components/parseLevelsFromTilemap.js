@@ -20,6 +20,22 @@ const parseObject = (f = shift(0, 0)) => ({ x, y, properties }) => ({
 const parseActor = parseObject(shift(8, 24));
 
 
+const proto = {
+  /**
+   * Get the definitions for a given game level. If given the name of an
+   * unknown level, return null.
+   *
+   * @arg {String} name - The name of a level.
+   *
+   * @return {Object|null} The level definitions of a existing level,
+   * null otherwise.
+   */
+  getLevel (name) {
+    return this.definitions[name] || null;
+  }
+};
+
+
 /**
  * Parse objects contained in the object layer to build a game level.
  *
@@ -61,13 +77,8 @@ function makeLevel (objects) {
  */
 export default function parseLevelsFromTilemap (g, tilemap) {
   const { objects, properties } = Phaser.TilemapParser.parse(g, tilemap);
-
-  return {
+  return Object.assign(Object.create(proto), {
     definitions: mapObj(makeLevel, objects),
-    startingLevel: properties['starting-level'],
-
-    getLevel (name) {
-      return this.definitions[name] || null;
-    }
-  };
+    startingLevel: properties['starting-level']
+  });
 }
