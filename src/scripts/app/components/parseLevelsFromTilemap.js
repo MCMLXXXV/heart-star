@@ -20,6 +20,15 @@ const parseObject = (f = shift(0, 0)) => ({ x, y, properties }) => ({
 const parseActor = parseObject(shift(8, 24));
 
 
+/**
+ * Parse objects contained in the object layer to build a game level.
+ *
+ * @private
+ *
+ * @arg {Object[]} objects - A tilemap object layer data structure.
+ *
+ * @return {Object} Information about sprites placement, etc.
+ */
 function makeLevel (objects) {
   return {
     meta: parseMeta(find('meta', objects)),
@@ -34,6 +43,22 @@ function makeLevel (objects) {
 }
 
 
+/**
+ * Build all levels definitions, including data about the placement of the
+ * sprites for any given level and some information related to the game
+ * progression.
+ *
+ * This function uses the Phaser `TilemapParser` class internally to read the
+ * definitions of all object layers from a named Tilemap, edited with Tiled,
+ * and loaded in the current running instance of a Phaser game, and transform
+ * those into readable objects to be interpreted and used by the game to place
+ * the sprites in their defined positions.
+ *
+ * @arg {Phaser.Game} g        A running Phaser Game instance.
+ * @arg {String}      tilemap  The desired tilemap to be parsed.
+ *
+ * @return {Object} A raw object, holding all levels definitions.
+ */
 export default function parseLevelsFromTilemap (g, tilemap) {
   const { objects, properties } = Phaser.TilemapParser.parse(g, tilemap);
 
