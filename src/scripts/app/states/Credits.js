@@ -1,7 +1,10 @@
 import credits from '../data/credits';
 
-import LinkButton        from '../objects/LinkButton';
-import MenuOptionButton  from '../objects/MenuOptionButton';
+import {
+  menuButton,
+  linkButton
+} from '../components/uiButtons';
+
 import BackgroundPattern from '../objects/BackgroundPattern';
 
 const DEFAULT_SCREEN = 'adventure-islands';
@@ -32,31 +35,21 @@ export default class Credits extends Phaser.State {
     this.add.image(0, 0, 'graphics', label);
   }
 
-  _makeLinkButton (x, page, url) {
-    return new LinkButton(this.game, x, page, url);
-  }
-
   _addLinkButtons (links) {
     const firstCol = 120 - (links.length - 1) * 16;
+    const x = (i) => firstCol + 32 * i;
+    const addButton = (i) => this.add.button(x(i), 47, 'graphics');
 
-    links.forEach(({ page, url }, i) => {
-      let x = firstCol + 32 * i;
-      this.add.existing(this._makeLinkButton(x, page, url));
-    });
+    links.forEach(({ page, url }, i) => linkButton(addButton(i), page, url));
   }
 
   _addMenuButtons (screen, addMoreButton = false) {
-    let backButton = this.add.existing(new MenuOptionButton(this.game, 0, 0));
-    backButton.onInputUp.add(() => {
-      this.game.transitions.toState('Title', 'blackout', 1000, 'blackout');
-    });
+    const addButton = (x, y) => this.add.button(x, y, 'graphics');
+
+    menuButton(addButton(0, 0), 'back', 'Title', 'blackout');
 
     if (addMoreButton) {
-      let moreButton = this.add.existing(
-        new MenuOptionButton(this.game, 192, 144, MenuOptionButton.MORE));
-      moreButton.onInputUp.add(() => {
-        this.game.transitions.toState('Credits', 'blackout', 1000, 'rb');
-      });
+      menuButton(addButton(192, 144), 'more', 'Credits', 'rb');
     }
   }
 

@@ -20,12 +20,12 @@ export default class Transitions extends Phaser.Plugin {
     this.sprite = this.game.make.image(0, 0, this.buffer);
     this.game.stage.addChild(this.sprite);
 
-    this.register('iris',     Iris);
-    this.register('copy',     Copy);
-    this.register('pink',     Pink);
-    this.register('blinds',   Blinds);
-    this.register('sky-blue', SkyBlue);
-    this.register('blackout', Blackout);
+    this.register('iris',        Iris);
+    this.register('copy',        Copy);
+    this.register('blinds',      Blinds);
+    this.register('blink-star',  SkyBlue);
+    this.register('blink-heart', Pink);
+    this.register('blackout',    Blackout);
   }
 
   // --------------------------------------------------------------------------

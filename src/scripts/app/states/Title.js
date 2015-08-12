@@ -1,4 +1,5 @@
-import MenuOptionButton  from '../objects/MenuOptionButton';
+import { menuButton } from '../components/uiButtons';
+
 import BackgroundPattern from '../objects/BackgroundPattern';
 
 
@@ -22,20 +23,10 @@ export default class Title extends Phaser.State {
   // --------------------------------------------------------------------------
 
   _makeMenuButtons () {
-    this.add.existing(
-      this._makeMenuOptionButton(110, MenuOptionButton.START, 'Levels'));
-    this.add.existing(
-      this._makeMenuOptionButton(130, MenuOptionButton.CREDITS, 'Credits'));
-  }
+    const addButton = (y) => this.add.button(80, y, 'graphics');
 
-  _makeMenuOptionButton (y, type, stateName) {
-    let button = new MenuOptionButton(this.game, 80, y, type);
-
-    button.onInputUp.add(() => {
-      this.game.transitions.toState(stateName, 'blackout', 1000);
-    });
-
-    return button;
+    menuButton(addButton(110), 'start', 'Levels');
+    menuButton(addButton(130), 'credits', 'Credits');
   }
 
   _placeCharacter (name, x) {

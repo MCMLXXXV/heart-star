@@ -1,7 +1,8 @@
 import levels from '../data/levels';
 
+import parseLevelsFromTilemap from '../components/parseLevelsFromTilemap';
+
 import ObjectsManager from '../managers/ObjectsManager';
-import LevelManager   from '../managers/LevelManager';
 
 import Goal   from '../objects/Goal';
 import Actor  from '../objects/Actor';
@@ -17,30 +18,50 @@ export default class Game extends Phaser.State {
     this.controls    = this.game.controls;
     this.transitions = this.game.transitions;
 
-    this._levelManager   = this._makeManager(LevelManager);
-    this._objectsManager = this._makeManager(ObjectsManager);
+    this._levelManager   = parseLevelsFromTilemap(this.game, 'tilemaps');
+    this._objectsManager = new ObjectsManager(this.game);
 
-    this._goal         = null;
-    this._star         = null;
-    this._heart        = null;
-    this._idleActor    = null;
-    this._activePlayer = null;
+    this._waitingActor = null;
+    this._activeActor  = null;
 
-    this._tutorialLabel    = null;
     this._unlockedLevels   = null;
     this._levelDefinitions = null;
   }
 
   create () {
+    const addObject = (F, ...a) => this.add.existing(new F(this.game, ...a));
+
+    const goBackLevelSelection =
+      () => this.transitions.toState('Levels', 'blackout', 1000);
+
     this._agents = this.add.existing(new Agents(this.game));
 
-    this._heartGroup = this._objectsManager.createLayerFor('heart', true);
-    this._starGroup  = this._objectsManager.createLayerFor('star', true);
-    this._moonGroup  = this._objectsManager.createLayerFor('both');
+    this._heartLayer = this._objectsManager.createLayerFor('heart', true);
+    this._starLayer  = this._objectsManager.createLayerFor('star', true);
+    this._moonLayer  = this._objectsManager.createLayerFor('both');
 
     this.controls.spacebar.onUp.add(this._switchActiveActor, this);
-    this.controls.esc.onUp.add(this._goToLevelState, this);
+    this.controls.esc.onUp.add(goBackLevelSelection);
     this.controls.backspace.onUp.add(this._resetGameStage, this);
+
+    // -- The tutorial caption ------------------------------------------------
+    this._tutorialLabel = this.make.image(0, 0, 'graphics');
+    this._tutorialLabel.visible = false;
+    this._moonLayer.add(this._tutorialLabel);
+
+    // -- The goal platform ---------------------------------------------------
+    this._goal = addObject(Goal);
+    this._goal.actorsLanded.add(() => this._winLevel());
+
+    // -- The actors ----------------------------------------------------------
+    this._heart = addObject(Actor, Actor.HEART);
+    this._heart.wasHurt.add(() => this._loseLevel());
+
+    this._star = addObject(Actor, Actor.STAR);
+    this._star.wasHurt.add(() => this._loseLevel());
+
+    this._heart.wasHurt.add(() => this._star.startle());
+    this._star.wasHurt.add(() => this._heart.startle());
 
     this.transitions.reveal('blackout', 1000);
     this._prepareLevel(this.level);
@@ -53,165 +74,113 @@ export default class Game extends Phaser.State {
   }
 
   update () {
-    this._activePlayer.collideActor(this._idleActor);
-    this._goal.collideActors(this._activePlayer, this._idleActor);
+    this._activeActor.collideActor(this._waitingActor);
+    this._goal.collideActors(this._activeActor, this._waitingActor);
 
-    this._heartGroup.collide(this._heart);
-    this._starGroup.collide(this._star);
-    this._moonGroup.collide([ this._heart, this._star ]);
+    this._heartLayer.collide(this._heart);
+    this._starLayer.collide(this._star);
+    this._moonLayer.collide([ this._heart, this._star ]);
 
-    this._agents.collide(this._activePlayer);
-    this._agents.collide(this._idleActor);
+    this._agents.collide(this._activeActor);
+    this._agents.collide(this._waitingActor);
 
     if (this.inGame) {
       if (this.controls.left.isDown) {
-        this._activePlayer.walkLeft();
+        this._activeActor.walkLeft();
       }
       else if (this.controls.right.isDown) {
-        this._activePlayer.walkRight();
+        this._activeActor.walkRight();
       }
       else {
-        this._activePlayer.stop();
-        this._idleActor.stop();
+        this._activeActor.stop();
+        this._waitingActor.stop();
       }
 
       if (this.controls.up.isDown) {
-        this._activePlayer.jump();
+        this._activeActor.jump();
       }
       else {
-        this._activePlayer.cancelPowerJump();
+        this._activeActor.cancelPowerJump();
       }
     }
     else {
-      this._activePlayer.stop();
-      this._idleActor.stop();
+      this._activeActor.stop();
+      this._waitingActor.stop();
     }
   }
 
   // --------------------------------------------------------------------------
 
-  _makeManager (factory, ... args) {
-    return new factory(this.game, ... args);
-  }
-
-  _makeActor (roleName) {
-    let actor = new Actor(this.game, roleName);
-
-    actor.wasHurt.add(() => this._loseLevel());
-
-    return actor;
-  }
-
   _prepareLevel (level) {
-    this._levelDefinitions = this._getLevelDefinitions(level);
-    this._objectsManager.createObjects(this._levelDefinitions.objects);
+    this._levelDefinitions = this._levelManager.getLevel(level);
+    this._objectsManager.createObjects(this._levelDefinitions);
 
-    this._placeTutorialLabel();
-    this._placeGoal();
-    this._placeActors();
+    this._showTutorialCaption(this._levelDefinitions.meta.tutorial);
+    this._resetGoal(this._levelDefinitions.goal);
+    this._resetActors();
   }
 
-  _getLevelDefinitions (level) {
-    return this._levelManager.getLevel(level);
-  }
-
-  _placeTutorialLabel () {
-    const name = this._tutorialLabelName;
-
-    if (this._tutorialLabel === null) {
-      this._tutorialLabel = this.make.image(0, 0, 'graphics');
-      this._moonGroup.add(this._tutorialLabel);
-    }
-
-    if (name === null) {
-      this._tutorialLabel.alpha = 0;
-    }
-    else {
-      this._tutorialLabel.alpha = 1;
+  _showTutorialCaption (name) {
+    this._tutorialLabel.visible = (name !== null);
+    if (name !== null) {
       this._tutorialLabel.frameName = name;
     }
   }
 
-  _placeGoal () {
-    const { x, y } = this.goalCoordinates;
-
-    if (this._goal === null) {
-      this._goal = this.add.existing(new Goal(this.game));
-      this._goal.actorsLanded.add(this._winLevel, this);
-    }
-
+  _resetGoal ({ position: { x, y } }) {
     this._goal.reset(x, y);
   }
 
-  _placeActors () {
-    if (this._heart === null && this._star === null) {
-      this._heart = this.add.existing(this._makeActor(Actor.HEART));
-      this._star  = this.add.existing(this._makeActor(Actor.STAR));
-
-      this._heart.wasHurt.add(this._star.startle, this._star);
-      this._star.wasHurt.add(this._heart.startle, this._heart);
-    }
-
-    this._restartActor(this._heart, this.heartCoordinates);
-    this._restartActor(this._star, this.starCoordinates);
-    this._switchActors(this._heart, this._star);
+  _resetActors () {
+    this._resetActor(this._heart, this._levelDefinitions.heart);
+    this._resetActor(this._star, this._levelDefinitions.star);
+    this._changeActiveActor(this._heart, this._star);
+    this._switchLayers();
   }
 
-  _restartActor (actor, { x, y }) {
+  _resetActor (actor, { position: { x, y } }) {
     actor.reset(x, y);
     actor.sink();
   }
 
-  _switchActors (playerActor, idleActor) {
-    this._activePlayer      = playerActor;
-    this._activePlayer.idle = false;
-    this._activePlayer.stop();
+  _changeActiveActor (activeActor, waitingActor) {
+    const change = (actor, isWaiting) => {
+      actor.stop();
+      actor.idle = isWaiting;
 
-    this._idleActor      = idleActor;
-    this._idleActor.idle = true;
-    this._idleActor.stop();
+      return actor;
+    };
 
-    this._switchLayers();
+    this._waitingActor = change(waitingActor, true);
+    this._activeActor  = change(activeActor,  false);
   }
 
   _switchLayers () {
-    this._heartGroup.toggle(!this._heart.idle);
-    this._starGroup.toggle(!this._star.idle);
+    this._heartLayer.visible = !this._heart.idle;
+    this._starLayer.visible = !this._star.idle;
   }
 
   _switchActiveActor () {
     if (!this.inGame) return;
-    if (!this._activePlayer.standing) return;
+    if (!this._activeActor.standing) return;
 
-    this._doActorSwitchEffect(this._idleActor.role);
-    this._switchActors(this._idleActor, this._activePlayer);
-  }
-
-  _doActorSwitchEffect (role) {
-    let effectName;
-
-    if (role === 'heart') {
-      effectName = 'pink';
-    }
-    else if (role === 'star') {
-      effectName = 'sky-blue';
-    }
-
-    this.transitions.reveal(effectName, 400);
+    this.transitions.reveal(`blink-${ this._waitingActor.role }`, 400);
+    this._changeActiveActor(this._waitingActor, this._activeActor);
+    this._switchLayers();
   }
 
   _resetGameStage () {
     if (!this.inGame) return;
 
     this.transitions.reveal('copy', 500);
-    this._placeActors();
+    this._resetActors();
     this._objectsManager.reset();
   }
 
   _loseLevel () {
     this.time.events.add(1000, () => {
       this.transitions.hide('blinds', 1000, () => {
-        this._placeActors();
+        this._resetActors();
         this._objectsManager.reset();
         this.transitions.reveal('blinds', 1000);
       });
@@ -219,19 +188,20 @@ export default class Game extends Phaser.State {
   }
 
   _winLevel () {
-    this._heart.emotion = 'cheering';
-    this._heart.float();
-    this._heart.stop();
+    const haltActor = (actor) => {
+      actor.emotion = 'cheering';
+      actor.float();
+      actor.stop();
+    };
 
-    this._star.emotion  = 'cheering';
-    this._star.float();
-    this._star.stop();
+    haltActor(this._heart);
+    haltActor(this._star);
 
     this.time.events.add(1500, () => this._startNextLevel());
   }
 
   _startNextLevel () {
-    let nextLevel = this._levelDefinitions.next;
+    let nextLevel = this._levelDefinitions.meta.next;
 
     if (nextLevel === null) {
       this.transitions.toState('Credits', 'blackout', 1000);
@@ -246,41 +216,19 @@ export default class Game extends Phaser.State {
   }
 
   _unlockLevel (level) {
-    let lvl = this._unlockedLevels
-      .find((lvl) => lvl.name === level);
+    const nextLevel = this._unlockedLevels.find(({ name }) => name === level);
 
-    if (lvl.locked) {
-      lvl.locked = false;
-
+    if (nextLevel.locked) {
+      nextLevel.locked = false;
       this.storage.setItem('levels', this._unlockedLevels);
     }
   }
 
-  _goToLevelState () {
-    this.transitions.toState('Levels', 'blackout', 1000);
-  }
-
   // --------------------------------------------------------------------------
-
-  get _tutorialLabelName () {
-    return this._levelDefinitions.tutorial;
-  }
-
-  get goalCoordinates () {
-    return this._levelDefinitions.goal;
-  }
-
-  get heartCoordinates () {
-    return this._levelDefinitions.actors.heart;
-  }
-
-  get starCoordinates () {
-    return this._levelDefinitions.actors.star;
-  }
 
   get inGame () {
     return !this.transitions.isRunning &&
-      this._activePlayer && this._activePlayer.emotion === null;
+      this._activeActor && this._activeActor.emotion === null;
   }
 
 }

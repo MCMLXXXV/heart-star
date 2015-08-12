@@ -3,9 +3,7 @@ class Goal extends Phaser.Sprite {
   constructor (game) {
     super(game, 0, 0, 'sprites');
 
-    this.anchor.set(0.5);
-
-    this._setupPhysicsBody(32, 16, 0, 8);
+    this._setupPhysicsBody(32, 16, 0, 16);
     this._setupAnimation();
 
     this.actorsLanded = new Phaser.Signal();

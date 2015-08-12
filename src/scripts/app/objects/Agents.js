@@ -5,9 +5,9 @@ class Agents extends Phaser.Group {
 
     this.enableBody = true;
 
-    this._leftAgent   = this.add(this._makeAgent( -20,   0,  16, 160));
-    this._rightAgent  = this.add(this._makeAgent( 244,   0,  16, 160));
-    this._bottomAgent = this.add(this._makeAgent(-120, 240, 480,  16));
+    this._leftAgent   = this._makeAgent( -20,   0,  16, 160);
+    this._rightAgent  = this._makeAgent( 244,   0,  16, 160);
+    this._bottomAgent = this._makeAgent(-120, 240, 480,  16);
 
     this.setAll('body.immovable', true);
   }
@@ -21,27 +21,18 @@ class Agents extends Phaser.Group {
     this.game.physics.arcade.overlap(
       actor,
       this._bottomAgent,
-      this._bottomAgentOverlapCallback,
-      this._bottomAgentOverlapProcess,
+      () => actor.harm(),
+      () => !actor.hurt,
       this);
   }
 
   // --------------------------------------------------------------------------
 
-  _makeBitmap (width, height) {
-    return this.game.make.bitmapData(width, height);
-  }
-
   _makeAgent (x, y, width, height) {
-    return this.game.make.sprite(x, y, this._makeBitmap(width, height));
-  }
+    const sprite = this.create(x, y, null);
+    sprite.body.setSize(width, height);
 
-  _bottomAgentOverlapCallback (actor) {
-    actor.harm();
-  }
-
-  _bottomAgentOverlapProcess (actor) {
-    return !actor.hurt;
+    return sprite;
   }
 
 }

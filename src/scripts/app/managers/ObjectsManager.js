@@ -11,23 +11,24 @@ class ObjectsManager {
 
   // --------------------------------------------------------------------------
 
-  createLayerFor (roleName, enableBackground = false) {
-    var layer = new ObjectsLayer(this.game, roleName);
+  createLayerFor (owner, enableBackground = false) {
+    var layer = new ObjectsLayer(this.game, owner);
 
     if (enableBackground)
       layer.enableBackground();
 
-    this._layers[roleName] = layer;
+    this._layers[owner] = layer;
 
     return layer;
   }
 
-  createObjects (mapObjects) {
+  createObjects (objects) {
     this._recycle();
-    this._makeTilemapLayers(mapObjects.layers);
-    this._makeTraps(mapObjects.traps);
-    this._makePlatforms(mapObjects.platforms);
-    this._makeRetractables(mapObjects.retractables);
+    this._makeTilemapLayers(objects.meta.layers);
+    this._makeTraps(objects.traps);
+    this._makePlatforms(objects.platforms);
+    this._makeGates(objects.gates);
+    this._makeButtons(objects.buttons);
   }
 
   reset () {
@@ -48,33 +49,37 @@ class ObjectsManager {
   }
 
   _makeTilemapLayer (actor, layerName) {
-    this._getRecipientGroupFor(actor).addTilemapLayer(layerName);
+    this._getRecipientGroupFor(actor).changeTilemapLayer(layerName);
   }
 
   _makeTraps (traps) {
-    for (var { position, affects } of traps)
-      this._getRecipientGroupFor(affects).addTrap(
+    for (var { position, properties: { owner } } of traps)
+      this._getRecipientGroupFor(owner).placeTrap(
         position.x, position.y);
   }
 
   _makePlatforms (platforms) {
-    for (var { position, affects, type } of platforms)
-      this._getRecipientGroupFor(affects).addPlatform(
+    for (var { position, properties: { owner, type } } of platforms)
+      this._getRecipientGroupFor(owner).placePlatform(
         position.x, position.y, type);
   }
 
-  _makeRetractables (retractables) {
-    for (var key of Object.keys(retractables))
-      this._makeRetractable(retractables[key]);
+  _makeGates (gates) {
+    for (const { position: { x, y }, properties: { owner } } of gates) {
+      this._getRecipientGroupFor(owner)
+        .placeGate(x, y);
+    }
   }
 
-  _makeRetractable ({ retractable, button }) {
-    this._getRecipientGroupFor(retractable.affects).addRetractable(
-      { retractable, button });
+  _makeButtons (buttons) {
+    for (const { position: { x, y }, properties: { owner, orientation } } of buttons) {
+      this._getRecipientGroupFor(owner)
+        .placeButton(x, y, orientation);
+    }
   }
 
-  _getRecipientGroupFor (roleName) {
-    return this._layers[roleName];
+  _getRecipientGroupFor (owner) {
+    return this._layers[owner];
   }
 
   _resetLayer (objectsLayer) {

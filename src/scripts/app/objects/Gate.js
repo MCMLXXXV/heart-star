@@ -1,4 +1,4 @@
-class Retractable extends Phaser.Sprite {
+class Gate extends Phaser.Sprite {
 
   constructor (game, role) {
     super(game, 0, 0, 'sprites');
@@ -41,7 +41,7 @@ class Retractable extends Phaser.Sprite {
 
   _setupAnimations (role) {
     const frames = (i, j = i) =>
-      Phaser.Animation.generateFrameNames(`retractable-${role}-`, i, j, '', 1);
+      Phaser.Animation.generateFrameNames(`gate-${role}-`, i, j, '', 1);
 
     this.animations.add('close', frames(1),     0, false);
     this.animations.add('open',  frames(1, 5), 10, false)
@@ -59,4 +59,4 @@ class Retractable extends Phaser.Sprite {
 }
 
 
-export default Retractable;
+export default Gate;
