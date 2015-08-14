@@ -34,7 +34,8 @@ module.exports = function (gulp, $, config) {
     return gulp.src(viewsGlobs.templates)
       .pipe($.hb({
         data: viewsGlobs.data,
-        partials: viewsGlobs.partials
+        partials: viewsGlobs.partials,
+        bustCache: true
       }))
       .pipe($.rename({ extname: '.html' }))
       .pipe(gulp.dest(dirs.build))
@@ -104,7 +105,12 @@ module.exports = function (gulp, $, config) {
       .on('change', forget('scripts'));
 
     gulp.watch(globs.styles, [ 'dev:build:styles' ]);
-    gulp.watch(globs.views.templates, [  'dev:build:views' ]);
+
+    gulp.watch([
+      globs.views.templates,
+      globs.views.data
+    ], [  'dev:build:views' ]);
+
     gulp.watch('bower.json', [ 'dev:build:bundle' ]);
   });
 
