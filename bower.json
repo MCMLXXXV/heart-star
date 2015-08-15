@@ -1,8 +1,6 @@
 {
   "name": "heart-star",
   "dependencies": {
-    "almond": "^0.3.0",
-    "localforage": "^1.2.0",
     "phaser": "~2.4.0"
   },
   "overrides": {

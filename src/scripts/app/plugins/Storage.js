@@ -5,7 +5,6 @@
  */
 
 
-import Phaser      from 'Phaser';
 import localforage from 'localforage';
 
 
