@@ -11,11 +11,10 @@ module.exports = function (gulp, $, config) {
   // Is in development mode?
   var isWatching = false;
 
-  var buffer = require('vinyl-buffer');
-  var source = require('vinyl-source-stream');
-
-  var browserSync    = require('browser-sync').create();
-  var autoprefixer   = require('autoprefixer-core');
+  var buffer       = require('vinyl-buffer');
+  var source       = require('vinyl-source-stream');
+  var browserSync  = require('browser-sync').create();
+  var autoprefixer = require('autoprefixer-core');
 
   var handleErrors = $.notify.onError({ message: '<%= error.message %>' });
 
@@ -53,7 +52,7 @@ module.exports = function (gulp, $, config) {
       .pipe(browserSync.stream({ match: '**/*.css' }));
   });
 
-  // Compile script files as AMD, bundle them as a single file.
+  // Bundle the application source code using Browserify.
   gulp.task('dev:build:scripts', [ 'dev:lint' ], function () {
     return bundler(isWatching)
       .bundle()
@@ -66,7 +65,7 @@ module.exports = function (gulp, $, config) {
       .pipe(browserSync.stream());
   });
 
-  // Concatenates Bower script libraries in a single file.
+  // Copy the chosen Phaser build for development.
   gulp.task('dev:copy-phaser', function () {
     return gulp.src(config.phaser)
       .pipe($.rename('phaser.js'))
