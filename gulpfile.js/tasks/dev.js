@@ -16,7 +16,6 @@ module.exports = function (gulp, $, config) {
 
   var browserSync    = require('browser-sync').create();
   var autoprefixer   = require('autoprefixer-core');
-  var mainBowerFiles = require('main-bower-files');
 
   var handleErrors = $.notify.onError({ message: '<%= error.message %>' });
 
@@ -68,14 +67,10 @@ module.exports = function (gulp, $, config) {
   });
 
   // Concatenates Bower script libraries in a single file.
-  gulp.task('dev:build:bundle', function () {
-    return gulp.src(mainBowerFiles())
-      .pipe($.filter('**/*.js'))
-      .pipe($.sourcemaps.init({ loadMaps: true }))
-      .pipe($.concat('bundle.js'))
-      .pipe($.sourcemaps.write('.'))
-      .pipe(gulp.dest(dirs.build))
-      .pipe(browserSync.stream());
+  gulp.task('dev:copy-phaser', function () {
+    return gulp.src(config.phaser)
+      .pipe($.rename('phaser.js'))
+      .pipe(gulp.dest(dirs.build));
   });
 
   // Instantiate a live web development server for cross-browser, cross-device
@@ -102,8 +97,6 @@ module.exports = function (gulp, $, config) {
     gulp.watch([
       globs.views.templates, globs.views.data
     ], [ 'dev:build:views' ]);
-
-    gulp.watch('bower.json', [ 'dev:build:bundle' ]);
   });
 
   // Pass through modified script files and issue warnings about
@@ -118,13 +111,13 @@ module.exports = function (gulp, $, config) {
   // The overall build task.
   gulp.task('dev:build', [
     'dev:build:views',
-    'dev:build:bundle',
     'dev:build:styles',
     'dev:build:scripts'
   ]);
 
   // The main development task.
   gulp.task('dev', [
+    'dev:copy-phaser',
     'dev:server',
     'dev:watch'
   ]);

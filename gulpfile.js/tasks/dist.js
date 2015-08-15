@@ -37,10 +37,10 @@ module.exports = function (gulp, $, config) {
   // Bundle all scripts together for distribution.
   gulp.task(
     'dist:scripts',
-    [ 'dev:build:bundle', 'dev:build:scripts' ],
+    [ 'dev:copy-phaser', 'dev:build:scripts' ],
     function () {
       return gulp.src([
-        dirs.build + '/bundle.js',
+        dirs.build + '/phaser.js',
         dirs.build + '/game.js'
       ])
         .pipe($.sourcemaps.init({ loadMaps: true }))
