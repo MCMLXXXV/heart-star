@@ -10,8 +10,9 @@ module.exports = function (gulp, $, config) {
 
   var browserSync    = require('browser-sync').create();
   var autoprefixer   = require('autoprefixer-core');
-  var handleErrors   = require('../lib/handleErrors');
   var mainBowerFiles = require('main-bower-files');
+
+  var handleErrors = $.notify.onError({ message: '<%= error.message %>' });
 
   var dirs  = config.dirs;
   var globs = config.globs;
