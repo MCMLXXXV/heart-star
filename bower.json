@@ -1,7 +1,6 @@
 {
   "name": "heart-star",
   "dependencies": {
-    "localforage": "^1.2.0",
     "phaser": "~2.4.0"
   },
   "overrides": {

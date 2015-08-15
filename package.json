@@ -3,6 +3,9 @@
   "version": "0.0.1",
   "private": true,
   "description": "A port of the game originally created by Jussi Simpanen for Ludum Dare 30, Theme: \"Connected Worlds\".",
+  "dependencies": {
+    "localforage": "^1.2.0"
+  },
   "devDependencies": {
     "autoprefixer-core": "^5.0.0",
     "babelify": "^6.1.3",
