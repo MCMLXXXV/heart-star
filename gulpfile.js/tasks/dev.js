@@ -21,7 +21,7 @@ module.exports = function (gulp, $, config) {
   var dirs  = config.dirs;
   var globs = config.globs;
 
-  var bundler = require('./helpers/bundler')(config.bundle);
+  var bundler = require('./helpers/bundler');
 
   // Compile template views into HTML files.
   gulp.task('dev:build:views', function () {
@@ -54,7 +54,7 @@ module.exports = function (gulp, $, config) {
 
   // Bundle the application source code using Browserify.
   gulp.task('dev:build:scripts', [ 'dev:lint' ], function () {
-    return bundler(isWatching)
+    return bundler(config.bundle, isWatching)
       .bundle()
       .on('error', handleErrors)
       .pipe(source('game.js'))

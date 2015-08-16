@@ -28,20 +28,11 @@ var bundler = null;
 
 
 // Get the current bundler instance.
-function getBundler (config, withWatchify) {
+module.exports = function (config, withWatchify) {
   if (!bundler) {
     // Initialize the bundler for the first time.
     bundler = createBundler(config, withWatchify);
   }
 
   return bundler;
-}
-
-
-module.exports = function (config) {
-
-  return function (withWatchify) {
-    return getBundler(config, withWatchify);
-  };
-
 };
