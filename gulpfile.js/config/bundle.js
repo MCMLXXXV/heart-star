@@ -10,6 +10,6 @@ module.exports = {
 
   debug: true,
   standalone: 'app',
-  entries: [ 'src/scripts/index' ]
+  entries: [ 'src/scripts/app' ]
 
 };

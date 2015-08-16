@@ -1,3 +1,4 @@
 {
-  "nonStandard": false
+  "nonStandard": false,
+  "optional": [ "runtime" ]
 }
