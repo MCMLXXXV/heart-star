@@ -5,48 +5,38 @@ import graphics from './atlases/graphics';
 export default {
 
   // - Game Boot Assets -------------------------------------------------------
-
-  'boot': [
-
+  boot: [
     {
-      'type': 'image',
-      'key': 'splash-screen',
-      'url': 'splash-screen.png'
+      type: 'image',
+      key: 'splash-screen',
+      url: 'splash-screen.png'
     }
-
   ],
 
   // - Graphics section -------------------------------------------------------
-
-  'graphics': [
-
+  graphics: [
     {
-      'type': 'atlasJSONHash',
-      'key': 'graphics',
-      'textureURL': 'graphics.png',
-      'atlasData': graphics
+      type: 'atlasJSONHash',
+      key: 'graphics',
+      textureURL: 'graphics.png',
+      atlasData: graphics
     },
-
     {
-      'type': 'atlasJSONHash',
-      'key': 'sprites',
-      'textureURL': 'sprites.png',
-      'atlasData': sprites
+      type: 'atlasJSONHash',
+      key: 'sprites',
+      textureURL: 'sprites.png',
+      atlasData: sprites
     },
-
     {
-      'type': 'image',
-      'key': 'tileset',
-      'url': 'tileset.png',
+      type: 'image',
+      key: 'tileset',
+      url: 'tileset.png',
     },
-
     {
-      'type': 'tilemap',
-      'key': 'tilemaps',
-      'url': 'tilemaps.json',
-      'format': 'TILED_JSON'
+      type: 'tilemap',
+      key: 'tilemaps',
+      url: 'tilemaps.json',
+      format: 'TILED_JSON'
     }
-
   ]
-
 };

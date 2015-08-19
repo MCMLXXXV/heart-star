@@ -1,7 +1,7 @@
 export default class Logo extends Phaser.State {
 
   create () {
-    let logo = this.add.image(120, 80, 'graphics', 'logo-ai');
+    const logo = this.add.image(120, 80, 'graphics', 'logo-ai');
     logo.anchor.set(0.5);
     logo.alpha = 0;
 

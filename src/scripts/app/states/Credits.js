@@ -17,8 +17,8 @@ export default class Credits extends Phaser.State {
   }
 
   create () {
-    let { screen }            = this;
-    let { background, links } = credits[screen];
+    const { screen }            = this;
+    const { background, links } = credits[screen];
 
     this._addBackground(background);
     this._addLinkButtons(links);
