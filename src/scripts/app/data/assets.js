@@ -8,8 +8,7 @@ export default {
   boot: [
     {
       type: 'image',
-      key: 'splash-screen',
-      url: 'splash-screen.png'
+      key: 'splash-screen'
     }
   ],
 
@@ -18,24 +17,20 @@ export default {
     {
       type: 'atlasJSONHash',
       key: 'graphics',
-      textureURL: 'graphics.png',
       atlasData: graphics
     },
     {
       type: 'atlasJSONHash',
       key: 'sprites',
-      textureURL: 'sprites.png',
       atlasData: sprites
     },
     {
       type: 'image',
-      key: 'tileset',
-      url: 'tileset.png',
+      key: 'tileset'
     },
     {
       type: 'tilemap',
       key: 'tilemaps',
-      url: 'tilemaps.json',
       format: 'TILED_JSON'
     }
   ]
