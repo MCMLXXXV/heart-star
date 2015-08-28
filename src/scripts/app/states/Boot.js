@@ -8,7 +8,7 @@ import Transitions from '../plugins/Transitions';
 export default class Boot extends Phaser.State {
 
   init () {
-    this.load.baseURL = './assets/';
+    this.load.path = 'assets/';
 
     this.game.storage     = this.game.plugins.add(Storage, 'heart-star');
     this.game.controls    = this.game.plugins.add(GameControl);
