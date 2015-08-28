@@ -13,8 +13,6 @@ export default class Boot extends Phaser.State {
     this.game.storage     = this.game.plugins.add(Storage, 'heart-star');
     this.game.controls    = this.game.plugins.add(GameControl);
     this.game.transitions = this.game.plugins.add(Transitions);
-
-    this.physics.startSystem(Phaser.Physics.ARCADE);
   }
 
   preload () {
