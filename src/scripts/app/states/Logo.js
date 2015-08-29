@@ -7,19 +7,18 @@ export default class Logo extends Phaser.State {
 
     const changeLogo = () => logo.frameName = 'logo-rb';
     const goToTitle  = () => this.state.start('Title', true, false, 'iris');
-    const makeTween  = (callback) => {
-      let tween = this.add.tween(logo)
-        .to({ alpha: 1 }, 1000, 'Sine.easeOut', false, 1500)
-        .to({ alpha: 0 }, 1000, 'Sine.easeOut', false, 1500);
 
-      tween.onComplete.addOnce(callback);
+    const tween      = (o, ...e) => e.reduce((t, f) => (f(t), t), this.add.tween(o));
+    const chain      = (t, ...ts) => (t.chain(...ts), t);
+    const onComplete = (t, f) => (t.onComplete.addOnce(f), t);
 
-      return tween;
-    };
+    const fade   = (t) => t.to({ alpha: 0 }, 1000, 'Sine.easeOut', false, 1500);
+    const reveal = (t) => t.to({ alpha: 1 }, 1000, 'Sine.easeOut', false, 1500);
 
-    makeTween(changeLogo)
-      .chain(makeTween(goToTitle))
-      .start();
+    chain(
+      onComplete(tween(logo, reveal, fade), changeLogo),
+      onComplete(tween(logo, reveal, fade), goToTitle)
+    ).start();
   }
 
 }
