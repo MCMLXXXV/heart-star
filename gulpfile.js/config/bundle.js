@@ -6,11 +6,13 @@
 'use strict';
 
 
+var dirs = require('./dirs');
+
 module.exports = {
 
   debug: true,
   standalone: 'app',
-  entries: [ 'src/scripts/index' ],
+  entries: [ dirs.scripts + '/index.js' ],
   transform: [ 'babelify' ]
 
 };

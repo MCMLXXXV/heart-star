@@ -14,9 +14,7 @@ module.exports = {
   build: 'build',
 
   // Where this project source code lives.
-  views: 'src/views',
-  styles: 'src/styles',
-  scripts: 'src/scripts',
+  scripts: 'src',
 
   // Where static assets (textures, fonts, sprites, sounds etc.) are stored.
   static: 'static',
@@ -24,5 +22,11 @@ module.exports = {
   // Paths required by `slush-phaser-plus` sub-generators.
   get states  () { return this.scripts + '/app/states'; },
   get objects () { return this.scripts + '/app/objects'; },
-  get plugins () { return this.scripts + '/app/plugins'; }
+  get plugins () { return this.scripts + '/app/plugins'; },
+
+  // Game assets directory.
+  get assets  () { return this.static + '/assets'; },
+
+  // Texture Atlas output directory.
+  get atlases () { return this.scripts + '/app/data/atlases'; }
 };

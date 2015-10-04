@@ -1,8 +1,8 @@
 [Heart Star][demo]
 ==================
 
->   A port of the game originally created by [Jussi Simpanen][advi] for [Ludum
->   Dare 30][ld-g], Theme: "Connected Worlds".
+>   A port of the game created by [Jussi Simpanen][advi] for [Ludum Dare 30
+>   "Connected Worlds"][ld-g].
 
 ![Screenshots](screenshots.png)
 
@@ -17,20 +17,6 @@ Story
 >   interact by serving as a platform or carrying each other.
 
 
-Project Motivation and Objective
---------------------------------
-
-'Heart Star' is a Flash game, designed and created using the game authoring
-software Stencyl.
-
-For educational purposes, I took the opportunity and wrote this HTML/JavaScript
-port, using [Phaser][phsr].
-
-This port is a remake of the Ludum Dare version, aiming to be accurate as the
-original game as possible. None of the subsequent updates of the original game
-are planned to be ported, though.
-
-
 Game Controls
 -------------
 
@@ -38,7 +24,7 @@ Game Controls
 *   Use the space bar (`␣`) to switch between worlds and control a different
     character.
 *   Use the back space key to restart a level wherever you need.
-*   Use the escape key (`esc`) to quit the a game level.
+*   Use the escape key (`esc`) to quit the game level.
 
 
 Development Instructions
@@ -56,35 +42,48 @@ npm run clean # Wipes temporary and distribution files.
 ```
 
 
+About this Project
+------------------
+
+'Heart Star' was originally designed as a Flash game, created using the game
+authoring software [Stencyl][stcl]. For learning purposes, I developed this web
+application port using [Phaser][phsr].
+
+This port is a remake of the [published Ludum Dare version][ld-g], aiming to be
+as accurate like the original game as possible.
+
+
 ### Features ##################################################################
 
-*   Game ported with [Phaser][phsr] framework.
+*   Game ported with [Phaser][phsr] game framework.
 
-*   Game levels and some background images composed using [Tiled Map
-    Editor][tild].
+*   Game levels composed using [Tiled Map Editor][tild].
 
 *   Graphics converted into Texture Atlases using [`gulp.spritesmith`][gsps].
+    Either [GraphicsMagick][gm..] or [ImageMagick][imgk] is required to use
+    this feature.
 
 *   Uses [localForage][lfor] for game data storage management.
 
 *   All game code written in JavaScript (ECMAScript 2015), compiled with
-    [Babel][babl] for compatibility with today browsers.
+    [Babel][babl] for compatibility with today browsers. Game code bundled with
+    [Browserify][brsy].
 
-*   [BrowserSync][bsnc] as development server.
+*   [BrowserSync][bsnc] integrated as development server.
 
-*   [Gulp][gulp] task manager.
+*   Uses [Gulp][gulp] for development task management.
 
-*   Development environment compatible with [Node][node].
+*   Developed with [Node.js][node].
 
 
 Licensing
 ---------
 
-Source code distributed under the terms of the [MIT License](LICENSE).
+Source code under the [MIT License](LICENSE).
 
-Original game project by Jussi Simpanen, shared under a [Creative Commons 3.0
-Atribution—Non-Commercial—Share-Alike Unported][cc-l] license. All remixed
-artwork used in this version of the game is redistributed under the [same
+Original game project, including code and game assets, created by Jussi
+Simpanen, shared under a [Creative Commons Attribution-NonCommercial-ShareAlike
+3.0 Unported][cc-l] license. All remixed artwork shared under the [same
 license][cc-l].
 
 
@@ -94,8 +93,12 @@ license][cc-l].
 [babl]: https://babeljs.io/
 [gulp]: https://gulpjs.com/
 [node]: https://nodejs.org/
+[brsy]: http://browserify.org/
 [bsnc]: http://browsersync.io/
+[stcl]: http://www.stencyl.com/
 [tild]: http://www.mapeditor.org/
+[imgk]: http://www.imagemagick.org/
+[gm..]: http://www.graphicsmagick.org/
 [advi]: http://simpanen.carbonmade.com/
 [demo]: https://rblopes.github.io/heart-star/
 [lfor]: https://mozilla.github.io/localForage/

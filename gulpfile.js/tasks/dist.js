@@ -15,29 +15,14 @@ module.exports = function (gulp, $, config) {
   var options = config.pluginOptions;
 
   // Wipes `build` and `dist` directories before any task.
-  gulp.task('dist:clean', function (done) {
-    del([ dirs.build, dirs.dist ], done);
-  });
-
-  // Process any markup files for distribution.
-  gulp.task('dist:views', [ 'dev:build:views' ], function () {
-    return gulp.src(dirs.build + '/*.html')
-      .pipe($.processhtml())
-      .pipe(gulp.dest(dirs.dist));
-  });
-
-  // Copy and minify all style sheet files.
-  gulp.task('dist:styles', [ 'dev:build:styles' ], function () {
-    return gulp.src(dirs.build + '/*.css')
-      .pipe($.minifyCss(options['dist:styles']))
-      .pipe($.rename({ extname: '.min.css' }))
-      .pipe(gulp.dest(dirs.dist));
+  gulp.task('dist:clean', function () {
+    return del([ dirs.build, dirs.dist ]);
   });
 
   // Bundle all scripts together for distribution.
   gulp.task(
     'dist:scripts',
-    [ 'dev:copy-phaser', 'dev:build:scripts' ],
+    [ 'dev:copy-phaser', 'dev:scripts' ],
     function () {
       return gulp.src([
         dirs.build + '/phaser.js',
@@ -53,25 +38,20 @@ module.exports = function (gulp, $, config) {
 
   // Copy all dependent application assets into the final build directory.
   gulp.task('dist:assets', function () {
-    return gulp.src(globs.assets)
-      .pipe(gulp.dest(dirs.dist));
-  });
+    var filterHTML = $.filter('*.html', { restore: true });
 
-  // Generate the off-line application cache.
-  gulp.task('dist:appcache', function () {
     return gulp.src(globs.assets)
-      .pipe($.manifest(options['dist:appcache']))
+      .pipe(filterHTML)
+      .pipe($.processhtml())
+      .pipe(filterHTML.restore)
       .pipe(gulp.dest(dirs.dist));
   });
 
   // The main distribution task.
   gulp.task('dist', [ 'dist:clean' ], function (done) {
     gulp.start([
-      'dist:views',
       'dist:assets',
-      'dist:styles',
-      'dist:scripts',
-      'dist:appcache'
+      'dist:scripts'
     ], done);
   });
 

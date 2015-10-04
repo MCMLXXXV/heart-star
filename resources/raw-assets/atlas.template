@@ -1,0 +1,10 @@
+export default {
+  frames: [
+  {{#items}}
+    {
+      filename: '{{{name}}}',
+      frame: { x: {{x}}, y: {{y}}, w: {{width}}, h: {{height}} }
+    },
+  {{/items}}
+  ]
+};
