@@ -1,8 +1,5 @@
 {
-  "name": "heart-star",
-  "version": "0.0.1",
   "private": true,
-  "description": "A port of the game originally created by Jussi Simpanen for Ludum Dare 30, Theme: \"Connected Worlds\".",
   "dependencies": {
     "localforage": "^1.2.0",
     "phaser": "^2.4.2"
@@ -42,11 +39,6 @@
     "dist": "gulp dist",
     "clean": "gulp dist:clean",
     "start": "gulp default"
-  },
-  "browserify": {
-    "transform": [
-      "babelify"
-    ]
   },
   "license": "MIT"
 }
