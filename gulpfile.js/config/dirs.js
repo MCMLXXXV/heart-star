@@ -14,7 +14,6 @@ module.exports = {
   build: 'build',
 
   // Where this project source code lives.
-  views: 'src/views',
   scripts: 'src/scripts',
 
   // Where static assets (textures, fonts, sprites, sounds etc.) are stored.

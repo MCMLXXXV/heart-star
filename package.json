@@ -14,7 +14,6 @@
     "gulp-concat": "^2.5.0",
     "gulp-eslint": "^1.0.0",
     "gulp-filter": "^3.0.0",
-    "gulp-hb": "^2.6.0",
     "gulp-load-plugins": "^0.10.0",
     "gulp-notify": "^2.2.0",
     "gulp-processhtml": "^1.1.0",
