@@ -2,13 +2,11 @@
 *.log
 Thumbs.db
 
-dist
-build
-node_modules
-bower_components
+dist/
+build/
+node_modules/
 
 !.git*
 !.babelrc
-!.bowerrc
 !.eslintrc
 !.editorconfig
