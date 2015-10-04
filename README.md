@@ -1,14 +1,14 @@
 [Heart Star][demo]
-===============================================================================
+==================
 
 >   A port of the game originally created by [Jussi Simpanen][advi] for [Ludum
 >   Dare 30][ld-g], Theme: "Connected Worlds".
 
-![Screenshots](https://raw.githubusercontent.com/rblopes/heart-star/master/screenshots.png)
+![Screenshots](screenshots.png)
 
 
 Story
--------------------------------------------------------------------------------
+-----
 
 >   Two friends want to reach the same place together but they have a little
 >   problem: They live in completely different worlds! Help the friends reach
@@ -18,7 +18,7 @@ Story
 
 
 Project Motivation and Objective
--------------------------------------------------------------------------------
+--------------------------------
 
 'Heart Star' is a Flash game, designed and created using the game authoring
 software Stencyl.
@@ -30,33 +30,30 @@ This port is a remake of the Ludum Dare version, aiming to be accurate as the
 original game as possible. None of the subsequent updates of the original game
 are planned to be ported, though.
 
-WIP: [Play a preview of the game.][demo] See below for planned updates.
-
 
 Game Controls
--------------------------------------------------------------------------------
+-------------
 
-Use arrow keys no move and jump the platforms. To switch worlds, hit
-'SPACEBAR'. Use 'BACKSPACE' to restart the level. Use 'ESC' to quit and return
-to the stage selection screen.
+*   Use the arrow keys (`↑`, `←` and `→`) to move and jump.
+*   Use the space bar (`␣`) to switch between worlds and control a different
+    character.
+*   Use the back space key to restart a level wherever you need.
+*   Use the escape key (`esc`) to quit the a game level.
 
 
 Development Instructions
--------------------------------------------------------------------------------
+------------------------
 
-Download and extract the [packaged project][dwld] contents, or clone this
-repository locally. Either way, the following npm scripts are available to you,
-performing the tasks described below.
+Download and extract the [packaged project][dwld], or clone this repository
+locally. The following npm scripts are available to you, performing the tasks
+described.
 
-```sh
-npm install   # Installs all required project dependencies.
-npm start     # Launches the development server.
-npm run dist  # Prepare the game release for distribution.
-npm run clean # Wipes the project from temporary and distribution build files.
 ```
-
-Then, a tab on your favorite browser should open, pointed to
-`http://localhost:3000/`. Happy coding!
+npm install   # Installs all required project dependencies.
+npm start     # Launches the server and opens the page for live development.
+npm run dist  # Prepare the game release for distribution.
+npm run clean # Wipes temporary and distribution files.
+```
 
 
 ### Features ##################################################################
@@ -68,31 +65,22 @@ Then, a tab on your favorite browser should open, pointed to
 
 *   Graphics converted into Texture Atlases using [`gulp.spritesmith`][gsps].
 
-*   [localForage][lfor], responsible for in-game data storage management—mainly
-    the unlockable levels!
+*   Uses [localForage][lfor] for game data storage management.
 
-*   All game code written in the upcoming ECMAScript 2015 JavaScript dialect.
-    Source-to-source compiler [Babel][babl] is used to make it compatible with
-    today's browsers.
+*   All game code written in JavaScript (ECMAScript 2015), compiled with
+    [Babel][babl] for compatibility with today browsers.
 
 *   [BrowserSync][bsnc] as development server.
 
 *   [Gulp][gulp] task manager.
 
-*   Development environment compatible with [Node][node] and [io.js][iojs].
-
-
-Planned Updates and Improvements
--------------------------------------------------------------------------------
-
-*   Fix friends hopping and carrying behavior.
-*   Code clean up.
+*   Development environment compatible with [Node][node].
 
 
 Licensing
--------------------------------------------------------------------------------
+---------
 
-Source code distributed under the terms of the [MIT License][mitl].
+Source code distributed under the terms of the [MIT License](LICENSE).
 
 Original game project by Jussi Simpanen, shared under a [Creative Commons 3.0
 Atribution—Non-Commercial—Share-Alike Unported][cc-l] license. All remixed
@@ -102,9 +90,7 @@ license][cc-l].
 
 <!-- ---------------------------------------------------------------------- -->
 
-[iojs]: https://iojs.org/
 [phsr]: https://phaser.io/
-[gscm]: http://git-scm.com/
 [babl]: https://babeljs.io/
 [gulp]: https://gulpjs.com/
 [node]: https://nodejs.org/
@@ -115,6 +101,5 @@ license][cc-l].
 [lfor]: https://mozilla.github.io/localForage/
 [gsps]: https://github.com/twolfson/gulp.spritesmith
 [cc-l]: https://creativecommons.org/licenses/by-nc-sa/3.0/
-[dwld]: https://github.com/rblopes/heart-star/archive/dev.zip
-[mitl]: https://github.com/rblopes/heart-star/blob/master/LICENSE
+[dwld]: https://github.com/rblopes/heart-star/archive/master.zip
 [ld-g]: http://ludumdare.com/compo/ludum-dare-30/?action=preview&uid=11391
