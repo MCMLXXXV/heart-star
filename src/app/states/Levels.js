@@ -1,11 +1,10 @@
 import levels from '../data/levels';
 
+import scrollingPattern from '../components/scrollingPattern';
 import {
   menuButton,
   levelButton
 } from '../components/uiButtons';
-
-import BackgroundPattern from '../objects/BackgroundPattern';
 
 
 export default class Levels extends Phaser.State {
@@ -17,7 +16,7 @@ export default class Levels extends Phaser.State {
   create () {
     const addBackButton = () => this.add.button(0, 0, 'graphics');
 
-    this.add.existing(new BackgroundPattern(this.game));
+    scrollingPattern(this.game);
     this.add.image(0, 0, 'graphics', 'background-level-select');
     this.add.image(0, 32, 'graphics', 'level-select');
     menuButton(addBackButton(), 'back', 'Title', 'blackout');

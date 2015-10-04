@@ -1,11 +1,10 @@
 import credits from '../data/credits';
 
+import scrollingPattern from '../components/scrollingPattern';
 import {
   menuButton,
   linkButton
 } from '../components/uiButtons';
-
-import BackgroundPattern from '../objects/BackgroundPattern';
 
 const DEFAULT_SCREEN = 'adventure-islands';
 
@@ -30,7 +29,7 @@ export default class Credits extends Phaser.State {
   // --------------------------------------------------------------------------
 
   _addBackground ({ pattern, layer, label }) {
-    this.add.existing(new BackgroundPattern(this.game, pattern));
+    scrollingPattern(this.game, pattern);
     this.add.image(0, 0, 'graphics', layer);
     this.add.image(0, 0, 'graphics', label);
   }

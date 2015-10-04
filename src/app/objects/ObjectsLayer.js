@@ -1,8 +1,9 @@
+import scrollingPattern from '../components/scrollingPattern';
+
 import Gate              from '../objects/Gate';
 import Trap              from '../objects/Trap';
 import Button            from '../objects/Button';
 import Platform          from '../objects/Platform';
-import BackgroundPattern from '../objects/BackgroundPattern';
 
 
 class ObjectsLayer extends Phaser.Group {
@@ -59,7 +60,7 @@ class ObjectsLayer extends Phaser.Group {
   }
 
   enableBackground () {
-    this.addAt(new BackgroundPattern(this.game, this.preferedBackground), 0);
+    this.addAt(scrollingPattern(this.game, this.preferedBackground), 0);
   }
 
   collide (actor) {
@@ -120,9 +121,8 @@ class ObjectsLayer extends Phaser.Group {
 
   get preferedBackground () {
     switch (this._owner) {
-      case 'heart': return BackgroundPattern.HEART;
-      case 'star':  return BackgroundPattern.STAR;
-      case 'both':  return BackgroundPattern.HEART_STAR;
+      case 'heart': return scrollingPattern.HEART;
+      case 'star':  return scrollingPattern.STAR;
     }
   }
 

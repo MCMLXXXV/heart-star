@@ -1,6 +1,5 @@
+import scrollingPattern from '../components/scrollingPattern';
 import { menuButton } from '../components/uiButtons';
-
-import BackgroundPattern from '../objects/BackgroundPattern';
 
 
 export default class Title extends Phaser.State {
@@ -11,7 +10,7 @@ export default class Title extends Phaser.State {
   }
 
   create () {
-    this.add.existing(new BackgroundPattern(this.game));
+    scrollingPattern(this.game);
     this.add.image(0, 0, 'graphics', 'background-title');
     this.add.image(this.world.width, 0, 'graphics', 'version')
       .anchor.set(1, 0);
