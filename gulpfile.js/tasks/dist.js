@@ -15,8 +15,8 @@ module.exports = function (gulp, $, config) {
   var options = config.pluginOptions;
 
   // Wipes `build` and `dist` directories before any task.
-  gulp.task('dist:clean', function (done) {
-    del([ dirs.build, dirs.dist ], done);
+  gulp.task('dist:clean', function () {
+    return del([ dirs.build, dirs.dist ]);
   });
 
   // Bundle all scripts together for distribution.
