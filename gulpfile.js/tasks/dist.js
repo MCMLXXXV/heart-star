@@ -26,14 +26,6 @@ module.exports = function (gulp, $, config) {
       .pipe(gulp.dest(dirs.dist));
   });
 
-  // Copy and minify all style sheet files.
-  gulp.task('dist:styles', [ 'dev:build:styles' ], function () {
-    return gulp.src(dirs.build + '/*.css')
-      .pipe($.minifyCss(options['dist:styles']))
-      .pipe($.rename({ extname: '.min.css' }))
-      .pipe(gulp.dest(dirs.dist));
-  });
-
   // Bundle all scripts together for distribution.
   gulp.task(
     'dist:scripts',
@@ -62,7 +54,6 @@ module.exports = function (gulp, $, config) {
     gulp.start([
       'dist:views',
       'dist:assets',
-      'dist:styles',
       'dist:scripts'
     ], done);
   });

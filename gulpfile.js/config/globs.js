@@ -25,9 +25,6 @@ module.exports = {
     get templates () { return dirs.views + '/templates/*.hbs'; }
   },
 
-  // LESS scripts become compatible cross-browser style sheets.
-  get styles () { return dirs.styles  + '/*.less'; },
-
   // Finds this project static assets to be copied for distribution.
   get assets () { return dirs.static  + '/**'; },
 

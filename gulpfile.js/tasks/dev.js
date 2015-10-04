@@ -11,10 +11,9 @@ module.exports = function (gulp, $, config) {
   // Is in development mode?
   var isWatching = false;
 
-  var buffer       = require('vinyl-buffer');
-  var source       = require('vinyl-source-stream');
-  var browserSync  = require('browser-sync').create();
-  var autoprefixer = require('autoprefixer-core');
+  var buffer      = require('vinyl-buffer');
+  var source      = require('vinyl-source-stream');
+  var browserSync = require('browser-sync').create();
 
   var handleErrors = $.notify.onError({ message: '<%= error.message %>' });
 
@@ -36,20 +35,6 @@ module.exports = function (gulp, $, config) {
       .pipe($.rename({ extname: '.html' }))
       .pipe(gulp.dest(dirs.build))
       .pipe(browserSync.stream());
-  });
-
-  // Compile style sheet templates, prefix proposed and non-standard rules.
-  gulp.task('dev:build:styles', function () {
-    return gulp.src(globs.styles)
-      .pipe($.sourcemaps.init())
-      .pipe($.less())
-      .on('error', handleErrors)
-      .pipe($.postcss([
-        autoprefixer()
-      ]))
-      .pipe($.sourcemaps.write('.'))
-      .pipe(gulp.dest(dirs.build))
-      .pipe(browserSync.stream({ match: '**/*.css' }));
   });
 
   // Bundle the application source code using Browserify.
@@ -92,7 +77,6 @@ module.exports = function (gulp, $, config) {
     isWatching = true;
 
     gulp.watch(globs.scripts, [ 'dev:build:scripts' ]);
-    gulp.watch(globs.styles,  [  'dev:build:styles' ]);
     gulp.watch([
       globs.views.templates, globs.views.data
     ], [ 'dev:build:views' ]);
@@ -110,7 +94,6 @@ module.exports = function (gulp, $, config) {
   // The overall build task.
   gulp.task('dev:build', [
     'dev:build:views',
-    'dev:build:styles',
     'dev:build:scripts'
   ]);
 

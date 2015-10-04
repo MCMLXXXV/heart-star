@@ -13,9 +13,13 @@
     <title>{{ meta.title }}</title>
     <meta name="description" content="{{ meta.description }}">
 
-    <!-- build:css styles.min.css -->
-    <link rel="stylesheet" href="styles.css">
-    <!-- /build -->
+    <style>
+      html { box-sizing: border-box; }
+      * { margin: 0; padding: 0; }
+      *, *:before, *:after { box-sizing: inherit; }
+      html, body { background: #000; overflow: hidden; -ms-touch-action: none; touch-action: none; }
+      canvas { touch-action-delay: none; -ms-touch-action: none; touch-action: none; -ms-interpolation-mode: nearest-neighbor; image-rendering: -webkit-optimize-contrast; image-rendering: -moz-crisp-edges; image-rendering: -o-pixelated; image-rendering: pixelated; }
+    </style>
   </head>
 
   <body>
