@@ -1,7 +1,5 @@
 import assets from '../data/assets';
 
-import SplashScreen from '../objects/SplashScreen';
-
 
 export default class Preload extends Phaser.State {
 
@@ -17,9 +15,11 @@ export default class Preload extends Phaser.State {
   // --------------------------------------------------------------------------
 
   _displaySplashScreen () {
-    let splashScreen = new SplashScreen(this.game);
-
-    this.load.setPreloadSprite(splashScreen.barFiller);
+    this.add.image(0, 0, 'splash-screen');
+    this.load.setPreloadSprite(
+      this.add.bitmapData(120, 10)
+        .fill(255, 184, 184)
+        .addToWorld(60, 130));
   }
 
 }
