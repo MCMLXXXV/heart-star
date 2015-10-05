@@ -1,4 +1,4 @@
-import levels from '../data/levels';
+import defaultLevels from '../data/levels';
 
 import scrollingPattern from '../components/scrollingPattern';
 import {
@@ -7,38 +7,40 @@ import {
 } from '../components/uiButtons';
 
 
-export default class Levels extends Phaser.State {
+function showLevelButtons (g, levels) {
+  const x = (n) => 48 + 32 * (n % 5);
+  const y = (n) => 64 + 32 * Math.floor(n / 5);
+  const button = (n) => g.add.button(x(n), y(n), 'graphics');
+
+  if (levels === null) {
+    // The game is being played for the first time,
+    // no unlocked levels yet.
+    levels = defaultLevels;
+  }
+
+  levels.forEach(
+    ({ name, locked }, n) => levelButton(button(n), name, locked));
+}
+
+
+export default {
 
   init () {
     this.game.transitions.reveal('blackout', 1000);
-  }
+  },
 
   create () {
-    const addBackButton = () => this.add.button(0, 0, 'graphics');
+    const image = (x, y, k) => this.add.image(x, y, 'graphics', k);
+    const button = (x, y) => this.add.button(x, y, 'graphics');
 
     scrollingPattern(this.game);
-    this.add.image(0, 0, 'graphics', 'background-level-select');
-    this.add.image(0, 32, 'graphics', 'level-select');
-    menuButton(addBackButton(), 'back', 'Title', 'blackout');
+    image(0,  0, 'background-level-select');
+    image(0, 32, 'level-select');
 
-    this.game.storage.getItem('levels', this._makeLevelButtons, this);
+    menuButton(button(0, 0), 'back', 'Title', 'blackout');
+
+    this.game.storage.getItem('levels')
+      .then((levels) => showLevelButtons(this.game, levels));
   }
 
-  // --------------------------------------------------------------------------
-
-  _makeLevelButtons (err, unlockedLevels) {
-    const x = (n) => 48 + 32 * (n % 5);
-    const y = (n) => 64 + 32 * Math.floor(n / 5);
-    const addButton = (x, y) => this.add.button(x, y, 'graphics');
-
-    if (unlockedLevels === null) {
-      // The game is being played for the first time,
-      // no unlocked levels yet.
-      unlockedLevels = levels;
-    }
-
-    unlockedLevels.forEach(({ name: level, locked }, i) =>
-      levelButton(addButton(x(i), y(i)), level, locked));
-  }
-
-}
+};

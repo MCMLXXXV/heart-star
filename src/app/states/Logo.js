@@ -1,4 +1,4 @@
-export default class Logo extends Phaser.State {
+export default {
 
   create () {
     const logo = this.add.image(120, 80, 'graphics', 'logo-ai');
@@ -21,4 +21,4 @@ export default class Logo extends Phaser.State {
     ).start();
   }
 
-}
+};

@@ -5,29 +5,9 @@ import GameControl from '../plugins/GameControl';
 import Transitions from '../plugins/Transitions';
 
 
-export default class Boot extends Phaser.State {
+export default {
 
   init () {
-    this.load.path = 'assets/';
-
-    this.game.storage     = this.game.plugins.add(Storage, 'heart-star');
-    this.game.controls    = this.game.plugins.add(GameControl);
-    this.game.transitions = this.game.plugins.add(Transitions);
-  }
-
-  preload () {
-    this.load.pack('boot', null, assets);
-  }
-
-  create () {
-    this._setupStage();
-
-    this.state.start('Preload');
-  }
-
-  // --------------------------------------------------------------------------
-
-  _setupStage () {
     this.input.maxPointers = 1;
 
     this.scale.pageAlignHorizontally   = true;
@@ -37,6 +17,20 @@ export default class Boot extends Phaser.State {
     this.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
 
     this.stage.smoothed = false;
+
+    this.load.path = 'assets/';
+
+    this.game.storage     = this.game.plugins.add(Storage, 'heart-star');
+    this.game.controls    = this.game.plugins.add(GameControl);
+    this.game.transitions = this.game.plugins.add(Transitions);
+  },
+
+  preload () {
+    this.load.pack('boot', null, assets);
+  },
+
+  create () {
+    this.state.start('Preload');
   }
 
-}
+};

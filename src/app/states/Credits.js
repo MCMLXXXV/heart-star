@@ -9,11 +9,11 @@ import {
 const DEFAULT_SCREEN = 'adventure-islands';
 
 
-export default class Credits extends Phaser.State {
+export default {
 
   init (screen = DEFAULT_SCREEN) {
     this.screen = screen;
-  }
+  },
 
   create () {
     const { screen }            = this;
@@ -24,7 +24,7 @@ export default class Credits extends Phaser.State {
     this._addMenuButtons(screen, (screen === DEFAULT_SCREEN));
 
     this.game.transitions.reveal('blackout', 1000);
-  }
+  },
 
   // --------------------------------------------------------------------------
 
@@ -32,7 +32,7 @@ export default class Credits extends Phaser.State {
     scrollingPattern(this.game, pattern);
     this.add.image(0, 0, 'graphics', layer);
     this.add.image(0, 0, 'graphics', label);
-  }
+  },
 
   _addLinkButtons (links) {
     const firstCol = 120 - (links.length - 1) * 16;
@@ -40,7 +40,7 @@ export default class Credits extends Phaser.State {
     const addButton = (i) => this.add.button(x(i), 47, 'graphics');
 
     links.forEach(({ page, url }, i) => linkButton(addButton(i), page, url));
-  }
+  },
 
   _addMenuButtons (screen, addMoreButton = false) {
     const addButton = (x, y) => this.add.button(x, y, 'graphics');
@@ -52,4 +52,4 @@ export default class Credits extends Phaser.State {
     }
   }
 
-}
+};
