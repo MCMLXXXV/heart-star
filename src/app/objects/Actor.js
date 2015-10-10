@@ -7,6 +7,27 @@ const DEFAULT_SPEED_LIMITS      = [ 64, 180 ];
 const DEFAULT_JUMP_VELOCITY     = -100;
 
 
+export function addAnimations (sprite, role) {
+  const frames = (i, j = i) =>
+    Phaser.Animation.generateFrameNames(`actor-${role}-`, i, j, '', 2);
+
+  sprite.animations.add('normal',           frames( 0,  3), 4, true);
+  sprite.animations.add('happy',            frames( 4,  7), 4, true);
+  sprite.animations.add('looking',          frames( 8, 11), 4, true);
+  sprite.animations.add('walking',          frames(12, 15), 4, true);
+  sprite.animations.add('carrying',         frames(16    ), 0, false);
+  sprite.animations.add('carrying+looking', frames(17, 20), 4, true);
+  sprite.animations.add('carrying+walking', frames(21, 24), 4, true);
+  sprite.animations.add('rising',           frames(25    ), 0, false);
+  sprite.animations.add('falling',          frames(26    ), 0, false);
+  sprite.animations.add('injured',          frames(27    ), 0, false);
+  sprite.animations.add('scared',           frames(28    ), 0, false);
+  sprite.animations.add('cheering',         frames(29, 30), 2, true);
+
+  return sprite;
+}
+
+
 class Actor extends Phaser.Sprite {
 
   constructor (game, role) {
@@ -18,13 +39,13 @@ class Actor extends Phaser.Sprite {
     this.role      = role;
     this.idle      = true;
     this.emotion   = null;
-    this.animation = 'idle';
+    this.animation = 'normal';
 
     this._friendBeingCarried     = null;
     this._remainingJumpingFrames = 0;
 
     this._setupPhysicsBody(10, 16);
-    this._setupAnimations();
+    addAnimations(this, role);
   }
 
   update () {
@@ -90,7 +111,7 @@ class Actor extends Phaser.Sprite {
   }
 
   harm (fromBelow = false) {
-    this.emotion = 'hurt';
+    this.emotion = 'injured';
 
     this.body.velocity.x = 0;
 
@@ -118,24 +139,6 @@ class Actor extends Phaser.Sprite {
     this.body.setSize(width, height);
   }
 
-  _setupAnimations () {
-    const frames = (i, j = i) =>
-      Phaser.Animation.generateFrameNames(`actor-${this.role}-`, i, j, '', 2);
-
-    this.animations.add('idle',             frames( 0,  3), 4, true);
-    this.animations.add('happy',            frames( 4,  7), 4, true);
-    this.animations.add('facing',           frames( 8, 11), 4, true);
-    this.animations.add('walking',          frames(12, 15), 4, true);
-    this.animations.add('carrying-idle',    frames(16    ), 0, false);
-    this.animations.add('carrying-facing',  frames(17, 20), 4, true);
-    this.animations.add('carrying-walking', frames(21, 24), 4, true);
-    this.animations.add('jumping',          frames(25    ), 0, false);
-    this.animations.add('falling',          frames(26    ), 0, false);
-    this.animations.add('hurt',             frames(27    ), 0, false);
-    this.animations.add('scared',           frames(28    ), 0, false);
-    this.animations.add('cheering',         frames(29, 30), 2, true);
-  }
-
   _updateDrag () {
     if (this.jumping) {
       this.body.drag.x = DEFAULT_DRAG_WHEN_JUMPING;
@@ -149,16 +152,16 @@ class Actor extends Phaser.Sprite {
     if (this.emotion === null) {
       if (this.idle) {
         this.facing = Actor.FACE_RIGHT;
-        this.animation = this.carrying ? 'carrying-idle' : 'idle';
+        this.animation = this.carrying ? 'carrying' : 'normal';
       }
       else if (this.jumping) {
-        this.animation = this.falling ? 'falling' : 'jumping';
+        this.animation = this.falling ? 'falling' : 'rising';
       }
       else if (this.walking) {
-        this.animation = this.carrying ? 'carrying-walking' : 'walking';
+        this.animation = this.carrying ? 'carrying+walking' : 'walking';
       }
       else if (this.standing) {
-        this.animation = this.carrying ? 'carrying-facing' : 'facing';
+        this.animation = this.carrying ? 'carrying+looking' : 'looking';
       }
     }
   }
@@ -236,7 +239,7 @@ class Actor extends Phaser.Sprite {
   }
 
   get hurt () {
-    return this.emotion === 'hurt';
+    return this.emotion === 'injured';
   }
 
 }

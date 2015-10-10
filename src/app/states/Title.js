@@ -1,5 +1,6 @@
 import scrollingPattern from '../components/scrollingPattern';
 import { menuButton } from '../components/uiButtons';
+import { addAnimations } from '../objects/Actor';
 
 
 function showMenuButtons (g) {
@@ -19,14 +20,11 @@ export default {
 
   create () {
     const image = (x, y, k, s) => this.add.image(x, y, k, s);
-
     const anchorXY = (x, y, o) => (o.anchor.set(x, y), o);
-    const addAnimation0 = (m, n, x, o) => (o.animations.add(0, m, n, x), o);
 
-    const frames = (s) => Phaser.Animation.generateFrameNames(
-      `actor-${s}-`, 4, 7, '', 2);
-    const placeCharacter = (s, x) => addAnimation0(
-      frames(s), 4, true, anchorXY(0.5, 1, image(x, 96, 'sprites'))).play(0);
+    const placeCharacter = (s, x) =>
+      addAnimations(anchorXY(0.5, 1, image(x, 96, 'sprites')), s)
+        .play('happy');
 
     scrollingPattern(this.game);
     image(0, 0, 'graphics', 'background-title');
