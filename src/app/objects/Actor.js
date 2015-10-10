@@ -31,7 +31,6 @@ class Actor extends Phaser.Sprite {
     this._updateDrag();
     this._updateAnimation();
     this._updateCarryingFriend();
-    this._updateJumpPower();
   }
 
   // --------------------------------------------------------------------------
@@ -41,12 +40,9 @@ class Actor extends Phaser.Sprite {
     this.emotion = null;
   }
 
-  walkLeft () {
-    this._move(Actor.FACE_LEFT,  DEFAULT_ACCELERATION);
-  }
-
-  walkRight () {
-    this._move(Actor.FACE_RIGHT, DEFAULT_ACCELERATION);
+  move (xAxis) {
+    this.body.acceleration.x = xAxis * DEFAULT_ACCELERATION;
+    this.scale.x = xAxis !== 0 ? Math.sign(xAxis) : this.scale.x;
   }
 
   float () {
@@ -61,16 +57,20 @@ class Actor extends Phaser.Sprite {
     this.body.acceleration.x = 0;
   }
 
-  jump () {
-    if (this.canJump) {
-      this.body.velocity.y = DEFAULT_JUMP_VELOCITY;
-      this._remainingJumpingFrames -= 1;
-    }
-  }
+  jump (trigger, triggerDuration) {
+    const { standing, carrying } = this;
 
-  cancelPowerJump () {
-    if (this.jumping) {
-      this._remainingJumpingFrames = 0;
+    if (this._remainingJumpingFrames > 0) {
+      if (trigger) {
+        this.body.velocity.y = DEFAULT_JUMP_VELOCITY;
+        this._remainingJumpingFrames -= 1;
+      }
+      else {
+        this._remainingJumpingFrames = 0;
+      }
+    }
+    else if (trigger && triggerDuration < 4 && standing && !carrying) {
+      this._remainingJumpingFrames = DEFAULT_JUMP_POWER;
     }
   }
 
@@ -136,11 +136,6 @@ class Actor extends Phaser.Sprite {
     this.animations.add('cheering',         frames(29, 30), 2, true);
   }
 
-  _move (direction, speed) {
-    this.facing              = direction;
-    this.body.acceleration.x = direction * speed;
-  }
-
   _updateDrag () {
     if (this.jumping) {
       this.body.drag.x = DEFAULT_DRAG_WHEN_JUMPING;
@@ -171,12 +166,6 @@ class Actor extends Phaser.Sprite {
   _updateCarryingFriend () {
     if (this._friendBeingCarried && !this._friendBeingCarried.standing) {
       this._friendBeingCarried = null;
-    }
-  }
-
-  _updateJumpPower () {
-    if (this.standing) {
-      this._remainingJumpingFrames = DEFAULT_JUMP_POWER;
     }
   }
 
@@ -214,14 +203,6 @@ class Actor extends Phaser.Sprite {
 
   get jumping () {
     return !this.standing;
-  }
-
-  get canJump () {
-    return !this.carrying && (this.standing || this.canPowerJump);
-  }
-
-  get canPowerJump () {
-    return this.jumping && this._remainingJumpingFrames > 0;
   }
 
   get falling () {

@@ -73,7 +73,7 @@ export default class Game extends Phaser.State {
       });
   }
 
-  update () {
+  update (g) {
     this._activeActor.collideActor(this._waitingActor);
     this._goal.collideActors(this._activeActor, this._waitingActor);
 
@@ -85,27 +85,11 @@ export default class Game extends Phaser.State {
     this._agents.collide(this._waitingActor);
 
     if (this.inGame) {
-      if (this.controls.left.isDown) {
-        this._activeActor.walkLeft();
-      }
-      else if (this.controls.right.isDown) {
-        this._activeActor.walkRight();
-      }
-      else {
-        this._activeActor.stop();
-        this._waitingActor.stop();
-      }
+      const { left, right, up } = g.controls;
+      const xAxis = Number(right.isDown) - Number(left.isDown);
 
-      if (this.controls.up.isDown) {
-        this._activeActor.jump();
-      }
-      else {
-        this._activeActor.cancelPowerJump();
-      }
-    }
-    else {
-      this._activeActor.stop();
-      this._waitingActor.stop();
+      this._activeActor.move(xAxis);
+      this._activeActor.jump(up.isDown, up.repeats);
     }
   }
 
