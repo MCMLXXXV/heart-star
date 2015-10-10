@@ -1,10 +1,16 @@
-const DEFAULT_DRAG              = 600;
-const DEFAULT_DRAG_WHEN_JUMPING = 250;
-const DEFAULT_GRAVITY           = 350;
-const DEFAULT_JUMP_POWER        = 14;
-const DEFAULT_ACCELERATION      = 600;
-const DEFAULT_SPEED_LIMITS      = [ 64, 180 ];
-const DEFAULT_JUMP_VELOCITY     = -100;
+import { enableBody } from '../components/arcadePhysics';
+
+
+const ACCELERATION       =  600;
+const BODY_HEIGHT        =   16;
+const BODY_WIDTH         =   10;
+const DRAG_WHEN_JUMPING  =  250;
+const DRAG_WHEN_STANDING =  600;
+const GRAVITY            =  350;
+const RISING_SPEED       = -100;
+const MAX_JUMPING_FRAMES =   16;
+const MAX_SPEED_X        =   64;
+const MAX_SPEED_Y        =  180;
 
 
 export function addAnimations (sprite, role) {
@@ -41,17 +47,20 @@ class Actor extends Phaser.Sprite {
     this.emotion   = null;
     this.animation = 'normal';
 
-    this._friendBeingCarried     = null;
-    this._remainingJumpingFrames = 0;
+    this.powerJumpFrames = 0;
 
-    this._setupPhysicsBody(10, 16);
+    enableBody(this, (o) => {
+      o.setSize(BODY_WIDTH, BODY_HEIGHT);
+      o.drag.x = DRAG_WHEN_STANDING;
+      o.maxVelocity.set(MAX_SPEED_X, MAX_SPEED_Y);
+      o.deltaMax.set(2);
+    });
     addAnimations(this, role);
   }
 
   update () {
     this._updateDrag();
     this._updateAnimation();
-    this._updateCarryingFriend();
   }
 
   // --------------------------------------------------------------------------
@@ -62,7 +71,7 @@ class Actor extends Phaser.Sprite {
   }
 
   move (xAxis) {
-    this.body.acceleration.x = xAxis * DEFAULT_ACCELERATION;
+    this.body.acceleration.x = xAxis * ACCELERATION;
     this.scale.x = xAxis !== 0 ? Math.sign(xAxis) : this.scale.x;
   }
 
@@ -71,52 +80,55 @@ class Actor extends Phaser.Sprite {
   }
 
   sink () {
-    this.body.gravity.y = DEFAULT_GRAVITY;
+    this.body.gravity.y = GRAVITY;
   }
 
   stop () {
-    this.body.acceleration.x = 0;
+    this.body.velocity.set(0);
+    this.body.acceleration.set(0);
+  }
+
+  fly () {
+    this.body.velocity.y = RISING_SPEED;
   }
 
   jump (trigger, triggerDuration) {
     const { standing, carrying } = this;
 
-    if (this._remainingJumpingFrames > 0) {
+    if (this.powerJumpFrames > 0) {
       if (trigger) {
-        this.body.velocity.y = DEFAULT_JUMP_VELOCITY;
-        this._remainingJumpingFrames -= 1;
+        this.fly();
+        this.powerJumpFrames -= 1;
       }
       else {
-        this._remainingJumpingFrames = 0;
+        this.powerJumpFrames = 0;
       }
     }
     else if (trigger && triggerDuration < 4 && standing && !carrying) {
-      this._remainingJumpingFrames = DEFAULT_JUMP_POWER;
+      this.powerJumpFrames = MAX_JUMPING_FRAMES;
     }
   }
 
   collideActor (actor) {
-    var hasCollided = this.game.physics.arcade.collide(
+    this.game.physics.arcade.collide(
       actor,
       this,
-      this._actorCollisionCallback,
-      null,
-      this);
-
-    actor.carry(hasCollided && this.standing, this);
-  }
-
-  carry (condition, actor) {
-    this._friendBeingCarried = condition ? actor : null;
+      (o) => {
+        if (o.standing) {
+          o.body.x += this.deltaX;
+          o.body.y += this.deltaY;
+        }
+      });
   }
 
   harm (fromBelow = false) {
     this.emotion = 'injured';
 
-    this.body.velocity.x = 0;
+    this.stop();
 
-    if (fromBelow)
-      this.body.velocity.y = -100;
+    if (fromBelow) {
+      this.fly();
+    }
 
     this.wasHurt.dispatch(this);
   }
@@ -128,23 +140,12 @@ class Actor extends Phaser.Sprite {
 
   // --------------------------------------------------------------------------
 
-  _setupPhysicsBody (width, height) {
-    if (this.body === null) {
-      this.game.physics.arcade.enableBody(this);
-    }
-
-    this.body.drag.x = DEFAULT_DRAG;
-    this.body.maxVelocity.set(... DEFAULT_SPEED_LIMITS);
-
-    this.body.setSize(width, height);
-  }
-
   _updateDrag () {
     if (this.jumping) {
-      this.body.drag.x = DEFAULT_DRAG_WHEN_JUMPING;
+      this.body.drag.x = DRAG_WHEN_JUMPING;
     }
     else {
-      this.body.drag.x = DEFAULT_DRAG;
+      this.body.drag.x = DRAG_WHEN_STANDING;
     }
   }
 
@@ -163,18 +164,6 @@ class Actor extends Phaser.Sprite {
       else if (this.standing) {
         this.animation = this.carrying ? 'carrying+looking' : 'looking';
       }
-    }
-  }
-
-  _updateCarryingFriend () {
-    if (this._friendBeingCarried && !this._friendBeingCarried.standing) {
-      this._friendBeingCarried = null;
-    }
-  }
-
-  _actorCollisionCallback (actor) {
-    if (actor.standing) {
-      actor.body.x += this.deltaX;
     }
   }
 
@@ -213,7 +202,7 @@ class Actor extends Phaser.Sprite {
   }
 
   get carrying () {
-    return this._friendBeingCarried !== null && this.body.touching.up;
+    return this.body.touching.up;
   }
 
   get idle () {
