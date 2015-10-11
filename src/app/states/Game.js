@@ -29,15 +29,13 @@ export default {
     const goBackLevelSelection =
       () => g.transitions.toState('Levels', 'blackout', 1000);
 
+    // -- The collision agents ------------------------------------------------
     this.agents = addObject(Agents);
 
+    // -- The game world features ---------------------------------------------
     this.heartLayer = this.objectsManager.createLayerFor('heart', true);
-    this.starLayer  = this.objectsManager.createLayerFor('star', true);
+    this.starLayer  = this.objectsManager.createLayerFor('star',  true);
     this.moonLayer  = this.objectsManager.createLayerFor('both');
-
-    this.controls.spacebar.onUp.add(this.switchActiveActor, this);
-    this.controls.esc.onUp.add(goBackLevelSelection);
-    this.controls.backspace.onUp.add(this.resetLevel, this);
 
     // -- The tutorial caption ------------------------------------------------
     this.tutorialCaption = this.moonLayer.add(tutorialCaption(g));
@@ -47,19 +45,21 @@ export default {
     goal.actorsLanded.add(() => this.winLevel());
 
     // -- The actors ----------------------------------------------------------
-    const heart = this.heart = addObject(Actor, Actor.HEART);
-    const star  = this.star  = addObject(Actor, Actor.STAR);
+    const startle = (actor) => () => (this.loseLevel(), actor.startle());
+    const heart   = this.heart = addObject(Actor, Actor.HEART);
+    const star    = this.star  = addObject(Actor, Actor.STAR);
 
-    heart.wasInjured.add(() => this.loseLevel());
-    star.wasInjured.add(() => this.loseLevel());
-
-    heart.wasInjured.add(() => star.startle());
-    star.wasInjured.add(() => heart.startle());
+    heart.wasInjured.add(startle(star));
+    star.wasInjured.add(startle(heart));
 
     this.transitions.reveal('blackout', 1000);
     this.prepareLevel(this.initialLevel);
 
-    this.storage
+    g.controls.spacebar.onUp.add(this.switchActiveActor, this);
+    g.controls.esc.onUp.add(goBackLevelSelection);
+    g.controls.backspace.onUp.add(this.resetLevel, this);
+
+    g.storage
       .getItem('levels')
       .then((unlockedLevels) => {
         this.unlockedLevels = unlockedLevels || defaultLevels;
@@ -153,7 +153,6 @@ export default {
   },
 
   winLevel () {
-    this.levelCompleted = true;
     const haltActor = (actor) => {
       actor.play('cheering');
       actor.float();
@@ -165,6 +164,8 @@ export default {
 
     this.time.events.add(
       1500, () => this.startLevel(this.levelDefinitions.meta.next));
+
+    this.levelCompleted = true;
   },
 
   startLevel (nextLevel) {
