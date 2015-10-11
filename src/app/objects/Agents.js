@@ -21,8 +21,8 @@ class Agents extends Phaser.Group {
     this.game.physics.arcade.overlap(
       actor,
       this._bottomAgent,
-      () => actor.harm(),
-      () => !actor.hurt,
+      () => actor.injure(),
+      () => !actor.isInjured,
       this);
   }
 

@@ -67,11 +67,11 @@ class ObjectsLayer extends Phaser.Group {
     const collide = (o, f = null, g = null) =>
       this.game.physics.arcade.collide(o, actor, f, g);
 
-    const harmActor = () => actor.harm(true);
-    const actorIsNotHurt = () => !actor.hurt;
+    const harmActor = () => actor.injure();
+    const actorIsNotHurt = () => !actor.isInjured;
     const switchButtonOn = () => this._button.switchOn();
-    const buttonIsNotTriggered = () => !(this._button.triggered || actor.hurt);
-    const gateIsNotOpen = () => !(this._gate.open || actor.hurt);
+    const buttonIsNotTriggered = () => !(this._button.triggered || actor.isInjured);
+    const gateIsNotOpen = () => !(this._gate.open || actor.isInjured);
 
     collide(this._tilemapLayer, null, actorIsNotHurt);
     collide(this._button, switchButtonOn, buttonIsNotTriggered);

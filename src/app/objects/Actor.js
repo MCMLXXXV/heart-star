@@ -1,52 +1,91 @@
-const DEFAULT_DRAG              = 600;
-const DEFAULT_DRAG_WHEN_JUMPING = 250;
-const DEFAULT_GRAVITY           = 350;
-const DEFAULT_JUMP_POWER        = 14;
-const DEFAULT_ACCELERATION      = 600;
-const DEFAULT_SPEED_LIMITS      = [ 64, 180 ];
-const DEFAULT_JUMP_VELOCITY     = -100;
+import { enableBody } from '../components/arcadePhysics';
+
+
+const ACTOR_HEART = 'heart';
+const ACTOR_STAR  = 'star';
+
+const ACCELERATION       =  600;
+const BODY_HEIGHT        =   16;
+const BODY_WIDTH         =   10;
+const DRAG_WHEN_JUMPING  =  250;
+const DRAG_WHEN_STANDING =  600;
+const GRAVITY            =  350;
+const RISING_SPEED       = -100;
+const MAX_JUMPING_FRAMES =   16;
+const MAX_SPEED_X        =   64;
+const MAX_SPEED_Y        =  180;
+
+
+function addAnimations (sprite, role) {
+  const frames = (i, j = i) =>
+    Phaser.Animation.generateFrameNames(`actor-${role}-`, i, j, '', 2);
+
+  sprite.animations.add('normal',           frames( 0,  3), 4, true);
+  sprite.animations.add('happy',            frames( 4,  7), 4, true);
+  sprite.animations.add('looking',          frames( 8, 11), 4, true);
+  sprite.animations.add('walking',          frames(12, 15), 4, true);
+  sprite.animations.add('carrying',         frames(16    ), 0, false);
+  sprite.animations.add('carrying+looking', frames(17, 20), 4, true);
+  sprite.animations.add('carrying+walking', frames(21, 24), 4, true);
+  sprite.animations.add('rising',           frames(25    ), 0, false);
+  sprite.animations.add('falling',          frames(26    ), 0, false);
+  sprite.animations.add('injured',          frames(27    ), 0, false);
+  sprite.animations.add('scared',           frames(28    ), 0, false);
+  sprite.animations.add('cheering',         frames(29, 30), 2, true);
+
+  return sprite;
+}
 
 
 class Actor extends Phaser.Sprite {
+
+  static get HEART () {
+    return ACTOR_HEART;
+  }
+
+  static get STAR () {
+    return ACTOR_STAR;
+  }
+
+  static updateAnimation (sprite, active) {
+    const { isWalking, isStanding, isRising, isCarrying } = sprite;
+
+    const animation = active ? (isStanding ?
+      (isCarrying ?
+        (isWalking ? 'carrying+walking' : 'carrying+looking') :
+        (isWalking ? 'walking' : 'looking')) :
+        (isRising ? 'rising' : 'falling')
+      ) : (isCarrying ? 'carrying' : 'normal');
+
+    sprite.play(animation);
+    sprite.facing = active ? Math.sign(sprite.body.velocity.x) : 1;
+  }
 
   constructor (game, role) {
     super(game, 0, 0, 'sprites');
     this.anchor.set(0.5, 1);
 
-    this.wasHurt = new Phaser.Signal();
+    this.wasInjured = new Phaser.Signal();
 
-    this.role      = role;
-    this.idle      = true;
-    this.emotion   = null;
-    this.animation = 'idle';
+    this.role = role;
 
-    this._friendBeingCarried     = null;
-    this._remainingJumpingFrames = 0;
+    this.powerJumpFrames = 0;
 
-    this._setupPhysicsBody(10, 16);
-    this._setupAnimations();
-  }
-
-  update () {
-    this._updateDrag();
-    this._updateAnimation();
-    this._updateCarryingFriend();
-    this._updateJumpPower();
+    enableBody(this, (o) => {
+      o.setSize(BODY_WIDTH, BODY_HEIGHT);
+      o.drag.x = DRAG_WHEN_STANDING;
+      o.maxVelocity.set(MAX_SPEED_X, MAX_SPEED_Y);
+      o.deltaMax.set(2);
+    });
+    addAnimations(this, role);
   }
 
   // --------------------------------------------------------------------------
 
-  reset (x, y) {
-    super.reset(x, y);
-    this.emotion = null;
-  }
-
-  walkLeft () {
-    this._move(Actor.FACE_LEFT,  DEFAULT_ACCELERATION);
-  }
-
-  walkRight () {
-    this._move(Actor.FACE_RIGHT, DEFAULT_ACCELERATION);
+  move (xAxis) {
+    this.body.acceleration.x = xAxis * ACCELERATION;
+    this.body.drag.x = this.isRising ? DRAG_WHEN_JUMPING : DRAG_WHEN_STANDING;
+    this.facing = xAxis !== 0 ? Math.sign(xAxis) : this.facing;
   }
 
   float () {
@@ -54,136 +93,61 @@ class Actor extends Phaser.Sprite {
   }
 
   sink () {
-    this.body.gravity.y = DEFAULT_GRAVITY;
+    this.body.gravity.y = GRAVITY;
   }
 
   stop () {
-    this.body.acceleration.x = 0;
+    this.body.velocity.set(0);
+    this.body.acceleration.set(0);
   }
 
-  jump () {
-    if (this.canJump) {
-      this.body.velocity.y = DEFAULT_JUMP_VELOCITY;
-      this._remainingJumpingFrames -= 1;
+  fly () {
+    this.body.velocity.y = RISING_SPEED;
+  }
+
+  jump (trigger, triggerDuration) {
+    const { isStanding, isCarrying } = this;
+
+    if (this.powerJumpFrames > 0) {
+      if (trigger) {
+        this.fly();
+        this.powerJumpFrames -= 1;
+      }
+      else {
+        this.powerJumpFrames = 0;
+      }
     }
-  }
-
-  cancelPowerJump () {
-    if (this.jumping) {
-      this._remainingJumpingFrames = 0;
+    else if (trigger && triggerDuration < 4 && isStanding && !isCarrying) {
+      this.powerJumpFrames = MAX_JUMPING_FRAMES;
     }
   }
 
   collideActor (actor) {
-    var hasCollided = this.game.physics.arcade.collide(
+    this.game.physics.arcade.collide(
       actor,
       this,
-      this._actorCollisionCallback,
-      null,
-      this);
-
-    actor.carry(hasCollided && this.standing, this);
+      (o) => {
+        if (o.isStanding) {
+          o.body.x += this.deltaX;
+          o.body.y += this.deltaY;
+        }
+      });
   }
 
-  carry (condition, actor) {
-    this._friendBeingCarried = condition ? actor : null;
-  }
+  injure () {
+    this.play('injured');
+    this.stop();
 
-  harm (fromBelow = false) {
-    this.emotion = 'hurt';
+    if (this.isStanding) {
+      this.fly();
+    }
 
-    this.body.velocity.x = 0;
-
-    if (fromBelow)
-      this.body.velocity.y = -100;
-
-    this.wasHurt.dispatch(this);
+    this.wasInjured.dispatch(this);
   }
 
   startle () {
     this.float();
-    this.emotion = 'scared';
-  }
-
-  // --------------------------------------------------------------------------
-
-  _setupPhysicsBody (width, height) {
-    if (this.body === null) {
-      this.game.physics.arcade.enableBody(this);
-    }
-
-    this.body.drag.x = DEFAULT_DRAG;
-    this.body.maxVelocity.set(... DEFAULT_SPEED_LIMITS);
-
-    this.body.setSize(width, height);
-  }
-
-  _setupAnimations () {
-    const frames = (i, j = i) =>
-      Phaser.Animation.generateFrameNames(`actor-${this.role}-`, i, j, '', 2);
-
-    this.animations.add('idle',             frames( 0,  3), 4, true);
-    this.animations.add('happy',            frames( 4,  7), 4, true);
-    this.animations.add('facing',           frames( 8, 11), 4, true);
-    this.animations.add('walking',          frames(12, 15), 4, true);
-    this.animations.add('carrying-idle',    frames(16    ), 0, false);
-    this.animations.add('carrying-facing',  frames(17, 20), 4, true);
-    this.animations.add('carrying-walking', frames(21, 24), 4, true);
-    this.animations.add('jumping',          frames(25    ), 0, false);
-    this.animations.add('falling',          frames(26    ), 0, false);
-    this.animations.add('hurt',             frames(27    ), 0, false);
-    this.animations.add('scared',           frames(28    ), 0, false);
-    this.animations.add('cheering',         frames(29, 30), 2, true);
-  }
-
-  _move (direction, speed) {
-    this.facing              = direction;
-    this.body.acceleration.x = direction * speed;
-  }
-
-  _updateDrag () {
-    if (this.jumping) {
-      this.body.drag.x = DEFAULT_DRAG_WHEN_JUMPING;
-    }
-    else {
-      this.body.drag.x = DEFAULT_DRAG;
-    }
-  }
-
-  _updateAnimation () {
-    if (this.emotion === null) {
-      if (this.idle) {
-        this.facing = Actor.FACE_RIGHT;
-        this.animation = this.carrying ? 'carrying-idle' : 'idle';
-      }
-      else if (this.jumping) {
-        this.animation = this.falling ? 'falling' : 'jumping';
-      }
-      else if (this.walking) {
-        this.animation = this.carrying ? 'carrying-walking' : 'walking';
-      }
-      else if (this.standing) {
-        this.animation = this.carrying ? 'carrying-facing' : 'facing';
-      }
-    }
-  }
-
-  _updateCarryingFriend () {
-    if (this._friendBeingCarried && !this._friendBeingCarried.standing) {
-      this._friendBeingCarried = null;
-    }
-  }
-
-  _updateJumpPower () {
-    if (this.standing) {
-      this._remainingJumpingFrames = DEFAULT_JUMP_POWER;
-    }
-  }
-
-  _actorCollisionCallback (actor) {
-    if (actor.standing) {
-      actor.body.x += this.deltaX;
-    }
+    this.play('scared');
   }
 
   // --------------------------------------------------------------------------
@@ -192,79 +156,31 @@ class Actor extends Phaser.Sprite {
     return this.scale.x;
   }
 
-  set facing (newValue) {
-    this.scale.x = newValue;
+  set facing (facing) {
+    this.scale.x = facing !== 0 ? Math.sign(facing) : this.scale.x;
   }
 
-  get animation () {
-    return this.animations.currentAnim;
+  get isWalking () {
+    return this.body.velocity.x !== 0;
   }
 
-  set animation (newValue) {
-    this.animations.play(newValue);
+  get isStanding () {
+    return this.body.touching.down || this.body.blocked.down;
   }
 
-  get standing () {
-    return this.body.blocked.down || this.body.touching.down;
+  get isRising () {
+    return !this.isStanding && this.body.velocity.y < 0;
   }
 
-  get walking () {
-    return this.standing && this.body.velocity.x !== 0;
+  get isCarrying () {
+    return this.body.touching.up || this.body.wasTouching.up;
   }
 
-  get jumping () {
-    return !this.standing;
-  }
-
-  get canJump () {
-    return !this.carrying && (this.standing || this.canPowerJump);
-  }
-
-  get canPowerJump () {
-    return this.jumping && this._remainingJumpingFrames > 0;
-  }
-
-  get falling () {
-    return this.jumping && this.body.velocity.y > 0;
-  }
-
-  get carrying () {
-    return this._friendBeingCarried !== null && this.body.touching.up;
-  }
-
-  get idle () {
-    return this._idle;
-  }
-
-  set idle (newValue) {
-    this._idle = newValue;
-
-    this.alpha = this._idle ? 0.50 : 1;
-  }
-
-  get emotion () {
-    return this._emotion;
-  }
-
-  set emotion (newValue) {
-    if (newValue !== null)
-      this.animation = newValue;
-
-    this._emotion = newValue;
-    this.facing = Actor.FACE_RIGHT;
-  }
-
-  get hurt () {
-    return this.emotion === 'hurt';
+  get isInjured () {
+    return this.animations.currentAnim.name === 'injured';
   }
 
 }
 
-
-Actor.FACE_LEFT  = -1;
-Actor.FACE_RIGHT =  1;
-
-Actor.HEART = 'heart';
-Actor.STAR  = 'star';
 
 export default Actor;
