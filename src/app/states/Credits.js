@@ -22,8 +22,6 @@ export default {
     this._addBackground(background);
     this._addLinkButtons(links);
     this._addMenuButtons(screen, (screen === DEFAULT_SCREEN));
-
-    this.game.transitions.reveal('blackout', 1000);
   },
 
   // --------------------------------------------------------------------------

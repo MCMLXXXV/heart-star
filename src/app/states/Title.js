@@ -13,11 +13,6 @@ function showMenuButtons (g) {
 
 export default {
 
-  init (effectName = 'iris') {
-    this.game.transitions.reveal(
-      effectName, 1000, () => showMenuButtons(this.game));
-  },
-
   create (g) {
     const image  = (x, y, k, s) => g.add.image(x, y, k, s);
     const object = (F, ...a) => g.add.existing(new F(g, ...a));
@@ -38,6 +33,8 @@ export default {
 
     placeCharacter('heart',  64);
     placeCharacter('star',  176);
+
+    showMenuButtons(g);
   }
 
 };

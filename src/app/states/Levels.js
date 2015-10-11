@@ -25,10 +25,6 @@ function showLevelButtons (g, levels) {
 
 export default {
 
-  init () {
-    this.game.transitions.reveal('blackout', 1000);
-  },
-
   create () {
     const image = (x, y, k) => this.add.image(x, y, 'graphics', k);
     const button = (x, y) => this.add.button(x, y, 'graphics');

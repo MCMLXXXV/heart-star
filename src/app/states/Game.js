@@ -18,7 +18,6 @@ export default {
     this.levelCompleted = false;
     this.storage        = this.game.storage;
     this.controls       = this.game.controls;
-    this.transitions    = this.game.transitions;
     this.gameLevels     = parseLevelsFromTilemap(this.game, 'tilemaps');
     this.objectsManager = new ObjectsManager(this.game);
   },
@@ -26,8 +25,7 @@ export default {
   create (g) {
     const addObject = (F, ...a) => g.add.existing(new F(g, ...a));
 
-    const goBackLevelSelection =
-      () => g.transitions.toState('Levels', 'blackout', 1000);
+    const goBackLevelSelection = () => g.state.start('Levels');
 
     // -- The collision agents ------------------------------------------------
     this.agents = addObject(Agents);
@@ -52,7 +50,6 @@ export default {
     heart.wasInjured.add(startle(star));
     star.wasInjured.add(startle(heart));
 
-    this.transitions.reveal('blackout', 1000);
     this.prepareLevel(this.initialLevel);
 
     g.controls.spacebar.onUp.add(this.switchActiveActor, this);
@@ -130,25 +127,20 @@ export default {
     if (!this.inGame) return;
     if (!this.activeActor.isStanding) return;
 
-    this.transitions.reveal(`blink-${ this.waitingActor.role }`, 400);
     this.changeActiveActor(this.waitingActor, this.activeActor);
   },
 
   resetLevel () {
     if (!this.inGame) return;
 
-    this.transitions.reveal('copy', 500);
     this.resetActors();
     this.objectsManager.reset();
   },
 
   loseLevel () {
     this.time.events.add(1000, () => {
-      this.transitions.hide('blinds', 1000, () => {
-        this.resetActors();
-        this.objectsManager.reset();
-        this.transitions.reveal('blinds', 1000);
-      });
+      this.resetActors();
+      this.objectsManager.reset();
     });
   },
 
@@ -170,14 +162,11 @@ export default {
 
   startLevel (nextLevel) {
     if (nextLevel === null) {
-      this.transitions.toState('Credits', 'blackout', 1000);
+      this.state.start('Credits');
     }
     else {
-      this.transitions.hide('blinds', 1000, () => {
-        this.unlockLevel(nextLevel);
-        this.prepareLevel(nextLevel);
-        this.transitions.reveal('blinds', 1000);
-      });
+      this.unlockLevel(nextLevel);
+      this.prepareLevel(nextLevel);
     }
   },
 
@@ -193,8 +182,7 @@ export default {
   // --------------------------------------------------------------------------
 
   get inGame () {
-    return !(this.transitions.isRunning ||
-      this.levelCompleted ||
+    return !(this.levelCompleted ||
       this.activeActor.isInjured ||
       this.waitingActor.isInjured);
   }

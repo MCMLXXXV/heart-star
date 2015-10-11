@@ -1,14 +1,12 @@
+const toStateCallback = (g, k, ...a) => () => g.state.start(k, true, false, ...a);
 const frameName = (name, state) => `button-${name}-${state}`;
 const overFrame = (name) => frameName(name, 'over');
 const outFrame = (name) => frameName(name, 'out');
 
 
-export function menuButton (button, name, stateName, ... args) {
-  const toState = (stateName) =>
-    () => button.game.transitions.toState(stateName, 'blackout', 1000, ... args);
-
+export function menuButton (button, name, stateName, ...args) {
   button.setFrames(overFrame(name), outFrame(name));
-  button.onInputUp.add(toState(stateName));
+  button.onInputUp.add(toStateCallback(button.game, stateName, ...args));
 
   return button;
 }
@@ -30,15 +28,12 @@ export function levelButton (button, level, locked) {
   const LEVEL_LOCKED_FRAMENAME = 'button-level-locked';
 
   const name = `level-${level}`;
-  const toState = (level) =>
-    () => button.game.transitions.toState('Game', 'blackout', 1000, level);
-
   if (locked) {
     button.input.useHandCursor = false;
     button.setFrames(LEVEL_LOCKED_FRAMENAME, LEVEL_LOCKED_FRAMENAME);
   }
   else {
-    button.onInputUp.add(toState(level));
+    button.onInputUp.add(toStateCallback(button.game, 'Game', level));
     button.setFrames(overFrame(name), outFrame(name));
   }
 
