@@ -15,6 +15,7 @@ export default {
 
   init (initialLevel = '01') {
     this.initialLevel   = initialLevel;
+    this.levelCompleted = false;
     this.storage        = this.game.storage;
     this.controls       = this.game.controls;
     this.transitions    = this.game.transitions;
@@ -36,24 +37,24 @@ export default {
 
     this.controls.spacebar.onUp.add(this.switchActiveActor, this);
     this.controls.esc.onUp.add(goBackLevelSelection);
-    this.controls.backspace.onUp.add(this.resetGameStage, this);
+    this.controls.backspace.onUp.add(this.resetLevel, this);
 
     // -- The tutorial caption ------------------------------------------------
     this.tutorialCaption = this.moonLayer.add(tutorialCaption(g));
 
     // -- The goal platform ---------------------------------------------------
-    this.goal = addObject(Goal);
-    this.goal.actorsLanded.add(() => this.winLevel());
+    const goal = this.goal = addObject(Goal);
+    goal.actorsLanded.add(() => this.winLevel());
 
     // -- The actors ----------------------------------------------------------
-    this.heart = addObject(Actor, Actor.HEART);
-    this.star  = addObject(Actor, Actor.STAR);
+    const heart = this.heart = addObject(Actor, Actor.HEART);
+    const star  = this.star  = addObject(Actor, Actor.STAR);
 
-    this.heart.wasHurt.add(() => this.loseLevel());
-    this.star.wasHurt.add(() => this.loseLevel());
+    heart.wasInjured.add(() => this.loseLevel());
+    star.wasInjured.add(() => this.loseLevel());
 
-    this.heart.wasHurt.add(() => this.star.startle());
-    this.star.wasHurt.add(() => this.heart.startle());
+    heart.wasInjured.add(() => star.startle());
+    star.wasInjured.add(() => heart.startle());
 
     this.transitions.reveal('blackout', 1000);
     this.prepareLevel(this.initialLevel);
@@ -82,12 +83,16 @@ export default {
 
       this.activeActor.move(xAxis);
       this.activeActor.jump(up.isDown, up.repeats);
+
+      Actor.updateAnimation(this.heart, (this.activeActor === this.heart));
+      Actor.updateAnimation(this.star,  (this.activeActor === this.star));
     }
   },
 
   // --------------------------------------------------------------------------
 
   prepareLevel (level) {
+    this.levelCompleted = false;
     this.levelDefinitions = this.gameLevels.getLevel(level);
     this.objectsManager.createObjects(this.levelDefinitions);
 
@@ -100,13 +105,16 @@ export default {
   resetActors () {
     resetActor(this.heart, this.levelDefinitions.heart);
     resetActor(this.star, this.levelDefinitions.star);
-    this.changeActiveActor(this.heart, this.star);
+    this.changeActiveActor(this.heart, this.star, true);
   },
 
-  changeActiveActor (activeActor, waitingActor) {
+  changeActiveActor (activeActor, waitingActor, resettingLevel = false) {
     const change = (actor) => {
       actor.stop();
-      actor.idle = (actor === waitingActor);
+      actor.alpha = (actor === waitingActor) ? 0.5 : 1;
+      actor.play((actor !== waitingActor) ?
+        (actor.isCarrying && !resettingLevel ? 'carrying+looking' : 'looking') :
+        (actor.isCarrying && !resettingLevel ? 'carrying' : 'normal'));
 
       return actor;
     };
@@ -120,13 +128,13 @@ export default {
 
   switchActiveActor () {
     if (!this.inGame) return;
-    if (!this.activeActor.standing) return;
+    if (!this.activeActor.isStanding) return;
 
     this.transitions.reveal(`blink-${ this.waitingActor.role }`, 400);
     this.changeActiveActor(this.waitingActor, this.activeActor);
   },
 
-  resetGameStage () {
+  resetLevel () {
     if (!this.inGame) return;
 
     this.transitions.reveal('copy', 500);
@@ -145,8 +153,9 @@ export default {
   },
 
   winLevel () {
+    this.levelCompleted = true;
     const haltActor = (actor) => {
-      actor.emotion = 'cheering';
+      actor.play('cheering');
       actor.float();
       actor.stop();
     };
@@ -183,8 +192,10 @@ export default {
   // --------------------------------------------------------------------------
 
   get inGame () {
-    return !this.transitions.isRunning &&
-      this.activeActor && this.activeActor.emotion === null;
+    return !(this.transitions.isRunning ||
+      this.levelCompleted ||
+      this.activeActor.isInjured ||
+      this.waitingActor.isInjured);
   }
 
 };
