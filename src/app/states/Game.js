@@ -1,6 +1,7 @@
 import levels from '../data/levels';
 
 import parseLevelsFromTilemap from '../components/parseLevelsFromTilemap';
+import tutorialCaption        from '../components/tutorialCaption';
 
 import ObjectsManager from '../managers/ObjectsManager';
 
@@ -28,7 +29,7 @@ export default class Game extends Phaser.State {
     this._levelDefinitions = null;
   }
 
-  create () {
+  create (g) {
     const addObject = (F, ...a) => this.add.existing(new F(this.game, ...a));
 
     const goBackLevelSelection =
@@ -45,9 +46,7 @@ export default class Game extends Phaser.State {
     this.controls.backspace.onUp.add(this._resetGameStage, this);
 
     // -- The tutorial caption ------------------------------------------------
-    this._tutorialLabel = this.make.image(0, 0, 'graphics');
-    this._tutorialLabel.visible = false;
-    this._moonLayer.add(this._tutorialLabel);
+    this.tutorialCaption = this._moonLayer.add(tutorialCaption(g));
 
     // -- The goal platform ---------------------------------------------------
     this._goal = addObject(Goal);
@@ -99,16 +98,9 @@ export default class Game extends Phaser.State {
     this._levelDefinitions = this._levelManager.getLevel(level);
     this._objectsManager.createObjects(this._levelDefinitions);
 
-    this._showTutorialCaption(this._levelDefinitions.meta.tutorial);
+    this.tutorialCaption.show(this._levelDefinitions.meta.tutorial);
     this._resetGoal(this._levelDefinitions.goal);
     this._resetActors();
-  }
-
-  _showTutorialCaption (name) {
-    this._tutorialLabel.visible = (name !== null);
-    if (name !== null) {
-      this._tutorialLabel.frameName = name;
-    }
   }
 
   _resetGoal ({ position: { x, y } }) {
