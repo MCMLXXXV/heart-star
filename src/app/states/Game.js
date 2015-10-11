@@ -1,210 +1,190 @@
-import levels from '../data/levels';
-
+import defaultLevels          from '../data/levels';
 import parseLevelsFromTilemap from '../components/parseLevelsFromTilemap';
 import tutorialCaption        from '../components/tutorialCaption';
-
-import ObjectsManager from '../managers/ObjectsManager';
-
-import Goal   from '../objects/Goal';
-import Actor  from '../objects/Actor';
-import Agents from '../objects/Agents';
+import ObjectsManager         from '../managers/ObjectsManager';
+import Goal                   from '../objects/Goal';
+import Actor                  from '../objects/Actor';
+import Agents                 from '../objects/Agents';
 
 
-export default class Game extends Phaser.State {
+const resetObject = (o, { position: { x, y } }) => o.reset(x, y);
+const resetActor = (actor, o) => (resetObject(actor, o), actor.sink());
 
-  init (level = '01') {
-    this.level = level;
 
-    this.storage     = this.game.storage;
-    this.controls    = this.game.controls;
-    this.transitions = this.game.transitions;
+export default {
 
-    this._levelManager   = parseLevelsFromTilemap(this.game, 'tilemaps');
-    this._objectsManager = new ObjectsManager(this.game);
-
-    this._waitingActor = null;
-    this._activeActor  = null;
-
-    this._unlockedLevels   = null;
-    this._levelDefinitions = null;
-  }
+  init (initialLevel = '01') {
+    this.initialLevel   = initialLevel;
+    this.storage        = this.game.storage;
+    this.controls       = this.game.controls;
+    this.transitions    = this.game.transitions;
+    this.gameLevels     = parseLevelsFromTilemap(this.game, 'tilemaps');
+    this.objectsManager = new ObjectsManager(this.game);
+  },
 
   create (g) {
-    const addObject = (F, ...a) => this.add.existing(new F(this.game, ...a));
+    const addObject = (F, ...a) => g.add.existing(new F(g, ...a));
 
     const goBackLevelSelection =
-      () => this.transitions.toState('Levels', 'blackout', 1000);
+      () => g.transitions.toState('Levels', 'blackout', 1000);
 
-    this._agents = this.add.existing(new Agents(this.game));
+    this.agents = addObject(Agents);
 
-    this._heartLayer = this._objectsManager.createLayerFor('heart', true);
-    this._starLayer  = this._objectsManager.createLayerFor('star', true);
-    this._moonLayer  = this._objectsManager.createLayerFor('both');
+    this.heartLayer = this.objectsManager.createLayerFor('heart', true);
+    this.starLayer  = this.objectsManager.createLayerFor('star', true);
+    this.moonLayer  = this.objectsManager.createLayerFor('both');
 
-    this.controls.spacebar.onUp.add(this._switchActiveActor, this);
+    this.controls.spacebar.onUp.add(this.switchActiveActor, this);
     this.controls.esc.onUp.add(goBackLevelSelection);
-    this.controls.backspace.onUp.add(this._resetGameStage, this);
+    this.controls.backspace.onUp.add(this.resetGameStage, this);
 
     // -- The tutorial caption ------------------------------------------------
-    this.tutorialCaption = this._moonLayer.add(tutorialCaption(g));
+    this.tutorialCaption = this.moonLayer.add(tutorialCaption(g));
 
     // -- The goal platform ---------------------------------------------------
-    this._goal = addObject(Goal);
-    this._goal.actorsLanded.add(() => this._winLevel());
+    this.goal = addObject(Goal);
+    this.goal.actorsLanded.add(() => this.winLevel());
 
     // -- The actors ----------------------------------------------------------
-    this._heart = addObject(Actor, Actor.HEART);
-    this._heart.wasHurt.add(() => this._loseLevel());
+    this.heart = addObject(Actor, Actor.HEART);
+    this.star  = addObject(Actor, Actor.STAR);
 
-    this._star = addObject(Actor, Actor.STAR);
-    this._star.wasHurt.add(() => this._loseLevel());
+    this.heart.wasHurt.add(() => this.loseLevel());
+    this.star.wasHurt.add(() => this.loseLevel());
 
-    this._heart.wasHurt.add(() => this._star.startle());
-    this._star.wasHurt.add(() => this._heart.startle());
+    this.heart.wasHurt.add(() => this.star.startle());
+    this.star.wasHurt.add(() => this.heart.startle());
 
     this.transitions.reveal('blackout', 1000);
-    this._prepareLevel(this.level);
+    this.prepareLevel(this.initialLevel);
 
     this.storage
       .getItem('levels')
       .then((unlockedLevels) => {
-        this._unlockedLevels = unlockedLevels || levels;
+        this.unlockedLevels = unlockedLevels || defaultLevels;
       });
-  }
+  },
 
   update (g) {
-    this._activeActor.collideActor(this._waitingActor);
-    this._goal.collideActors(this._activeActor, this._waitingActor);
+    this.activeActor.collideActor(this.waitingActor);
+    this.goal.collideActors(this.heart, this.star);
 
-    this._heartLayer.collide(this._heart);
-    this._starLayer.collide(this._star);
-    this._moonLayer.collide([ this._heart, this._star ]);
+    this.heartLayer.collide(this.heart);
+    this.starLayer.collide(this.star);
+    this.moonLayer.collide([ this.heart, this.star ]);
 
-    this._agents.collide(this._activeActor);
-    this._agents.collide(this._waitingActor);
+    this.agents.collide(this.heart);
+    this.agents.collide(this.star);
 
     if (this.inGame) {
       const { left, right, up } = g.controls;
       const xAxis = Number(right.isDown) - Number(left.isDown);
 
-      this._activeActor.move(xAxis);
-      this._activeActor.jump(up.isDown, up.repeats);
+      this.activeActor.move(xAxis);
+      this.activeActor.jump(up.isDown, up.repeats);
     }
-  }
+  },
 
   // --------------------------------------------------------------------------
 
-  _prepareLevel (level) {
-    this._levelDefinitions = this._levelManager.getLevel(level);
-    this._objectsManager.createObjects(this._levelDefinitions);
+  prepareLevel (level) {
+    this.levelDefinitions = this.gameLevels.getLevel(level);
+    this.objectsManager.createObjects(this.levelDefinitions);
 
-    this.tutorialCaption.show(this._levelDefinitions.meta.tutorial);
-    this._resetGoal(this._levelDefinitions.goal);
-    this._resetActors();
-  }
+    this.tutorialCaption.show(this.levelDefinitions.meta.tutorial);
 
-  _resetGoal ({ position: { x, y } }) {
-    this._goal.reset(x, y);
-  }
+    resetObject(this.goal, this.levelDefinitions.goal);
+    this.resetActors();
+  },
 
-  _resetActors () {
-    this._resetActor(this._heart, this._levelDefinitions.heart);
-    this._resetActor(this._star, this._levelDefinitions.star);
-    this._changeActiveActor(this._heart, this._star);
-    this._switchLayers();
-  }
+  resetActors () {
+    resetActor(this.heart, this.levelDefinitions.heart);
+    resetActor(this.star, this.levelDefinitions.star);
+    this.changeActiveActor(this.heart, this.star);
+  },
 
-  _resetActor (actor, { position: { x, y } }) {
-    actor.reset(x, y);
-    actor.sink();
-  }
-
-  _changeActiveActor (activeActor, waitingActor) {
-    const change = (actor, isWaiting) => {
+  changeActiveActor (activeActor, waitingActor) {
+    const change = (actor) => {
       actor.stop();
-      actor.idle = isWaiting;
+      actor.idle = (actor === waitingActor);
 
       return actor;
     };
 
-    this._waitingActor = change(waitingActor, true);
-    this._activeActor  = change(activeActor,  false);
-  }
+    this.waitingActor = change(waitingActor);
+    this.activeActor  = change(activeActor);
 
-  _switchLayers () {
-    this._heartLayer.visible = !this._heart.idle;
-    this._starLayer.visible = !this._star.idle;
-  }
+    this.heartLayer.visible = (activeActor === this.heart);
+    this.starLayer.visible  = (activeActor === this.star);
+  },
 
-  _switchActiveActor () {
+  switchActiveActor () {
     if (!this.inGame) return;
-    if (!this._activeActor.standing) return;
+    if (!this.activeActor.standing) return;
 
-    this.transitions.reveal(`blink-${ this._waitingActor.role }`, 400);
-    this._changeActiveActor(this._waitingActor, this._activeActor);
-    this._switchLayers();
-  }
+    this.transitions.reveal(`blink-${ this.waitingActor.role }`, 400);
+    this.changeActiveActor(this.waitingActor, this.activeActor);
+  },
 
-  _resetGameStage () {
+  resetGameStage () {
     if (!this.inGame) return;
 
     this.transitions.reveal('copy', 500);
-    this._resetActors();
-    this._objectsManager.reset();
-  }
+    this.resetActors();
+    this.objectsManager.reset();
+  },
 
-  _loseLevel () {
+  loseLevel () {
     this.time.events.add(1000, () => {
       this.transitions.hide('blinds', 1000, () => {
-        this._resetActors();
-        this._objectsManager.reset();
+        this.resetActors();
+        this.objectsManager.reset();
         this.transitions.reveal('blinds', 1000);
       });
     });
-  }
+  },
 
-  _winLevel () {
+  winLevel () {
     const haltActor = (actor) => {
       actor.emotion = 'cheering';
       actor.float();
       actor.stop();
     };
 
-    haltActor(this._heart);
-    haltActor(this._star);
+    haltActor(this.heart);
+    haltActor(this.star);
 
-    this.time.events.add(1500, () => this._startNextLevel());
-  }
+    this.time.events.add(
+      1500, () => this.startLevel(this.levelDefinitions.meta.next));
+  },
 
-  _startNextLevel () {
-    let nextLevel = this._levelDefinitions.meta.next;
-
+  startLevel (nextLevel) {
     if (nextLevel === null) {
       this.transitions.toState('Credits', 'blackout', 1000);
     }
     else {
       this.transitions.hide('blinds', 1000, () => {
-        this._unlockLevel(nextLevel);
-        this._prepareLevel(nextLevel);
+        this.unlockLevel(nextLevel);
+        this.prepareLevel(nextLevel);
         this.transitions.reveal('blinds', 1000);
       });
     }
-  }
+  },
 
-  _unlockLevel (level) {
-    const nextLevel = this._unlockedLevels.find(({ name }) => name === level);
+  unlockLevel (level) {
+    const nextLevel = this.unlockedLevels.find(({ name }) => name === level);
 
     if (nextLevel.locked) {
       nextLevel.locked = false;
-      this.storage.setItem('levels', this._unlockedLevels);
+      this.storage.setItem('levels', this.unlockedLevels);
     }
-  }
+  },
 
   // --------------------------------------------------------------------------
 
   get inGame () {
     return !this.transitions.isRunning &&
-      this._activeActor && this._activeActor.emotion === null;
+      this.activeActor && this.activeActor.emotion === null;
   }
 
-}
+};
