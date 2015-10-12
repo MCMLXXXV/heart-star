@@ -1,10 +1,9 @@
-import defaultLevels from '../data/levels';
-
+import defaultLevels    from '../data/levels';
 import scrollingPattern from '../components/scrollingPattern';
 import {
   menuButton,
   levelButton
-} from '../components/uiButtons';
+}                       from '../components/uiButtons';
 
 
 function showLevelButtons (g, levels) {
@@ -25,6 +24,10 @@ function showLevelButtons (g, levels) {
 
 export default {
 
+  init () {
+    this.game.transitions.blackout.reveal({ duration: 1000 });
+  },
+
   create () {
     const image = (x, y, k) => this.add.image(x, y, 'graphics', k);
     const button = (x, y) => this.add.button(x, y, 'graphics');
@@ -33,7 +36,7 @@ export default {
     image(0,  0, 'background-level-select');
     image(0, 32, 'level-select');
 
-    menuButton(button(0, 0), 'back', 'Title', 'blackout');
+    menuButton(button(0, 0), 'back', 'Title', this.game.transitions.blackout);
 
     this.game.storage.getItem('levels')
       .then((levels) => showLevelButtons(this.game, levels));

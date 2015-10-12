@@ -1,6 +1,6 @@
-import scrollingPattern from '../components/scrollingPattern';
-import { menuButton }   from '../components/uiButtons';
-import Actor            from '../objects/Actor';
+import scrollingPattern   from '../components/scrollingPattern';
+import { menuButton }     from '../components/uiButtons';
+import Actor              from '../objects/Actor';
 
 
 function showMenuButtons (g) {
@@ -12,6 +12,12 @@ function showMenuButtons (g) {
 
 
 export default {
+
+  init (transition=this.game.transitions.iris) {
+    transition.reveal({
+      duration: 1000
+    }, () => showMenuButtons(this.game));
+  },
 
   create (g) {
     const image  = (x, y, k, s) => g.add.image(x, y, k, s);
@@ -33,8 +39,6 @@ export default {
 
     placeCharacter('heart',  64);
     placeCharacter('star',  176);
-
-    showMenuButtons(g);
   }
 
 };

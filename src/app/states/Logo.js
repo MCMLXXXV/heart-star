@@ -6,7 +6,7 @@ export default {
     logo.alpha = 0;
 
     const changeLogo = () => logo.frameName = 'logo-rb';
-    const goToTitle  = () => this.state.start('Title', true, false, 'iris');
+    const goToTitle  = () => this.state.start('Title', true, false);
 
     const tween      = (o, ...e) => e.reduce((t, f) => (f(t), t), this.add.tween(o));
     const chain      = (t, ...ts) => (t.chain(...ts), t);
