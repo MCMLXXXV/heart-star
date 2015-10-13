@@ -1,4 +1,7 @@
-const toStateCallback = (g, k, ...a) => () => g.state.start(k, true, false, ...a);
+const toStateCallback = (g, k, ...a) => () =>
+  g.transitions.isRunning || g.transitions.blackout.hide({
+    duration: 1000
+  }, () => g.state.start(k, true, false, ...a));
 const frameName = (name, state) => `button-${name}-${state}`;
 const overFrame = (name) => frameName(name, 'over');
 const outFrame = (name) => frameName(name, 'out');
