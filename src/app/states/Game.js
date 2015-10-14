@@ -26,8 +26,10 @@ export default {
   create (g) {
     const addObject = (F, ...a) => g.add.existing(new F(g, ...a));
 
-    const goBackLevelSelection =
-      () => g.transitions.toState('Levels', 'blackout', 1000);
+    const goBackLevelSelection = () =>
+      this.transitions.isRunning || this.transitions.blackout.hide({
+        duration: 1000
+      }, () => g.state.start('Levels'));
 
     // -- The collision agents ------------------------------------------------
     this.agents = addObject(Agents);
@@ -52,7 +54,6 @@ export default {
     heart.wasInjured.add(startle(star));
     star.wasInjured.add(startle(heart));
 
-    this.transitions.reveal('blackout', 1000);
     this.prepareLevel(this.initialLevel);
 
     g.controls.spacebar.onUp.add(this.switchActiveActor, this);
@@ -64,6 +65,8 @@ export default {
       .then((unlockedLevels) => {
         this.unlockedLevels = unlockedLevels || defaultLevels;
       });
+
+    this.transitions.blackout.reveal({ duration: 1000 });
   },
 
   update (g) {
@@ -130,25 +133,31 @@ export default {
     if (!this.inGame) return;
     if (!this.activeActor.isStanding) return;
 
-    this.transitions.reveal(`blink-${ this.waitingActor.role }`, 400);
+    if (this.waitingActor === this.heart) {
+      this.transitions.heart.reveal({ duration: 500 });
+    }
+    else {
+      this.transitions.star.reveal({ duration: 500 });
+    }
+
     this.changeActiveActor(this.waitingActor, this.activeActor);
   },
 
   resetLevel () {
     if (!this.inGame) return;
 
-    this.transitions.reveal('copy', 500);
+    this.transitions.copy.reveal({ duration: 500 });
     this.resetActors();
     this.objectsManager.reset();
   },
 
   loseLevel () {
-    this.time.events.add(1000, () => {
-      this.transitions.hide('blinds', 1000, () => {
-        this.resetActors();
-        this.objectsManager.reset();
-        this.transitions.reveal('blinds', 1000);
-      });
+    this.transitions.blinds.chain({
+      duration: 2000,
+      delay: 1000
+    }, () => {
+      this.resetActors();
+      this.objectsManager.reset();
     });
   },
 
@@ -162,21 +171,25 @@ export default {
     haltActor(this.heart);
     haltActor(this.star);
 
-    this.time.events.add(
-      1500, () => this.startLevel(this.levelDefinitions.meta.next));
+    this.startLevel(this.levelDefinitions.meta.next);
 
     this.levelCompleted = true;
   },
 
   startLevel (nextLevel) {
     if (nextLevel === null) {
-      this.transitions.toState('Credits', 'blackout', 1000);
+      this.transitions.blackout.hide({
+        duration: 2000,
+        delay: 1500
+      }, () => this.state.start('Credits'));
     }
     else {
-      this.transitions.hide('blinds', 1000, () => {
+      this.transitions.blinds.chain({
+        duration: 2000,
+        delay: 1500
+      }, () => {
         this.unlockLevel(nextLevel);
         this.prepareLevel(nextLevel);
-        this.transitions.reveal('blinds', 1000);
       });
     }
   },
@@ -193,7 +206,8 @@ export default {
   // --------------------------------------------------------------------------
 
   get inGame () {
-    return !(this.transitions.isRunning ||
+    return !(
+      this.transitions.isRunning ||
       this.levelCompleted ||
       this.activeActor.isInjured ||
       this.waitingActor.isInjured);

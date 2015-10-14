@@ -1,10 +1,10 @@
-import credits from '../data/credits';
-
+import credits          from '../data/credits';
 import scrollingPattern from '../components/scrollingPattern';
 import {
   menuButton,
   linkButton
-} from '../components/uiButtons';
+}                       from '../components/uiButtons';
+
 
 const DEFAULT_SCREEN = 'adventure-islands';
 
@@ -13,6 +13,7 @@ export default {
 
   init (screen = DEFAULT_SCREEN) {
     this.screen = screen;
+    this.game.transitions.blackout.reveal({ duration: 1000 });
   },
 
   create () {
@@ -22,8 +23,6 @@ export default {
     this._addBackground(background);
     this._addLinkButtons(links);
     this._addMenuButtons(screen, (screen === DEFAULT_SCREEN));
-
-    this.game.transitions.reveal('blackout', 1000);
   },
 
   // --------------------------------------------------------------------------
@@ -45,7 +44,7 @@ export default {
   _addMenuButtons (screen, addMoreButton = false) {
     const addButton = (x, y) => this.add.button(x, y, 'graphics');
 
-    menuButton(addButton(0, 0), 'back', 'Title', 'blackout');
+    menuButton(addButton(0, 0), 'back', 'Title', this.game.transitions.blackout);
 
     if (addMoreButton) {
       menuButton(addButton(192, 144), 'more', 'Credits', 'rb');

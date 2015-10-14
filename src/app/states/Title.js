@@ -1,6 +1,6 @@
-import scrollingPattern from '../components/scrollingPattern';
-import { menuButton }   from '../components/uiButtons';
-import Actor            from '../objects/Actor';
+import scrollingPattern   from '../components/scrollingPattern';
+import { menuButton }     from '../components/uiButtons';
+import Actor              from '../objects/Actor';
 
 
 function showMenuButtons (g) {
@@ -13,9 +13,10 @@ function showMenuButtons (g) {
 
 export default {
 
-  init (effectName = 'iris') {
-    this.game.transitions.reveal(
-      effectName, 1000, () => showMenuButtons(this.game));
+  init (transition=this.game.transitions.iris) {
+    transition.reveal({
+      duration: 1000
+    }, () => showMenuButtons(this.game));
   },
 
   create (g) {

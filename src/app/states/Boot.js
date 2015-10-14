@@ -1,5 +1,4 @@
-import assets from '../data/assets';
-
+import assets      from '../data/assets';
 import Storage     from '../plugins/Storage';
 import GameControl from '../plugins/GameControl';
 import Transitions from '../plugins/Transitions';
@@ -23,6 +22,8 @@ export default {
     this.game.storage     = this.game.plugins.add(Storage, 'heart-star');
     this.game.controls    = this.game.plugins.add(GameControl);
     this.game.transitions = this.game.plugins.add(Transitions);
+
+    this.game.tweens.frameBased = true;
   },
 
   preload () {
