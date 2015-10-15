@@ -9,6 +9,13 @@ export default {
     {
       type: 'image',
       key: 'splash-screen'
+    },
+    {
+      type: 'image',
+      key: 'progress-bar',
+      url: 'data:image/gif;base64,' +
+       'R0lGODdheAAKAPAAAP+4uAAAACwAAAAAeAAKAAACIYSPqcvtD6OctNqLs968+w+G4kiW' +
+       '5omm6sq27gvH8kxzBQA7'
     }
   ],
 
