@@ -1,7 +1,7 @@
 import defaultLevels          from '../data/levels';
 import parseLevelsFromTilemap from '../components/parseLevelsFromTilemap';
 import tutorialCaption        from '../components/tutorialCaption';
-import ObjectsManager         from '../managers/ObjectsManager';
+import objectsManager         from '../managers/ObjectsManager';
 import Goal                   from '../objects/Goal';
 import Actor                  from '../objects/Actor';
 import Agents                 from '../objects/Agents';
@@ -20,7 +20,7 @@ export default {
     this.controls       = this.game.controls;
     this.transitions    = this.game.transitions;
     this.gameLevels     = parseLevelsFromTilemap(this.game, 'tilemaps');
-    this.objectsManager = new ObjectsManager(this.game);
+    this.objectsManager = objectsManager(this.game);
   },
 
   create (g) {

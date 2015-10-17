@@ -1,92 +1,64 @@
 import ObjectsLayer from '../objects/ObjectsLayer';
 
 
-class ObjectsManager {
+export default function ObjectsManager (g) {
+  const layers      = {};
+  const getLayerFor = (k) => layers[k];
 
-  constructor (game) {
-    this.game = game;
-
-    this._layers = {};
+  function setupMaps ({ heart, star }) {
+    getLayerFor('heart').changeTilemapLayer(heart);
+    getLayerFor('star').changeTilemapLayer(star);
   }
 
-  // --------------------------------------------------------------------------
-
-  createLayerFor (owner, enableBackground = false) {
-    var layer = new ObjectsLayer(this.game, owner);
-
-    if (enableBackground)
-      layer.enableBackground();
-
-    this._layers[owner] = layer;
-
-    return layer;
-  }
-
-  createObjects (objects) {
-    this._recycle();
-    this._makeTilemapLayers(objects.meta.layers);
-    this._makeTraps(objects.traps);
-    this._makePlatforms(objects.platforms);
-    this._makeGates(objects.gates);
-    this._makeButtons(objects.buttons);
-  }
-
-  reset () {
-    for (var key of Object.keys(this._layers))
-      this._resetLayer(this._layers[key]);
-  }
-
-  // --------------------------------------------------------------------------
-
-  _recycle () {
-    Object.keys(this._layers)
-      .forEach((key) => this._layers[key].recycle());
-  }
-
-  _makeTilemapLayers (layers) {
-    for (var layer in layers)
-      this._makeTilemapLayer(layer, layers[layer]);
-  }
-
-  _makeTilemapLayer (actor, layerName) {
-    this._getRecipientGroupFor(actor).changeTilemapLayer(layerName);
-  }
-
-  _makeTraps (traps) {
-    for (var { position, properties: { owner } } of traps)
-      this._getRecipientGroupFor(owner).placeTrap(
-        position.x, position.y);
-  }
-
-  _makePlatforms (platforms) {
-    for (var { position, properties: { owner, type } } of platforms)
-      this._getRecipientGroupFor(owner).placePlatform(
-        position.x, position.y, type);
-  }
-
-  _makeGates (gates) {
-    for (const { position: { x, y }, properties: { owner } } of gates) {
-      this._getRecipientGroupFor(owner)
-        .placeGate(x, y);
+  function setupSpikes (spikes) {
+    for (let { position: { x, y }, properties: { owner } } of spikes) {
+      getLayerFor(owner).placeTrap(x, y);
     }
   }
 
-  _makeButtons (buttons) {
-    for (const { position: { x, y }, properties: { owner, orientation } } of buttons) {
-      this._getRecipientGroupFor(owner)
-        .placeButton(x, y, orientation);
+  function setupPlatforms (platforms) {
+    for (let { position: { x, y }, properties: { owner, type } } of platforms) {
+      getLayerFor(owner).placePlatform(x, y, type);
     }
   }
 
-  _getRecipientGroupFor (owner) {
-    return this._layers[owner];
+  function setupGates (gates) {
+    for (let { position: { x, y }, properties: { owner } } of gates) {
+      getLayerFor(owner).placeGate(x, y);
+    }
   }
 
-  _resetLayer (objectsLayer) {
-    objectsLayer.reset();
+  function setupButtons (buttons) {
+    for (let { position: { x, y }, properties: { owner, orientation } } of buttons) {
+      getLayerFor(owner).placeButton(x, y, orientation);
+    }
   }
 
+  return {
+    createLayerFor (owner, enableBackground = false) {
+      const layer = new ObjectsLayer(g, owner);
+
+      if (enableBackground) {
+        layer.enableBackground();
+      }
+
+      Object.defineProperty(layers, owner, { get () { return layer; } });
+
+      return layer;
+    },
+
+    createObjects (objects) {
+      [ 'heart', 'star', 'both' ].forEach((k) => getLayerFor(k).recycle());
+
+      setupMaps(objects.meta.layers);
+      setupSpikes(objects.traps);
+      setupPlatforms(objects.platforms);
+      setupGates(objects.gates);
+      setupButtons(objects.buttons);
+    },
+
+    reset () {
+      [ 'heart', 'star', 'both' ].forEach((k) => getLayerFor(k).reset());
+    }
+  };
 }
-
-
-export default ObjectsManager;
