@@ -1,10 +1,10 @@
 import defaultLevels          from '../data/levels';
 import parseLevelsFromTilemap from '../components/parseLevelsFromTilemap';
-import tutorialCaption        from '../components/tutorialCaption';
-import createLayer            from '../objects/layer';
-import createGoal             from '../objects/goal';
 import Actor                  from '../objects/Actor';
 import createAgents           from '../objects/agents';
+import createGoal             from '../objects/goal';
+import createLayer            from '../objects/layer';
+import tutorialCaption        from '../objects/tutorialCaption';
 
 
 const resetObject = (o, { position: { x, y } }) => o.reset(x, y);
