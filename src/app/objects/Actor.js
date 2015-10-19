@@ -1,4 +1,5 @@
 import { enableBody } from '../components/arcadePhysics';
+import { frames }     from '../components/animation';
 
 
 const ACTOR_HEART = 'heart';
@@ -17,22 +18,19 @@ const MAX_SPEED_Y        =  180;
 
 
 function addAnimations (sprite, role) {
-  const frames = (i, j = i) =>
-    Phaser.Animation.generateFrameNames(`actor-${role}-`, i, j, '', 2);
-
-  sprite.animations.add('normal',           frames( 0,  3), 4, true);
-  sprite.animations.add('happy',            frames( 4,  7), 4, true);
-  sprite.animations.add('looking',          frames( 8, 11), 4, true);
-  sprite.animations.add('walking',          frames(12, 15), 4, true);
-  sprite.animations.add('carrying',         frames(16    ), 0, false);
-  sprite.animations.add('carrying+looking', frames(17, 20), 4, true);
-  sprite.animations.add('carrying+walking', frames(21, 24), 4, true);
-  sprite.animations.add('rising',           frames(25    ), 0, false);
-  sprite.animations.add('falling',          frames(26    ), 0, false);
-  sprite.animations.add('injured',          frames(27    ), 0, false);
-  sprite.animations.add('scared',           frames(28    ), 0, false);
-  sprite.animations.add('cheering',         frames(29, 30), 2, true);
-
+  const xs = (i, j=i) => frames(`actor-${role}-`, i, j, 2)
+  sprite.animations.add('normal',           xs( 0,  3), 4, true);
+  sprite.animations.add('happy',            xs( 4,  7), 4, true);
+  sprite.animations.add('looking',          xs( 8, 11), 4, true);
+  sprite.animations.add('walking',          xs(12, 15), 4, true);
+  sprite.animations.add('carrying',         xs(16    ), 0, false);
+  sprite.animations.add('carrying+looking', xs(17, 20), 4, true);
+  sprite.animations.add('carrying+walking', xs(21, 24), 4, true);
+  sprite.animations.add('rising',           xs(25    ), 0, false);
+  sprite.animations.add('falling',          xs(26    ), 0, false);
+  sprite.animations.add('injured',          xs(27    ), 0, false);
+  sprite.animations.add('scared',           xs(28    ), 0, false);
+  sprite.animations.add('cheering',         xs(29, 30), 2, true);
   return sprite;
 }
 

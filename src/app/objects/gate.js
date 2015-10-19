@@ -1,7 +1,5 @@
 import { enableBody } from '../components/arcadePhysics';
-
-const frames = (s, i, j=i, x=1) =>
-  Phaser.Animation.generateFrameNames(s, i, j, '', x);
+import { frames }     from '../components/animation';
 
 
 export default function gate (g, parent, owner) {

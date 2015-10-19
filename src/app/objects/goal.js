@@ -1,6 +1,5 @@
 import { enableBody } from '../components/arcadePhysics';
-
-const frames = Phaser.Animation.generateFrameNames('goal-', 1, 6, '', 1);
+import { frames }     from '../components/animation';
 
 function isTouchingUpOnly ({ touching: { up, right, down, left }}) {
   return up && !(right || down || left);
@@ -14,7 +13,7 @@ export default function goal (g) {
     b.immovable = true;
     b.setSize(32, 16, 0, 16);
   });
-  sprite.animations.add('main', frames, 8, true).play();
+  sprite.animations.add('main', frames('goal-', 1, 6, '', 1), 8, true).play();
 
   return {
     actorsLanded,
