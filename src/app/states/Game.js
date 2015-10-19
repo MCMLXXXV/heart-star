@@ -1,8 +1,8 @@
 import defaultLevels          from '../data/levels';
 import parseLevelsFromTilemap from '../components/parseLevelsFromTilemap';
 import tutorialCaption        from '../components/tutorialCaption';
-import layer                  from '../objects/layer';
-import Goal                   from '../objects/Goal';
+import createLayer            from '../objects/layer';
+import createGoal             from '../objects/goal';
 import Actor                  from '../objects/Actor';
 import Agents                 from '../objects/Agents';
 
@@ -34,15 +34,15 @@ export default {
     this.agents = addObject(Agents);
 
     // -- The game world features ---------------------------------------------
-    this.heartLayer = layer(g, 'heart', { enableBackground: true });
-    this.starLayer  = layer(g, 'star',  { enableBackground: true });
-    this.moonLayer  = layer(g, 'both');
+    this.heartLayer = createLayer(g, 'heart', { enableBackground: true });
+    this.starLayer  = createLayer(g, 'star',  { enableBackground: true });
+    this.moonLayer  = createLayer(g, 'both');
 
     // -- The tutorial caption ------------------------------------------------
     this.tutorialCaption = tutorialCaption(g);
 
     // -- The goal platform ---------------------------------------------------
-    const goal = this.goal = addObject(Goal);
+    const goal = this.goal = createGoal(g);
     goal.actorsLanded.add(() => this.winLevel());
 
     // -- The actors ----------------------------------------------------------
@@ -70,7 +70,7 @@ export default {
 
   update (g) {
     this.activeActor.collideActor(this.waitingActor);
-    this.goal.collideActors(this.heart, this.star);
+    this.goal.collide(this.heart, this.star);
 
     this.heartLayer.collide(this.heart);
     this.starLayer.collide(this.star);
