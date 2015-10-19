@@ -357,6 +357,18 @@ export default {
       frame: { x: 68, y: 34, w: 32, h: 32 }
     },
     {
+      filename: 'spike-both',
+      frame: { x: 78, y: 246, w: 16, h: 16 }
+    },
+    {
+      filename: 'spike-heart',
+      frame: { x: 96, y: 246, w: 16, h: 16 }
+    },
+    {
+      filename: 'spike-star',
+      frame: { x: 114, y: 246, w: 16, h: 16 }
+    },
+    {
       filename: 'stable-platform-both-medium',
       frame: { x: 36, y: 144, w: 32, h: 16 }
     },
@@ -379,18 +391,6 @@ export default {
     {
       filename: 'stable-platform-star-short',
       frame: { x: 234, y: 220, w: 16, h: 16 }
-    },
-    {
-      filename: 'trap-both',
-      frame: { x: 78, y: 246, w: 16, h: 16 }
-    },
-    {
-      filename: 'trap-heart',
-      frame: { x: 96, y: 246, w: 16, h: 16 }
-    },
-    {
-      filename: 'trap-star',
-      frame: { x: 114, y: 246, w: 16, h: 16 }
     },
   ]
 };

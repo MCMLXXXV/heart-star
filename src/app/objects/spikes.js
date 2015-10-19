@@ -5,7 +5,7 @@ export default function spikes (g, parent, owner) {
   const container = parent.add(g.add.group());
 
   const createSprite = () => enableBody(
-    container.create(0, 0, 'sprites', `trap-${owner}`),
+    container.create(0, 0, 'sprites', `spike-${owner}`),
     (b) => {
       b.setSize(b.width - 2, 8, 1, 8);
       b.immovable = true;

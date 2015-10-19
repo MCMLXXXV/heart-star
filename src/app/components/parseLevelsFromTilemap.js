@@ -15,7 +15,7 @@ const typeAndOwner = (s) => (k) => all(type(s), owner(k));
 
 const selectGate     = typeAndOwner('gate');
 const selectButton   = typeAndOwner('button');
-const selectSpike    = typeAndOwner('trap');
+const selectSpike    = typeAndOwner('spike');
 const selectPlatform = typeAndOwner('platform');
 
 const parseMeta =
