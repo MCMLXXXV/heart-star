@@ -1,7 +1,7 @@
 import defaultLevels          from '../data/levels';
 import parseLevelsFromTilemap from '../components/parseLevelsFromTilemap';
 import tutorialCaption        from '../components/tutorialCaption';
-import objectsManager         from '../managers/ObjectsManager';
+import layer                  from '../objects/layer';
 import Goal                   from '../objects/Goal';
 import Actor                  from '../objects/Actor';
 import Agents                 from '../objects/Agents';
@@ -20,7 +20,6 @@ export default {
     this.controls       = this.game.controls;
     this.transitions    = this.game.transitions;
     this.gameLevels     = parseLevelsFromTilemap(this.game, 'tilemaps');
-    this.objectsManager = objectsManager(this.game);
   },
 
   create (g) {
@@ -35,9 +34,9 @@ export default {
     this.agents = addObject(Agents);
 
     // -- The game world features ---------------------------------------------
-    this.heartLayer = this.objectsManager.createLayerFor('heart', true);
-    this.starLayer  = this.objectsManager.createLayerFor('star',  true);
-    this.moonLayer  = this.objectsManager.createLayerFor('both');
+    this.heartLayer = layer(g, 'heart', { enableBackground: true });
+    this.starLayer  = layer(g, 'star',  { enableBackground: true });
+    this.moonLayer  = layer(g, 'both');
 
     // -- The tutorial caption ------------------------------------------------
     this.tutorialCaption = tutorialCaption(g);
@@ -94,13 +93,17 @@ export default {
 
   // --------------------------------------------------------------------------
 
+  setupLayers ({ meta: { layers }, objects: { heart, star, both }}) {
+    this.heartLayer.setup(heart, layers.heart);
+    this.starLayer.setup(star, layers.star);
+    this.moonLayer.setup(both);
+  },
+
   prepareLevel (level) {
     this.levelCompleted = false;
     this.levelDefinitions = this.gameLevels.getLevel(level);
-    this.objectsManager.setup(this.levelDefinitions);
-
+    this.setupLayers(this.levelDefinitions);
     this.tutorialCaption.show(this.levelDefinitions.meta.tutorial);
-
     resetObject(this.goal, this.levelDefinitions.goal);
     this.resetActors();
   },
@@ -109,6 +112,12 @@ export default {
     resetActor(this.heart, this.levelDefinitions.heart);
     resetActor(this.star, this.levelDefinitions.star);
     this.changeActiveActor(this.heart, this.star, true);
+  },
+
+  resetLayers () {
+    this.heartLayer.reset();
+    this.starLayer.reset();
+    this.moonLayer.reset();
   },
 
   changeActiveActor (activeActor, waitingActor, resettingLevel = false) {
@@ -148,7 +157,7 @@ export default {
 
     this.transitions.copy.reveal({ duration: 500 });
     this.resetActors();
-    this.objectsManager.reset();
+    this.resetLayers();
   },
 
   loseLevel () {
@@ -157,7 +166,7 @@ export default {
       delay: 1000
     }, () => {
       this.resetActors();
-      this.objectsManager.reset();
+      this.resetLayers();
     });
   },
 

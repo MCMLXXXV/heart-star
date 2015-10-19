@@ -9,7 +9,7 @@ import createSpikes    from '../objects/spikes';
 import createPlatforms from '../objects/platforms';
 
 
-export default function ObjectsLayer (g, role, { enableBackground=false }={}) {
+export default function layer (g, role, { enableBackground=false }={}) {
   const container = g.add.group();
   const map       = createMap(g, container, 'tilemaps');
   const gate      = createGate(g, container, role);
