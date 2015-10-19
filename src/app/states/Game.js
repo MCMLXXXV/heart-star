@@ -4,7 +4,7 @@ import tutorialCaption        from '../components/tutorialCaption';
 import createLayer            from '../objects/layer';
 import createGoal             from '../objects/goal';
 import Actor                  from '../objects/Actor';
-import Agents                 from '../objects/Agents';
+import createAgents           from '../objects/agents';
 
 
 const resetObject = (o, { position: { x, y } }) => o.reset(x, y);
@@ -31,7 +31,7 @@ export default {
       }, () => g.state.start('Levels'));
 
     // -- The collision agents ------------------------------------------------
-    this.agents = addObject(Agents);
+    this.agents = createAgents(g);
 
     // -- The game world features ---------------------------------------------
     this.heartLayer = createLayer(g, 'heart', { enableBackground: true });
@@ -75,9 +75,7 @@ export default {
     this.heartLayer.collide(this.heart);
     this.starLayer.collide(this.star);
     this.moonLayer.collide([ this.heart, this.star ]);
-
-    this.agents.collide(this.heart);
-    this.agents.collide(this.star);
+    this.agents.collide([ this.heart, this.star ]);
 
     if (this.inGame) {
       const { left, right, up } = g.controls;
