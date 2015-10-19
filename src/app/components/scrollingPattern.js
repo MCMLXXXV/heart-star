@@ -12,6 +12,13 @@ const scrollOptions = {
   [STAR]:       [  SCROLL_SPEED, -SCROLL_SPEED ]
 };
 
+export function patternFor (role) {
+  if (role === 'heart') { return HEART; }
+  if (role === 'star')  { return STAR;  }
+  if (role === 'both')  { return MOON;  }
+  return HEART_STAR;
+}
+
 const scrollPattern = (o, key) => (o.autoScroll(...scrollOptions[key]), o);
 
 
