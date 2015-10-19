@@ -1,12 +1,22 @@
-const type = (t) => ({ type }) => type === t;
-
-const find = (t, o) => o.find(type(t));
-const filter = (t, o) => o.filter(type(t));
-const keys = (o) => Object.keys(o);
+const find   = (f, o) => o.find(f);
+const filter = (f, o) => o.filter(f);
+const keys   = (o) => Object.keys(o);
 const reduce = (f, m, a) => a.reduce(f, m);
 const mapObj = (f, o) => reduce((m, k) => (m[k] = f(o[k]), m), {}, keys(o));
+const all    = (...fs) => (...a) => fs.every((f) => f(...a));
+const exists = (o) => (o != null);
+const maybe  = (f) => (o) => exists(o) && f(o) || null;
 
 const shift = (ox, oy) => (x, y) => ({ x: x + ox, y: y + oy });
+
+const type         = (s) => ({ type }) => type === s;
+const owner        = (s) => ({ properties: { owner }}) => owner === s;
+const typeAndOwner = (s) => (k) => all(type(s), owner(k));
+
+const selectGate     = typeAndOwner('gate');
+const selectButton   = typeAndOwner('button');
+const selectSpike    = typeAndOwner('trap');
+const selectPlatform = typeAndOwner('platform');
 
 const parseMeta =
   ({ properties: { heart, star, next = null, tutorial = null } }) => ({
@@ -18,6 +28,11 @@ const parseObject = (f = shift(0, 0)) => ({ x, y, properties }) => ({
 });
 
 const parseActor = parseObject(shift(8, 24));
+
+const parseGate     = ({ x, y }) => ({ x, y });
+const parseButton   = ({ x, y, properties: { orientation }}) => ({ x: x + 8, y: y + 8, orientation });
+const parseSpike    = ({ x, y, width }) => ({ x, y: y - 8, width });
+const parsePlatform = ({ x, y, properties: { type: size }}) => ({ x, y, size });
 
 
 const proto = {
@@ -31,7 +46,7 @@ const proto = {
    * null otherwise.
    */
   getLevel (name) {
-    return this.definitions[name] || null;
+    return this.levels[name] || null;
   }
 };
 
@@ -46,15 +61,23 @@ const proto = {
  * @return {Object} Information about sprites placement, etc.
  */
 function makeLevel (objects) {
+  const objs = (k) => ({
+    gate: maybe(parseGate)(find(selectGate(k), objects)),
+    button: maybe(parseButton)(find(selectButton(k), objects)),
+    spikes: filter(selectSpike(k), objects).map(maybe(parseSpike)),
+    platforms: filter(selectPlatform(k), objects).map(maybe(parsePlatform))
+  });
+
   return {
-    meta: parseMeta(find('meta', objects)),
-    heart: parseActor(find('heart', objects)),
-    star: parseActor(find('star', objects)),
-    goal: parseObject()(find('goal', objects)),
-    traps: filter('trap', objects).map(parseObject(shift(0, -8))),
-    platforms: filter('platform', objects).map(parseObject()),
-    buttons: filter('button', objects).map(parseObject(shift(8, 8))),
-    gates: filter('gate', objects).map(parseObject(shift(8, 0)))
+    meta: parseMeta(find(({ type }) => type === 'meta', objects)),
+    heart: parseActor(find(({ type }) => type === 'heart', objects)),
+    star: parseActor(find(({ type }) => type === 'star', objects)),
+    goal: parseObject()(find(({ type }) => type === 'goal', objects)),
+    objects: {
+      both: objs('both'),
+      heart: objs('heart'),
+      star: objs('star')
+    }
   };
 }
 
@@ -78,7 +101,7 @@ function makeLevel (objects) {
 export default function parseLevelsFromTilemap (g, tilemap) {
   const { objects, properties } = Phaser.TilemapParser.parse(g, tilemap);
   return Object.assign(Object.create(proto), {
-    definitions: mapObj(makeLevel, objects),
+    levels: mapObj(makeLevel, objects),
     startingLevel: properties['starting-level']
   });
 }
