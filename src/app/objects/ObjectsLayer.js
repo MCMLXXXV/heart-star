@@ -1,132 +1,53 @@
-import scrollingPattern from '../components/scrollingPattern';
+import {
+  default as scrollingPattern,
+  patternFor
+}                      from '../components/scrollingPattern';
+import createMap       from '../objects/map';
+import createGate      from '../objects/gate';
+import createButton    from '../objects/button';
+import createSpikes    from '../objects/spikes';
+import createPlatforms from '../objects/platforms';
 
-import Gate              from '../objects/Gate';
-import Trap              from '../objects/Trap';
-import Button            from '../objects/Button';
-import Platform          from '../objects/Platform';
 
+export default function ObjectsLayer (g, role, { enableBackground=false }={}) {
+  const container = g.add.group();
+  const map       = createMap(g, container, 'tilemaps');
+  const gate      = createGate(g, container, role);
+  const button    = createButton(g, container, role, gate);
+  const spikes    = createSpikes(g, container, role);
+  const platforms = createPlatforms(g, container, role);
 
-class ObjectsLayer extends Phaser.Group {
-
-  constructor (game, owner) {
-    super(game);
-
-    this._owner = owner;
-
-    this._tilemap = this._makeTilemap('tilemaps');
-    this._tilemapLayer = null;
-
-    this._tilemapGroup = this.add(game.make.group());
-
-    this._gateGroup = this.add(game.make.group());
-    this._gate = this._gateGroup.add(new Gate(game, owner));
-    this._button = this._gateGroup.add(new Button(game, owner));
-    this._gate.bindTo(this._button);
-
-    this._trapsGroup = this.add(game.make.group());
-    this._platformsGroup = this.add(game.make.group());
+  if (enableBackground) {
+    container.addAt(scrollingPattern(g, patternFor(role)), 0);
   }
 
-  // --------------------------------------------------------------------------
+  return {
+    setup (objects, mapName=null) {
+      if (mapName) { map.setup(mapName); }
+      gate.setup(objects.gate);
+      button.setup(objects.button);
+      spikes.setup(objects.spikes);
+      platforms.setup(objects.platforms);
+    },
 
-  changeTilemapLayer (layerName) {
-    if (this._tilemapLayer !== null)
-      this._tilemapLayer.destroy();
+    reset () {
+      gate.reset();
+      button.reset();
+    },
 
-    this._tilemapLayer = this._makeTilemapLayer(this._tilemap, layerName);
+    collide (actor) {
+      map.collide(actor);
+      gate.collide(actor);
+      button.collide(actor);
+      spikes.collide(actor);
+      platforms.collide(actor);
+    },
 
-    this._tilemapGroup.add(this._tilemapLayer);
-  }
-
-  placeTrap (x, y) {
-    this._addObject(x, y, this._trapsGroup, Trap, this._owner);
-  }
-
-  placePlatform (x, y, range) {
-    const platform = this._addObject(
-      x, y, this._platformsGroup,
-      Platform, this._owner);
-
-    platform.range = range;
-  }
-
-  placeGate (x, y) {
-    this._gate.reset(x, y);
-  }
-
-  placeButton (x, y, orientation) {
-    this._button.reset(x, y);
-    this._button.orientation = orientation;
-  }
-
-  enableBackground () {
-    this.addAt(scrollingPattern(this.game, this.preferedBackground), 0);
-  }
-
-  collide (actor) {
-    const collide = (o, f = null, g = null) =>
-      this.game.physics.arcade.collide(o, actor, f, g);
-
-    const harmActor = () => actor.injure();
-    const actorIsNotHurt = () => !actor.isInjured;
-    const switchButtonOn = () => this._button.switchOn();
-    const buttonIsNotTriggered = () => !(this._button.triggered || actor.isInjured);
-    const gateIsNotOpen = () => !(this._gate.open || actor.isInjured);
-
-    collide(this._tilemapLayer, null, actorIsNotHurt);
-    collide(this._button, switchButtonOn, buttonIsNotTriggered);
-    collide(this._gate, null, gateIsNotOpen);
-    collide(this._trapsGroup, harmActor, actorIsNotHurt);
-    collide(this._platformsGroup);
-  }
-
-  reset () {
-    this._gate.close();
-    this._button.switchOff();
-  }
-
-  recycle () {
-    this._tilemapGroup.callAll('kill');
-    this._gateGroup.callAll('kill');
-    this._trapsGroup.callAll('kill');
-    this._platformsGroup.callAll('kill');
-  }
-
-  // --------------------------------------------------------------------------
-
-  _makeTilemap (tilemapKey) {
-    const tilemap = this.game.make.tilemap(tilemapKey);
-
-    tilemap.addTilesetImage('tileset');
-
-    return tilemap;
-  }
-
-  _makeTilemapLayer (tilemap, layerName) {
-    const tilemapLayer = tilemap.createLayer(layerName);
-
-    tilemap.setCollisionBetween(1, 144, true, layerName);
-
-    return tilemapLayer;
-  }
-
-  _addObject (x, y, group, factory, ...features) {
-    const object = group.getFirstDead() ||
-      group.add(new factory(this.game, ...features));
-
-    return object.reset(x, y);
-  }
-
-  // --------------------------------------------------------------------------
-
-  get preferedBackground () {
-    switch (this._owner) {
-      case 'heart': return scrollingPattern.HEART;
-      case 'star':  return scrollingPattern.STAR;
+    get visible () {
+      return container.visible;
+    },
+    set visible (visible) {
+      container.visible = visible;
     }
-  }
-
+  };
 }
-
-
-export default ObjectsLayer;

@@ -40,7 +40,7 @@ export default {
     this.moonLayer  = this.objectsManager.createLayerFor('both');
 
     // -- The tutorial caption ------------------------------------------------
-    this.tutorialCaption = this.moonLayer.add(tutorialCaption(g));
+    this.tutorialCaption = tutorialCaption(g);
 
     // -- The goal platform ---------------------------------------------------
     const goal = this.goal = addObject(Goal);
@@ -97,7 +97,7 @@ export default {
   prepareLevel (level) {
     this.levelCompleted = false;
     this.levelDefinitions = this.gameLevels.getLevel(level);
-    this.objectsManager.createObjects(this.levelDefinitions);
+    this.objectsManager.setup(this.levelDefinitions);
 
     this.tutorialCaption.show(this.levelDefinitions.meta.tutorial);
 
