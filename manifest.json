@@ -1,5 +1,5 @@
 {
-  "name": "My Phaser Template",
+  "name": "Heart Star",
   "icons": [
     {
       "src": "icons\/android-chrome-36x36.png",
@@ -40,5 +40,5 @@
   ],
   "start_url": "index.html",
   "display": "fullscreen",
-  "orientation": "portrait"
+  "orientation": "landscape"
 }

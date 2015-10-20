@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html manifest="offline.appcache">
+<html>
 
   <head>
     <meta charset="utf-8">
@@ -33,21 +33,27 @@
     <link rel="apple-touch-icon" sizes="144x144" href="icons/apple-touch-icon-144x144.png">
     <link rel="apple-touch-icon" sizes="152x152" href="icons/apple-touch-icon-152x152.png">
     <link rel="apple-touch-icon" sizes="180x180" href="icons/apple-touch-icon-180x180.png">
-    
+
     <!-- Windows 8.x Tile -->
     <meta name="msapplication-TileColor" content="#00aba9">
     <meta name="msapplication-TileImage" content="icons/mstile-144x144.png">
     <meta name="msapplication-config" content="browserconfig.xml">
 
     <title>Heart Star</title>
-    <meta name="description" content="A port of the game originally created by Jussi Simpanen for Ludum Dare 30, Theme: &quot;Connected Worlds&quot;.">
+    <meta name="description" content="A port of the game created by Jussi Simpanen for Ludum Dare 30 &quot;Connected Worlds&quot;">
 
-    <link rel="stylesheet" href="styles.min.css">
+    <style>
+      html { box-sizing: border-box; }
+      * { margin: 0; padding: 0; }
+      *, *:before, *:after { box-sizing: inherit; }
+      html, body { background: #000; overflow: hidden; -ms-touch-action: none; touch-action: none; }
+      canvas { touch-action-delay: none; -ms-touch-action: none; touch-action: none; -ms-interpolation-mode: nearest-neighbor; image-rendering: -webkit-optimize-contrast; image-rendering: -moz-crisp-edges; image-rendering: -o-pixelated; image-rendering: pixelated; }
+    </style>
   </head>
 
   <body>
     <script src="game.min.js"></script>
-    <script>require('app')()</script>
+    <script>window.app()</script>
   </body>
 
 </html>
