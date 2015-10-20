@@ -2,103 +2,103 @@ export default {
   frames: [
     {
       filename: 'actor-heart-00',
-      frame: { x: 78, y: 240, w: 24, h: 24 }
-    },
-    {
-      filename: 'actor-heart-01',
-      frame: { x: 208, y: 214, w: 24, h: 24 }
-    },
-    {
-      filename: 'actor-heart-02',
-      frame: { x: 104, y: 240, w: 24, h: 24 }
-    },
-    {
-      filename: 'actor-heart-03',
       frame: { x: 130, y: 240, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-04',
+      filename: 'actor-heart-01',
+      frame: { x: 242, y: 0, w: 24, h: 24 }
+    },
+    {
+      filename: 'actor-heart-02',
       frame: { x: 156, y: 240, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-05',
+      filename: 'actor-heart-03',
       frame: { x: 182, y: 240, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-06',
+      filename: 'actor-heart-04',
       frame: { x: 208, y: 240, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-07',
+      filename: 'actor-heart-05',
       frame: { x: 234, y: 240, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-08',
+      filename: 'actor-heart-06',
       frame: { x: 268, y: 0, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-09',
+      filename: 'actor-heart-07',
       frame: { x: 268, y: 26, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-10',
+      filename: 'actor-heart-08',
       frame: { x: 268, y: 52, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-11',
+      filename: 'actor-heart-09',
       frame: { x: 268, y: 78, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-12',
+      filename: 'actor-heart-10',
       frame: { x: 268, y: 104, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-13',
+      filename: 'actor-heart-11',
       frame: { x: 268, y: 130, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-14',
+      filename: 'actor-heart-12',
       frame: { x: 268, y: 156, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-15',
+      filename: 'actor-heart-13',
       frame: { x: 268, y: 182, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-16',
+      filename: 'actor-heart-14',
       frame: { x: 268, y: 208, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-17',
+      filename: 'actor-heart-15',
       frame: { x: 268, y: 234, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-18',
+      filename: 'actor-heart-16',
       frame: { x: 0, y: 266, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-19',
+      filename: 'actor-heart-17',
       frame: { x: 26, y: 266, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-20',
+      filename: 'actor-heart-18',
       frame: { x: 52, y: 266, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-21',
+      filename: 'actor-heart-19',
       frame: { x: 78, y: 266, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-22',
+      filename: 'actor-heart-20',
       frame: { x: 104, y: 266, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-23',
+      filename: 'actor-heart-21',
       frame: { x: 130, y: 266, w: 24, h: 24 }
     },
     {
-      filename: 'actor-heart-24',
+      filename: 'actor-heart-22',
       frame: { x: 156, y: 266, w: 24, h: 24 }
+    },
+    {
+      filename: 'actor-heart-23',
+      frame: { x: 182, y: 266, w: 24, h: 24 }
+    },
+    {
+      filename: 'actor-heart-24',
+      frame: { x: 208, y: 266, w: 24, h: 24 }
     },
     {
       filename: 'actor-heart-25',
@@ -125,76 +125,80 @@ export default {
       frame: { x: 166, y: 138, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-00',
+      filename: 'actor-heart-31',
       frame: { x: 192, y: 138, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-01',
+      filename: 'actor-star-00',
       frame: { x: 0, y: 188, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-02',
+      filename: 'actor-star-01',
       frame: { x: 26, y: 188, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-03',
+      filename: 'actor-star-02',
       frame: { x: 52, y: 188, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-04',
+      filename: 'actor-star-03',
       frame: { x: 78, y: 188, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-05',
+      filename: 'actor-star-04',
       frame: { x: 104, y: 188, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-06',
+      filename: 'actor-star-05',
       frame: { x: 130, y: 188, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-07',
+      filename: 'actor-star-06',
       frame: { x: 156, y: 188, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-08',
+      filename: 'actor-star-07',
       frame: { x: 182, y: 188, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-09',
+      filename: 'actor-star-08',
       frame: { x: 208, y: 188, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-10',
+      filename: 'actor-star-09',
       frame: { x: 0, y: 214, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-11',
+      filename: 'actor-star-10',
       frame: { x: 26, y: 214, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-12',
+      filename: 'actor-star-11',
       frame: { x: 52, y: 214, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-13',
+      filename: 'actor-star-12',
       frame: { x: 78, y: 214, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-14',
+      filename: 'actor-star-13',
       frame: { x: 104, y: 214, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-15',
+      filename: 'actor-star-14',
       frame: { x: 130, y: 214, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-16',
+      filename: 'actor-star-15',
       frame: { x: 156, y: 214, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-17',
+      filename: 'actor-star-16',
       frame: { x: 182, y: 214, w: 24, h: 24 }
+    },
+    {
+      filename: 'actor-star-17',
+      frame: { x: 208, y: 214, w: 24, h: 24 }
     },
     {
       filename: 'actor-star-18',
@@ -202,51 +206,55 @@ export default {
     },
     {
       filename: 'actor-star-19',
-      frame: { x: 242, y: 0, w: 24, h: 24 }
-    },
-    {
-      filename: 'actor-star-20',
       frame: { x: 242, y: 26, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-21',
+      filename: 'actor-star-20',
       frame: { x: 242, y: 52, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-22',
+      filename: 'actor-star-21',
       frame: { x: 242, y: 78, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-23',
+      filename: 'actor-star-22',
       frame: { x: 242, y: 104, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-24',
+      filename: 'actor-star-23',
       frame: { x: 242, y: 130, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-25',
+      filename: 'actor-star-24',
       frame: { x: 242, y: 156, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-26',
+      filename: 'actor-star-25',
       frame: { x: 242, y: 182, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-27',
+      filename: 'actor-star-26',
       frame: { x: 242, y: 208, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-28',
+      filename: 'actor-star-27',
       frame: { x: 0, y: 240, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-29',
+      filename: 'actor-star-28',
       frame: { x: 26, y: 240, w: 24, h: 24 }
     },
     {
-      filename: 'actor-star-30',
+      filename: 'actor-star-29',
       frame: { x: 52, y: 240, w: 24, h: 24 }
+    },
+    {
+      filename: 'actor-star-30',
+      frame: { x: 78, y: 240, w: 24, h: 24 }
+    },
+    {
+      filename: 'actor-star-31',
+      frame: { x: 104, y: 240, w: 24, h: 24 }
     },
     {
       filename: 'button-both-off',
@@ -262,7 +270,7 @@ export default {
     },
     {
       filename: 'button-heart-on',
-      frame: { x: 200, y: 266, w: 16, h: 16 }
+      frame: { x: 252, y: 266, w: 16, h: 16 }
     },
     {
       filename: 'button-star-off',
@@ -382,7 +390,7 @@ export default {
     },
     {
       filename: 'stable-platform-heart-short',
-      frame: { x: 182, y: 266, w: 16, h: 16 }
+      frame: { x: 234, y: 266, w: 16, h: 16 }
     },
     {
       filename: 'stable-platform-star-medium',
@@ -390,7 +398,7 @@ export default {
     },
     {
       filename: 'stable-platform-star-short',
-      frame: { x: 218, y: 266, w: 16, h: 16 }
+      frame: { x: 270, y: 266, w: 16, h: 16 }
     },
   ]
 };

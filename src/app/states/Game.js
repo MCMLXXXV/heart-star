@@ -170,6 +170,7 @@ export default {
 
   winLevel () {
     const haltActor = (actor) => {
+      actor.alpha = 1;
       actor.play('cheering');
       actor.float();
       actor.stop();

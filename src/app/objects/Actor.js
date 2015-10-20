@@ -18,7 +18,7 @@ const MAX_SPEED_Y        =  180;
 
 
 function addAnimations (sprite, role) {
-  const xs = (i, j=i) => frames(`actor-${role}-`, i, j, 2)
+  const xs = (i, j=i) => frames(`actor-${role}-`, i, j, 2);
   sprite.animations.add('normal',           xs( 0,  3), 4, true);
   sprite.animations.add('happy',            xs( 4,  7), 4, true);
   sprite.animations.add('looking',          xs( 8, 11), 4, true);
@@ -28,9 +28,9 @@ function addAnimations (sprite, role) {
   sprite.animations.add('carrying+walking', xs(21, 24), 4, true);
   sprite.animations.add('rising',           xs(25    ), 0, false);
   sprite.animations.add('falling',          xs(26    ), 0, false);
-  sprite.animations.add('injured',          xs(27    ), 0, false);
-  sprite.animations.add('scared',           xs(28    ), 0, false);
-  sprite.animations.add('cheering',         xs(29, 30), 2, true);
+  sprite.animations.add('injured',          xs(27, 28), 8, true);
+  sprite.animations.add('scared',           xs(29    ), 0, false);
+  sprite.animations.add('cheering',         xs(30, 31), 2, true);
   return sprite;
 }
 
@@ -95,6 +95,7 @@ class Actor extends Phaser.Sprite {
   }
 
   stop () {
+    this.facing = 1;
     this.body.velocity.set(0);
     this.body.acceleration.set(0);
   }
@@ -135,6 +136,7 @@ class Actor extends Phaser.Sprite {
   injure () {
     this.play('injured');
     this.stop();
+    this.facing = 1;
 
     if (this.isStanding) {
       this.fly();
@@ -144,8 +146,10 @@ class Actor extends Phaser.Sprite {
   }
 
   startle () {
+    this.stop();
     this.float();
     this.play('scared');
+    this.facing = 1;
   }
 
   // --------------------------------------------------------------------------
