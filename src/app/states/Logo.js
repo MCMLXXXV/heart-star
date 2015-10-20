@@ -1,4 +1,4 @@
-export default class Logo extends Phaser.State {
+export default {
 
   create () {
     const logo = this.add.image(120, 80, 'graphics', 'logo-ai');
@@ -6,7 +6,7 @@ export default class Logo extends Phaser.State {
     logo.alpha = 0;
 
     const changeLogo = () => logo.frameName = 'logo-rb';
-    const goToTitle  = () => this.state.start('Title', true, false, 'iris');
+    const goToTitle  = () => this.state.start('Title', true, false);
 
     const tween      = (o, ...e) => e.reduce((t, f) => (f(t), t), this.add.tween(o));
     const chain      = (t, ...ts) => (t.chain(...ts), t);
@@ -21,4 +21,4 @@ export default class Logo extends Phaser.State {
     ).start();
   }
 
-}
+};
